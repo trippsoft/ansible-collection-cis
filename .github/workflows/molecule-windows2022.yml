@@ -36,7 +36,7 @@ jobs:
       - x64
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: 'trippsc2.cis'
       - name: Run Molecule tests
