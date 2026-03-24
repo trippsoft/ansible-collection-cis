@@ -4,6 +4,7 @@
     - w2025cis_rule_17_5_1_enabled
   block:
     - name: "17.5.1 | L1 | Ensure 'Audit Account Lockout' is set to include 'Failure'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9217-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |
@@ -22,6 +23,7 @@
     - w2025cis_rule_17_5_2_enabled
   block:
     - name: "17.5.2 | L1 | Ensure 'Audit Group Membership' is set to include 'Success'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9249-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |
@@ -40,6 +42,7 @@
     - w2025cis_rule_17_5_3_enabled
   block:
     - name: "17.5.3 | L1 | Ensure 'Audit Logoff' is set to include 'Success'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9216-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |
@@ -58,6 +61,7 @@
     - w2025cis_rule_17_5_4_enabled
   block:
     - name: "17.5.4 | L1 | Ensure 'Audit Logon' is set to 'Success and Failure'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9215-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |
@@ -81,6 +85,7 @@
     - w2025cis_rule_17_5_5_enabled
   block:
     - name: "17.5.5 | L1 | Ensure 'Audit Other Logon/Logoff Events' is set to 'Success and Failure'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce921c-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |
@@ -104,6 +109,7 @@
     - w2025cis_rule_17_5_6_enabled
   block:
     - name: "17.5.6 | L1 | Ensure 'Audit Special Logon' is set to include 'Success'"
+      check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce921b-69ae-11d9-bed3-505054503030}" -r |
           ConvertFrom-Csv |

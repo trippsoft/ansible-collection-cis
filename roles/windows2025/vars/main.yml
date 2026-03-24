@@ -33,14 +33,14 @@ _w2025cis_debug_programs_default_users:
 _w2025cis_generate_security_audits_default_users:
   - LOCAL SERVICE
   - NETWORK SERVICE
-  - RESTRICTED SERVICES\PrintSpoolerService
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
 
 _w2025cis_impersonate_a_client_after_authentication_default_users:
   - Administrators
   - LOCAL SERVICE
   - NETWORK SERVICE
   - SERVICE
-  - RESTRICTED SERVICES\PrintSpoolerService
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
 
 _w2025cis_manage_auditing_and_security_log_default_users:
   - Administrators

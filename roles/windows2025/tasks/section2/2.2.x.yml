@@ -152,7 +152,7 @@
 
 - name: "2.2.16 | L1 | Ensure 'Create permanent shared objects' is set to 'No One'"
   when:
-    - w2025cis_rule_2_2_167_enabled
+    - w2025cis_rule_2_2_16_enabled
   ansible.windows.win_user_right:
     name: SeCreatePermanentPrivilege
     users: []
@@ -370,6 +370,10 @@
     name: SeAuditPrivilege
     users: "{{ _w2025cis_generate_security_audits_users | reject('equalto', omit) | list }}"
     action: set
+  register: _w2025cis_generate_security_audits_result
+  failed_when:
+    - _w2025cis_generate_security_audits_result is failed
+    - _w2025cis_generate_security_audits_result.msg != "Failed to translate the account 'RESTRICTED SERVICES\\PrintSpoolerService' to a SID"
 
 - name: >-
     2.2.31 | L1 |
@@ -400,6 +404,10 @@
     name: SeImpersonatePrivilege
     users: "{{ _w2025cis_impersonate_a_client_after_authentication_users | reject('equalto', omit) | list }}"
     action: set
+  register: _w2025cis_impersonate_a_client_after_authentication_result
+  failed_when:
+    - _w2025cis_impersonate_a_client_after_authentication_result is failed
+    - _w2025cis_impersonate_a_client_after_authentication_result.msg != "Failed to translate the account 'RESTRICTED SERVICES\\PrintSpoolerService' to a SID"
 
 - name: >-
     2.2.33 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'

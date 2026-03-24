@@ -41,7 +41,9 @@
     that:
       - ansible_os_family == 'Windows'
       - ansible_distribution | regex_search('(Microsoft Windows Server 2025)')
-    fail_msg: "This role can only be run against Windows Server 2025.  {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
+    fail_msg: >-
+      This role can only be run against Windows Server 2025.
+      {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
     success_msg: "This role is running against {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
 
 - name: "Validate | 1.1.1 | L1 | Ensure 'Enforce password history' is set to '24 or more password(s)'"
@@ -50,8 +52,11 @@
   ansible.builtin.assert:
     that:
       - w2025cis_password_history_size | int >= 24
-    fail_msg: "The variable 'w2025cis_password_history_size' must be set to 24 or more.  Value: {{ w2025cis_password_history_size }}"
-    success_msg: "The variable 'w2025cis_password_history_size' is set to 24 or more.  Value: {{ w2025cis_password_history_size }}"
+    fail_msg: >-
+      The variable 'w2025cis_password_history_size' must be set to 24 or more.
+      Value: {{ w2025cis_password_history_size }}
+    success_msg: >-
+      The variable 'w2025cis_password_history_size' is set to 24 or more. Value: {{ w2025cis_password_history_size }}
 
 - name: "Validate | 1.1.2 | L1 | Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
   when:
@@ -60,8 +65,12 @@
     that:
       - w2025cis_maximum_password_age | int <= 365
       - w2025cis_maximum_password_age | int > 0
-    fail_msg: "The variable 'w2025cis_maximum_password_age' must be set to between 1 and 365.  Value: {{ w2025cis_maximum_password_age }}"
-    success_msg: "The variable 'w2025cis_maximum_password_age' is set to between 1 and 365.  Value: {{ w2025cis_maximum_password_age }}"
+    fail_msg: >-
+      The variable 'w2025cis_maximum_password_age' must be set to between 1 and 365.
+      Value: {{ w2025cis_maximum_password_age }}
+    success_msg: >-
+      The variable 'w2025cis_maximum_password_age' is set to between 1 and 365.
+      Value: {{ w2025cis_maximum_password_age }}
 
 - name: "Validate | 1.1.3 | L1 | Ensure 'Minimum password age' is set to '1 or more day(s)'"
   when:
@@ -69,8 +78,10 @@
   ansible.builtin.assert:
     that:
       - w2025cis_minimum_password_age | int >= 1
-    fail_msg: "The variable 'w2025cis_minimum_password_age' must be set to 1 or more.  Value: {{ w2025cis_minimum_password_age }}"
-    success_msg: "The variable 'w2025cis_minimum_password_age' is set to 1 or more.  Value: {{ w2025cis_minimum_password_age }}"
+    fail_msg: >-
+      The variable 'w2025cis_minimum_password_age' must be set to 1 or more. Value: {{ w2025cis_minimum_password_age }}
+    success_msg: >-
+      The variable 'w2025cis_minimum_password_age' is set to 1 or more. Value: {{ w2025cis_minimum_password_age }}
 
 - name: "Validate | 1.1.4 | L1 | Ensure 'Minimum password length' is set to '14 or more character(s)'"
   when:
@@ -78,8 +89,12 @@
   ansible.builtin.assert:
     that:
       - w2025cis_minimum_password_length | int >= 14
-    fail_msg: "The variable 'w2025cis_minimum_password_length' must be set to 14 or more.  Value: {{ w2025cis_minimum_password_length }}"
-    success_msg: "The variable 'w2025cis_minimum_password_length' is set to 14 or more.  Value: {{ w2025cis_minimum_password_length }}"
+    fail_msg: >-
+      The variable 'w2025cis_minimum_password_length' must be set to 14 or more.
+      Value: {{ w2025cis_minimum_password_length }}
+    success_msg: >-
+      The variable 'w2025cis_minimum_password_length' is set to 14 or more.
+      Value: {{ w2025cis_minimum_password_length }}
 
 - name: "Validate | 1.2.1 | L1 | Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
   when:
@@ -87,18 +102,28 @@
   ansible.builtin.assert:
     that:
       - w2025cis_lockout_duration_in_minutes | int >= 15
-    fail_msg: "The variable 'w2025cis_lockout_duration_in_minutes' must be set to 15 or more.  Value: {{ w2025cis_lockout_duration_in_minutes }}"
-    success_msg: "The variable 'w2025cis_lockout_duration_in_minutes' is set to 15 or more.  Value: {{ w2025cis_lockout_duration_in_minutes }}"
+    fail_msg: >-
+      The variable 'w2025cis_lockout_duration_in_minutes' must be set to 15 or more.
+      Value: {{ w2025cis_lockout_duration_in_minutes }}
+    success_msg: >-
+      The variable 'w2025cis_lockout_duration_in_minutes' is set to 15 or more.
+      Value: {{ w2025cis_lockout_duration_in_minutes }}
 
-- name: "Validate | 1.2.2 | L1 | Ensure 'Account lockout threshold' is set to '5 or fewer invalid logon attempt(s), but not 0'"
+- name: >-
+    Validate | 1.2.2 | L1 |
+    Ensure 'Account lockout threshold' is set to '5 or fewer invalid logon attempt(s), but not 0'
   when:
     - w2025cis_rule_1_2_2_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_lockout_bad_logon_count | int <= 5
       - w2025cis_lockout_bad_logon_count | int > 0
-    fail_msg: "The variable 'w2025cis_minimum_password_length' must be set to between 1 and 5.  Value: {{ w2025cis_lockout_bad_logon_count }}"
-    success_msg: "The variable 'w2025cis_minimum_password_length' is set to between 1 and 5.  Value: {{ w2025cis_lockout_bad_logon_count }}"
+    fail_msg: >-
+      The variable 'w2025cis_minimum_password_length' must be set to between 1 and 5.
+      Value: {{ w2025cis_lockout_bad_logon_count }}
+    success_msg: >-
+      The variable 'w2025cis_minimum_password_length' is set to between 1 and 5.
+      Value: {{ w2025cis_lockout_bad_logon_count }}
 
 - name: "Validate | 1.2.4 | L1 | Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
   when:
@@ -106,10 +131,16 @@
   ansible.builtin.assert:
     that:
       - w2025cis_lockout_reset_time_in_minutes | int >= 15
-    fail_msg: "The variable 'w2025cis_lockout_reset_time_in_minutes' must be set to 15 or more.  Value: {{ w2025cis_lockout_reset_time_in_minutes }}"
-    success_msg: "The variable 'w2025cis_lockout_reset_time_in_minutes' is set to 15 or more.  Value: {{ w2025cis_lockout_reset_time_in_minutes }}"
+    fail_msg: >-
+      The variable 'w2025cis_lockout_reset_time_in_minutes' must be set to 15 or more.
+      Value: {{ w2025cis_lockout_reset_time_in_minutes }}
+    success_msg: >-
+      The variable 'w2025cis_lockout_reset_time_in_minutes' is set to 15 or more.
+      Value: {{ w2025cis_lockout_reset_time_in_minutes }}
 
-- name: "Validate | 2.3.6.5 | L1 | Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'"
+- name: >-
+    Validate | 2.3.6.5 | L1 |
+    Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'
   when:
     - w2025cis_rule_2_3_6_5_enabled
     - _w2025cis_domain_controller_or_member_server
@@ -117,18 +148,28 @@
     that:
       - w2025cis_maximum_machine_account_password_age_in_days | int <= 30
       - w2025cis_maximum_machine_account_password_age_in_days | int > 0
-    fail_msg: "The variable 'w2025cis_maximum_machine_account_password_age_in_days' must be set to between 1 and 30.  Value: {{ w2025cis_maximum_machine_account_password_age_in_days }}"
-    success_msg: "The variable 'w2025cis_maximum_machine_account_password_age_in_days' is set to between 1 and 30.  Value: {{ w2025cis_maximum_machine_account_password_age_in_days }}"
+    fail_msg: >-
+      The variable 'w2025cis_maximum_machine_account_password_age_in_days' must be set to between 1 and 30.
+      Value: {{ w2025cis_maximum_machine_account_password_age_in_days }}
+    success_msg: >-
+      The variable 'w2025cis_maximum_machine_account_password_age_in_days' is set to between 1 and 30.
+      Value: {{ w2025cis_maximum_machine_account_password_age_in_days }}
 
-- name: "Validate | 2.3.7.3 | L1 | Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'"
+- name: >-
+    Validate | 2.3.7.3 | L1 |
+    Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'
   when:
     - w2025cis_rule_2_3_7_3_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_inactivity_timeout_in_seconds | int <= 900
       - w2025cis_inactivity_timeout_in_seconds | int >= 0
-    fail_msg: "The variable 'w2025cis_inactivity_timeout_in_seconds' must be set to between 0 and 900.  Value: {{ w2025cis_inactivity_timeout_in_seconds }}"
-    success_msg: "The variable 'w2025cis_inactivity_timeout_in_seconds' is set to between 0 and 900.  Value: {{ w2025cis_inactivity_timeout_in_seconds }}"
+    fail_msg: >-
+      The variable 'w2025cis_inactivity_timeout_in_seconds' must be set to between 0 and 900.
+      Value: {{ w2025cis_inactivity_timeout_in_seconds }}
+    success_msg: >-
+      The variable 'w2025cis_inactivity_timeout_in_seconds' is set to between 0 and 900.
+      Value: {{ w2025cis_inactivity_timeout_in_seconds }}
 
 - name: "Validate | 2.3.7.4 | L1 | Configure 'Interactive logon: Message text for users attempting to log on'"
   when:
@@ -148,7 +189,11 @@
     fail_msg: "The variable 'w2025cis_login_message_title' must be defined."
     success_msg: "The variable 'w2025cis_login_message_title' is defined."
 
-- name: "Validate | 2.3.7.6 | L2 | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s)' | MS only"
+- name: >-
+    Validate | 2.3.7.6 | L2 |
+    Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)'
+    is set to '4 or fewer logon(s)' |
+    MS only
   when:
     - w2025cis_rule_2_3_7_6_enabled
     - _w2025cis_member_server
@@ -157,84 +202,116 @@
     that:
       - w2025cis_cached_logons_count | int <= 4
       - w2025cis_cached_logons_count | int >= 0
-    fail_msg: "The variable 'w2025cis_cached_logons_count' must be set to between 0 and 4.  Value: {{ w2025cis_cached_logons_count }}"
-    success_msg: "The variable 'w2025cis_cached_logons_count' is set to between 0 and 4.  Value: {{ w2025cis_cached_logons_count }}"
+    fail_msg: >-
+      The variable 'w2025cis_cached_logons_count' must be set to between 0 and 4.
+      Value: {{ w2025cis_cached_logons_count }}
+    success_msg: >-
+      The variable 'w2025cis_cached_logons_count' is set to between 0 and 4. Value: {{ w2025cis_cached_logons_count }}
 
-- name: "Validate | 2.3.7.7 | L1 | Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'"
+- name: >-
+    Validate | 2.3.7.7 | L1 |
+    Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'
   when:
     - w2025cis_rule_2_3_7_7_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_password_expiry_warning_in_days | int <= 14
       - w2025cis_password_expiry_warning_in_days | int >= 5
-    fail_msg: "The variable 'w2025cis_password_expiry_warning_in_days' must be set to between 5 and 14.  Value: {{ w2025cis_password_expiry_warning_in_days }}"
-    success_msg: "The variable 'w2025cis_password_expiry_warning_in_days' is set to between 5 and 14.  Value: {{ w2025cis_password_expiry_warning_in_days }}"
+    fail_msg: >-
+      The variable 'w2025cis_password_expiry_warning_in_days' must be set to between 5 and 14.
+      Value: {{ w2025cis_password_expiry_warning_in_days }}
+    success_msg: >-
+      The variable 'w2025cis_password_expiry_warning_in_days' is set to between 5 and 14.
+      Value: {{ w2025cis_password_expiry_warning_in_days }}
 
-- name: "Validate | 2.3.9.1 | L1 | Ensure 'Microsoft network server: Amount of idle time required before suspending session' is set to '15 or fewer minute(s)'"
+- name: >-
+    Validate | 2.3.9.1 | L1 |
+    Ensure 'Microsoft network server: Amount of idle time required before suspending session'
+    is set to '15 or fewer minute(s)'
   when:
     - w2025cis_rule_2_3_9_1_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_idle_smb_timeout_in_minutes | int <= 15
       - w2025cis_idle_smb_timeout_in_minutes | int >= 0
-    fail_msg: "The variable 'w2025cis_idle_smb_timeout_in_minutes' must be set to between 0 and 15.  Value: {{ w2025cis_idle_smb_timeout_in_minutes }}"
-    success_msg: "The variable 'w2025cis_idle_smb_timeout_in_minutes' is set to between 0 and 15.  Value: {{ w2025cis_idle_smb_timeout_in_minutes }}"
+    fail_msg: >-
+      The variable 'w2025cis_idle_smb_timeout_in_minutes' must be set to between 0 and 15.
+      Value: {{ w2025cis_idle_smb_timeout_in_minutes }}
+    success_msg: >-
+      The variable 'w2025cis_idle_smb_timeout_in_minutes' is set to between 0 and 15.
+      Value: {{ w2025cis_idle_smb_timeout_in_minutes }}
 
-- name: "Validate | 9.1.5 | L1 | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'"
+- name: >-
+    Validate | 9.1.5 | L1 | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
     - w2025cis_rule_9_1_5_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_domain_firewall_log_size_in_kb | int >= 16384
-    fail_msg: "The variable 'w2025cis_domain_firewall_log_size_in_kb' must be set to 16384 or more.  Value: {{ w2025cis_domain_firewall_log_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_domain_firewall_log_size_in_kb' is set to 16384 or more.  Value: {{ w2025cis_domain_firewall_log_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_domain_firewall_log_size_in_kb' must be set to 16384 or more.
+      Value: {{ w2025cis_domain_firewall_log_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_domain_firewall_log_size_in_kb' is set to 16384 or more.
+      Value: {{ w2025cis_domain_firewall_log_size_in_kb }}
 
-- name: "Validate | 9.2.5 | L1 | Ensure 'Windows Firewall: Private: Logging: Size limit (KB)' is set to '16,384 KB or greater'"
+- name: >-
+    Validate | 9.2.5 | L1 |
+    Ensure 'Windows Firewall: Private: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
     - w2025cis_rule_9_2_5_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_private_firewall_log_size_in_kb | int >= 16384
-    fail_msg: "The variable 'w2025cis_private_firewall_log_size_in_kb' must be set to 16384 or more.  Value: {{ w2025cis_private_firewall_log_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_private_firewall_log_size_in_kb' is set to 16384 or more.  Value: {{ w2025cis_private_firewall_log_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_private_firewall_log_size_in_kb' must be set to 16384 or more.
+      Value: {{ w2025cis_private_firewall_log_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_private_firewall_log_size_in_kb' is set to 16384 or more.
+      Value: {{ w2025cis_private_firewall_log_size_in_kb }}
 
-- name: "Validate | 9.3.7 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'"
+- name: >-
+    Validate | 9.3.7 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
     - w2025cis_rule_9_3_7_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_public_firewall_log_size_in_kb | int >= 16384
-    fail_msg: "The variable 'w2025cis_public_firewall_log_size_in_kb' must be set to 16384 or more.  Value: {{ w2025cis_public_firewall_log_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_public_firewall_log_size_in_kb' is set to 16384 or more.  Value: {{ w2025cis_public_firewall_log_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_public_firewall_log_size_in_kb' must be set to 16384 or more.
+      Value: {{ w2025cis_public_firewall_log_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_public_firewall_log_size_in_kb' is set to 16384 or more.
+      Value: {{ w2025cis_public_firewall_log_size_in_kb }}
 
-- name: "Validate | 18.5.9 | L1 | Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)' is set to 'Enabled: 5 or fewer seconds'"
-  ansible.builtin.assert:
-    that:
-      - w2025cis_screensaver_grace_period_in_seconds | int <= 5
-      - w2025cis_screensaver_grace_period_in_seconds | int >= 0
-    fail_msg: "The variable 'w2025cis_screensaver_grace_period_in_seconds' must be set to between 0 and 5.  Value: {{ w2025cis_screensaver_grace_period_in_seconds }}"
-    success_msg: "The variable 'w2025cis_screensaver_grace_period_in_seconds' is set to between 0 and 5.  Value: {{ w2025cis_screensaver_grace_period_in_seconds }}"
-
-- name: "Validate | 18.6.7.6 | L1 | Ensure 'Set authentication rate limiter delay (milliseconds)' is set to 'Enabled: 2000' or more"
+- name: >-
+    Validate | 18.6.7.6 | L1 |
+    Ensure 'Set authentication rate limiter delay (milliseconds)' is set to 'Enabled: 2000' or more
   when:
     - w2025cis_rule_18_6_7_6_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_smb_authentication_rate_limiter_delay_in_ms | int >= 2000
-    fail_msg: "The variable 'w2025cis_smb_authentication_rate_limiter_delay_in_ms' must be set to 2000 or more.  Value: {{ w2025cis_smb_authentication_rate_limiter_delay_in_ms }}"
-    success_msg: "The variable 'w2025cis_smb_authentication_rate_limiter_delay_in_ms' is set to 2000 or more.  Value: {{ w2025cis_smb_authentication_rate_limiter_delay_in_ms }}"
+    fail_msg: >-
+      The variable 'w2025cis_smb_authentication_rate_limiter_delay_in_ms' must be set to 2000 or more.
+      Value: {{ w2025cis_smb_authentication_rate_limiter_delay_in_ms }}
+    success_msg: >-
+      The variable 'w2025cis_smb_authentication_rate_limiter_delay_in_ms' is set to 2000 or more.
+      Value: {{ w2025cis_smb_authentication_rate_limiter_delay_in_ms }}
 
-- name: "Validate | 18.9.25.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
+- name: "Validate | 18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
     - w2025cis_rule_18_9_26_5_enabled
     - _w2025cis_member_server
   ansible.builtin.assert:
     that:
       - w2025cis_laps_password_length | int >= 15
-    fail_msg: "The variable 'w2025cis_laps_password_length' must be set to 15 or more.  Value: {{ w2025cis_laps_password_length }}"
-    success_msg: "The variable 'w2025cis_laps_password_length' is set to 15 or more.  Value: {{ w2025cis_laps_password_length }}"
+    fail_msg: >-
+      The variable 'w2025cis_laps_password_length' must be set to 15 or more. Value: {{ w2025cis_laps_password_length }}
+    success_msg: >-
+      The variable 'w2025cis_laps_password_length' is set to 15 or more. Value: {{ w2025cis_laps_password_length }}
 
-- name: "Validate | 18.9.25.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
+- name: "Validate | 18.9.26.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
   when:
     - w2025cis_rule_18_9_26_6_enabled
     - _w2025cis_member_server
@@ -242,10 +319,16 @@
     that:
       - w2025cis_laps_password_age_in_days | int <= 30
       - w2025cis_laps_password_age_in_days | int >= 0
-    fail_msg: "The variable 'w2025cis_laps_password_age_in_days' must be set to between 0 and 30.  Value: {{ w2025cis_laps_password_age_in_days }}"
-    success_msg: "The variable 'w2025cis_laps_password_age_in_days' is set to between 0 and 30.  Value: {{ w2025cis_laps_password_age_in_days }}"
+    fail_msg: >-
+      The variable 'w2025cis_laps_password_age_in_days' must be set to between 0 and 30.
+      Value: {{ w2025cis_laps_password_age_in_days }}
+    success_msg: >-
+      The variable 'w2025cis_laps_password_age_in_days' is set to between 0 and 30.
+      Value: {{ w2025cis_laps_password_age_in_days }}
 
-- name: "Validate | 18.9.25.7 | L1 | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'"
+- name: >-
+    Validate | 18.9.26.7 | L1 |
+    Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'
   when:
     - w2025cis_rule_18_9_26_7_enabled
     - _w2025cis_member_server
@@ -253,41 +336,69 @@
     that:
       - w2025cis_laps_post_authentication_grace_period_in_hours | int <= 8
       - w2025cis_laps_post_authentication_grace_period_in_hours | int >= 0
-    fail_msg: "The variable 'w2025cis_laps_post_authentication_grace_period_in_hours' must be set to between 0 and 8.  Value: {{ w2025cis_laps_post_authentication_grace_period_in_hours }}"
-    success_msg: "The variable 'w2025cis_laps_post_authentication_grace_period_in_hours' is set to between 0 and 8.  Value: {{ w2025cis_laps_post_authentication_grace_period_in_hours }}"
+    fail_msg: >-
+      The variable 'w2025cis_laps_post_authentication_grace_period_in_hours' must be set to between 0 and 8.
+      Value: {{ w2025cis_laps_post_authentication_grace_period_in_hours }}
+    success_msg: >-
+      The variable 'w2025cis_laps_post_authentication_grace_period_in_hours' is set to between 0 and 8.
+      Value: {{ w2025cis_laps_post_authentication_grace_period_in_hours }}
 
-- name: "Validate | 18.10.26.1.2 | L1 | Ensure 'Application: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    Validate | 18.10.26.1.2 | L1 |
+    Ensure 'Application: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_1_2_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_application_log_max_size_in_kb | int >= 32768
-    fail_msg: "The variable 'w2025cis_application_log_max_size_in_kb' must be set to 32768 or more.  Value: {{ w2025cis_application_log_max_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_application_log_max_size_in_kb' is set to 32768 or more.  Value: {{ w2025cis_application_log_max_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_application_log_max_size_in_kb' must be set to 32768 or more.
+      Value: {{ w2025cis_application_log_max_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_application_log_max_size_in_kb' is set to 32768 or more.
+      Value: {{ w2025cis_application_log_max_size_in_kb }}
 
-- name: "Validate | 18.10.26.2.2 | L1 | Ensure 'Security: Specify the maximum log file size (KB)' is set to 'Enabled: 196,608 or greater'"
+- name: >-
+    Validate | 18.10.26.2.2 | L1 |
+    Ensure 'Security: Specify the maximum log file size (KB)' is set to 'Enabled: 196,608 or greater'
   when:
     - w2025cis_rule_18_10_26_2_2_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_security_log_max_size_in_kb | int >= 196608
-    fail_msg: "The variable 'w2025cis_security_log_max_size_in_kb' must be set to 196608 or more.  Value: {{ w2025cis_security_log_max_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_security_log_max_size_in_kb' is set to 196608 or more.  Value: {{ w2025cis_security_log_max_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_security_log_max_size_in_kb' must be set to 196608 or more.
+      Value: {{ w2025cis_security_log_max_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_security_log_max_size_in_kb' is set to 196608 or more.
+      Value: {{ w2025cis_security_log_max_size_in_kb }}
 
-- name: "Validate | 18.10.26.3.2 | L1 | Ensure 'Setup: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    Validate | 18.10.26.3.2 | L1 |
+    Ensure 'Setup: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_3_2_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_setup_log_max_size_in_kb | int >= 32768
-    fail_msg: "The variable 'w2025cis_setup_log_max_size_in_kb' must be set to 32768 or more.  Value: {{ w2025cis_setup_log_max_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_setup_log_max_size_in_kb' is set to 32768 or more.  Value: {{ w2025cis_setup_log_max_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_setup_log_max_size_in_kb' must be set to 32768 or more.
+      Value: {{ w2025cis_setup_log_max_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_setup_log_max_size_in_kb' is set to 32768 or more.
+      Value: {{ w2025cis_setup_log_max_size_in_kb }}
 
-- name: "Validate | 18.10.26.4.2 | L1 | Ensure 'System: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    Validate | 18.10.26.4.2 | L1 |
+    Ensure 'System: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_4_2_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_system_log_max_size_in_kb | int >= 32768
-    fail_msg: "The variable 'w2025cis_system_log_max_size_in_kb' must be set to 32768 or more.  Value: {{ w2025cis_system_log_max_size_in_kb }}"
-    success_msg: "The variable 'w2025cis_system_log_max_size_in_kb' is set to 32768 or more.  Value: {{ w2025cis_system_log_max_size_in_kb }}"
+    fail_msg: >-
+      The variable 'w2025cis_system_log_max_size_in_kb' must be set to 32768 or more.
+      Value: {{ w2025cis_system_log_max_size_in_kb }}
+    success_msg: >-
+      The variable 'w2025cis_system_log_max_size_in_kb' is set to 32768 or more.
+      Value: {{ w2025cis_system_log_max_size_in_kb }}

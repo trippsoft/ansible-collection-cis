@@ -62,11 +62,8 @@
 - name: Execute the 18.10.63.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.63.x.yml
 
-- name: Execute the 18.10.76.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.76.x.yml
-
-- name: Execute the 18.10.80.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.80.x.yml
+- name: Execute the 18.10.77.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.77.x.yml
 
 - name: Execute the 18.10.81.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.81.x.yml
@@ -74,17 +71,20 @@
 - name: Execute the 18.10.82.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.82.x.yml
 
-- name: Execute the 18.10.87.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.87.x.yml
+- name: Execute the 18.10.83.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.83.x.yml
 
-- name: Execute the 18.10.89.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.89.x.yml
+- name: Execute the 18.10.88.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.88.x.yml
 
 - name: Execute the 18.10.90.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.90.x.yml
 
-- name: Execute the 18.10.92.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.92.x.yml
+- name: Execute the 18.10.91.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.91.x.yml
+
+- name: Execute the 18.10.93.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.93.x.yml
 
 - name: Execute the 18.10.94.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.94.x.yml
