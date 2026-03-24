@@ -14,6 +14,9 @@
 - name: Execute the 18.9.13.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.13.x.yml
 
+- name: Execute the 18.9.17.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.17.x.yml
+
 - name: Execute the 18.9.19.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.19.x.yml
 
@@ -26,9 +29,6 @@
 - name: Execute the 18.9.24.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.24.x.yml
 
-- name: Execute the 18.9.25.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.25.x.yml
-
 - name: Execute the 18.9.26.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.26.x.yml
 
@@ -38,8 +38,8 @@
 - name: Execute the 18.9.28.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.28.x.yml
 
-- name: Execute the 18.9.31.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.31.x.yml
+- name: Execute the 18.9.29.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.29.x.yml
 
 - name: Execute the 18.9.33.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.33.x.yml
@@ -47,17 +47,20 @@
 - name: Execute the 18.9.35.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.35.x.yml
 
-- name: Execute the 18.9.36.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.36.x.yml
+- name: Execute the 18.9.37.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.37.x.yml
 
-- name: Execute the 18.9.39.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.39.x.yml
+- name: Execute the 18.9.38.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.38.x.yml
 
-- name: Execute the 18.9.47.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.47.x.yml
+- name: Execute the 18.9.41.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.41.x.yml
 
 - name: Execute the 18.9.49.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.49.x.yml
 
 - name: Execute the 18.9.51.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.51.x.yml
+
+- name: Execute the 18.9.53.x tasks
+  ansible.builtin.import_tasks: section18/18.9/18.9.53.x.yml

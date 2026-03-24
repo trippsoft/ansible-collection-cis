@@ -1,7 +1,7 @@
 ---
 _w2022cis_standalone: "{{ ansible_windows_domain_role == 'Stand-alone server' and not w2022cis_is_template }}"
 _w2022cis_domain_controller: >-
-  {{ ansible_windows_domain_role | regex_search('(domain controller)') and not w2022cis_is_template }}
+  {{ 'domain controller' in ansible_windows_domain_role and not w2022cis_is_template }}
 _w2022cis_member_server: "{{ ansible_windows_domain_role == 'Member server' and not w2022cis_is_template }}"
 
 _w2022cis_level2_domain_controller: "{{ _w2022cis_domain_controller and _w2022cis_level2 }}"
@@ -33,12 +33,14 @@ _w2022cis_debug_programs_default_users:
 _w2022cis_generate_security_audits_default_users:
   - LOCAL SERVICE
   - NETWORK SERVICE
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
 
 _w2022cis_impersonate_a_client_after_authentication_default_users:
   - Administrators
   - LOCAL SERVICE
   - NETWORK SERVICE
   - SERVICE
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
 
 _w2022cis_manage_auditing_and_security_log_default_users:
   - Administrators
@@ -51,9 +53,11 @@ _w2022cis_replace_a_process_level_token_default_users:
   - NETWORK SERVICE
 
 _w2022cis_access_this_computer_from_the_network_users: >-
-  {{ w2022cis_access_this_computer_from_the_network_additional_users + _w2022cis_access_this_computer_from_the_network_default_users }}
+  {{ w2022cis_access_this_computer_from_the_network_additional_users +
+      _w2022cis_access_this_computer_from_the_network_default_users }}
 _w2022cis_adjust_memory_quotas_for_a_process_users: >-
-  {{ w2022cis_adjust_memory_quotas_for_a_process_additional_users + _w2022cis_adjust_memory_quotas_for_a_process_default_users }}
+  {{ w2022cis_adjust_memory_quotas_for_a_process_additional_users +
+      _w2022cis_adjust_memory_quotas_for_a_process_default_users }}
 _w2022cis_create_global_objects_users: >-
   {{ w2022cis_create_global_objects_additional_users + _w2022cis_create_global_objects_default_users }}
 _w2022cis_debug_programs_users: >-
@@ -61,15 +65,19 @@ _w2022cis_debug_programs_users: >-
 _w2022cis_generate_security_audits_users: >-
   {{ w2022cis_generate_security_audits_additional_users + _w2022cis_generate_security_audits_default_users }}
 _w2022cis_impersonate_a_client_after_authentication_users: >-
-  {{ w2022cis_impersonate_a_client_after_authentication_additional_users + _w2022cis_impersonate_a_client_after_authentication_default_users }}
+  {{ w2022cis_impersonate_a_client_after_authentication_additional_users +
+      _w2022cis_impersonate_a_client_after_authentication_default_users }}
 _w2022cis_manage_auditing_and_security_log_users: >-
-  {{ w2022cis_manage_auditing_and_security_log_additional_users + _w2022cis_manage_auditing_and_security_log_default_users }}
+  {{ w2022cis_manage_auditing_and_security_log_additional_users +
+      _w2022cis_manage_auditing_and_security_log_default_users }}
 _w2022cis_perform_volume_maintenance_tasks_users: >-
-  {{ w2022cis_perform_volume_maintenance_tasks_additional_users + _w2022cis_perform_volume_maintenance_tasks_default_users }}
+  {{ w2022cis_perform_volume_maintenance_tasks_additional_users +
+      _w2022cis_perform_volume_maintenance_tasks_default_users }}
 _w2022cis_replace_a_process_level_token_users: >-
   {{ w2022cis_replace_a_process_level_token_additional_users + _w2022cis_replace_a_process_level_token_default_users }}
 
-_w2022cis_increase_scheduling_priority_users: '{{ ["Administrators"] if _windows_installation_type == "Server Core" else ["Administrators", "Window Manager\Window Manager Group"] }}'
+_w2022cis_increase_scheduling_priority_users: >-
+  {{ ["Administrators"] if _windows_installation_type == "Server Core" else ["Administrators", "Window Manager\Window Manager Group"] }}
 
 _w2022cis_smart_card_removal_behavior_map:
   lock: 1
@@ -96,9 +104,16 @@ _w2022cis_laps_directory_map:
   azure_ad: 1
   ad: 2
 
+_w2022cis_laps_password_complexity_map:
+  all_characters: 4
+  short_word_passphrase: 6
+  long_word_passphrase: 7
+  short_word_passphrase_with_prefix: 8
+
 _w2022cis_laps_post_authentication_actions_map:
   reset_password_and_logoff: 3
   reset_password_and_reboot: 5
+  reset_password_and_terminal_processes: 11
 
 _w2022cis_doh_policy_map:
   require: 3
@@ -116,10 +131,6 @@ _w2022cis_rpc_listener_authentication_protocol_map:
 _w2022cis_vbs_platform_security_level_map:
   secure_boot_and_dma_protection: 3
   secure_boot: 1
-
-_w2022cis_whfb_roca_mitigation_map:
-  block: 2
-  audit: 1
 
 _w2022cis_windows_connect_pin_requirement_map:
   always: 2
@@ -145,6 +156,10 @@ _w2022cis_windows_ink_workspace_access_map:
   disallow_above_lock: 1
   disabled: 0
 
+_w2022cis_disable_http_proxy_features_map:
+  disable_for_loopback_interfaces: 256
+  disable_all: 287
+
 _w2022cis_smart_card_removal_behavior_value: >-
   {{ _w2022cis_smart_card_removal_behavior_map[w2022cis_smart_card_removal_behavior] }}
 _w2022cis_smb_spn_target_name_validation_level_value: >-
@@ -157,6 +172,8 @@ _w2022cis_admin_uac_elevation_behavior_value: >-
   {{ _w2022cis_admin_uac_elevation_behavior_map[w2022cis_admin_uac_elevation_behavior] }}
 _w2022cis_laps_directory_value: >-
   {{ _w2022cis_laps_directory_map[w2022cis_laps_directory] }}
+_w2022cis_laps_password_complexity_value: >-
+  {{ _w2022cis_laps_password_complexity_map[w2022cis_laps_password_complexity] }}
 _w2022cis_laps_post_authentication_actions_value: >-
   {{ _w2022cis_laps_post_authentication_actions_map[w2022cis_laps_post_authentication_actions] }}
 _w2022cis_doh_policy_value: >-
@@ -167,8 +184,6 @@ _w2022cis_rpc_listener_authentication_protocol_value: >-
   {{ _w2022cis_rpc_listener_authentication_protocol_map[w2022cis_rpc_listener_authentication_protocol] }}
 _w2022cis_vbs_platform_security_level_value: >-
   {{ _w2022cis_vbs_platform_security_level_map[w2022cis_vbs_platform_security_level] }}
-_w2022cis_whfb_roca_mitigation_value: >-
-  {{ _w2022cis_whfb_roca_mitigation_map[w2022cis_whfb_roca_mitigation] }}
 _w2022cis_windows_connect_pin_requirement_value: >-
   {{ _w2022cis_windows_connect_pin_requirement_map[w2022cis_windows_connect_pin_requirement] }}
 _w2022cis_telemetry_level_value: >-
@@ -181,3 +196,5 @@ _w2022cis_remote_encryption_protection_aggressiveness_value: >-
   {{ _w2022cis_remote_encryption_protection_aggressiveness_map[w2022cis_remote_encryption_protection_aggressiveness] }}
 _w2022cis_windows_ink_workspace_access_value: >-
   {{ _w2022cis_windows_ink_workspace_access_map[w2022cis_windows_ink_workspace_access] }}
+_w2022cis_disable_http_proxy_features_value: >-
+  {{ _w2022cis_disable_http_proxy_features_map[w2022cis_disable_http_proxy_features] }}

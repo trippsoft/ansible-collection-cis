@@ -1,5 +1,8 @@
 ---
-- name: "2.3.2.1 | L1 | Ensure 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' is set to 'Enabled'"
+- name: >-
+    2.3.2.1 | L1 |
+    Ensure 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings'
+    is set to 'Enabled'
   when:
     - w2022cis_rule_2_3_2_1_enabled
   ansible.windows.win_regedit:
@@ -8,7 +11,8 @@
     data: 1
     type: dword
 
-- name: "2.3.2.2 | L1 | Ensure 'Audit: Shut down system immediately if unable to log security audits' is set to 'Disabled'"
+- name: >-
+    2.3.2.2 | L1 | Ensure 'Audit: Shut down system immediately if unable to log security audits' is set to 'Disabled'
   when:
     - w2022cis_rule_2_3_2_2_enabled
   ansible.windows.win_regedit:

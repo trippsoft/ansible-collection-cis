@@ -8,7 +8,9 @@
     data: 1
     type: dword
 
-- name: "18.10.8.2 | L1 | Ensure 'Set the default behavior for AutoRun' is set to 'Enabled: Do not execute any autorun commands'"
+- name: >-
+    18.10.8.2 | L1 |
+    Ensure 'Set the default behavior for AutoRun' is set to 'Enabled: Do not execute any autorun commands'
   when:
     - w2022cis_rule_18_10_8_2_enabled
   ansible.windows.win_regedit:

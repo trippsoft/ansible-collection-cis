@@ -8,7 +8,9 @@
     key: EnableGuestAccount
     value: 0
 
-- name: "2.3.1.2 | L1 | Ensure 'Accounts: Limit local account use of blank passwords to console logon only' is set to 'Enabled'"
+- name: >-
+    2.3.1.2 | L1 |
+    Ensure 'Accounts: Limit local account use of blank passwords to console logon only' is set to 'Enabled'
   when:
     - w2022cis_rule_2_3_1_2_enabled
   ansible.windows.win_regedit:

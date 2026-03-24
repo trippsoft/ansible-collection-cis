@@ -4,14 +4,20 @@
     - w2022cis_rule_18_9_23_1_enabled
     - w2022cis_rule_18_9_23_1_force or _w2022cis_level2
   block:
-    - name: "18.9.23.1 | L2 | Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic' | DevicePKInitBehavior"
+    - name: >-
+        18.9.23.1 | L2 |
+        Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic' |
+        DevicePKInitBehavior
       ansible.windows.win_regedit:
         path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
         name: DevicePKInitBehavior
         data: 0
         type: dword
 
-    - name: "18.9.23.1 | L2 | Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic' | DevicePKInitEnabled"
+    - name: >-
+        18.9.23.1 | L2 |
+        Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic' |
+        DevicePKInitEnabled
       ansible.windows.win_regedit:
         path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
         name: DevicePKInitEnabled

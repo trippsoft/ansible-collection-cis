@@ -3,9 +3,9 @@
   when:
     - w2022cis_rule_1_1_1_enabled
   community.windows.win_security_policy:
-      section: System Access
-      key: PasswordHistorySize
-      value: "{{ w2022cis_password_history_size }}"
+    section: System Access
+    key: PasswordHistorySize
+    value: "{{ w2022cis_password_history_size }}"
 
 - name: "1.1.2 | L1 | Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
   when:

@@ -1,10 +1,21 @@
 ---
-- name: "18.9.27.1 | L2 | Ensure 'Disallow copying of user input methods to the system account for sign-in' is set to 'Enabled'"
+- name: "18.9.27.1 | L1 | Ensure 'Allow Custom SSPs and APs to be loaded into LSASS' is set to 'Disabled' | DC only"
   when:
     - w2022cis_rule_18_9_27_1_enabled
-    - w2022cis_rule_18_9_27_1_force or _w2022cis_level2
+    - _w2022cis_domain_controller
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Control Panel\International
-    name: BlockUserInputMethodsForSignIn
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: AllowCustomSSPsAPs
+    data: 0
+    type: dword
+
+- name: >-
+    18.9.27.2 | NG | Ensure 'Configures LSASS to run as a protected process' is set to 'Enabled: Enabled with UEFI Lock'
+  when:
+    - w2022cis_rule_18_9_27_2_enabled
+    - w2022cis_rule_18_9_27_2_force or _w2022cis_ngws
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RunAsPPL
     data: 1
     type: dword

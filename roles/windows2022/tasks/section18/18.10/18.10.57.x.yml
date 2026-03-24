@@ -8,7 +8,9 @@
     data: 1
     type: dword
 
-- name: "18.10.57.3.2.1 | L2 | Ensure 'Restrict Remote Desktop Services users to a single Remote Desktop Services session' is set to 'Enabled'"
+- name: >-
+    18.10.57.3.2.1 | L2 |
+    Ensure 'Restrict Remote Desktop Services users to a single Remote Desktop Services session' is set to 'Enabled'
   when:
     - w2022cis_rule_18_10_57_3_2_1_enabled
     - w2022cis_rule_18_10_57_3_2_1_force or _w2022cis_level2
@@ -95,7 +97,9 @@
     data: 1
     type: dword
 
-- name: "18.10.57.3.9.3 | L1 | Ensure 'Require use of specific security layer for remote (RDP) connections' is set to 'Enabled: SSL'"
+- name: >-
+    18.10.57.3.9.3 | L1 |
+    Ensure 'Require use of specific security layer for remote (RDP) connections' is set to 'Enabled: SSL'
   when:
     - w2022cis_rule_18_10_57_3_9_3_enabled
   ansible.windows.win_regedit:
@@ -104,7 +108,10 @@
     data: 2
     type: dword
 
-- name: "18.10.57.3.9.4 | L1 | Ensure 'Require user authentication for remote connections by using Network Level Authentication' is set to 'Enabled'"
+- name: >-
+    18.10.57.3.9.4 | L1 |
+    Ensure 'Require user authentication for remote connections by using Network Level Authentication'
+    is set to 'Enabled'
   when:
     - w2022cis_rule_18_10_57_3_9_4_enabled
   ansible.windows.win_regedit:
@@ -122,7 +129,10 @@
     data: 3
     type: dword
 
-- name: "18.10.57.3.10.1 | L2 | Ensure 'Set time limit for active but idle Remote Desktop Services sessions' is set to 'Enabled: 15 minutes or less, but not Never (0)'"
+- name: >-
+    18.10.57.3.10.1 | L2 |
+    Ensure 'Set time limit for active but idle Remote Desktop Services sessions'
+    is set to 'Enabled: 15 minutes or less, but not Never (0)'
   when:
     - w2022cis_rule_18_10_57_3_10_1_enabled
     - w2022cis_rule_18_10_57_3_10_1_force or _w2022cis_level2

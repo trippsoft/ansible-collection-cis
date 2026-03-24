@@ -8,18 +8,11 @@
     data: 1
     type: dword
 
-- name: "2.3.8.2 | L1 | Ensure 'Microsoft network client: Digitally sign communications (if server agrees)' is set to 'Enabled'"
+- name: >-
+    2.3.8.2 | L1 |
+    Ensure 'Microsoft network client: Send unencrypted password to third-party SMB servers' is set to 'Disabled'
   when:
     - w2022cis_rule_2_3_8_2_enabled
-  ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
-    name: EnableSecuritySignature
-    data: 1
-    type: dword
-
-- name: "2.3.8.3 | L1 | Ensure 'Microsoft network client: Send unencrypted password to third-party SMB servers' is set to 'Disabled'"
-  when:
-    - w2022cis_rule_2_3_8_3_enabled
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
     name: EnablePlainTextPassword

@@ -19,7 +19,10 @@
     data: 1
     type: dword
 
-- name: "18.7.3 | L1 | Ensure 'Configure RPC connection settings: Protocol to use for outgoing RPC connections' is set to 'Enabled: RPC over TCP'"
+- name: >-
+    18.7.3 | L1 |
+    Ensure 'Configure RPC connection settings: Protocol to use for outgoing RPC connections'
+    is set to 'Enabled: RPC over TCP'
   when:
     - w2022cis_rule_18_7_3_enabled
   ansible.windows.win_regedit:
@@ -28,7 +31,10 @@
     data: 0
     type: dword
 
-- name: "18.7.4 | L1 | Ensure 'Configure RPC connection settings: Use authentication for outgoing RPC connections' is set to 'Enabled: Default'"
+- name: >-
+    18.7.4 | L1 |
+    Ensure 'Configure RPC connection settings: Use authentication for outgoing RPC connections'
+    is set to 'Enabled: Default'
   when:
     - w2022cis_rule_18_7_4_enabled
   ansible.windows.win_regedit:
@@ -37,7 +43,10 @@
     data: 0
     type: dword
 
-- name: "18.7.5 | L1 | Ensure 'Configure RPC listener settings: Protocols to allow for incoming RPC connections' is set to 'Enabled: RPC over TCP'"
+- name: >-
+    18.7.5 | L1 |
+    Ensure 'Configure RPC listener settings: Protocols to allow for incoming RPC connections'
+    is set to 'Enabled: RPC over TCP'
   when:
     - w2022cis_rule_18_7_5_enabled
   ansible.windows.win_regedit:
@@ -46,7 +55,10 @@
     data: 5
     type: dword
 
-- name: "18.7.6 | L1 | Ensure 'Configure RPC listener settings: Authentication protocol to use for incoming RPC connections:' is set to 'Enabled: Negotiate' or higher"
+- name: >-
+    18.7.6 | L1 |
+    Ensure 'Configure RPC listener settings: Authentication protocol to use for incoming RPC connections:'
+    is set to 'Enabled: Negotiate' or higher
   when:
     - w2022cis_rule_18_7_6_enabled
   ansible.windows.win_regedit:
@@ -83,7 +95,10 @@
     type: dword
     state: present
 
-- name: "18.7.10 | L1 | Ensure 'Manage processing of Queue-specific files' is set to 'Enabled: Limit Queue-specific files to Color profiles'"
+- name: >-
+    18.7.10 | L1 |
+    Ensure 'Manage processing of Queue-specific files'
+    is set to 'Enabled: Limit Queue-specific files to Color profiles'
   when:
     - w2022cis_rule_18_7_10_enabled
   ansible.windows.win_regedit:
@@ -93,7 +108,10 @@
     type: dword
     state: present
 
-- name: "18.7.11 | L1 | Ensure 'Point and Print Restrictions: When installing drivers for a new connection' is set to 'Enabled: Show warning and elevation prompt'"
+- name: >-
+    18.7.11 | L1 |
+    Ensure 'Point and Print Restrictions: When installing drivers for a new connection'
+    is set to 'Enabled: Show warning and elevation prompt'
   when:
     - w2022cis_rule_18_7_11_enabled
   ansible.windows.win_regedit:
@@ -102,7 +120,10 @@
     data: 0
     type: dword
 
-- name: "18.7.12 | L1 | Ensure 'Point and Print Restrictions: When updating drivers for an existing connection' is set to 'Enabled: Show warning and elevation prompt'"
+- name: >-
+    18.7.12 | L1 |
+    Ensure 'Point and Print Restrictions: When updating drivers for an existing connection'
+    is set to 'Enabled: Show warning and elevation prompt'
   when:
     - w2022cis_rule_18_7_12_enabled
   ansible.windows.win_regedit:

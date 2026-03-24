@@ -1,19 +1,10 @@
 ---
-- name: "18.9.51.1.1 | L1 | Ensure 'Enable Windows NTP Client' is set to 'Enabled'"
+- name: "18.9.51.1 | L2 | Ensure 'Turn off the advertising ID' is set to 'Enabled'"
   when:
-    - w2022cis_rule_18_9_51_1_1_enabled
+    - w2022cis_rule_18_9_51_1_enabled
+    - w2022cis_rule_18_9_51_1_force or _w2022cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpclient
-    name: Enabled
-    data: 1
-    type: dword
-
-- name: "18.9.51.1.2 | L1 | Ensure 'Enable Windows NTP Server' is set to 'Disabled' | MS only"
-  when:
-    - w2022cis_rule_18_9_51_1_2_enabled
-    - _w2022cis_standalone_or_member_server
-  ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpserver
-    name: Enabled
+    path: HKLM:\Software\Policies\Microsoft\Windows\Advertisinginfo
+    name: DisabledByGroupPolicy
     data: 1
     type: dword

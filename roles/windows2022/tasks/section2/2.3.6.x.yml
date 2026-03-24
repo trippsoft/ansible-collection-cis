@@ -1,5 +1,6 @@
 ---
-- name: "2.3.6.1 | L1 | Ensure 'Domain member: Digitally encrypt or sign secure channel data (always)' is set to 'Enabled'"
+- name: >-
+    2.3.6.1 | L1 | Ensure 'Domain member: Digitally encrypt or sign secure channel data (always)' is set to 'Enabled'
   when:
     - w2022cis_rule_2_3_6_1_enabled
     - _w2022cis_domain_controller_or_member_server
@@ -9,7 +10,8 @@
     data: 1
     type: dword
 
-- name: "2.3.6.2 | L1 | Ensure 'Domain member: Digitally encrypt secure channel data (when possible)' is set to 'Enabled'"
+- name: >-
+    2.3.6.2 | L1 | Ensure 'Domain member: Digitally encrypt secure channel data (when possible)' is set to 'Enabled'
   when:
     - w2022cis_rule_2_3_6_2_enabled
     - _w2022cis_domain_controller_or_member_server
@@ -39,7 +41,8 @@
     data: 0
     type: dword
 
-- name: "2.3.6.5 | L1 | Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'"
+- name: >-
+    2.3.6.5 | L1 | Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'
   when:
     - w2022cis_rule_2_3_6_5_enabled
     - _w2022cis_domain_controller_or_member_server

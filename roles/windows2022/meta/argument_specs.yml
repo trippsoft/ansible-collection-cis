@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: Windows Server 2022 CIS Benchmarks
     description:
-      - This role applies the CIS Benchmark hardening steps on Windows Server 2022 machines. It is based on the CIS Benchmark for Windows Server 2022, v4.0.0.
+      - This role applies the CIS Benchmark hardening steps on Windows Server 2022 machines. It is based on the CIS Benchmark for Windows Server 2022, v5.0.0.
     author:
       - Jim Tarpley (@trippsc2)
     options:
@@ -395,6 +395,13 @@ argument_specs:
         description:
           - Whether to enable rule 2.2.36.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_2_2_36_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 2.2.36.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_2_2_37_enabled:
         type: bool
         required: false
@@ -402,13 +409,6 @@ argument_specs:
         description:
           - Whether to enable rule 2.2.37.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_2_2_37_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 2.2.37.
-          - This applies when the machine type is appropriate.
       w2022cis_rule_2_2_38_enabled:
         type: bool
         required: false
@@ -485,13 +485,6 @@ argument_specs:
         default: true
         description:
           - Whether to enable rule 2.2.48.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_2_2_49_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 2.2.49.
           - This applies when the level and machine type are appropriate.
       w2022cis_access_this_computer_from_the_network_additional_users:
         type: list
@@ -705,6 +698,13 @@ argument_specs:
         description:
           - Whether to enable rule 2.3.7.1.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_2_3_7_1_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 2.3.7.1.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_2_3_7_2_enabled:
         type: bool
         required: false
@@ -820,13 +820,6 @@ argument_specs:
         description:
           - Whether to enable rule 2.3.8.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_2_3_8_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 2.3.8.3.
-          - This applies when the level and machine type are appropriate.
       w2022cis_rule_2_3_9_1_enabled:
         type: bool
         required: false
@@ -854,13 +847,6 @@ argument_specs:
         default: true
         description:
           - Whether to enable rule 2.3.9.4.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_2_3_9_5_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 2.3.9.5.
           - This applies when the level and machine type are appropriate.
       w2022cis_idle_smb_timeout_in_minutes:
         type: int
@@ -1083,13 +1069,6 @@ argument_specs:
         default: true
         description:
           - Whether to enable rule 2.3.11.12.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_2_3_11_13_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 2.3.11.13.
           - This applies when the level and machine type are appropriate.
       w2022cis_ldap_client_signing_requirements:
         type: str
@@ -1728,13 +1707,6 @@ argument_specs:
         description:
           - Whether to enable rule 18.4.6.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_4_7_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.4.7.
-          - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_5_1_enabled:
         type: bool
         required: false
@@ -1812,6 +1784,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.5.9.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_5_9_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.5.9.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_18_5_10_enabled:
         type: bool
         required: false
@@ -1833,26 +1812,6 @@ argument_specs:
         description:
           - Whether to enable rule 18.5.11.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_5_11_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 18.5.11.
-          - This applies when the machine type is appropriate.
-      w2022cis_rule_18_5_12_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.5.12.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_screensaver_grace_period_in_seconds:
-        type: int
-        required: false
-        default: 5
-        description:
-          - The screensaver grace period in seconds.
       w2022cis_rule_18_6_4_1_enabled:
         type: bool
         required: false
@@ -2321,6 +2280,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.9.13.1.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_17_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.17.1.
+          - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_9_19_2_enabled:
         type: bool
         required: false
@@ -2348,20 +2314,6 @@ argument_specs:
         default: true
         description:
           - Whether to enable rule 18.9.19.5.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_19_6_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.19.6.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_19_7_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.19.7.
           - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_9_20_1_1_enabled:
         type: bool
@@ -2552,61 +2504,61 @@ argument_specs:
         description:
           - Whether to enable rule 18.9.24.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_1_enabled:
+      w2022cis_rule_18_9_26_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.1.
+          - Whether to enable rule 18.9.26.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_2_enabled:
+      w2022cis_rule_18_9_26_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.2.
+          - Whether to enable rule 18.9.26.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_3_enabled:
+      w2022cis_rule_18_9_26_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.3.
+          - Whether to enable rule 18.9.26.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_4_enabled:
+      w2022cis_rule_18_9_26_4_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.4.
+          - Whether to enable rule 18.9.26.4.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_5_enabled:
+      w2022cis_rule_18_9_26_5_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.5.
+          - Whether to enable rule 18.9.26.5.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_6_enabled:
+      w2022cis_rule_18_9_26_6_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.6.
+          - Whether to enable rule 18.9.26.6.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_7_enabled:
+      w2022cis_rule_18_9_26_7_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.7.
+          - Whether to enable rule 18.9.26.7.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_25_8_enabled:
+      w2022cis_rule_18_9_26_8_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.25.8.
+          - Whether to enable rule 18.9.26.8.
           - This applies when the level and machine type are appropriate.
       w2022cis_laps_directory:
         type: str
@@ -2617,6 +2569,17 @@ argument_specs:
           - ad
         description:
           - The directory in which to store LAPS passwords.
+      w2022cis_laps_password_complexity:
+        type: str
+        required: false
+        default: all_characters
+        choices:
+          - all_characters
+          - short_word_passphrase
+          - long_word_passphrase
+          - short_word_passphrase_with_prefix
+        description:
+          - The LAPS password complexity level.
       w2022cis_laps_password_length:
         type: int
         required: false
@@ -2642,29 +2605,9 @@ argument_specs:
         choices:
           - reset_password_and_logoff
           - reset_password_and_reboot
+          - reset_password_and_terminal_processes
         description:
           - The LAPS post-authentication actions to perform when the grace period expires.
-      w2022cis_rule_18_9_26_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.26.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_26_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.26.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_26_2_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 18.9.26.2.
-          - This applies when the machine type is appropriate.
       w2022cis_rule_18_9_27_1_enabled:
         type: bool
         required: false
@@ -2672,12 +2615,19 @@ argument_specs:
         description:
           - Whether to enable rule 18.9.27.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_27_1_force:
+      w2022cis_rule_18_9_27_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.27.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_27_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.27.1.
+          - Whether to override the level requirement for CIS rule 18.9.27.2.
           - This applies when the machine type is appropriate.
       w2022cis_rule_18_9_28_1_enabled:
         type: bool
@@ -2686,224 +2636,222 @@ argument_specs:
         description:
           - Whether to enable rule 18.9.28.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.3.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_4_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.4.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_5_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.5.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_6_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.6.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_28_7_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.28.7.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_31_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.31.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_31_1_force:
+      w2022cis_rule_18_9_28_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.31.1.
+          - Whether to override the level requirement for CIS rule 18.9.28.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_31_2_enabled:
+      w2022cis_rule_18_9_29_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.31.2.
+          - Whether to enable rule 18.9.29.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_31_2_force:
+      w2022cis_rule_18_9_29_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.29.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_29_3_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.29.3.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_29_4_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.29.4.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_29_5_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.29.5.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_29_6_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.29.6.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_33_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.33.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_33_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.31.2.
+          - Whether to override the level requirement for CIS rule 18.9.33.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_33_6_1_enabled:
+      w2022cis_rule_18_9_33_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.33.6.1.
+          - Whether to enable rule 18.9.33.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_33_6_1_force:
+      w2022cis_rule_18_9_33_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.33.6.1.
+          - Whether to override the level requirement for CIS rule 18.9.33.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_33_6_2_enabled:
+      w2022cis_rule_18_9_35_6_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.33.6.2.
+          - Whether to enable rule 18.9.35.6.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_33_6_2_force:
+      w2022cis_rule_18_9_35_6_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.33.6.2.
+          - Whether to override the level requirement for CIS rule 18.9.35.6.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_33_6_3_enabled:
+      w2022cis_rule_18_9_35_6_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.33.6.3.
+          - Whether to enable rule 18.9.35.6.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_33_6_4_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.33.6.4.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_35_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.35.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_35_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.35.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_36_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.36.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_36_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.9.36.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_36_2_force:
+      w2022cis_rule_18_9_35_6_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.36.2.
+          - Whether to override the level requirement for CIS rule 18.9.35.6.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_39_1_enabled:
+      w2022cis_rule_18_9_35_6_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.39.1.
+          - Whether to enable rule 18.9.35.6.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_whfb_roca_mitigation:
-        type: str
-        required: false
-        default: audit
-        choices:
-          - block
-          - audit
-        description:
-          - The Windows Hello for Business ROCA mitigation.
-      w2022cis_rule_18_9_47_5_1_enabled:
+      w2022cis_rule_18_9_35_6_4_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.47.5.1.
+          - Whether to enable rule 18.9.35.6.4.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_47_5_1_force:
+      w2022cis_rule_18_9_37_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.37.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_37_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.37.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_38_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.38.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_38_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.38.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_38_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.47.5.1.
+          - Whether to override the level requirement for CIS rule 18.9.38.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_47_11_1_enabled:
+      w2022cis_rule_18_9_41_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.47.11.1.
+          - Whether to enable rule 18.9.41.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_47_11_1_force:
+      w2022cis_rule_18_9_49_5_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.49.5.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_49_5_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.47.11.1.
+          - Whether to override the level requirement for CIS rule 18.9.49.5.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_49_1_enabled:
+      w2022cis_rule_18_9_49_11_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.49.1.
+          - Whether to enable rule 18.9.49.11.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_49_1_force:
+      w2022cis_rule_18_9_49_11_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.9.49.1.
+          - Whether to override the level requirement for CIS rule 18.9.49.11.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_9_51_1_1_enabled:
+      w2022cis_rule_18_9_51_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.51.1.1.
+          - Whether to enable rule 18.9.51.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_9_51_1_2_enabled:
+      w2022cis_rule_18_9_51_1_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.9.51.1.
+          - This applies when the machine type is appropriate.
+      w2022cis_rule_18_9_53_1_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.9.51.1.2.
+          - Whether to enable rule 18.9.53.1.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_9_53_1_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.9.53.1.2.
           - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_10_4_1_enabled:
         type: bool
@@ -2989,13 +2937,6 @@ argument_specs:
         description:
           - Whether to override the level requirement for CIS rule 18.10.13.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_13_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.13.3.
-          - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_10_14_1_enabled:
         type: bool
         required: false
@@ -3045,7 +2986,7 @@ argument_specs:
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.16.8.
+          - Whether to override the level requirement for CIS rule 18.10.16.2.
           - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_16_3_enabled:
         type: bool
@@ -3061,6 +3002,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.16.4.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_16_4_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.16.4.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_16_5_enabled:
         type: bool
         required: false
@@ -3068,6 +3016,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.16.5.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_16_5_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.16.5.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_16_6_enabled:
         type: bool
         required: false
@@ -3075,13 +3030,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.16.6.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_16_7_enabled:
+      w2022cis_rule_18_10_16_6_force:
         type: bool
         required: false
-        default: true
+        default: false
         description:
-          - Whether to enable rule 18.10.16.7.
-          - This applies when the level and machine type are appropriate.
+          - Whether to override the level requirement for CIS rule 18.10.16.6.
+          - This applies when the machine type is appropriate.
       w2022cis_allow_telemetry:
         type: str
         required: false
@@ -3206,7 +3161,7 @@ argument_specs:
       w2022cis_rule_18_10_26_4_2_enabled:
         type: bool
         required: false
-        default: true        
+        default: true
         description:
           - Whether to enable rule 18.10.26.4.2.
           - This applies when the level and machine type are appropriate.
@@ -3262,19 +3217,33 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.29.5.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_37_1_enabled:
+      w2022cis_rule_18_10_36_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.37.1.
+          - Whether to enable rule 18.10.36.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_37_1_force:
+      w2022cis_rule_18_10_36_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.37.1.
+          - Whether to override the level requirement for CIS rule 18.10.36.1.
+          - This applies when the machine type is appropriate.
+      w2022cis_rule_18_10_40_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.40.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_40_1_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.40.1.
           - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_41_1_enabled:
         type: bool
@@ -3283,152 +3252,131 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.41.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_41_1_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 18.10.41.1.
-          - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_42_1_enabled:
+      w2022cis_rule_18_10_42_4_1_enabled:
         type: bool
         required: false
         default: true
         description:
           - Whether to enable rule 18.10.42.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_4_1_enabled:
+      w2022cis_rule_18_10_42_5_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.1.
+          - Whether to enable rule 18.10.42.5.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_5_1_enabled:
+      w2022cis_rule_18_10_42_5_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.5.1.
+          - Whether to enable rule 18.10.42.5.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_5_2_enabled:
+      w2022cis_rule_18_10_42_6_1_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.5.2.
+          - Whether to enable rule 18.10.42.6.1.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_5_2_force:
+      w2022cis_rule_18_10_42_6_1_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.6.1.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_6_3_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.6.3.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_7_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.7.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_7_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.43.5.2.
+          - Whether to override the level requirement for CIS rule 18.10.42.7.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_43_6_1_1_enabled:
+      w2022cis_rule_18_10_42_8_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.6.1.1.
+          - Whether to enable rule 18.10.42.8.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_6_1_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.6.1.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_6_3_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.6.3.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_7_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.7.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_7_1_force:
+      w2022cis_rule_18_10_42_8_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.43.7.1.
+          - Whether to override the level requirement for CIS rule 18.10.42.8.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_43_8_1_enabled:
+      w2022cis_rule_18_10_42_10_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.8.1.
+          - Whether to enable rule 18.10.42.10.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_8_1_force:
+      w2022cis_rule_18_10_42_10_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.10.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_10_3_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.10.3.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_10_4_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.10.4.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_10_5_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.10.5.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_11_1_1_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.42.11.1.1.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_42_11_1_1_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.43.8.1.
+          - Whether to override the level requirement for CIS rule 18.10.42.11.1.1.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_43_10_1_enabled:
+      w2022cis_rule_18_10_42_11_1_1_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.10.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_10_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.10.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_10_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.10.3.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_10_4_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.10.4.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_10_5_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.10.5.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_11_1_1_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.11.1.1.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_11_1_1_1_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 18.10.43.11.1.1.1.
-          - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_43_11_1_1_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.43.11.1.1.2.
+          - Whether to enable rule 18.10.42.11.1.1.2.
           - This applies when the level and machine type are appropriate.
       w2022cis_brute_force_protection_aggressiveness:
         type: str
@@ -3448,19 +3396,19 @@ argument_specs:
           - block
         description:
           - The configured state of brute force protection.
-      w2022cis_rule_18_10_43_11_1_2_1_enabled:
+      w2022cis_rule_18_10_42_11_1_2_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.11.1.2.1.
+          - Whether to enable rule 18.10.42.11.1.2.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_11_1_2_1_force:
+      w2022cis_rule_18_10_42_11_1_2_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.43.11.1.2.1.
+          - Whether to override the level requirement for CIS rule 18.10.42.11.1.2.1.
           - This applies when the machine type is appropriate.
       w2022cis_remote_encryption_protection_aggressiveness:
         type: str
@@ -3471,75 +3419,68 @@ argument_specs:
           - high
         description:
           - The aggressiveness of remote encryption protection.
-      w2022cis_rule_18_10_43_12_1_enabled:
+      w2022cis_rule_18_10_42_12_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.12.1.
+          - Whether to enable rule 18.10.42.12.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_12_1_force:
+      w2022cis_rule_18_10_42_12_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.43.12.1.
+          - Whether to override the level requirement for CIS rule 18.10.42.12.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_43_13_1_enabled:
+      w2022cis_rule_18_10_42_13_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.13.1.
+          - Whether to enable rule 18.10.42.13.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_13_2_enabled:
+      w2022cis_rule_18_10_42_13_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.13.2.
+          - Whether to enable rule 18.10.42.13.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_13_3_enabled:
+      w2022cis_rule_18_10_42_13_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.13.3.
+          - Whether to enable rule 18.10.42.13.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_13_4_enabled:
+      w2022cis_rule_18_10_42_13_4_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.13.4.
+          - Whether to enable rule 18.10.42.13.4.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_13_5_enabled:
+      w2022cis_rule_18_10_42_13_5_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.13.5.
+          - Whether to enable rule 18.10.42.13.5.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_16_enabled:
+      w2022cis_rule_18_10_42_16_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.16.
+          - Whether to enable rule 18.10.42.16.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_43_17_enabled:
+      w2022cis_rule_18_10_42_17_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.43.17.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_51_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.51.1.
+          - Whether to enable rule 18.10.42.17.
           - This applies when the level and machine type are appropriate.
       w2022cis_rule_18_10_56_1_enabled:
         type: bool
@@ -3786,33 +3727,33 @@ argument_specs:
         description:
           - Whether to override the level requirement for CIS rule 18.10.63.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_76_2_1_enabled:
+      w2022cis_rule_18_10_77_2_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.76.2.1.
+          - Whether to enable rule 18.10.77.2.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_80_1_enabled:
+      w2022cis_rule_18_10_81_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.80.1.
+          - Whether to enable rule 18.10.81.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_80_1_force:
+      w2022cis_rule_18_10_81_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.80.1.
+          - Whether to override the level requirement for CIS rule 18.10.81.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_80_2_enabled:
+      w2022cis_rule_18_10_81_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.80.2.
+          - Whether to enable rule 18.10.81.2.
           - This applies when the level and machine type are appropriate.
       w2022cis_windows_ink_workspace_access:
         type: str
@@ -3823,34 +3764,6 @@ argument_specs:
           - disabled
         description:
           - The Windows Ink Workspace access.
-      w2022cis_rule_18_10_81_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.81.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_81_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.81.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_81_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.81.3.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_81_3_force:
-        type: bool
-        required: false
-        default: false
-        description:
-          - Whether to override the level requirement for CIS rule 18.10.81.3.
-          - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_82_1_enabled:
         type: bool
         required: false
@@ -3865,118 +3778,132 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.82.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_87_1_enabled:
+      w2022cis_rule_18_10_82_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.87.1.
+          - Whether to enable rule 18.10.82.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_87_1_force:
+      w2022cis_rule_18_10_82_3_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.87.1.
+          - Whether to override the level requirement for CIS rule 18.10.82.3.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_87_2_enabled:
+      w2022cis_rule_18_10_83_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.87.2.
+          - Whether to enable rule 18.10.83.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_87_2_force:
+      w2022cis_rule_18_10_83_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.83.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_88_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.88.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_88_1_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.87.2.
+          - Whether to override the level requirement for CIS rule 18.10.88.1.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_89_1_1_enabled:
+      w2022cis_rule_18_10_88_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.89.1.1.
+          - Whether to enable rule 18.10.88.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_1_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.89.1.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_1_3_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.89.1.3.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_2_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.89.2.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_2_2_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 18.10.89.2.2.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_2_2_force:
+      w2022cis_rule_18_10_88_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.89.2.2.
+          - Whether to override the level requirement for CIS rule 18.10.88.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_89_2_3_enabled:
+      w2022cis_rule_18_10_90_1_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.89.2.3.
+          - Whether to enable rule 18.10.90.1.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_89_2_4_enabled:
+      w2022cis_rule_18_10_90_1_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.89.2.4.
+          - Whether to enable rule 18.10.90.1.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_90_1_enabled:
+      w2022cis_rule_18_10_90_1_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.90.1.
+          - Whether to enable rule 18.10.90.1.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_90_1_force:
+      w2022cis_rule_18_10_90_2_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.90.2.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_90_2_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.90.2.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_90_2_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.90.1.
+          - Whether to override the level requirement for CIS rule 18.10.90.2.2.
           - This applies when the machine type is appropriate.
-      w2022cis_rule_18_10_92_2_1_enabled:
+      w2022cis_rule_18_10_90_2_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.92.2.1.
+          - Whether to enable rule 18.10.90.2.3.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_93_1_1_enabled:
+      w2022cis_rule_18_10_90_2_4_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.93.1.1.
+          - Whether to enable rule 18.10.90.2.4.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_91_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.91.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_91_1_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.91.1.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_93_2_1_enabled:
         type: bool
         required: false
@@ -3984,34 +3911,64 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.93.2.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_93_2_2_enabled:
+      w2022cis_rule_18_10_94_1_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.93.2.2.
+          - Whether to enable rule 18.10.94.1.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_93_4_1_enabled:
+      w2022cis_rule_18_10_94_2_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.93.4.1.
+          - Whether to enable rule 18.10.94.2.1.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_93_4_2_enabled:
+      w2022cis_rule_18_10_94_2_2_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.93.4.2.
+          - Whether to enable rule 18.10.94.2.2.
           - This applies when the level and machine type are appropriate.
-      w2022cis_rule_18_10_93_4_3_enabled:
+      w2022cis_rule_18_10_94_4_1_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.93.4.3.
+          - Whether to enable rule 18.10.94.4.1.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_94_4_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.94.4.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_11_1_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.11.1.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_11_2_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.11.2.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_disable_http_proxy_features:
+        type: str
+        required: false
+        default: disable_for_loopback_interfaces
+        choices:
+          - disable_for_loopback_interfaces
+          - disable_all
+        description:
+          - The HTTP proxy features to disable.
       w2022cis_rule_19_5_1_1_enabled:
         type: bool
         required: false
@@ -4102,13 +4059,6 @@ argument_specs:
         default: true
         description:
           - Whether to enable rule 19.7.26.1.
-          - This applies when the level and machine type are appropriate.
-      w2022cis_rule_19_7_44_1_enabled:
-        type: bool
-        required: false
-        default: true
-        description:
-          - Whether to enable rule 19.7.44.1.
           - This applies when the level and machine type are appropriate.
       w2022cis_rule_19_7_46_2_1_enabled:
         type: bool

@@ -48,7 +48,7 @@
   when:
     - w2022cis_rule_1_1_1_enabled
   ansible.builtin.assert:
-    that: 
+    that:
       - w2022cis_password_history_size | int >= 24
     fail_msg: "The variable 'w2022cis_password_history_size' must be set to 24 or more.  Value: {{ w2022cis_password_history_size }}"
     success_msg: "The variable 'w2022cis_password_history_size' is set to 24 or more.  Value: {{ w2022cis_password_history_size }}"
@@ -94,7 +94,7 @@
   when:
     - w2022cis_rule_1_2_2_enabled
   ansible.builtin.assert:
-    that: 
+    that:
       - w2022cis_lockout_bad_logon_count | int <= 5
       - w2022cis_lockout_bad_logon_count | int > 0
     fail_msg: "The variable 'w2022cis_minimum_password_length' must be set to between 1 and 5.  Value: {{ w2022cis_lockout_bad_logon_count }}"
@@ -215,9 +215,9 @@
     fail_msg: "The variable 'w2022cis_screensaver_grace_period_in_seconds' must be set to between 0 and 5.  Value: {{ w2022cis_screensaver_grace_period_in_seconds }}"
     success_msg: "The variable 'w2022cis_screensaver_grace_period_in_seconds' is set to between 0 and 5.  Value: {{ w2022cis_screensaver_grace_period_in_seconds }}"
 
-- name: "Validate | 18.9.25.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
+- name: "Validate | 18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
-    - w2022cis_rule_18_9_25_5_enabled
+    - w2022cis_rule_18_9_26_5_enabled
     - _w2022cis_member_server
   ansible.builtin.assert:
     that:
@@ -225,9 +225,9 @@
     fail_msg: "The variable 'w2022cis_laps_password_length' must be set to 15 or more.  Value: {{ w2022cis_laps_password_length }}"
     success_msg: "The variable 'w2022cis_laps_password_length' is set to 15 or more.  Value: {{ w2022cis_laps_password_length }}"
 
-- name: "Validate | 18.9.25.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
+- name: "Validate | 18.9.26.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
   when:
-    - w2022cis_rule_18_9_25_6_enabled
+    - w2022cis_rule_18_9_26_6_enabled
     - _w2022cis_member_server
   ansible.builtin.assert:
     that:
@@ -236,9 +236,9 @@
     fail_msg: "The variable 'w2022cis_laps_password_age_in_days' must be set to between 0 and 30.  Value: {{ w2022cis_laps_password_age_in_days }}"
     success_msg: "The variable 'w2022cis_laps_password_age_in_days' is set to between 0 and 30.  Value: {{ w2022cis_laps_password_age_in_days }}"
 
-- name: "Validate | 18.9.25.7 | L1 | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'"
+- name: "Validate | 18.9.26.7 | L1 | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'"
   when:
-    - w2022cis_rule_18_9_25_7_enabled
+    - w2022cis_rule_18_9_26_7_enabled
     - _w2022cis_member_server
   ansible.builtin.assert:
     that:

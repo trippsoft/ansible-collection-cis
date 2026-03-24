@@ -145,24 +145,88 @@ provisioner:
         w2022cis_is_template: true
     host_vars:
       l1dc:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
         domain_name: test2.loc
         domain_base_dn: DC=test2,DC=loc
       l3dc:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
       l1ms:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
         ansible_user: TEST\vagrant
       l3ms:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
         ansible_user: TEST\vagrant
       l1standalone:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
       l3standalone:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
       l1template:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
       l3template:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
 verifier:
   name: ansible

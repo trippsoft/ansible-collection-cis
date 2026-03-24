@@ -1,5 +1,7 @@
 ---
-- name: "18.9.13.1 | L1 | Ensure 'Boot-Start Driver Initialization Policy' is set to 'Enabled: Good, unknown and bad but critical'"
+- name: >-
+    18.9.13.1 | L1 |
+    Ensure 'Boot-Start Driver Initialization Policy' is set to 'Enabled: Good, unknown and bad but critical'
   when:
     - w2022cis_rule_18_9_13_1_enabled
   ansible.windows.win_regedit:

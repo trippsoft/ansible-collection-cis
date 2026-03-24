@@ -1,18 +1,40 @@
 ---
-- name: "18.9.35.1 | L1 | Ensure 'Configure Offer Remote Assistance' is set to 'Disabled'"
+- name: >-
+    18.9.35.6.1 | L2 | Ensure 'Allow network connectivity during connected-standby (on battery)' is set to 'Disabled'
   when:
-    - w2022cis_rule_18_9_35_1_enabled
+    - w2022cis_rule_18_9_35_6_1_enabled
+    - w2022cis_rule_18_9_35_6_1_force or _w2022cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
-    name: fAllowUnsolicited
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9
+    name: DCSettingIndex
     data: 0
     type: dword
 
-- name: "18.9.35.2 | L1 | Ensure 'Configure Solicited Remote Assistance' is set to 'Disabled'"
+- name: >-
+    18.9.35.6.2 | L2 | Ensure 'Allow network connectivity during connected-standby (plugged in)' is set to 'Disabled'
   when:
-    - w2022cis_rule_18_9_35_2_enabled
+    - w2022cis_rule_18_9_35_6_2_enabled
+    - w2022cis_rule_18_9_35_6_2_force or _w2022cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
-    name: fAllowToGetHelp
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9
+    name: ACSettingIndex
     data: 0
+    type: dword
+
+- name: "18.9.35.6.3 | L1 | Ensure 'Require a password when a computer wakes (on battery)' is set to 'Enabled'"
+  when:
+    - w2022cis_rule_18_9_35_6_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+    name: DCSettingIndex
+    data: 1
+    type: dword
+
+- name: "18.9.35.6.4 | L1 | Ensure 'Require a password when a computer wakes (plugged in)' is set to 'Enabled'"
+  when:
+    - w2022cis_rule_18_9_35_6_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+    name: ACSettingIndex
+    data: 1
     type: dword

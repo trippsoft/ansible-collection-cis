@@ -1,5 +1,8 @@
 ---
-- name: "18.9.24.1 | L1 | Ensure 'Enumeration policy for external devices incompatible with Kernel DMA Protection' is set to 'Enabled: Block All'"
+- name: >-
+    18.9.24.1 | L1 |
+    Ensure 'Enumeration policy for external devices incompatible with Kernel DMA Protection'
+    is set to 'Enabled: Block All'
   when:
     - w2022cis_rule_18_9_24_1_enabled
   ansible.windows.win_regedit:
