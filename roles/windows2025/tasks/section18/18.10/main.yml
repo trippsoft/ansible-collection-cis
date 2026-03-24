@@ -35,20 +35,17 @@
 - name: Execute the 18.10.29.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.29.x.yml
 
-- name: Execute the 18.10.37.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.37.x.yml
+- name: Execute the 18.10.36.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.36.x.yml
+
+- name: Execute the 18.10.40.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.40.x.yml
 
 - name: Execute the 18.10.41.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.41.x.yml
 
 - name: Execute the 18.10.42.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.42.x.yml
-
-- name: Execute the 18.10.43.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.43.x.yml
-
-- name: Execute the 18.10.51.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.51.x.yml
 
 - name: Execute the 18.10.56.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.56.x.yml
@@ -89,5 +86,5 @@
 - name: Execute the 18.10.92.x tasks
   ansible.builtin.import_tasks: section18/18.10/18.10.92.x.yml
 
-- name: Execute the 18.10.93.x tasks
-  ansible.builtin.import_tasks: section18/18.10/18.10.93.x.yml
+- name: Execute the 18.10.94.x tasks
+  ansible.builtin.import_tasks: section18/18.10/18.10.94.x.yml

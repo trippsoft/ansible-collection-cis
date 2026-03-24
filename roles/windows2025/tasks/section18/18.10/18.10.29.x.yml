@@ -1,5 +1,7 @@
 ---
-- name: "18.10.29.2 | L1 | Ensure 'Do not apply the Mark of the Web tag to files copied from insecure sources' is set to 'Disabled'"
+- name: >-
+    18.10.29.2 | L1 |
+    Ensure 'Do not apply the Mark of the Web tag to files copied from insecure sources' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_29_2_enabled
   ansible.windows.win_regedit:

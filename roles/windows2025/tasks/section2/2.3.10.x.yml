@@ -7,7 +7,10 @@
     key: LSAAnonymousNameLookup
     value: 0
 
-- name: "2.3.10.2 | L1 | Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts' is set to 'Enabled' | MS only"
+- name: >-
+    2.3.10.2 | L1 |
+    Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts' is set to 'Enabled' |
+    MS only
   when:
     - w2025cis_rule_2_3_10_2_enabled
     - _w2025cis_member_server
@@ -17,7 +20,10 @@
     data: 1
     type: dword
 
-- name: "2.3.10.3 | L1 | Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts and shares' is set to 'Enabled' | MS only"
+- name: >-
+    2.3.10.3 | L1 |
+    Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts and shares' is set to 'Enabled' |
+    MS only
   when:
     - w2025cis_rule_2_3_10_3_enabled
     - _w2025cis_member_server
@@ -27,7 +33,10 @@
     data: 1
     type: dword
 
-- name: "2.3.10.4 | L2 | Ensure 'Network access: Do not allow storage of passwords and credentials for network authentication' is set to 'Enabled'"
+- name: >-
+    2.3.10.4 | L2 |
+    Ensure 'Network access: Do not allow storage of passwords and credentials for network authentication'
+    is set to 'Enabled'
   when:
     - w2025cis_rule_2_3_10_4_enabled
     - w2025cis_rule_2_3_10_4_force or _w2025cis_level2
@@ -36,8 +45,9 @@
     name: DisableDomainCreds
     data: 1
     type: dword
-      
-- name: "2.3.10.5 | L1 | Ensure 'Network access: Let Everyone permissions apply to anonymous users' is set to 'Disabled'"
+
+- name: >-
+    2.3.10.5 | L1 | Ensure 'Network access: Let Everyone permissions apply to anonymous users' is set to 'Disabled'
   when:
     - w2025cis_rule_2_3_10_5_enabled
   ansible.windows.win_regedit:
@@ -46,14 +56,15 @@
     data: 0
     type: dword
 
-- name: "2.3.10.6 | L1 | Ensure 'Network access: Named Pipes that can be accessed anonymously' is configured | DC only"
+- name: >-
+    2.3.10.6 | L1 | Ensure 'Network access: Named Pipes that can be accessed anonymously' is configured | DC only
   when:
     - w2025cis_rule_2_3_10_6_enabled
     - _w2025cis_domain_controller
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
     name: NullSessionPipes
-    data: 
+    data:
       - LSARPC
       - NETLOGON
       - SAMR
@@ -77,7 +88,7 @@
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\AllowedExactpaths
     name: "Machine"
-    data: 
+    data:
       - 'System\CurrentControlSet\Control\ProductOptions'
       - 'System\CurrentControlSet\Control\Server Applications'
       - 'Software\Microsoft\Windows NT\CurrentVersion'
@@ -92,7 +103,8 @@
     data: "{{ w2025cis_remote_registry_paths }}"
     type: multistring
 
-- name: "2.3.10.10 | L1 | Ensure 'Network access: Restrict anonymous access to Named Pipes and Shares' is set to 'Enabled'"
+- name: >-
+    2.3.10.10 | L1 | Ensure 'Network access: Restrict anonymous access to Named Pipes and Shares' is set to 'Enabled'
   when:
     - w2025cis_rule_2_3_10_10_enabled
   ansible.windows.win_regedit:
@@ -101,7 +113,11 @@
     data: 1
     type: dword
 
-- name: "2.3.10.11 | L1 | Ensure 'Network access: Restrict clients allowed to make remote calls to SAM' is set to 'Administrators: Remote Access: Allow' | MS only"
+- name: >-
+    2.3.10.11 | L1 |
+    Ensure 'Network access: Restrict clients allowed to make remote calls to SAM'
+    is set to 'Administrators: Remote Access: Allow' |
+    MS only
   when:
     - w2025cis_rule_2_3_10_11_enabled
     - _w2025cis_standalone_or_member_server
@@ -120,7 +136,10 @@
     data: ""
     type: multistring
 
-- name: "2.3.10.13 | L1 | Ensure 'Network access: Sharing and security model for local accounts' is set to 'Classic - local users authenticate as themselves'"
+- name: >-
+    2.3.10.13 | L1 |
+    Ensure 'Network access: Sharing and security model for local accounts'
+    is set to 'Classic - local users authenticate as themselves'
   when:
     - w2025cis_rule_2_3_10_13_enabled
   ansible.windows.win_regedit:

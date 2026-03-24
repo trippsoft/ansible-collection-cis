@@ -1,5 +1,7 @@
 ---
-- name: "18.10.26.1.1 | L1 | Ensure 'Application: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+- name: >-
+    18.10.26.1.1 | L1 |
+    Ensure 'Application: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_26_1_1_enabled
   ansible.windows.win_regedit:
@@ -8,7 +10,9 @@
     data: 0
     type: string
 
-- name: "18.10.26.1.2 | L1 | Ensure 'Application: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    18.10.26.1.2 | L1 |
+    Ensure 'Application: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_1_2_enabled
   ansible.windows.win_regedit:
@@ -17,7 +21,9 @@
     data: "{{ w2025cis_application_log_max_size_in_kb }}"
     type: dword
 
-- name: "18.10.26.2.1 | L1 | Ensure 'Security: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+- name: >-
+    18.10.26.2.1 | L1 |
+    Ensure 'Security: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_26_2_1_enabled
   ansible.windows.win_regedit:
@@ -26,7 +32,9 @@
     data: 0
     type: string
 
-- name: "18.10.26.2.2 | L1 | Ensure 'Security: Specify the maximum log file size (KB)' is set to 'Enabled: 196,608 or greater'"
+- name: >-
+    18.10.26.2.2 | L1 |
+    Ensure 'Security: Specify the maximum log file size (KB)' is set to 'Enabled: 196,608 or greater'
   when:
     - w2025cis_rule_18_10_26_2_2_enabled
   ansible.windows.win_regedit:
@@ -35,7 +43,9 @@
     data: "{{ w2025cis_security_log_max_size_in_kb }}"
     type: dword
 
-- name: "18.10.26.3.1 | L1 | Ensure 'Setup: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+- name: >-
+    18.10.26.3.1 | L1 |
+    Ensure 'Setup: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_26_3_1_enabled
   ansible.windows.win_regedit:
@@ -44,7 +54,9 @@
     data: 0
     type: string
 
-- name: "18.10.26.3.2 | L1 | Ensure 'Setup: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    18.10.26.3.2 | L1 |
+    Ensure 'Setup: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_3_2_enabled
   ansible.windows.win_regedit:
@@ -53,7 +65,9 @@
     data: "{{ w2025cis_setup_log_max_size_in_kb }}"
     type: dword
 
-- name: "18.10.26.4.1 | L1 | Ensure 'System: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+- name: >-
+    18.10.26.4.1 | L1 |
+    Ensure 'System: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_26_4_1_enabled
   ansible.windows.win_regedit:
@@ -62,7 +76,8 @@
     data: 0
     type: string
 
-- name: "18.10.26.4.2 | L1 | Ensure 'System: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'"
+- name: >-
+    18.10.26.4.2 | L1 | Ensure 'System: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
   when:
     - w2025cis_rule_18_10_26_4_2_enabled
   ansible.windows.win_regedit:

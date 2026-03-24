@@ -9,7 +9,10 @@
     data: 0
     type: dword
 
-- name: "18.10.4.2 | L1 | Ensure 'Not allow per-user unsigned packages to install by default (requires explicitly allow per install)' is set to 'Enabled'"
+- name: >-
+    18.10.4.2 | L1 |
+    Ensure 'Not allow per-user unsigned packages to install by default (requires explicitly allow per install)'
+    is set to 'Enabled'
   when:
     - w2025cis_rule_18_10_4_2_enabled
   ansible.windows.win_regedit:

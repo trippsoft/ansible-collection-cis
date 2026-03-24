@@ -1,5 +1,6 @@
 ---
-- name: "18.4.1 | L1 | Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' | MS only"
+- name: >-
+    18.4.1 | L1 | Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' | MS only
   when:
     - w2025cis_rule_18_4_1_enabled
     - _w2025cis_standalone_or_member_server
@@ -66,14 +67,4 @@
     state: present
     value: NodeType
     data: 2
-    datatype: dword
-
-- name: "18.4.7 | L1 | Ensure 'WDigest Authentication' is set to 'Disabled'"
-  when:
-    - w2025cis_rule_18_4_7_enabled
-  ansible.windows.win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
-    state: present
-    value: UseLogonCredential
-    data: 0
     datatype: dword

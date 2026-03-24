@@ -29,7 +29,9 @@
     data: 1
     type: dword
 
-- name: "18.9.20.1.4 | L2 | Ensure 'Turn off Internet Connection Wizard if URL connection is referring to Microsoft.com' is set to 'Enabled'"
+- name: >-
+    18.9.20.1.4 | L2 |
+    Ensure 'Turn off Internet Connection Wizard if URL connection is referring to Microsoft.com' is set to 'Enabled'
   when:
     - w2025cis_rule_18_9_20_1_4_enabled
     - w2025cis_rule_18_9_20_1_4_force or _w2025cis_level2
@@ -39,7 +41,9 @@
     data: 1
     type: dword
 
-- name: "18.9.20.1.5 | L1 | Ensure 'Turn off Internet download for Web publishing and online ordering wizards' is set to 'Enabled'"
+- name: >-
+    18.9.20.1.5 | L1 |
+    Ensure 'Turn off Internet download for Web publishing and online ordering wizards' is set to 'Enabled'
   when:
     - w2025cis_rule_18_9_20_1_5_enabled
   ansible.windows.win_regedit:
@@ -58,7 +62,9 @@
     data: 1
     type: dword
 
-- name: "18.9.20.1.7 | L2 | Ensure 'Turn off Registration if URL connection is referring to Microsoft.com' is set to 'Enabled'"
+- name: >-
+    18.9.20.1.7 | L2 |
+    Ensure 'Turn off Registration if URL connection is referring to Microsoft.com' is set to 'Enabled'
   when:
     - w2025cis_rule_18_9_20_1_7_enabled
     - w2025cis_rule_18_9_20_1_7_force or _w2025cis_level2
@@ -98,7 +104,9 @@
     data: 1
     type: dword
 
-- name: "18.9.20.1.11 | L2 | Ensure 'Turn off the Windows Messenger Customer Experience Improvement Program' is set to 'Enabled'"
+- name: >-
+    18.9.20.1.11 | L2 |
+    Ensure 'Turn off the Windows Messenger Customer Experience Improvement Program' is set to 'Enabled'
   when:
     - w2025cis_rule_18_9_20_1_11_enabled
     - w2025cis_rule_18_9_20_1_11_force or _w2025cis_level2
@@ -123,7 +131,8 @@
     - w2025cis_rule_18_9_20_1_13_enabled
     - w2025cis_rule_18_9_20_1_13_force or _w2025cis_level2
   block:
-    - name: "18.9.20.1.13 | L2 | Ensure 'Turn off Windows Error Reporting' is set to 'Enabled' | Windows Error Reporting"
+    - name: >-
+        18.9.20.1.13 | L2 | Ensure 'Turn off Windows Error Reporting' is set to 'Enabled' | Windows Error Reporting
       ansible.windows.win_regedit:
         path: HKLM:\Software\Policies\Microsoft\Windows\Windows Error Reporting
         name: Disabled

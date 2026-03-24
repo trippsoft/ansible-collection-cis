@@ -4,7 +4,7 @@ galaxy_info:
   namespace: trippsc2
   role_name: windows2025
   description: |
-    This role applies the CIS Benchmark hardening steps on Windows Server 2025 machines. It is based on the CIS Benchmark for Windows Server 2025, v1.0.0.
+    This role applies the CIS Benchmark hardening steps on Windows Server 2025 machines. It is based on the CIS Benchmark for Windows Server 2025, v2.0.0.
 
   license: MIT
 

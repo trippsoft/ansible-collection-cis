@@ -22,3 +22,6 @@
 
 - name: Execute the 18.10.x tasks
   ansible.builtin.import_tasks: section18/18.10/main.yml
+
+- name: Execute the 18.11.x tasks
+  ansible.builtin.import_tasks: section18/18.11.x.yml

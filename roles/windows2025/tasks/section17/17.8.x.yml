@@ -1,20 +1,18 @@
 ---
-- name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success and Failure'"
+- name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success'"
   when:
     - w2025cis_rule_17_8_1_enabled
   block:
-    - name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9228-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+    - name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success'"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9228-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_8_1_audit
 
-    - name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success and Failure' | Success"
+    - name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success' | Success"
       when:
         - "'Success' not in _w2025cis_rule_17_8_1_audit.stdout"
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9228-69ae-11d9-bed3-505054503030}" /success:enable
-
-    - name: "17.8.1 | L1 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success and Failure' | Failure"
-      when:
-        - "'Failure' not in _w2025cis_rule_17_8_1_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9228-69ae-11d9-bed3-505054503030}" /failure:enable

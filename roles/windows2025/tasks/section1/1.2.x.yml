@@ -8,7 +8,7 @@
     key: LockoutBadCount
     value: "{{ w2025cis_lockout_bad_logon_count }}"
 
-- name: "1.2.1 | L1 | Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
+- name: "1.2.1 | L1 | Ensure 'Account lockout duration' is set to '15 or more minute(s)'" # noqa ignore-errors
   when:
     - w2025cis_rule_1_2_1_enabled
   community.windows.win_security_policy:
@@ -16,9 +16,6 @@
     key: LockoutDuration
     value: "{{ w2025cis_lockout_duration_in_minutes }}"
   ignore_errors: true
-  tags:
-    - always
-    - skip_ansible_lint
   # Ignore errors in case the lockout and reset duration must be set in the opposite order
 
 - name: "1.2.3 | L1 | Ensure 'Allow Administrator account lockout' is set to 'Enabled'"

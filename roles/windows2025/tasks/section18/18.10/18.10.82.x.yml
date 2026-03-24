@@ -1,18 +1,30 @@
 ---
-- name: "18.10.82.1 | L1 | Ensure 'Configure the transmission of the user's password in the content of MPR notifications sent by winlogon.' is set to 'Disabled'"
+- name: "18.10.82.1 | L1 | Ensure 'Allow user control over installs' is set to 'Disabled'"
   when:
     - w2025cis_rule_18_10_82_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableMPR
+    path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+    name: EnableUserControl
     data: 0
     type: dword
 
-- name: "18.10.82.2 | L1 | Ensure 'Sign-in and lock last interactive user automatically after a restart' is set to 'Disabled'"
+- name: "18.10.82.2 | L1 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
   when:
     - w2025cis_rule_18_10_82_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: DisableAutomaticRestartSignOn
-    data: 1
+    path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+    name: AlwaysInstallElevated
+    data: 0
+    type: dword
+
+- name: >-
+    18.10.82.3 | L2 |
+    Ensure 'Prevent Internet Explorer security prompt for Windows Installer scripts' is set to 'Disabled'
+  when:
+    - w2025cis_rule_18_10_82_3_enabled
+    - w2025cis_rule_18_10_82_3_force or _w2025cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+    name: SafeForScripting
+    data: 0
     type: dword

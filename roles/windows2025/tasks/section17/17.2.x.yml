@@ -4,7 +4,10 @@
     - w2025cis_rule_17_2_1_enabled
   block:
     - name: "17.2.1 | L1 | Ensure 'Audit Application Group Management' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9239-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9239-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_1_audit
@@ -25,7 +28,10 @@
     - _w2025cis_domain_controller
   block:
     - name: "17.2.2 | L1 | Ensure 'Audit Computer Account Management' is set to include 'Success' | DC only"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9236-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9236-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_2_audit
@@ -41,7 +47,10 @@
     - _w2025cis_domain_controller
   block:
     - name: "17.2.3 | L1 | Ensure 'Audit Distribution Group Management' is set to include 'Success' | DC only"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9238-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9238-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_3_audit
@@ -57,7 +66,10 @@
     - _w2025cis_domain_controller
   block:
     - name: "17.2.4 | L1 | Ensure 'Audit Other Account Management Events' is set to include 'Success' | DC only"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce923a-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce923a-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_4_audit
@@ -72,7 +84,10 @@
     - w2025cis_rule_17_2_5_enabled
   block:
     - name: "17.2.5 | L1 | Ensure 'Audit Security Group Management' is set to include 'Success'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9237-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9237-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_5_audit
@@ -87,7 +102,10 @@
     - w2025cis_rule_17_2_6_enabled
   block:
     - name: "17.2.6 | L1 | Ensure 'Audit User Account Management' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"{0cce9235-69ae-11d9-bed3-505054503030}" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9235-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2025cis_rule_17_2_6_audit
