@@ -15,7 +15,8 @@
     - rhel9cis_rule_6_3_1_2_force or _rhel9cis_level2
   become: true
   block:
-    - name: 6.3.1.2 | Ensure auditing for processes that start prior to auditd is enabled | Get GRUB_CMDLINE_LINUX # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 6.3.1.2 | Ensure auditing for processes that start prior to auditd is enabled | Get GRUB_CMDLINE_LINUX
       check_mode: false
       ansible.builtin.shell: |
         grep 'GRUB_CMDLINE_LINUX=' /etc/default/grub | sed 's/.$//'
@@ -48,7 +49,8 @@
     - rhel9cis_rule_6_3_1_3_enabled
     - rhel9cis_rule_6_3_1_3_force or _rhel9cis_level2
   block:
-    - name: 6.3.1.3 | Ensure audit_backlog_limit is sufficient | Get GRUB_CMDLINE_LINUX # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 6.3.1.3 | Ensure audit_backlog_limit is sufficient | Get GRUB_CMDLINE_LINUX
       become: true
       check_mode: false
       ansible.builtin.shell: |
@@ -291,7 +293,8 @@
     - rhel9cis_rule_6_3_4_4_force or _rhel9cis_level2
   become: true
   block:
-    - name: 6.3.4.4 | Ensure only authorized groups are assigned ownership of audit log files | Get /var/log/audit/* files
+    - name: >-
+        6.3.4.4 | Ensure only authorized groups are assigned ownership of audit log files | Get /var/log/audit/* files
       ansible.builtin.find:
         paths:
           - /var/log/audit
@@ -320,7 +323,7 @@
         file_type: file
         recurse: true
       register: _rhel9cis_audit_conf_files
-    
+
     - name: 6.3.4.5 | Ensure audit configuration files are 640 or more restrictive | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
       when:
@@ -344,7 +347,7 @@
         file_type: file
         recurse: true
       register: _rhel9cis_audit_conf_files
-    
+
     - name: 6.3.4.6 | Ensure audit configuration files are owned by root | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
       ansible.builtin.file:
@@ -366,7 +369,7 @@
         file_type: file
         recurse: true
       register: _rhel9cis_audit_conf_files
-    
+
     - name: 6.3.4.7 | Ensure audit configuration files belong to group root | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
       ansible.builtin.file:

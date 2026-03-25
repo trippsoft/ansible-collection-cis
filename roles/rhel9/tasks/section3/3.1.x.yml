@@ -2,7 +2,7 @@
 - name: 3.1.1 | Ensure IPv6 status is identified
   loop:
     - net.ipv6.conf.all.disable_ipv6
-    - net.ipv6.conf.default.disable_ipv6    
+    - net.ipv6.conf.default.disable_ipv6
   when:
     - rhel9cis_rule_3_1_1_enabled
     - not rhel9cis_ipv6_needed

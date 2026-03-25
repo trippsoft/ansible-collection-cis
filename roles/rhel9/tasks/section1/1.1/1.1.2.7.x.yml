@@ -19,7 +19,7 @@
       vars:
         _rhel9cis_warning_rule: '1.1.2.7.2'
         _rhel9cis_warning_description: /var/log/audit is not a separate partition.
-    
+
     - name: 1.1.2.7.3 | Ensure noexec option set on /var/log/audit partition
       when:
         - rhel9cis_rule_1_1_2_7_3_enabled
@@ -27,7 +27,7 @@
       vars:
         _rhel9cis_warning_rule: '1.1.2.7.3'
         _rhel9cis_warning_description: /var/log/audit is not a separate partition.
-    
+
     - name: 1.1.2.7.4 | Ensure nosuid option set on /var/log/audit partition
       when:
         - rhel9cis_rule_1_1_2_7_4_enabled
@@ -44,7 +44,6 @@
       rhel9cis_rule_1_1_2_7_3_enabled or
       rhel9cis_rule_1_1_2_7_4_enabled
   block:
-    
     - name: 1.1.2.7.x | Set existing /var/log/audit mount configuration fact
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_log_audit_mount: >-

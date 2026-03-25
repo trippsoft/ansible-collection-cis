@@ -19,7 +19,7 @@
       vars:
         _rhel9cis_warning_rule: '1.1.2.5.2'
         _rhel9cis_warning_description: /var/tmp is not a separate partition.
-    
+
     - name: 1.1.2.5.3 | Ensure noexec option set on /var/tmp partition
       when:
         - rhel9cis_rule_1_1_2_5_3_enabled
@@ -27,7 +27,7 @@
       vars:
         _rhel9cis_warning_rule: '1.1.2.5.3'
         _rhel9cis_warning_description: /var/tmp is not a separate partition.
-    
+
     - name: 1.1.2.5.4 | Ensure nosuid option set on /var/tmp partition
       when:
         - rhel9cis_rule_1_1_2_5_4_enabled
@@ -44,7 +44,6 @@
       rhel9cis_rule_1_1_2_5_3_enabled or
       rhel9cis_rule_1_1_2_5_4_enabled
   block:
-    
     - name: 1.1.2.5.x | Set existing /var/tmp mount configuration fact
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_tmp_mount: >-

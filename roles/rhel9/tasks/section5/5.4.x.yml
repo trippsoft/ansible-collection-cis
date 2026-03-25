@@ -68,7 +68,7 @@
       changed_when: false
       failed_when: false
       register: _rhel9cis_future_password_users
-      
+
     - name: 5.4.1.6 | Ensure all users last password change date is in the past | Warn
       when:
         - _rhel9cis_future_password_users.stdout_lines | length > 0
@@ -106,7 +106,8 @@
       vars:
         _rhel9cis_warning_rule: '5.4.2.1'
         _rhel9cis_warning_description: >-
-          '{{ (_rhel9cis_passwd | selectattr('uid', 'eq', 0) | list | first).id }}' has UID 0 and is not root. This must be manually remediated.
+          '{{ (_rhel9cis_passwd | selectattr('uid', 'eq', 0) | list | first).id }}' has UID 0 and is not root.
+          This must be manually remediated.
 
 - name: 5.4.2.2 | Ensure root is the only GID 0 account
   when:
@@ -136,7 +137,8 @@
       vars:
         _rhel9cis_warning_rule: '5.4.2.2'
         _rhel9cis_warning_description: >-
-          '{{ (_rhel9cis_passwd | selectattr('gid', 'eq', 0) | list | first).id }}' has GID 0 and is not root. This must be manually remediated.
+          '{{ (_rhel9cis_passwd | selectattr('gid', 'eq', 0) | list | first).id }}' has GID 0 and is not root.
+          This must be manually remediated.
 
 - name: 5.4.2.3 | Ensure group root is the only GID 0 group
   when:
@@ -166,7 +168,8 @@
       vars:
         _rhel9cis_warning_rule: '5.4.2.3'
         _rhel9cis_warning_description: >-
-          '{{ (_rhel9cis_group | selectattr('gid', 'eq', 0) | list | first).id }}' has GID 0 and is not root. This must be manually remediated.
+          '{{ (_rhel9cis_group | selectattr('gid', 'eq', 0) | list | first).id }}' has GID 0 and is not root.
+          This must be manually remediated.
 
 - name: 5.4.2.4 | Ensure root account access is controlled
   when:

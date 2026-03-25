@@ -585,7 +585,7 @@
       ansible.builtin.include_tasks: ../add-warning.yml
       vars:
         _rhel9cis_warning_rule: '2.1.22'
-        _rhel9cis_warning_description: 
+        _rhel9cis_warning_description:
           - Remediation cannot be automated. Please review the output below for listening services on network interfaces.
           - ''
           - "{{ _rhel9cis_listening_services.stdout_lines }}"

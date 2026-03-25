@@ -19,7 +19,7 @@
       vars:
         _rhel9cis_warning_rule: '1.1.2.3.2'
         _rhel9cis_warning_description: /home is not a separate partition.
-    
+
     - name: 1.1.2.3.3 | Ensure nosuid option set on /home partition'
       when:
         - rhel9cis_rule_1_1_2_3_3_enabled

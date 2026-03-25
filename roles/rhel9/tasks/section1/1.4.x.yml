@@ -12,7 +12,7 @@
     _rhel9cis_grub_config_path: /etc/grub2-efi.cfg
     _rhel9cis_bootloader_base_path: /boot/efi/EFI
     _rhel9cis_bootloader_file_permissions: '0700'
-  
+
 - name: 1.4.x | Set facts (BIOS)
   when:
     - not _rhel9cis_efi.stat.exists
@@ -28,7 +28,7 @@
     - name: 1.4.1 | Ensure bootloader password is set | Check current password
       become: true
       ansible.builtin.find:
-        paths: 
+        paths:
           - /boot
         file_type: file
         recurse: true

@@ -18,7 +18,7 @@
         content: ''
         dest: /etc/motd
 
-- name: 1.7.2 | Ensure local login warning banner is configured properly    
+- name: 1.7.2 | Ensure local login warning banner is configured properly
   when:
     - rhel9cis_rule_1_7_2_enabled
   become: true

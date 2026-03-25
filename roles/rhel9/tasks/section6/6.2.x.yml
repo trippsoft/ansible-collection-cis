@@ -274,7 +274,7 @@
     - name: 6.2.3.8 | Ensure rsyslog logrotate is configured | Get /etc/logrotate.d/* files
       become: true
       ansible.builtin.find:
-        paths: 
+        paths:
           - /etc/logrotate.d
         file_type: file
         recurse: true
@@ -286,7 +286,7 @@
         path: /etc/logrotate.conf
         regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
         replace: "\\1{{ rhel9cis_logrotate_frequency }}"
-    
+
     - name: 6.2.3.8 | Ensure rsyslog logrotate is configured | /etc/logrotate.d/*
       loop: "{{ _rhel9cis_logrotate_d.files }}"
       become: true
@@ -310,7 +310,7 @@
   block:
     - name: 6.2.4.1 | Ensure all logfiles have appropriate access configured | Get list of log files
       ansible.builtin.find:
-        paths: 
+        paths:
           - /var/log
         file_type: file
         recurse: true

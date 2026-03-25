@@ -34,7 +34,11 @@
 
 - name: Parse /etc/passwd contents to variable
   ansible.builtin.set_fact:
-    _rhel9cis_passwd: "{{ _rhel9cis_passwd_file_audit.stdout_lines | map('regex_replace', ld_passwd_regex, ld_passwd_yaml) | map('from_yaml') | list }}"
+    _rhel9cis_passwd: >-
+      {{ _rhel9cis_passwd_file_audit.stdout_lines |
+          map('regex_replace', ld_passwd_regex, ld_passwd_yaml) |
+          map('from_yaml') |
+          list }}
   vars:
     ld_passwd_regex: >-
       ^(?P<id>[^:]*):(?P<password>[^:]*):(?P<uid>[^:]*):(?P<gid>[^:]*):(?P<gecos>[^:]*):(?P<dir>[^:]*):(?P<shell>[^:]*)
@@ -60,7 +64,10 @@
 
 - name: Parse /etc/group contents to variable
   ansible.builtin.set_fact:
-    _rhel9cis_group: "{{ _rhel9cis_group_file_audit.stdout_lines | map('regex_replace', ld_group_regex, ld_group_yaml) | map('from_yaml') | list }}"
+    _rhel9cis_group: >-
+      {{ _rhel9cis_group_file_audit.stdout_lines |
+          map('regex_replace', ld_group_regex, ld_group_yaml) |
+          map('from_yaml') | list }}
   vars:
     ld_group_regex: >-
       ^(?P<id>[^:]*):(?P<password>[^:]*):(?P<gid>[^:]*):(?P<members>[^:]*)
@@ -78,8 +85,11 @@
     that:
       - ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
       - ansible_distribution_major_version is version_compare('9', '==')
-    fail_msg: "This role can only be run against supported Linux distributions.  {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
-    success_msg: "This role is running against a supported Linux distribution {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
+    fail_msg: >-
+      This role can only be run against supported Linux distributions.
+      {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
+    success_msg: >-
+      This role is running against a supported Linux distribution {{ ansible_distribution }} {{ ansible_distribution_major_version }}.
 
 - name: Validate CIS level
   ansible.builtin.assert:
@@ -292,19 +302,23 @@
   when:
     - rhel9cis_rule_5_1_9_enabled
   block:
-    - name: Validate | 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveInterval
+    - name: >-
+        Validate | 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveInterval
       ansible.builtin.assert:
         that:
           - rhel9cis_sshd_client_alive_interval | int > 0
         fail_msg: "The 'rhel9cis_sshd_client_alive_interval' variable must be greater than 0."
-        success_msg: "The 'rhel9cis_sshd_client_alive_interval' variable is set to {{ rhel9cis_sshd_client_alive_interval }}."
+        success_msg: >-
+          The 'rhel9cis_sshd_client_alive_interval' variable is set to {{ rhel9cis_sshd_client_alive_interval }}.
 
-    - name: Validate | 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveCountMax
+    - name: >-
+        Validate | 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveCountMax
       ansible.builtin.assert:
         that:
           - rhel9cis_sshd_client_alive_count_max | int > 0
         fail_msg: "The 'rhel9cis_sshd_client_alive_count_max' variable must be greater than 0."
-        success_msg: "The 'rhel9cis_sshd_client_alive_count_max' variable is set to {{ rhel9cis_sshd_client_alive_count_max }}."
+        success_msg: >-
+          The 'rhel9cis_sshd_client_alive_count_max' variable is set to {{ rhel9cis_sshd_client_alive_count_max }}.
 
 - name: Validate | 5.1.14 | Ensure sshd LoginGraceTime is configured
   when:
@@ -345,24 +359,30 @@
         that:
           - rhel9cis_sshd_max_startups_before_dropping | int > 0
           - rhel9cis_sshd_max_startups_before_dropping | int <= 10
-        fail_msg: "The 'rhel9cis_sshd_max_startups_before_dropping' variable must be greater than 0 and less than or equal to 10."
-        success_msg: "The 'rhel9cis_sshd_max_startups_before_dropping' variable is set to {{ rhel9cis_sshd_max_startups_before_dropping }}."
+        fail_msg: >-
+          The 'rhel9cis_sshd_max_startups_before_dropping' variable must be greater than 0 and less than or equal to 10.
+        success_msg: >-
+          The 'rhel9cis_sshd_max_startups_before_dropping' variable is set to {{ rhel9cis_sshd_max_startups_before_dropping }}.
 
     - name: Validate | 5.1.17 | Ensure sshd MaxStartups is configured | Validate startup drop percentage
       ansible.builtin.assert:
         that:
           - rhel9cis_sshd_max_startups_drop_percentage | int <= 30
           - rhel9cis_sshd_max_startups_drop_percentage | int >= 0
-        fail_msg: "The 'rhel9cis_sshd_max_startups_drop_percentage' variable must be a percentage less than or equal to 30."
-        success_msg: "The 'rhel9cis_sshd_max_startups_drop_percentage' variable is set to {{ rhel9cis_sshd_max_startups_drop_percentage }}."
+        fail_msg: >-
+          The 'rhel9cis_sshd_max_startups_drop_percentage' variable must be a percentage less than or equal to 30.
+        success_msg: >-
+          The 'rhel9cis_sshd_max_startups_drop_percentage' variable is set to {{ rhel9cis_sshd_max_startups_drop_percentage }}.
 
     - name: Validate | 5.1.17 | Ensure sshd MaxStartups is configured | Validate startup absolute maximum
       ansible.builtin.assert:
         that:
           - rhel9cis_sshd_max_startups_absolute_maximum | int >= rhel9cis_sshd_max_startups_before_dropping | int
           - rhel9cis_sshd_max_startups_absolute_maximum | int <= 60
-        fail_msg: "The 'rhel9cis_sshd_max_startups_absolute_maximum' variable must be greater than or equal to the 'rhel9cis_sshd_max_startups_before_dropping' variable and less than or equal to 60."
-        success_msg: "The 'rhel9cis_sshd_max_startups_absolute_maximum' variable is set to {{ rhel9cis_sshd_max_startups_absolute_maximum }}."
+        fail_msg: >-
+          The 'rhel9cis_sshd_max_startups_absolute_maximum' variable must be greater than or equal to the 'rhel9cis_sshd_max_startups_before_dropping' variable and less than or equal to 60.
+        success_msg: >-
+          The 'rhel9cis_sshd_max_startups_absolute_maximum' variable is set to {{ rhel9cis_sshd_max_startups_absolute_maximum }}.
 
 - name: Validate | 5.2.6 | Ensure sudo authentication timeout is configured correctly
   when:
@@ -371,7 +391,8 @@
     that:
       - rhel9cis_sudo_authentication_timeout | int >= 0
       - rhel9cis_sudo_authentication_timeout | int <= 15
-    fail_msg: "The 'rhel9cis_sudo_authentication_timeout' must be greater than or equal to 0 and be less than or equal to 15."
+    fail_msg: >-
+      The 'rhel9cis_sudo_authentication_timeout' must be greater than or equal to 0 and be less than or equal to 15.
     success_msg: "The 'rhel9cis_sudo_authentication_timeout' is set to {{ rhel9cis_sudo_authentication_timeout }}."
 
 - name: Validate | 5.3.3.1.1 | Ensure password failed attempts lockout is configured
@@ -400,7 +421,8 @@
     that:
       - rhel9cis_password_min_changed_characters | int >= 2
     fail_msg: "The 'rhel9cis_password_min_changed_characters' variable must be greater than or equal to 2."
-    success_msg: "The 'rhel9cis_password_min_changed_characters' variable is set to {{ rhel9cis_password_min_changed_characters }}."
+    success_msg: >-
+      The 'rhel9cis_password_min_changed_characters' variable is set to {{ rhel9cis_password_min_changed_characters }}.
 
 - name: Validate | 5.3.3.2.2 | Ensure password length is configured
   when:
@@ -419,7 +441,8 @@
       - rhel9cis_password_max_repeat_characters | int <= 3
       - rhel9cis_password_max_repeat_characters | int > 0
     fail_msg: "The 'rhel9cis_password_max_repeat_characters' variable must be less than or equal to 3 but not 0."
-    success_msg: "The 'rhel9cis_password_max_repeat_characters' variable is set to {{ rhel9cis_password_max_repeat_characters }}."
+    success_msg: >-
+      The 'rhel9cis_password_max_repeat_characters' variable is set to {{ rhel9cis_password_max_repeat_characters }}.
 
 - name: Validate | 5.3.3.2.5 | Ensure password maximum sequential characters is configured
   when:
@@ -429,7 +452,8 @@
       - rhel9cis_password_max_sequential_characters | int <= 3
       - rhel9cis_password_max_sequential_characters | int > 0
     fail_msg: "The 'rhel9cis_password_max_sequential_characters' variable must be less than or equal to 3 but not 0."
-    success_msg: "The 'rhel9cis_password_max_sequential_characters' variable is set to {{ rhel9cis_password_max_sequential_characters }}."
+    success_msg: >-
+      The 'rhel9cis_password_max_sequential_characters' variable is set to {{ rhel9cis_password_max_sequential_characters }}.
 
 - name: Validate | 5.3.3.3.1 | Ensure password history remember is configured
   when:
@@ -457,7 +481,8 @@
     that:
       - rhel9cis_password_expiration_warning_days | int >= 7
     fail_msg: "The 'rhel9cis_password_expiration_warning_days' variable must be greater than or equal to 7."
-    success_msg: "The 'rhel9cis_password_expiration_warning_days' is set to {{ rhel9cis_password_expiration_warning_days }}."
+    success_msg: >-
+      The 'rhel9cis_password_expiration_warning_days' is set to {{ rhel9cis_password_expiration_warning_days }}.
 
 - name: Validate | 5.4.1.5 | Ensure inactive password lock is configured
   when:

@@ -24,7 +24,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 3.2.1 | Ensure dccp kernel module is not available | Disable module
       community.general.modprobe:
         name: dccp
@@ -55,7 +55,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 3.2.2 | Ensure tipc kernel module is not available | Disable module
       community.general.modprobe:
         name: tipc
@@ -86,7 +86,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 3.2.3 | Ensure rds kernel module is not available | Disable module
       community.general.modprobe:
         name: rds
@@ -117,7 +117,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 3.2.4 | Ensure sctp kernel module is not available | Disable module
       community.general.modprobe:
         name: sctp

@@ -13,7 +13,8 @@
     - rhel9cis_rule_7_2_2_enabled
   become: true
   block:
-    - name: 7.2.2 | Ensure /etc/shadow password fields are not empty | Get list of empty password users # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.2 | Ensure /etc/shadow password fields are not empty | Get list of empty password users
       ansible.builtin.shell: |
         cat /etc/shadow | awk -F: '($2 == \"\" ) { print $1; }'
       changed_when: false
@@ -31,7 +32,8 @@
   when:
     - rhel9cis_rule_7_2_3_enabled
   block:
-    - name: 7.2.3 | Ensure all groups in /etc/passwd exist in /etc/group | Get list of users with missing groups # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.3 | Ensure all groups in /etc/passwd exist in /etc/group | Get list of users with missing groups
       become: true
       ansible.builtin.shell: |
         pwck -r | grep 'no group' | awk '{ gsub("[:\47]",""); print $2}'
@@ -54,7 +56,8 @@
   when:
     - rhel9cis_rule_7_2_4_enabled
   block:
-    - name: 7.2.4 | Ensure no duplicate UIDs exist | Get list of duplicate UIDs # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.4 | Ensure no duplicate UIDs exist | Get list of duplicate UIDs
       become: true
       ansible.builtin.shell: |
         pwck -r | awk -F: '{if ($3 in uid) print $1 ; else uid[$3]}' /etc/passwd
@@ -77,7 +80,8 @@
   when:
     - rhel9cis_rule_7_2_5_enabled
   block:
-    - name: 7.2.5 | Ensure no duplicate GIDs exist | Get list of duplicate GIDs # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.5 | Ensure no duplicate GIDs exist | Get list of duplicate GIDs
       become: true
       ansible.builtin.shell: |
         pwck -r | awk -F: '{if ($3 in gid) print $1 ; else gid[$3]}' /etc/group
@@ -100,7 +104,8 @@
   when:
     - rhel9cis_rule_7_2_6_enabled
   block:
-    - name: 7.2.6 | Ensure no duplicate user names exist | Get list of duplicate user names # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.6 | Ensure no duplicate user names exist | Get list of duplicate user names
       become: true
       ansible.builtin.shell: |
         pwck -r | awk -F: '{if ($1 in users) print $1 ; else users[$1]}' /etc/passwd
@@ -123,7 +128,8 @@
   when:
     - rhel9cis_rule_7_2_7_enabled
   block:
-    - name: 7.2.7 | Ensure no duplicate group names exist | Get list of duplicate group names # noqa risky-shell-pipe
+    # noqa risky-shell-pipe
+    - name: 7.2.7 | Ensure no duplicate group names exist | Get list of duplicate group names
       become: true
       ansible.builtin.shell: |
         getent passwd | cut -d: -f1 | sort -n | uniq -d
@@ -141,7 +147,7 @@
           - 'The following groups have duplicate names:'
           - ''
           - "{{ _rhel9cis_duplicate_group_names.stdout_lines }}"
- 
+
 - name: 7.2.8 | Ensure local interactive user home directories are configured
   when:
     - rhel9cis_rule_7_2_8_enabled

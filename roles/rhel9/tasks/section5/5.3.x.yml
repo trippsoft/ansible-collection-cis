@@ -30,7 +30,8 @@
   ansible.builtin.include_tasks: ../add-warning.yml
   vars:
     _rhel9cis_warning_rule: '5.3.2.x'
-    _rhel9cis_warning_description: "PAM configuration is not automated for safety reasons. Please carefully configure PAM using authselect manually."
+    _rhel9cis_warning_description: >-
+      PAM configuration is not automated for safety reasons. Please carefully configure PAM using authselect manually.
 
 - name: 5.3.3.1.1 | Ensure password failed attempts lockout is configured
   when:

@@ -1,16 +1,12 @@
 ---
-- name: '1.2.1 | Ensure GPG keys are configured | {{ _rhel9cis_gpgkey_file }}'
+- name: "1.2.1 | Ensure GPG keys are configured | {{ _rhel9cis_gpgkey_file }}" # noqa risky-shell-pipe
   become: true
-  ansible.builtin.shell: |
-    cat {{ _rhel9cis_gpgkey_file }} | grep gpgkey
+  ansible.builtin.shell: "cat {{ _rhel9cis_gpgkey_file }} | grep gpgkey"
   changed_when: false
   failed_when: _rhel9cis_gpgkey_result.rc not in [0, 1]
   register: _rhel9cis_gpgkey_result
-  tags:
-    - always
-    - skip_ansible_lint
 
-- name: '1.2.1 | Ensure GPG key are configured | {{ _rhel9cis_gpgkey_file }}'
+- name: "1.2.1 | Ensure GPG key are configured | {{ _rhel9cis_gpgkey_file }}"
   when:
     - _rhel9cis_gpgkey_result.rc == 1
   ansible.builtin.include_tasks: ../../add-warning.yml

@@ -154,7 +154,7 @@
       changed_when: false
       failed_when: false
       register: _rhel9cis_world_writable_files
-    
+
     - name: 7.1.11 | Ensure world writable files and directories are secured | Get list of world writable directories
       ansible.builtin.command: find / -xdev -type d -perm -0002
       changed_when: false
@@ -201,7 +201,7 @@
           The following unowned files were found on the system:
 
           {{ _rhel9cis_unowned_files.stdout_lines }}
-    
+
     - name: 7.1.12 | Ensure no unowned or ungrouped files or directories exist | Add warning for ungrouped only
       when:
         - _rhel9cis_unowned_files.stdout_lines | length == 0
