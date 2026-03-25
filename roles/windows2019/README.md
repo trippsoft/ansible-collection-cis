@@ -105,7 +105,6 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_2_3_1_2_enabled | <p>Whether to enable rule 2.3.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_2_3_1_3_enabled | <p>Whether to enable rule 2.3.1.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_2_3_1_4_enabled | <p>Whether to enable rule 2.3.1.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_2_3_1_5_enabled | <p>Whether to enable rule 2.3.1.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_admin_username | <p>The name to which to set the default Administrator account.</p> | str | no |  |  |
 | w2019cis_guest_username | <p>The name to which to set the default Guest account.</p> | str | no |  |  |
 | w2019cis_rule_2_3_2_1_enabled | <p>Whether to enable rule 2.3.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
@@ -269,8 +268,6 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_4_4_enabled | <p>Whether to enable rule 18.4.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_4_5_enabled | <p>Whether to enable rule 18.4.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_4_6_enabled | <p>Whether to enable rule 18.4.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_4_7_enabled | <p>Whether to enable rule 18.4.7.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_4_8_enabled | <p>Whether to enable rule 18.4.8.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_1_enabled | <p>Whether to enable rule 18.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_2_enabled | <p>Whether to enable rule 18.5.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_3_enabled | <p>Whether to enable rule 18.5.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
@@ -290,6 +287,9 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_screensaver_grace_period_in_seconds | <p>The screensaver grace period in seconds.</p> | int | no |  | 5 |
 | w2019cis_rule_18_6_4_1_enabled | <p>Whether to enable rule 18.6.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_6_4_2_enabled | <p>Whether to enable rule 18.6.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_6_4_3_enabled | <p>Whether to enable rule 18.6.4.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_6_4_3_force | <p>Whether to override the level requirement for CIS rule 18.6.4.3.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_6_4_4_enabled | <p>Whether to enable rule 18.6.4.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_netbios_dns_resolution_behavior | <p>The NetBIOS DNS resolution behavior.</p> | str | no | <ul><li>disabled_on_public_networks</li><li>disabled</li></ul> | disabled_on_public_networks |
 | w2019cis_rule_18_6_5_1_enabled | <p>Whether to enable rule 18.6.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_6_5_1_force | <p>Whether to override the level requirement for CIS rule 18.6.5.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
@@ -325,6 +325,7 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_7_9_enabled | <p>Whether to enable rule 18.7.9.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_7_10_enabled | <p>Whether to enable rule 18.7.10.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_7_11_enabled | <p>Whether to enable rule 18.7.11.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_7_12_enabled | <p>Whether to enable rule 18.7.12.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rpc_listener_authentication_protocol | <p>The RPC listener authentication protocol.</p> | str | no | <ul><li>negotiate</li><li>kerberos</li></ul> | negotiate |
 | w2019cis_rule_18_8_1_1_enabled | <p>Whether to enable rule 18.8.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_8_1_1_force | <p>Whether to override the level requirement for CIS rule 18.8.1.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
@@ -394,8 +395,6 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_laps_password_age_in_days | <p>The LAPS password age in days.</p> | int | no |  | 30 |
 | w2019cis_laps_post_authentication_grace_period_in_hours | <p>The LAPS post-authentication grace period in hours.</p> | int | no |  | 8 |
 | w2019cis_laps_post_authentication_actions | <p>The LAPS post-authentication actions to perform when the grace period expires.</p> | str | no | <ul><li>reset_password_and_logoff</li><li>reset_password_and_reboot</li></ul> | reset_password_and_logoff |
-| w2019cis_rule_18_9_26_1_enabled | <p>Whether to enable rule 18.9.26.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_9_26_1_force | <p>Whether to override the level requirement for CIS rule 18.9.26.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_18_9_27_1_enabled | <p>Whether to enable rule 18.9.27.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_9_27_1_force | <p>Whether to override the level requirement for CIS rule 18.9.27.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_18_9_28_1_enabled | <p>Whether to enable rule 18.9.28.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
@@ -428,135 +427,155 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_9_49_1_force | <p>Whether to override the level requirement for CIS rule 18.9.49.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_18_9_51_1_1_enabled | <p>Whether to enable rule 18.9.51.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_9_51_1_2_enabled | <p>Whether to enable rule 18.9.51.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_4_1_enabled | <p>Whether to enable rule 18.10.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_4_1_force | <p>Whether to override the level requirement for CIS rule 18.10.3.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_6_1_enabled | <p>Whether to enable rule 18.10.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_8_1_enabled | <p>Whether to enable rule 18.10.7.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_8_2_enabled | <p>Whether to enable rule 18.10.7.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_8_3_enabled | <p>Whether to enable rule 18.10.7.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_9_1_1_enabled | <p>Whether to enable rule 18.10.8.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_11_1_enabled | <p>Whether to enable rule 18.10.10.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_11_1_force | <p>Whether to override the level requirement for CIS rule 18.10.10.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_13_1_enabled | <p>Whether to enable rule 18.10.12.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_13_2_enabled | <p>Whether to enable rule 18.10.12.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_14_1_enabled | <p>Whether to enable rule 18.10.13.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_4_1_enabled | <p>Whether to enable rule 18.10.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_4_1_force | <p>Whether to override the level requirement for CIS rule 18.10.4.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_6_1_enabled | <p>Whether to enable rule 18.10.6.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_8_1_enabled | <p>Whether to enable rule 18.10.8.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_8_2_enabled | <p>Whether to enable rule 18.10.8.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_8_3_enabled | <p>Whether to enable rule 18.10.8.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_9_1_1_enabled | <p>Whether to enable rule 18.10.9.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_11_1_enabled | <p>Whether to enable rule 18.10.11.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_11_1_force | <p>Whether to override the level requirement for CIS rule 18.10.11.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_13_1_enabled | <p>Whether to enable rule 18.10.13.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_13_2_enabled | <p>Whether to enable rule 18.10.13.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_14_1_enabled | <p>Whether to enable rule 18.10.14.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_windows_connect_pin_requirement | <p>The Windows Connect PIN requirement.</p> | str | no | <ul><li>always</li><li>first_time</li></ul> | first_time |
-| w2019cis_rule_18_10_15_1_enabled | <p>Whether to enable rule 18.10.14.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_15_2_enabled | <p>Whether to enable rule 18.10.14.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_1_enabled | <p>Whether to enable rule 18.10.15.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_2_enabled | <p>Whether to enable rule 18.10.15.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_2_force | <p>Whether to override the level requirement for CIS rule 18.10.15.8.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_16_3_enabled | <p>Whether to enable rule 18.10.15.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_4_enabled | <p>Whether to enable rule 18.10.15.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_5_enabled | <p>Whether to enable rule 18.10.15.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_6_enabled | <p>Whether to enable rule 18.10.15.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_7_enabled | <p>Whether to enable rule 18.10.15.7.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_16_8_enabled | <p>Whether to enable rule 18.10.15.8.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_15_1_enabled | <p>Whether to enable rule 18.10.15.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_15_2_enabled | <p>Whether to enable rule 18.10.15.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_1_enabled | <p>Whether to enable rule 18.10.16.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_2_enabled | <p>Whether to enable rule 18.10.16.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_2_force | <p>Whether to override the level requirement for CIS rule 18.10.16.8.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_16_3_enabled | <p>Whether to enable rule 18.10.16.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_4_enabled | <p>Whether to enable rule 18.10.16.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_5_enabled | <p>Whether to enable rule 18.10.16.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_6_enabled | <p>Whether to enable rule 18.10.16.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_allow_telemetry | <p>Whether to allow telemetry.</p> | str | no | <ul><li>required</li><li>off</li></ul> | off |
-| w2019cis_rule_18_10_18_1_enabled | <p>Whether to enable rule 18.10.17.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_18_2_enabled | <p>Whether to enable rule 18.10.17.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_18_3_enabled | <p>Whether to enable rule 18.10.17.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_18_4_enabled | <p>Whether to enable rule 18.10.17.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_1_1_enabled | <p>Whether to enable rule 18.10.25.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_1_2_enabled | <p>Whether to enable rule 18.10.25.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_2_1_enabled | <p>Whether to enable rule 18.10.25.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_2_2_enabled | <p>Whether to enable rule 18.10.25.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_3_1_enabled | <p>Whether to enable rule 18.10.25.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_3_2_enabled | <p>Whether to enable rule 18.10.25.3.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_4_1_enabled | <p>Whether to enable rule 18.10.25.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_26_4_2_enabled | <p>Whether to enable rule 18.10.25.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_1_enabled | <p>Whether to enable rule 18.10.18.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_1_force | <p>Whether to override the level requirement for CIS rule 18.10.18.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_18_2_enabled | <p>Whether to enable rule 18.10.18.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_3_enabled | <p>Whether to enable rule 18.10.18.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_4_enabled | <p>Whether to enable rule 18.10.18.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_5_enabled | <p>Whether to enable rule 18.10.18.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_6_enabled | <p>Whether to enable rule 18.10.18.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_7_enabled | <p>Whether to enable rule 18.10.18.7.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_18_7_force | <p>Whether to override the level requirement for CIS rule 18.10.18.7.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_26_1_1_enabled | <p>Whether to enable rule 18.10.26.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_1_2_enabled | <p>Whether to enable rule 18.10.26.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_2_1_enabled | <p>Whether to enable rule 18.10.26.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_2_2_enabled | <p>Whether to enable rule 18.10.26.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_3_1_enabled | <p>Whether to enable rule 18.10.26.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_3_2_enabled | <p>Whether to enable rule 18.10.26.3.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_4_1_enabled | <p>Whether to enable rule 18.10.26.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_26_4_2_enabled | <p>Whether to enable rule 18.10.26.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_application_log_max_size_in_kb | <p>The maximum size of the Application log in KB.</p> | int | no |  | 32768 |
 | w2019cis_security_log_max_size_in_kb | <p>The maximum size of the Security log in KB.</p> | int | no |  | 196608 |
 | w2019cis_setup_log_max_size_in_kb | <p>The maximum size of the Setup log in KB.</p> | int | no |  | 32768 |
 | w2019cis_system_log_max_size_in_kb | <p>The maximum size of the System log in KB.</p> | int | no |  | 32768 |
-| w2019cis_rule_18_10_29_2_enabled | <p>Whether to enable rule 18.10.28.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_29_3_enabled | <p>Whether to enable rule 18.10.28.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_29_4_enabled | <p>Whether to enable rule 18.10.28.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_37_1_enabled | <p>Whether to enable rule 18.10.36.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_37_1_force | <p>Whether to override the level requirement for CIS rule 18.10.36.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_41_1_enabled | <p>Whether to enable rule 18.10.40.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_41_1_force | <p>Whether to override the level requirement for CIS rule 18.10.40.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_42_1_enabled | <p>Whether to enable rule 18.10.41.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_5_1_enabled | <p>Whether to enable rule 18.10.42.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_5_2_enabled | <p>Whether to enable rule 18.10.42.5.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_5_2_force | <p>Whether to override the level requirement for CIS rule 18.10.42.5.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_43_6_1_1_enabled | <p>Whether to enable rule 18.10.42.6.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_6_1_2_enabled | <p>Whether to enable rule 18.10.42.6.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_6_3_1_enabled | <p>Whether to enable rule 18.10.42.6.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_7_1_enabled | <p>Whether to enable rule 18.10.42.7.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_10_1_enabled | <p>Whether to enable rule 18.10.42.10.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_10_2_enabled | <p>Whether to enable rule 18.10.42.10.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_10_3_enabled | <p>Whether to enable rule 18.10.42.10.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_10_4_enabled | <p>Whether to enable rule 18.10.42.10.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_12_1_enabled | <p>Whether to enable rule 18.10.42.12.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_12_1_force | <p>Whether to override the level requirement for CIS rule 18.10.42.12.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_43_13_1_enabled | <p>Whether to enable rule 18.10.42.13.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_13_2_enabled | <p>Whether to enable rule 18.10.42.13.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_16_enabled | <p>Whether to enable rule 18.10.42.16.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_43_17_enabled | <p>Whether to enable rule 18.10.42.17.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_51_1_enabled | <p>Whether to enable rule 18.10.50.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_56_1_enabled | <p>Whether to enable rule 18.10.55.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_56_1_force | <p>Whether to override the level requirement for CIS rule 18.10.55.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_2_2_enabled | <p>Whether to enable rule 18.10.56.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_2_1_enabled | <p>Whether to enable rule 18.10.56.3.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_2_1_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.2.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_3_1_enabled | <p>Whether to enable rule 18.10.56.3.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_3_1_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.3.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_3_2_enabled | <p>Whether to enable rule 18.10.56.3.3.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_3_3_enabled | <p>Whether to enable rule 18.10.56.3.3.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_3_3_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.3.3.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_3_4_enabled | <p>Whether to enable rule 18.10.56.3.3.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_3_4_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.3.4.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_9_1_enabled | <p>Whether to enable rule 18.10.56.3.9.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_9_2_enabled | <p>Whether to enable rule 18.10.56.3.9.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_9_3_enabled | <p>Whether to enable rule 18.10.56.3.9.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_9_4_enabled | <p>Whether to enable rule 18.10.56.3.9.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_9_5_enabled | <p>Whether to enable rule 18.10.56.3.9.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_10_1_enabled | <p>Whether to enable rule 18.10.56.3.10.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_10_1_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.10.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_10_2_enabled | <p>Whether to enable rule 18.10.56.3.10.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_10_2_force | <p>Whether to override the level requirement for CIS rule 18.10.56.3.10.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_57_3_11_1_enabled | <p>Whether to enable rule 18.10.56.3.11.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_57_3_11_2_enabled | <p>Whether to enable rule 18.10.56.3.11.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_58_1_enabled | <p>Whether to enable rule 18.10.57.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_59_2_enabled | <p>Whether to enable rule 18.10.58.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_59_2_force | <p>Whether to override the level requirement for CIS rule 18.10.58.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_59_3_enabled | <p>Whether to enable rule 18.10.58.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_59_4_enabled | <p>Whether to enable rule 18.10.58.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_63_1_enabled | <p>Whether to enable rule 18.10.62.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_63_1_force | <p>Whether to override the level requirement for CIS rule 18.10.62.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_76_2_1_enabled | <p>Whether to enable rule 18.10.75.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_80_1_enabled | <p>Whether to enable rule 18.10.79.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_80_1_force | <p>Whether to override the level requirement for CIS rule 18.10.79.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_80_2_enabled | <p>Whether to enable rule 18.10.79.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_29_2_enabled | <p>Whether to enable rule 18.10.29.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_29_3_enabled | <p>Whether to enable rule 18.10.29.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_29_4_enabled | <p>Whether to enable rule 18.10.29.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_29_5_enabled | <p>Whether to enable rule 18.10.29.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_37_1_enabled | <p>Whether to enable rule 18.10.37.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_37_1_force | <p>Whether to override the level requirement for CIS rule 18.10.37.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_41_1_enabled | <p>Whether to enable rule 18.10.41.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_41_1_force | <p>Whether to override the level requirement for CIS rule 18.10.41.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_42_1_enabled | <p>Whether to enable rule 18.10.42.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_4_1_enabled | <p>Whether to enable rule 18.10.43.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_5_1_enabled | <p>Whether to enable rule 18.10.43.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_5_2_enabled | <p>Whether to enable rule 18.10.43.5.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_5_2_force | <p>Whether to override the level requirement for CIS rule 18.10.43.5.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_43_6_1_1_enabled | <p>Whether to enable rule 18.10.43.6.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_6_1_2_enabled | <p>Whether to enable rule 18.10.43.6.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_6_3_1_enabled | <p>Whether to enable rule 18.10.43.6.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_7_1_enabled | <p>Whether to enable rule 18.10.43.7.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_8_1_enabled | <p>Whether to enable rule 18.10.43.8.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_8_1_force | <p>Whether to override the level requirement for CIS rule 18.10.43.8.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_43_10_1_enabled | <p>Whether to enable rule 18.10.43.10.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_10_2_enabled | <p>Whether to enable rule 18.10.43.10.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_10_3_enabled | <p>Whether to enable rule 18.10.43.10.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_10_4_enabled | <p>Whether to enable rule 18.10.43.10.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_10_5_enabled | <p>Whether to enable rule 18.10.43.10.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_11_1_1_1_enabled | <p>Whether to enable rule 18.10.43.11.1.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_11_1_1_1_force | <p>Whether to override the level requirement for CIS rule 18.10.43.11.1.1.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_43_11_1_1_2_enabled | <p>Whether to enable rule 18.10.43.11.1.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_brute_force_protection_aggressiveness | <p>The aggressiveness of brute force protection.</p> | str | no | <ul><li>medium</li><li>high</li></ul> | medium |
+| w2019cis_brute_force_protection_configured_state | <p>The configured state of brute force protection.</p> | str | no | <ul><li>audit</li><li>block</li></ul> | audit |
+| w2019cis_rule_18_10_43_11_1_2_1_enabled | <p>Whether to enable rule 18.10.43.11.1.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_11_1_2_1_force | <p>Whether to override the level requirement for CIS rule 18.10.43.11.1.2.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_remote_encryption_protection_aggressiveness | <p>The aggressiveness of remote encryption protection.</p> | str | no | <ul><li>medium</li><li>high</li></ul> | medium |
+| w2019cis_rule_18_10_43_12_1_enabled | <p>Whether to enable rule 18.10.43.12.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_12_1_force | <p>Whether to override the level requirement for CIS rule 18.10.43.12.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_43_13_1_enabled | <p>Whether to enable rule 18.10.43.13.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_13_2_enabled | <p>Whether to enable rule 18.10.43.13.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_13_3_enabled | <p>Whether to enable rule 18.10.43.13.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_13_4_enabled | <p>Whether to enable rule 18.10.43.13.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_13_5_enabled | <p>Whether to enable rule 18.10.43.13.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_16_enabled | <p>Whether to enable rule 18.10.43.16.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_43_17_enabled | <p>Whether to enable rule 18.10.43.17.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_51_1_enabled | <p>Whether to enable rule 18.10.51.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_56_1_enabled | <p>Whether to enable rule 18.10.56.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_56_1_force | <p>Whether to override the level requirement for CIS rule 18.10.56.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_2_2_enabled | <p>Whether to enable rule 18.10.57.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_2_1_enabled | <p>Whether to enable rule 18.10.57.3.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_2_1_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.2.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_3_1_enabled | <p>Whether to enable rule 18.10.57.3.3.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_3_1_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.3.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_3_2_enabled | <p>Whether to enable rule 18.10.57.3.3.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_3_3_enabled | <p>Whether to enable rule 18.10.57.3.3.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_3_3_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.3.3.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_3_4_enabled | <p>Whether to enable rule 18.10.57.3.3.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_3_4_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.3.4.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_9_1_enabled | <p>Whether to enable rule 18.10.57.3.9.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_9_2_enabled | <p>Whether to enable rule 18.10.57.3.9.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_9_3_enabled | <p>Whether to enable rule 18.10.57.3.9.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_9_4_enabled | <p>Whether to enable rule 18.10.57.3.9.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_9_5_enabled | <p>Whether to enable rule 18.10.57.3.9.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_10_1_enabled | <p>Whether to enable rule 18.10.57.3.10.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_10_1_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.10.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_10_2_enabled | <p>Whether to enable rule 18.10.57.3.10.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_10_2_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.10.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_57_3_11_1_enabled | <p>Whether to enable rule 18.10.57.3.11.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_57_3_11_2_enabled | <p>Whether to enable rule 18.10.57.3.11.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_58_1_enabled | <p>Whether to enable rule 18.10.58.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_58_2_enabled | <p>Whether to enable rule 18.10.58.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_59_2_enabled | <p>Whether to enable rule 18.10.59.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_59_2_force | <p>Whether to override the level requirement for CIS rule 18.10.59.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_59_3_enabled | <p>Whether to enable rule 18.10.59.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_59_4_enabled | <p>Whether to enable rule 18.10.59.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_63_1_enabled | <p>Whether to enable rule 18.10.63.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_63_1_force | <p>Whether to override the level requirement for CIS rule 18.10.63.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_76_2_1_enabled | <p>Whether to enable rule 18.10.76.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_80_1_enabled | <p>Whether to enable rule 18.10.80.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_80_1_force | <p>Whether to override the level requirement for CIS rule 18.10.80.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_80_2_enabled | <p>Whether to enable rule 18.10.80.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_windows_ink_workspace_access | <p>The Windows Ink Workspace access.</p> | str | no | <ul><li>disallow_above_lock</li><li>disabled</li></ul> | disallow_above_lock |
-| w2019cis_rule_18_10_81_1_enabled | <p>Whether to enable rule 18.10.80.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_81_2_enabled | <p>Whether to enable rule 18.10.80.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_81_3_enabled | <p>Whether to enable rule 18.10.80.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_81_3_force | <p>Whether to override the level requirement for CIS rule 18.10.80.3.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_82_1_enabled | <p>Whether to enable rule 18.10.81.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_87_1_enabled | <p>Whether to enable rule 18.10.86.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_87_1_force | <p>Whether to override the level requirement for CIS rule 18.10.86.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_87_2_enabled | <p>Whether to enable rule 18.10.86.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_87_2_force | <p>Whether to override the level requirement for CIS rule 18.10.86.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_89_1_1_enabled | <p>Whether to enable rule 18.10.88.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_1_2_enabled | <p>Whether to enable rule 18.10.88.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_1_3_enabled | <p>Whether to enable rule 18.10.88.1.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_2_1_enabled | <p>Whether to enable rule 18.10.88.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_2_2_enabled | <p>Whether to enable rule 18.10.88.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_2_2_force | <p>Whether to override the level requirement for CIS rule 18.10.88.2.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_89_2_3_enabled | <p>Whether to enable rule 18.10.88.2.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_2_4_enabled | <p>Whether to enable rule 18.10.88.2.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_89_2_5_enabled | <p>Whether to enable rule 18.10.88.2.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_90_1_enabled | <p>Whether to enable rule 18.10.89.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_90_1_force | <p>Whether to override the level requirement for CIS rule 18.10.89.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2019cis_rule_18_10_92_2_1_enabled | <p>Whether to enable rule 18.10.91.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_1_1_enabled | <p>Whether to enable rule 18.10.92.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_2_1_enabled | <p>Whether to enable rule 18.10.92.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_2_2_enabled | <p>Whether to enable rule 18.10.92.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_4_1_enabled | <p>Whether to enable rule 18.10.92.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_4_2_enabled | <p>Whether to enable rule 18.10.92.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_18_10_93_4_3_enabled | <p>Whether to enable rule 18.10.92.4.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_81_1_enabled | <p>Whether to enable rule 18.10.81.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_81_2_enabled | <p>Whether to enable rule 18.10.81.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_81_3_enabled | <p>Whether to enable rule 18.10.81.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_81_3_force | <p>Whether to override the level requirement for CIS rule 18.10.81.3.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_82_1_enabled | <p>Whether to enable rule 18.10.82.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_87_1_enabled | <p>Whether to enable rule 18.10.87.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_87_1_force | <p>Whether to override the level requirement for CIS rule 18.10.87.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_87_2_enabled | <p>Whether to enable rule 18.10.87.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_87_2_force | <p>Whether to override the level requirement for CIS rule 18.10.87.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_89_1_1_enabled | <p>Whether to enable rule 18.10.89.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_1_2_enabled | <p>Whether to enable rule 18.10.89.1.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_1_3_enabled | <p>Whether to enable rule 18.10.89.1.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_2_1_enabled | <p>Whether to enable rule 18.10.89.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_2_2_enabled | <p>Whether to enable rule 18.10.89.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_2_2_force | <p>Whether to override the level requirement for CIS rule 18.10.89.2.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_89_2_3_enabled | <p>Whether to enable rule 18.10.89.2.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_2_4_enabled | <p>Whether to enable rule 18.10.89.2.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_89_2_5_enabled | <p>Whether to enable rule 18.10.89.2.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_90_1_enabled | <p>Whether to enable rule 18.10.90.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_90_1_force | <p>Whether to override the level requirement for CIS rule 18.10.90.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_18_10_92_2_1_enabled | <p>Whether to enable rule 18.10.92.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_1_1_enabled | <p>Whether to enable rule 18.10.93.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_2_1_enabled | <p>Whether to enable rule 18.10.93.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_2_2_enabled | <p>Whether to enable rule 18.10.93.2.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_4_1_enabled | <p>Whether to enable rule 18.10.93.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_4_2_enabled | <p>Whether to enable rule 18.10.93.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_93_4_3_enabled | <p>Whether to enable rule 18.10.93.4.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_19_5_1_1_enabled | <p>Whether to enable rule 19.5.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_19_6_6_1_1_enabled | <p>Whether to enable rule 19.6.6.1.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_19_6_6_1_1_force | <p>Whether to override the level requirement for CIS rule 19.6.6.1.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
@@ -570,9 +589,9 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_19_7_8_4_force | <p>Whether to override the level requirement for CIS rule 19.7.8.4.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_19_7_8_5_enabled | <p>Whether to enable rule 19.7.8.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_19_7_26_1_enabled | <p>Whether to enable rule 19.7.26.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_19_7_44_1_enabled | <p>Whether to enable rule 19.7.42.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_19_7_46_2_1_enabled | <p>Whether to enable rule 19.7.44.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2019cis_rule_19_7_46_2_1_force | <p>Whether to override the level requirement for CIS rule 19.7.44.2.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2019cis_rule_19_7_44_1_enabled | <p>Whether to enable rule 19.7.44.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_19_7_46_2_1_enabled | <p>Whether to enable rule 19.7.46.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_19_7_46_2_1_force | <p>Whether to override the level requirement for CIS rule 19.7.46.2.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 
 
 ## License
