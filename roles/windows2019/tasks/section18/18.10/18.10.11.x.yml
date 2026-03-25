@@ -1,0 +1,10 @@
+---
+- name: "18.10.11.1 | L2 | Ensure 'Allow Use of Camera' is set to 'Disabled'"
+  when:
+    - w2019cis_rule_18_10_11_1_enabled
+    - w2019cis_rule_18_10_11_1_force or _w2019cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Camera
+    name: AllowCamera
+    data: 1
+    type: dword

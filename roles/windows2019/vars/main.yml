@@ -1,7 +1,7 @@
 ---
 _w2019cis_standalone: "{{ ansible_windows_domain_role == 'Stand-alone server' and not w2019cis_is_template }}"
 _w2019cis_domain_controller: >-
-  {{ ansible_windows_domain_role | regex_search('(domain controller)') and not w2019cis_is_template }}
+  {{ 'domain controller' in ansible_windows_domain_role and not w2019cis_is_template }}
 _w2019cis_member_server: "{{ ansible_windows_domain_role == 'Member server' and not w2019cis_is_template }}"
 
 _w2019cis_level2_domain_controller: "{{ _w2019cis_domain_controller and w2019cis_level > 1 }}"
@@ -51,9 +51,11 @@ _w2019cis_replace_a_process_level_token_default_users:
   - NETWORK SERVICE
 
 _w2019cis_access_this_computer_from_the_network_users: >-
-  {{ w2019cis_access_this_computer_from_the_network_additional_users + _w2019cis_access_this_computer_from_the_network_default_users }}
+  {{ w2019cis_access_this_computer_from_the_network_additional_users +
+      _w2019cis_access_this_computer_from_the_network_default_users }}
 _w2019cis_adjust_memory_quotas_for_a_process_users: >-
-  {{ w2019cis_adjust_memory_quotas_for_a_process_additional_users + _w2019cis_adjust_memory_quotas_for_a_process_default_users }}
+  {{ w2019cis_adjust_memory_quotas_for_a_process_additional_users +
+      _w2019cis_adjust_memory_quotas_for_a_process_default_users }}
 _w2019cis_create_global_objects_users: >-
   {{ w2019cis_create_global_objects_additional_users + _w2019cis_create_global_objects_default_users }}
 _w2019cis_debug_programs_users: >-
@@ -61,15 +63,19 @@ _w2019cis_debug_programs_users: >-
 _w2019cis_generate_security_audits_users: >-
   {{ w2019cis_generate_security_audits_additional_users + _w2019cis_generate_security_audits_default_users }}
 _w2019cis_impersonate_a_client_after_authentication_users: >-
-  {{ w2019cis_impersonate_a_client_after_authentication_additional_users + _w2019cis_impersonate_a_client_after_authentication_default_users }}
+  {{ w2019cis_impersonate_a_client_after_authentication_additional_users +
+      _w2019cis_impersonate_a_client_after_authentication_default_users }}
 _w2019cis_manage_auditing_and_security_log_users: >-
-  {{ w2019cis_manage_auditing_and_security_log_additional_users + _w2019cis_manage_auditing_and_security_log_default_users }}
+  {{ w2019cis_manage_auditing_and_security_log_additional_users +
+      _w2019cis_manage_auditing_and_security_log_default_users }}
 _w2019cis_perform_volume_maintenance_tasks_users: >-
-  {{ w2019cis_perform_volume_maintenance_tasks_additional_users + _w2019cis_perform_volume_maintenance_tasks_default_users }}
+  {{ w2019cis_perform_volume_maintenance_tasks_additional_users +
+      _w2019cis_perform_volume_maintenance_tasks_default_users }}
 _w2019cis_replace_a_process_level_token_users: >-
   {{ w2019cis_replace_a_process_level_token_additional_users + _w2019cis_replace_a_process_level_token_default_users }}
 
-_w2019cis_increase_scheduling_priority_users: '{{ ["Administrators"] if _windows_installation_type == "Server Core" else ["Administrators", "Window Manager\Window Manager Group"] }}'
+_w2019cis_increase_scheduling_priority_users: >-
+  {{ ["Administrators"] if _windows_installation_type == "Server Core" else ["Administrators", "Window Manager\Window Manager Group"] }}
 
 _w2019cis_smart_card_removal_behavior_map:
   lock: 1
@@ -124,6 +130,18 @@ _w2019cis_allow_telemetry_map:
   'off': 0
   required: 1
 
+_w2019cis_brute_force_protection_aggressiveness_map:
+  medium: 1
+  high: 2
+
+_w2019cis_brute_force_protection_configured_state_map:
+  block: 1
+  audit: 2
+
+_w2019cis_remote_encryption_protection_aggressiveness_map:
+  medium: 1
+  high: 2
+
 _w2019cis_windows_ink_workspace_access_map:
   disabled: 0
   disallow_above_lock: 1
@@ -154,5 +172,11 @@ _w2019cis_windows_connect_pin_requirement_value: >-
   {{ _w2019cis_windows_connect_pin_requirement_map[w2019cis_windows_connect_pin_requirement] }}
 _w2019cis_allow_telemetry_value: >-
   {{ _w2019cis_allow_telemetry_map[w2019cis_allow_telemetry] }}
+_w2019cis_brute_force_protection_aggressiveness_value: >-
+  {{ _w2019cis_brute_force_protection_aggressiveness_map[w2019cis_brute_force_protection_aggressiveness] }}
+_w2019cis_brute_force_protection_configured_state_value: >-
+  {{ _w2019cis_brute_force_protection_configured_state_map[w2019cis_brute_force_protection_configured_state] }}
+_w2019cis_remote_encryption_protection_aggressiveness_value: >-
+  {{ _w2019cis_remote_encryption_protection_aggressiveness_map[w2019cis_remote_encryption_protection_aggressiveness] }}
 _w2019cis_windows_ink_workspace_access_value: >-
   {{ _w2019cis_windows_ink_workspace_access_map[w2019cis_windows_ink_workspace_access] }}

@@ -29,9 +29,6 @@
 - name: Execute the 18.9.25.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.25.x.yml
 
-- name: Execute the 18.9.26.x tasks
-  ansible.builtin.import_tasks: section18/18.9/18.9.26.x.yml
-
 - name: Execute the 18.9.27.x tasks
   ansible.builtin.import_tasks: section18/18.9/18.9.27.x.yml
 

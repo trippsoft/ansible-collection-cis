@@ -89,10 +89,10 @@
     data: 1
     type: dword
 
-- name: "19.7.42.1 | L1 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
+- name: "19.7.44.1 | L1 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
-    - w2019cis_rule_19_7_42_1_enabled
+    - w2019cis_rule_19_7_44_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\Installer"
@@ -100,11 +100,11 @@
     data: 0
     type: dword
 
-- name: "19.7.44.2.1 | L2 | Ensure 'Prevent Codec Download' is set to 'Enabled'"
+- name: "19.7.46.2.1 | L2 | Ensure 'Prevent Codec Download' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
-    - w2019cis_rule_19_7_44_2_1_enabled
-    - w2019cis_rule_19_7_44_2_1_force or _w2019cis_level2
+    - w2019cis_rule_19_7_46_2_1_enabled
+    - w2019cis_rule_19_7_46_2_1_force or _w2019cis_level2
     - "'Classes' not in item"
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windowsmediaplayer"

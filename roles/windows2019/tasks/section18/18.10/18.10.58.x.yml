@@ -1,28 +1,18 @@
 ---
-- name: "18.10.58.2 | L2 | Ensure 'Allow Cloud Search' is set to 'Enabled: Disable Cloud Search'"
+- name: "18.10.58.1 | L1 | Ensure 'Prevent downloading of enclosures' is set to 'Enabled'"
+  when:
+    - w2019cis_rule_18_10_58_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    name: DisableEnclosureDownload
+    data: 1
+    type: dword
+
+- name: "18.10.58.2 | L1 | Ensure 'Turn on Basic feed authentication over HTTP' is set to 'Disabled'"
   when:
     - w2019cis_rule_18_10_58_2_enabled
-    - w2019cis_rule_18_10_58_2_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
-    name: AllowCloudSearch
-    data: 0
-    type: dword
-
-- name: "18.10.58.3 | L1 | Ensure 'Allow indexing of encrypted files' is set to 'Disabled'"
-  when:
-    - w2019cis_rule_18_10_58_3_enabled
-  ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
-    name: AllowIndexingEncryptedStoresOrItems
-    data: 0
-    type: dword
-
-- name: "18.10.58.4 | L2 | Ensure 'Allow search highlights' is set to 'Disabled'"
-  when:
-    - w2019cis_rule_18_10_58_4_enabled
-  ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
-    name: EnableDynamicContentInWSB
+    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    name: AllowBasicAuthInClear
     data: 0
     type: dword

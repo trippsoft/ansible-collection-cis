@@ -4,7 +4,11 @@
     - w2019cis_rule_17_9_1_enabled
   block:
     - name: "17.9.1 | L1 | Ensure 'Audit IPsec Driver' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"IPsec Driver" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9213-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2019cis_rule_17_9_1_audit
@@ -12,19 +16,23 @@
     - name: "17.9.1 | L1 | Ensure 'Audit IPsec Driver' is set to 'Success and Failure' | Success"
       when:
         - "'Success' not in _w2019cis_rule_17_9_1_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"IPsec Driver" /success:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9213-69ae-11d9-bed3-505054503030}" /success:enable
 
     - name: "17.9.1 | L1 | Ensure 'Audit IPsec Driver' is set to 'Success and Failure' | Failure"
       when:
         - "'Failure' not in _w2019cis_rule_17_9_1_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"IPsec Driver" /failure:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9213-69ae-11d9-bed3-505054503030}" /failure:enable
 
 - name: "17.9.2 | L1 | Ensure 'Audit Other System Events' is set to 'Success and Failure'"
   when:
     - w2019cis_rule_17_9_2_enabled
   block:
     - name: "17.9.2 | L1 | Ensure 'Audit Other System Events' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"Other System Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9214-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2019cis_rule_17_9_2_audit
@@ -32,19 +40,23 @@
     - name: "17.9.2 | L1 | Ensure 'Audit Other System Events' is set to 'Success and Failure' | Success"
       when:
         - "'Success' not in _w2019cis_rule_17_9_2_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"Other System Events" /success:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9214-69ae-11d9-bed3-505054503030}" /success:enable
 
     - name: "17.9.2 | L1 | Ensure 'Audit Other System Events' is set to 'Success and Failure' | Failure"
       when:
         - "'Failure' not in _w2019cis_rule_17_9_2_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"Other System Events" /failure:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9214-69ae-11d9-bed3-505054503030}" /failure:enable
 
 - name: "17.9.3 | L1 | Ensure 'Audit Security State Change' is set to include 'Success'"
   when:
     - w2019cis_rule_17_9_3_enabled
   block:
     - name: "17.9.3 | L1 | Ensure 'Audit Security State Change' is set to include 'Success'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"Security State Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9210-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2019cis_rule_17_9_3_audit
@@ -52,14 +64,18 @@
     - name: "17.9.3 | L1 | Ensure 'Audit Security State Change' is set to include 'Success'"
       when:
         - "'Success' not in _w2019cis_rule_17_9_3_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"Security State Change" /success:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9210-69ae-11d9-bed3-505054503030}" /success:enable
 
 - name: "17.9.4 | L1 | Ensure 'Audit Security System Extension' is set to include 'Success'"
   when:
     - w2019cis_rule_17_9_4_enabled
   block:
     - name: "17.9.4 | L1 | Ensure 'Audit Security System Extension' is set to include 'Success'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"Security System Extension" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9211-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2019cis_rule_17_9_4_audit
@@ -67,14 +83,18 @@
     - name: "17.9.4 | L1 | Ensure 'Audit Security System Extension' is set to include 'Success'"
       when:
         - "'Success' not in _w2019cis_rule_17_9_4_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"Security System Extension" /success:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9211-69ae-11d9-bed3-505054503030}" /success:enable
 
 - name: "17.9.5 | L1 | Ensure 'Audit System Integrity' is set to 'Success and Failure'"
   when:
     - w2019cis_rule_17_9_5_enabled
   block:
     - name: "17.9.5 | L1 | Ensure 'Audit System Integrity' is set to 'Success and Failure'"
-      ansible.windows.win_shell: AuditPol /get /subcategory:"System Integrity" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce9212-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
       changed_when: false
       failed_when: false
       register: _w2019cis_rule_17_9_5_audit
@@ -82,9 +102,9 @@
     - name: "17.9.5 | L1 | Ensure 'Audit System Integrity' is set to 'Success and Failure' | Success"
       when:
         - "'Success' not in _w2019cis_rule_17_9_5_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"System Integrity" /success:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9212-69ae-11d9-bed3-505054503030}" /success:enable
 
     - name: "17.9.5 | L1 | Ensure 'Audit System Integrity' is set to 'Success and Failure' | Failure"
       when:
         - "'Failure' not in _w2019cis_rule_17_9_5_audit.stdout"
-      ansible.windows.win_shell: AuditPol /set /subcategory:"System Integrity" /failure:enable
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9212-69ae-11d9-bed3-505054503030}" /failure:enable

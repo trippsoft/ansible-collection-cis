@@ -1,5 +1,8 @@
 ---
-- name: "18.9.19.2 | L1 | Ensure 'Configure registry policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'"
+- name: >-
+    18.9.19.2 | L1 |
+    Ensure 'Configure registry policy processing: Do not apply during periodic background processing'
+    is set to 'Enabled: FALSE'
   when:
     - w2019cis_rule_18_9_19_2_enabled
   ansible.windows.win_regedit:
@@ -8,7 +11,10 @@
     data: 0
     type: dword
 
-- name: "18.9.19.3 | L1 | Ensure 'Configure registry policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'"
+- name: >-
+    18.9.19.3 | L1 |
+    Ensure 'Configure registry policy processing: Process even if the Group Policy objects have not changed'
+    is set to 'Enabled: TRUE'
   when:
     - w2019cis_rule_18_9_19_3_enabled
   ansible.windows.win_regedit:
@@ -17,7 +23,10 @@
     data: 0
     type: dword
 
-- name: "18.9.19.4 | L1 | Ensure 'Configure security policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'"
+- name: >-
+    18.9.19.4 | L1 |
+    Ensure 'Configure security policy processing: Do not apply during periodic background processing'
+    is set to 'Enabled: FALSE'
   when:
     - w2019cis_rule_18_9_19_4_enabled
   ansible.windows.win_regedit:
@@ -26,7 +35,10 @@
     data: 0
     type: dword
 
-- name: "18.9.19.5 | L1 | Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'"
+- name: >-
+    18.9.19.5 | L1 |
+    Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed'
+    is set to 'Enabled: TRUE'
   when:
     - w2019cis_rule_18_9_19_5_enabled
   ansible.windows.win_regedit:

@@ -17,7 +17,8 @@
     data: 1
     type: dword
 
-- name: "2.3.7.3 | L1 | Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'"
+- name: >-
+    2.3.7.3 | L1 | Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'
   when:
     - w2019cis_rule_2_3_7_3_enabled
   ansible.windows.win_regedit:
@@ -44,7 +45,11 @@
     data: "{{ w2019cis_login_message_title }}"
     type: string
 
-- name: "2.3.7.6 | L2 | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s)' | MS only"
+- name: >-
+    2.3.7.6 | L2 |
+    Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)'
+    is set to '4 or fewer logon(s)' |
+    MS only
   when:
     - w2019cis_rule_2_3_7_6_enabled
     - _w2019cis_member_server
@@ -55,7 +60,9 @@
     data: "{{ w2019cis_cached_logons_count }}"
     type: string
 
-- name: "2.3.7.7 | L1 | Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'"
+- name: >-
+    2.3.7.7 | L1 |
+    Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'
   when:
     - w2019cis_rule_2_3_7_7_enabled
   ansible.windows.win_regedit:
@@ -64,7 +71,10 @@
     data: "{{ w2019cis_password_expiry_warning_in_days }}"
     type: dword
 
-- name: "2.3.7.8 | L1 | Ensure 'Interactive logon: Require Domain Controller Authentication to unlock workstation' is set to 'Enabled' | MS only"
+- name: >-
+    2.3.7.8 | L1 |
+    Ensure 'Interactive logon: Require Domain Controller Authentication to unlock workstation' is set to 'Enabled' |
+    MS only
   when:
     - w2019cis_rule_2_3_7_8_enabled
     - _w2019cis_member_server
@@ -74,7 +84,8 @@
     data: 1
     type: dword
 
-- name: "2.3.7.9 | L1 | Ensure 'Interactive logon: Smart card removal behavior' is set to 'Lock Workstation' or higher"
+- name: >-
+    2.3.7.9 | L1 | Ensure 'Interactive logon: Smart card removal behavior' is set to 'Lock Workstation' or higher
   when:
     - w2019cis_rule_2_3_7_9_enabled
   ansible.windows.win_regedit:

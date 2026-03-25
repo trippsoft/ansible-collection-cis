@@ -1,5 +1,8 @@
 ---
-- name: "18.9.47.5.1 | L2 | Ensure 'Microsoft Support Diagnostic Tool: Turn on MSDT interactive communication with support provider' is set to 'Disabled'"
+- name: >-
+    18.9.47.5.1 | L2 |
+    Ensure 'Microsoft Support Diagnostic Tool: Turn on MSDT interactive communication with support provider'
+    is set to 'Disabled'
   when:
     - w2019cis_rule_18_9_47_5_1_enabled
     - w2019cis_rule_18_9_47_5_1_force or _w2019cis_level2

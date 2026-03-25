@@ -21,7 +21,10 @@
     data: 1
     type: dword
 
-- name: "18.7.3 | L1 | Ensure 'Configure RPC connection settings: Protocol to use for outgoing RPC connections' is set to 'Enabled: RPC over TCP'"
+- name: >-
+    18.7.3 | L1 |
+    Ensure 'Configure RPC connection settings: Protocol to use for outgoing RPC connections'
+    is set to 'Enabled: RPC over TCP'
   when:
     - w2019cis_rule_18_7_3_enabled
   ansible.windows.win_regedit:
@@ -30,7 +33,10 @@
     data: 0
     type: dword
 
-- name: "18.7.4 | L1 | Ensure 'Configure RPC connection settings: Use authentication for outgoing RPC connections' is set to 'Enabled: Default'"
+- name: >-
+    18.7.4 | L1 |
+    Ensure 'Configure RPC connection settings: Use authentication for outgoing RPC connections'
+    is set to 'Enabled: Default'
   when:
     - w2019cis_rule_18_7_4_enabled
   ansible.windows.win_regedit:
@@ -39,7 +45,10 @@
     data: 0
     type: dword
 
-- name: "18.7.5 | L1 | Ensure 'Configure RPC listener settings: Protocols to allow for incoming RPC connections' is set to 'Enabled: RPC over TCP'"
+- name: >-
+    18.7.5 | L1 |
+    Ensure 'Configure RPC listener settings: Protocols to allow for incoming RPC connections'
+    is set to 'Enabled: RPC over TCP'
   when:
     - w2019cis_rule_18_7_5_enabled
   ansible.windows.win_regedit:
@@ -48,7 +57,10 @@
     data: 5
     type: dword
 
-- name: "18.7.6 | L1 | Ensure 'Configure RPC listener settings: Authentication protocol to use for incoming RPC connections:' is set to 'Enabled: Negotiate' or higher"
+- name: >-
+    18.7.6 | L1 |
+    Ensure 'Configure RPC listener settings: Authentication protocol to use for incoming RPC connections:'
+    is set to 'Enabled: Negotiate' or higher
   when:
     - w2019cis_rule_18_7_6_enabled
   ansible.windows.win_regedit:
@@ -66,17 +78,16 @@
     data: 0
     type: dword
 
-- name: "18.7.8 | L1 | Ensure 'Limits print driver installation to Administrators' is set to 'Enabled'"
+- name: "18.7.8 | L1 | Ensure 'Configure RPC packet level privacy setting for incoming connections' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_7_8_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
-    name: RestrictDriverInstallationToAdministrators
-    data: 0
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Print
+    name: RpcAuthnLevelPrivacyEnabled
+    data: 1
     type: dword
-    state: present
 
-- name: "18.7.9 | L1 | Ensure 'Manage processing of Queue-specific files' is set to 'Enabled: Limit Queue-specific files to Color profiles'"
+- name: "18.7.9 | L1 | Ensure 'Limits print driver installation to Administrators' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_7_9_enabled
   ansible.windows.win_regedit:
@@ -86,18 +97,36 @@
     type: dword
     state: present
 
-- name: "18.7.10 | L1 | Ensure 'Point and Print Restrictions: When installing drivers for a new connection' is set to 'Enabled: Show warning and elevation prompt'"
+- name: >-
+    18.7.10 | L1 |
+    Ensure 'Manage processing of Queue-specific files' is set to 'Enabled: Limit Queue-specific files to Color profiles'
   when:
     - w2019cis_rule_18_7_10_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+    name: RestrictDriverInstallationToAdministrators
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.7.11 | L1 |
+    Ensure 'Point and Print Restrictions: When installing drivers for a new connection'
+    is set to 'Enabled: Show warning and elevation prompt'
+  when:
+    - w2019cis_rule_18_7_11_enabled
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint
     name: NoWarningNoElevationOnInstall
     data: 0
     type: dword
 
-- name: "18.7.11 | L1 | Ensure 'Point and Print Restrictions: When updating drivers for an existing connection' is set to 'Enabled: Show warning and elevation prompt'"
+- name: >-
+    18.7.12 | L1 |
+    Ensure 'Point and Print Restrictions: When updating drivers for an existing connection'
+    is set to 'Enabled: Show warning and elevation prompt'
   when:
-    - w2019cis_rule_18_7_11_enabled
+    - w2019cis_rule_18_7_12_enabled
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint
     name: UpdatePromptSettings

@@ -1,5 +1,8 @@
 ---
-- name: "18.9.25.1 | L1 | Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'"
+- name: >-
+    18.9.25.1 | L1 |
+    Ensure 'Configure password backup directory'
+    is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'
   when:
     - w2019cis_rule_18_9_25_1_enabled
     - _w2019cis_member_server
@@ -9,7 +12,8 @@
     data: "{{ _w2019cis_laps_directory_value }}"
     type: dword
 
-- name: "18.9.25.2 | L1 | Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'"
+- name: >-
+    18.9.25.2 | L1 | Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'
   when:
     - w2019cis_rule_18_9_25_2_enabled
     - _w2019cis_member_server
@@ -29,7 +33,10 @@
     data: 1
     type: dword
 
-- name: "18.9.25.4 | L1 | Ensure 'Password Settings: Password Complexity' is set to 'Enabled: Large letters + small letters + numbers + special characters'"
+- name: >-
+    18.9.25.4 | L1 |
+    Ensure 'Password Settings: Password Complexity'
+    is set to 'Enabled: Large letters + small letters + numbers + special characters'
   when:
     - w2019cis_rule_18_9_25_4_enabled
     - _w2019cis_member_server
@@ -59,7 +66,9 @@
     data: "{{ w2019cis_laps_password_age_in_days }}"
     type: dword
 
-- name: "18.9.25.7 | L1 | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'"
+- name: >-
+    18.9.25.7 | L1 |
+    Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'
   when:
     - w2019cis_rule_18_9_25_7_enabled
     - _w2019cis_member_server
@@ -69,7 +78,10 @@
     data: "{{ w2019cis_laps_post_authentication_grace_period_in_hours }}"
     type: dword
 
-- name: "18.9.25.8 | L1 | Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher"
+- name: >-
+    18.9.25.8 | L1 |
+    Ensure 'Post-authentication actions: Actions'
+    is set to 'Enabled: Reset the password and logoff the managed account' or higher
   when:
     - w2019cis_rule_18_9_25_8_enabled
     - _w2019cis_member_server

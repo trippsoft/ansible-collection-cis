@@ -1,0 +1,10 @@
+---
+- name: >-
+    18.10.82.1 | L1 | Ensure 'Sign-in and lock last interactive user automatically after a restart' is set to 'Disabled'
+  when:
+    - w2019cis_rule_18_10_82_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    name: DisableAutomaticRestartSignOn
+    data: 1
+    type: dword

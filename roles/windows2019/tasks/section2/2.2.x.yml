@@ -7,7 +7,11 @@
     users: []
     action: set
 
-- name: "2.2.2 | L1 | Ensure 'Access this computer from the network' is set to 'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS' | DC only"
+- name: >-
+    2.2.2 | L1 |
+    Ensure 'Access this computer from the network' is set to
+    'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS' |
+    DC only
   when:
     - w2019cis_rule_2_2_2_enabled
     - _w2019cis_domain_controller
@@ -19,7 +23,9 @@
       - ENTERPRISE DOMAIN CONTROLLERS
     action: set
 
-- name: "2.2.3 | L1 | Ensure 'Access this computer from the network' is set to 'Administrators, Authenticated Users' | MS only"
+- name: >-
+    2.2.3 | L1 |
+    Ensure 'Access this computer from the network' is set to 'Administrators, Authenticated Users' | MS only
   when:
     - w2019cis_rule_2_2_3_enabled
     - _w2019cis_standalone_or_member_server
@@ -44,11 +50,12 @@
     - _w2019cis_domain_controller
   ansible.windows.win_user_right:
     name: SeMachineAccountPrivilege
-    users: 
+    users:
       - Administrators
     action: set
 
-- name: "2.2.6 | L1 | Ensure 'Adjust memory quotas for a process' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'"
+- name: >-
+    2.2.6 | L1 | Ensure 'Adjust memory quotas for a process' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'
   when:
     - w2019cis_rule_2_2_6_enabled
   ansible.windows.win_user_right:
@@ -87,7 +94,9 @@
       - Administrators
     action: set
 
-- name: "2.2.10 | L1 | Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users' | MS only"
+- name: >-
+    2.2.10 | L1 |
+    Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users' | MS only
   when:
     - w2019cis_rule_2_2_10_enabled
     - _w2019cis_standalone_or_member_server
@@ -144,7 +153,8 @@
     users: []
     action: set
 
-- name: "2.2.16 | L1 | Ensure 'Create global objects' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'"
+- name: >-
+    2.2.16 | L1 | Ensure 'Create global objects' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
   when:
     - w2019cis_rule_2_2_16_enabled
   ansible.windows.win_user_right:
@@ -170,12 +180,18 @@
       - Administrators
     action: set
 
-- name: "2.2.19 | L1 | Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' | MS only"
+- name: >-
+    2.2.19 | L1 |
+    Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' | MS only
   when:
     - w2019cis_rule_2_2_19_enabled
     - _w2019cis_standalone_or_member_server
   block:
-    - name: "2.2.19 | L1 | Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' | MS only | No Hyper-v"
+    - name: >-
+        2.2.19 | L1 |
+        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+        MS only |
+        No Hyper-V
       when:
         - not _w2019cis_hyperv
       ansible.windows.win_user_right:
@@ -184,7 +200,11 @@
           - Administrators
         action: set
 
-    - name: "2.2.19 | L1 | Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' | MS only | With Hyper-v"
+    - name: >-
+        2.2.19 | L1 |
+        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+        MS only |
+        With Hyper-V
       when:
         - _w2019cis_hyperv
       ansible.windows.win_user_right:
@@ -212,7 +232,12 @@
       - Guests
     action: set
 
-- name: "2.2.22 | L1 | Ensure 'Deny access to this computer from the network' to include 'Guests, Local account and member of Administrators group' | MS only | Domain MS"
+- name: >-
+    2.2.22 | L1 |
+    Ensure 'Deny access to this computer from the network' to include
+    'Guests, Local account and member of Administrators group' |
+    MS only |
+    Domain MS
   when:
     - w2019cis_rule_2_2_22_enabled
     - _w2019cis_member_server
@@ -223,7 +248,12 @@
       - Local account and member of Administrators group
     action: set
 
-- name: "2.2.22 | L1 | Ensure 'Deny access to this computer from the network' to include 'Guests, Local account and member of Administrators group' | MS only | Standalone"
+- name: >-
+    2.2.22 | L1 |
+    Ensure 'Deny access to this computer from the network' to include
+    'Guests, Local account and member of Administrators group' |
+    MS only |
+    Standalone
   when:
     - w2019cis_rule_2_2_22_enabled
     - _w2019cis_standalone
@@ -270,7 +300,11 @@
       - Guests
     action: set
 
-- name: "2.2.27 | L1 | Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' | MS only | Domain MS"
+- name: >-
+    2.2.27 | L1 |
+    Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' |
+    MS only |
+    Domain MS
   when:
     - w2019cis_rule_2_2_27_enabled
     - _w2019cis_member_server
@@ -281,7 +315,9 @@
       - Local Account
     action: set
 
-- name: "2.2.27 | L1 | Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' | MS only | Standalone"
+- name: >-
+    2.2.27 | L1 |
+    Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' | MS only | Standalone
   when:
     - w2019cis_rule_2_2_27_enabled
     - _w2019cis_standalone
@@ -291,17 +327,20 @@
       - Guests
     action: set
 
-- name: "2.2.28 | L1 | Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'Administrators' | DC only"
+- name: >-
+    2.2.28 | L1 |
+    Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'Administrators' | DC only
   when:
     - w2019cis_rule_2_2_28_enabled
     - _w2019cis_domain_controller
   ansible.windows.win_user_right:
     name: SeEnableDelegationPrivilege
-    users: 
+    users:
       - Administrators
     action: set
 
-- name: "2.2.29 | L1 | Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'No One' | MS only"
+- name: >-
+    2.2.29 | L1 | Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'No One' | MS only
   when:
     - w2019cis_rule_2_2_29_enabled
     - _w2019cis_member_server
@@ -327,7 +366,11 @@
     users: "{{ _w2019cis_generate_security_audits_users | reject('equalto', omit) | list }}"
     action: set
 
-- name: "2.2.32 | L1 | Ensure 'Impersonate a client after authentication' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' | DC only"
+- name: >-
+    2.2.32 | L1 |
+    Ensure 'Impersonate a client after authentication' is set to
+    'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' |
+    DC only
   when:
     - w2019cis_rule_2_2_32_enabled
     - _w2019cis_domain_controller
@@ -340,9 +383,12 @@
       - SERVICE
     action: set
 
-- name: >
-    2.2.33 | L1 | Ensure 'Impersonate a client after authentication' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
-    and (when the Web Server (IIS) Role with Web Services Role Service is installed) 'IIS_IUSRS' | MS only
+- name: >-
+    2.2.33 | L1 |
+    Ensure 'Impersonate a client after authentication' is set to
+    'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' and
+    (when the Web Server (IIS) Role with Web Services Role Service is installed) 'IIS_IUSRS' |
+    MS only
   when:
     - w2019cis_rule_2_2_33_enabled
     - _w2019cis_standalone_or_member_server
@@ -351,7 +397,8 @@
     users: "{{ _w2019cis_impersonate_a_client_after_authentication_users | list }}"
     action: set
 
-- name: "2.2.34 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'"
+- name: >-
+    2.2.34 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'
   when:
     - w2019cis_rule_2_2_34_enabled
   ansible.windows.win_user_right:
@@ -386,7 +433,11 @@
     users: Administrators
     action: set
 
-- name: "2.2.38 | L1 | Ensure 'Manage auditing and security log' is set to 'Administrators' and (when Exchange is running in the environment) 'Exchange Servers' | DC only"
+- name: >-
+    2.2.38 | L1 |
+    Ensure 'Manage auditing and security log' is set to 'Administrators'
+    and (when Exchange is running in the environment) 'Exchange Servers' |
+    DC only
   when:
     - w2019cis_rule_2_2_38_enabled
     - _w2019cis_domain_controller

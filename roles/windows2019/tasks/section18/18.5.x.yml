@@ -9,7 +9,10 @@
     data: 0
     datatype: string
 
-- name: "18.5.2 | L1 | Ensure 'MSS: (DisableIPSourceRouting IPv6) IP source routing protection level' is set to 'Enabled: Highest protection, source routing is completely disabled'"
+- name: >-
+    18.5.2 | L1 |
+    Ensure 'MSS: (DisableIPSourceRouting IPv6) IP source routing protection level'
+    is set to 'Enabled: Highest protection, source routing is completely disabled'
   when:
     - w2019cis_rule_18_5_2_enabled
   ansible.windows.win_regedit:
@@ -19,7 +22,10 @@
     data: 2
     datatype: dword
 
-- name: "18.5.3 | L1 | Ensure 'MSS: (DisableIPSourceRouting) IP source routing protection level' is set to 'Enabled: Highest protection, source routing is completely disabled'"
+- name: >-
+    18.5.3 | L1 |
+    Ensure 'MSS: (DisableIPSourceRouting) IP source routing protection level'
+    is set to 'Enabled: Highest protection, source routing is completely disabled'
   when:
     - w2019cis_rule_18_5_3_enabled
   ansible.windows.win_regedit:
@@ -29,7 +35,9 @@
     data: 2
     datatype: dword
 
-- name: "18.5.4 | L1 | Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'"
+- name: >-
+    18.5.4 | L1 |
+    Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'
   when:
     - w2019cis_rule_18_5_4_enabled
   ansible.windows.win_regedit:
@@ -39,7 +47,10 @@
     data: 0
     datatype: dword
 
-- name: "18.5.5 | L2 | Ensure 'MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds' is set to 'Enabled: 300,000 or 5 minutes'"
+- name: >-
+    18.5.5 | L2 |
+    Ensure 'MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds'
+    is set to 'Enabled: 300,000 or 5 minutes'
   when:
     - w2019cis_rule_18_5_5_enabled
     - w2019cis_rule_18_5_5_force or _w2019cis_level2
@@ -50,7 +61,10 @@
     data: 300000
     datatype: dword
 
-- name: "18.5.6 | L1 | Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set to 'Enabled'"
+- name: >-
+    18.5.6 | L1 |
+    Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers'
+    is set to 'Enabled'
   when:
     - w2019cis_rule_18_5_6_enabled
   ansible.windows.win_regedit:
@@ -60,7 +74,10 @@
     data: 1
     type: dword
 
-- name: "18.5.7 | L2 | Ensure 'MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses' is set to 'Disabled'"
+- name: >-
+    18.5.7 | L2 |
+    Ensure 'MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses'
+    is set to 'Disabled'
   when:
     - w2019cis_rule_18_5_7_enabled
     - w2019cis_rule_18_5_7_force or _w2019cis_level2
@@ -81,7 +98,10 @@
     type: dword
     state: present
 
-- name: "18.5.9 | L1 | Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires' is set to 'Enabled: 5 or fewer seconds'"
+- name: >-
+    18.5.9 | L1 |
+    Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires'
+    is set to 'Enabled: 5 or fewer seconds'
   when:
     - w2019cis_rule_18_5_9_enabled
   ansible.windows.win_regedit:
@@ -91,7 +111,10 @@
     type: string
     state: present
 
-- name: "18.5.10 | L2 | Ensure 'MSS: (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'"
+- name: >-
+    18.5.10 | L2 |
+    Ensure 'MSS: (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted'
+    is set to 'Enabled: 3'
   when:
     - w2019cis_rule_18_5_10_enabled
     - w2019cis_rule_18_5_10_force or _w2019cis_level2
@@ -101,7 +124,9 @@
     data: 3
     type: dword
 
-- name: "18.5.11 | L2 | Ensure 'MSS: (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'"
+- name: >-
+    18.5.11 | L2 |
+    Ensure 'MSS: (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'
   when:
     - w2019cis_rule_18_5_11_enabled
     - w2019cis_rule_18_5_11_force or _w2019cis_level2
@@ -111,7 +136,10 @@
     data: 3
     type: dword
 
-- name: "18.5.12 | L1 | Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning' is set to 'Enabled: 90% or less'"
+- name: >-
+    18.5.12 | L1 |
+    Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning'
+    is set to 'Enabled: 90% or less'
   when:
     - w2019cis_rule_18_5_12_enabled
   ansible.windows.win_regedit:

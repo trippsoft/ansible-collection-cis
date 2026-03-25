@@ -1,5 +1,6 @@
 ---
-- name: "2.3.11.1 | L1 | Ensure 'Network security: Allow Local System to use computer identity for NTLM' is set to 'Enabled'"
+- name: >-
+    2.3.11.1 | L1 | Ensure 'Network security: Allow Local System to use computer identity for NTLM' is set to 'Enabled'
   when:
     - w2019cis_rule_2_3_11_1_enabled
   ansible.windows.win_regedit:
@@ -17,7 +18,10 @@
     data: 0
     type: dword
 
-- name: "2.3.11.3 | L1 | Ensure 'Network Security: Allow PKU2U authentication requests to this computer to use online identities' is set to 'Disabled'"
+- name: >-
+    2.3.11.3 | L1 |
+    Ensure 'Network Security: Allow PKU2U authentication requests to this computer to use online identities' is set to
+    'Disabled'
   when:
     - w2019cis_rule_2_3_11_3_enabled
   ansible.windows.win_regedit:
@@ -26,7 +30,10 @@
     data: 0
     type: dword
 
-- name: "2.3.11.4 | L1 | Ensure 'Network security: Configure encryption types allowed for Kerberos' is set to 'AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types'"
+- name: >-
+    2.3.11.4 | L1 |
+    Ensure 'Network security: Configure encryption types allowed for Kerberos' is set to
+    'AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types'
   when:
     - w2019cis_rule_2_3_11_4_enabled
   ansible.windows.win_regedit:
@@ -35,7 +42,9 @@
     data: 2147483640
     type: dword
 
-- name: "2.3.11.5 | L1 | Ensure 'Network security: Do not store LAN Manager hash value on next password change' is set to 'Enabled'"
+- name: >-
+    2.3.11.5 | L1 |
+    Ensure 'Network security: Do not store LAN Manager hash value on next password change' is set to 'Enabled'
   when:
     - w2019cis_rule_2_3_11_5_enabled
   ansible.windows.win_regedit:
@@ -53,7 +62,9 @@
     data: 1
     type: dword
 
-- name: "2.3.11.7 | L1 | Ensure 'Network security: LAN Manager authentication level' is set to 'Send NTLMv2 response only. Refuse LM & NTLM'"
+- name: >-
+    2.3.11.7 | L1 |
+    Ensure 'Network security: LAN Manager authentication level' is set to 'Send NTLMv2 response only. Refuse LM & NTLM'
   when:
     - w2019cis_rule_2_3_11_7_enabled
   ansible.windows.win_regedit:
@@ -62,7 +73,8 @@
     data: 5
     type: dword
 
-- name: "2.3.11.8 | L1 | Ensure 'Network security: LDAP client signing requirements' is set to 'Negotiate signing' or higher"
+- name: >-
+    2.3.11.8 | L1 | Ensure 'Network security: LDAP client signing requirements' is set to 'Negotiate signing' or higher
   when:
     - w2019cis_rule_2_3_11_8_enabled
   ansible.windows.win_regedit:
@@ -71,7 +83,10 @@
     data: "{{ _w2019cis_ldap_client_signing_requirements_value }}"
     type: dword
 
-- name: "2.3.11.9 | L1 | Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) clients' is set to 'Require NTLMv2 session security, Require 128-bit encryption'"
+- name: >-
+    2.3.11.9 | L1 |
+    Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) clients' is set to
+    'Require NTLMv2 session security, Require 128-bit encryption'
   when:
     - w2019cis_rule_2_3_11_9_enabled
   ansible.windows.win_regedit:
@@ -80,7 +95,10 @@
     data: 537395200
     type: dword
 
-- name: "2.3.11.10 | L1 | Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) servers' is set to 'Require NTLMv2 session security, Require 128-bit encryption'"
+- name: >-
+    2.3.11.10 | L1 |
+    Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) servers' is set to
+    'Require NTLMv2 session security, Require 128-bit encryption'
   when:
     - w2019cis_rule_2_3_11_10_enabled
   ansible.windows.win_regedit:
@@ -89,7 +107,9 @@
     data: 537395200
     type: dword
 
-- name: "2.3.11.11 | L1 | Ensure 'Network security: Restrict NTLM: Audit Incoming NTLM Traffic' is set to 'Enable auditing for all accounts'"
+- name: >-
+    2.3.11.11 | L1 |
+    Ensure 'Network security: Restrict NTLM: Audit Incoming NTLM Traffic' is set to 'Enable auditing for all accounts'
   when:
     - w2019cis_rule_2_3_11_11_enabled
   ansible.windows.win_regedit:
@@ -98,7 +118,10 @@
     data: 2
     type: dword
 
-- name: "2.3.11.12 | L1 | Ensure 'Network security: Restrict NTLM: Audit NTLM authentication in this domain' is set to 'Enable all' | DC only"
+- name: >-
+    2.3.11.12 | L1 |
+    Ensure 'Network security: Restrict NTLM: Audit NTLM authentication in this domain' is set to 'Enable all' |
+    DC only
   when:
     - w2019cis_rule_2_3_11_12_enabled
     - _w2019cis_domain_controller
@@ -108,7 +131,9 @@
     data: 7
     type: dword
 
-- name: "2.3.11.13 | L1 | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher"
+- name: >-
+    2.3.11.13 | L1 |
+    Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher
   when:
     - w2019cis_rule_2_3_11_13_enabled
   ansible.windows.win_regedit:

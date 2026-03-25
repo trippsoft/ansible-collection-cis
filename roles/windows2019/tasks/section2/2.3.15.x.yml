@@ -1,5 +1,6 @@
 ---
-- name: "2.3.15.1 | L1 | Ensure 'System objects: Require case insensitivity for non-Windows subsystems' is set to 'Enabled'"
+- name: >-
+    2.3.15.1 | L1 | Ensure 'System objects: Require case insensitivity for non-Windows subsystems' is set to 'Enabled'
   when:
     - w2019cis_rule_2_3_15_1_enabled
   ansible.windows.win_regedit:
@@ -8,7 +9,10 @@
     data: 1
     type: dword
 
-- name: "2.3.15.2 | L1 | Ensure 'System objects: Strengthen default permissions of internal system objects (e.g. Symbolic Links)' is set to 'Enabled'"
+- name: >-
+    2.3.15.2 | L1 |
+    Ensure 'System objects: Strengthen default permissions of internal system objects (e.g. Symbolic Links)' is set to
+    'Enabled'
   when:
     - w2019cis_rule_2_3_15_2_enabled
   ansible.windows.win_regedit:

@@ -1,5 +1,6 @@
 ---
-- name: "18.9.33.6.1 | L2 | Ensure 'Allow network connectivity during connected-standby (on battery)' is set to 'Disabled'"
+- name: >-
+    18.9.33.6.1 | L2 | Ensure 'Allow network connectivity during connected-standby (on battery)' is set to 'Disabled'
   when:
     - w2019cis_rule_18_9_33_6_1_enabled
     - w2019cis_rule_18_9_33_6_1_force or _w2019cis_level2
@@ -9,7 +10,8 @@
     data: 0
     type: dword
 
-- name: "18.9.33.6.2 | L2 | Ensure 'Allow network connectivity during connected-standby (plugged in)' is set to 'Disabled'"
+- name: >-
+    18.9.33.6.2 | L2 | Ensure 'Allow network connectivity during connected-standby (plugged in)' is set to 'Disabled'
   when:
     - w2019cis_rule_18_9_33_6_2_enabled
     - w2019cis_rule_18_9_33_6_2_force or _w2019cis_level2

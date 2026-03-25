@@ -44,7 +44,10 @@
     data: 0
     type: dword
 
-- name: "9.3.6 | L1 | Ensure 'Windows Firewall: Public: Logging: Name' is set to '%SystemRoot%\\System32\\logfiles\\firewall\\publicfw.log'"
+- name: >-
+    9.3.6 | L1 |
+    Ensure 'Windows Firewall: Public: Logging: Name'
+    is set to '%SystemRoot%\\System32\\logfiles\\firewall\\publicfw.log'
   when:
     - w2019cis_rule_9_3_6_enabled
   ansible.windows.win_regedit:
