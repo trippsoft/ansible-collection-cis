@@ -251,7 +251,7 @@
       when:
         - not rhel9cis_afs_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | afs | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/afs.conf
             regexp: "^(#)?install afs"
@@ -261,7 +261,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | afs | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/afs.conf
             regexp: "^(#)?blacklist afs(\\s|$)"
@@ -271,7 +271,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | afs | Disable module
           community.general.modprobe:
             name: afs
             state: absent
@@ -280,7 +280,7 @@
       when:
         - not rhel9cis_ceph_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ceph | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/ceph.conf
             regexp: "^(#)?install ceph"
@@ -290,7 +290,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ceph | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/ceph.conf
             regexp: "^(#)?blacklist ceph(\\s|$)"
@@ -300,7 +300,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ceph | Disable module
           community.general.modprobe:
             name: ceph
             state: absent
@@ -309,7 +309,7 @@
       when:
         - not rhel9cis_cifs_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | cifs | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/cifs.conf
             regexp: "^(#)?install cifs"
@@ -319,7 +319,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | cifs | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/cifs.conf
             regexp: "^(#)?blacklist cifs(\\s|$)"
@@ -329,7 +329,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | cifs | Disable module
           community.general.modprobe:
             name: cifs
             state: absent
@@ -338,7 +338,7 @@
       when:
         - not rhel9cis_exfat_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | exfat | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/exfat.conf
             regexp: "^(#)?install exfat"
@@ -348,7 +348,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | exfat | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/exfat.conf
             regexp: "^(#)?blacklist exfat(\\s|$)"
@@ -358,7 +358,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | exfat | Disable module
           community.general.modprobe:
             name: exfat
             state: absent
@@ -367,7 +367,7 @@
       when:
         - not rhel9cis_ext_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ext | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/ext.conf
             regexp: "^(#)?install ext"
@@ -377,7 +377,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ext | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/ext.conf
             regexp: "^(#)?blacklist ext(\\s|$)"
@@ -387,7 +387,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | ext | Disable module
           community.general.modprobe:
             name: ext
             state: absent
@@ -396,7 +396,7 @@
       when:
         - not rhel9cis_fat_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fat | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fat.conf
             regexp: "^(#)?install fat"
@@ -406,7 +406,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fat | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fat.conf
             regexp: "^(#)?blacklist fat(\\s|$)"
@@ -416,7 +416,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fat | Disable module
           community.general.modprobe:
             name: fat
             state: absent
@@ -425,7 +425,8 @@
       when:
         - not rhel9cis_fscache_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: >-
+            1.1.1.9 | Ensure unused filesystems kernel modules are not available | fscache | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fscache.conf
             regexp: "^(#)?install fscache"
@@ -435,7 +436,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fscache | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fscache.conf
             regexp: "^(#)?blacklist fscache(\\s|$)"
@@ -445,7 +446,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fscache | Disable module
           community.general.modprobe:
             name: fscache
             state: absent
@@ -454,7 +455,7 @@
       when:
         - not rhel9cis_fuse_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fuse | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fuse.conf
             regexp: "^(#)?install fuse"
@@ -464,7 +465,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fuse | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fuse.conf
             regexp: "^(#)?blacklist fuse(\\s|$)"
@@ -474,7 +475,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | fuse | Disable module
           community.general.modprobe:
             name: fuse
             state: absent
@@ -483,7 +484,7 @@
       when:
         - not rhel9cis_gfs2_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | gfs2 | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/gfs2.conf
             regexp: "^(#)?install gfs2"
@@ -493,7 +494,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | gfs2 | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/gfs2.conf
             regexp: "^(#)?blacklist gfs2(\\s|$)"
@@ -503,7 +504,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | gfs2 | Disable module
           community.general.modprobe:
             name: gfs2
             state: absent
@@ -512,7 +513,8 @@
       when:
         - not rhel9cis_nfs_common_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: >-
+            1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfs_common | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/nfs_common.conf
             regexp: "^(#)?install nfs_common"
@@ -522,7 +524,8 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: >-
+            1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfs_common | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/nfs_common.conf
             regexp: "^(#)?blacklist nfs_common(\\s|$)"
@@ -532,7 +535,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfs_common | Disable module
           community.general.modprobe:
             name: nfs_common
             state: absent
@@ -541,7 +544,7 @@
       when:
         - not rhel9cis_nfsd_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfsd | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/nfsd.conf
             regexp: "^(#)?install nfsd"
@@ -551,7 +554,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfsd | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/nfsd.conf
             regexp: "^(#)?blacklist nfsd(\\s|$)"
@@ -561,7 +564,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | nfsd | Disable module
           community.general.modprobe:
             name: nfsd
             state: absent
@@ -570,7 +573,9 @@
       when:
         - not rhel9cis_smbfs_common_needed
       block:
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Prevent modprode install
+        - name: >-
+            1.1.1.9 |
+            Ensure unused filesystems kernel modules are not available | smbfs_common | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/smbfs_common.conf
             regexp: "^(#)?install smbfs_common"
@@ -580,7 +585,8 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Add modprobe blacklist
+        - name: >-
+            1.1.1.9 | Ensure unused filesystems kernel modules are not available | smbfs_common | Add modprobe blacklist
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/smbfs_common.conf
             regexp: "^(#)?blacklist smbfs_common(\\s|$)"
@@ -590,7 +596,7 @@
             group: root
             mode: '0600'
 
-        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | Disable module
+        - name: 1.1.1.9 | Ensure unused filesystems kernel modules are not available | smbfs_common | Disable module
           community.general.modprobe:
             name: smbfs_common
             state: absent
