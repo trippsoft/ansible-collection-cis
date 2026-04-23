@@ -73,10 +73,10 @@
 
     - name: 1.4.2 | Ensure permissions on bootloader config are configured | Set permissions
       loop: "{{ _rhel9cis_bootloader_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
         group: root
         mode: "{{ _rhel9cis_bootloader_file_permissions }}"
-      loop_control:
-        label: "{{ item.path }}"

@@ -50,12 +50,12 @@
 
     - name: 5.2.4 | Ensure users must provide password for escalation | /etc/sudoers.d/*
       loop: "{{ _rhel9cis_sudoers_d_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.replace:
         path: "{{ item.path }}"
         regexp: '^([^#|].*)NOPASSWD(.*)'
         replace: '\1PASSWD\2'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 5.2.5 | Ensure re-authentication for privilege escalation is not disabled globally
   when:
@@ -70,12 +70,12 @@
 
     - name: 5.2.5 | Ensure re-authentication for privilege escalation is not disabled globally | /etc/sudoers.d/*
       loop: "{{ _rhel9cis_sudoers_d_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.replace:
         path: "{{ item.path }}"
         regexp: '^([^#].*)!authenticate(.*)'
         replace: '\1authenticate\2'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 5.2.6 | Ensure sudo authentication timeout is configured correctly
   when:

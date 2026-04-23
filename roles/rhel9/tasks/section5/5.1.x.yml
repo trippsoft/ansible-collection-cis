@@ -20,13 +20,13 @@
 
     - name: 5.1.1 | Ensure permissions on /etc/ssh/sshd_config are configured | /etc/ssh/sshd_config.d/*
       loop: "{{ _rhel9cis_sshd_config_d_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
         group: root
         mode: '0600'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 5.1.2 | Ensure permissions on SSH private host key files are configured
   when:
@@ -45,13 +45,13 @@
 
     - name: 5.1.2 | Ensure permissions on SSH private host key files are configured | /etc/ssh/ssh_host_*_key
       loop: "{{ _rhel9cis_ssh_host_private_keys.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
         group: ssh_keys
         mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 5.1.3 | Ensure permissions on SSH public host key files are configured
   when:
@@ -70,13 +70,13 @@
 
     - name: 5.1.3 | Ensure permissions on SSH public host key files are configured | /etc/ssh/ssh_host_*_key.pub
       loop: "{{ _rhel9cis_ssh_host_public_keys.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
         group: root
         mode: 'u=rw,g-wx,o-wx'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 5.1.4 | Ensure sshd Ciphers are configured
   when:

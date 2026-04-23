@@ -198,6 +198,8 @@
 
 - name: 5.4.2.7 | Ensure system accounts do not have a valid login shell
   loop: "{{ _rhel9cis_passwd }}"
+  loop_control:
+    label: "{{ item.id }}"
   when:
     - rhel9cis_rule_5_4_2_7_enabled
     - item.id != "halt"
@@ -213,11 +215,11 @@
   ansible.builtin.user:
     name: "{{ item.id }}"
     shell: /usr/sbin/nologin
-  loop_control:
-    label: "{{ item.id }}"
 
 - name: 5.4.2.8 | Ensure accounts without a valid login shell are locked
   loop: "{{ _rhel9cis_passwd }}"
+  loop_control:
+    label: "{{ item.id }}"
   when:
     - rhel9cis_rule_5_4_2_8_enabled
     - item.id != "halt"
@@ -235,8 +237,6 @@
     name: "{{ item.id }}"
     password: "*"
     password_lock: true
-  loop_control:
-    label: "{{ item.id }}"
 
 - name: 5.4.3.1 | Ensure nologin is not listed in /etc/shells
   when:

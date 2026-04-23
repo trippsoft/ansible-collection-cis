@@ -118,12 +118,12 @@
 
 - name: 6.3.2.3 | Ensure system is disabled when audit logs are full
   loop:
-    - name: disk_full_action
-      regexp: '^#?\s?disk_full_action\s?='
+    - regexp: '^#?\s?disk_full_action\s?='
       line: "disk_full_action = {{ rhel9cis_auditd_disk_full_action }}"
-    - name: disk_error_action
-      regexp: '^#?\s?disk_error_action\s?='
+    - regexp: '^#?\s?disk_error_action\s?='
       line: "disk_error_action = {{ rhel9cis_auditd_disk_error_action }}"
+  loop_control:
+    label: "{{ item.line }}"
   when:
     - rhel9cis_rule_6_3_2_3_enabled
     - rhel9cis_rule_6_3_2_3_force or _rhel9cis_level2
@@ -134,8 +134,6 @@
     line: "{{ item.line }}"
   notify:
     - _rhel9cis_reboot
-  loop_control:
-    label: "{{ item.name }}"
 
 - name: 6.3.3.6 | Ensure use of privileged commands are collected # noqa risky-shell-pipe
   when:
@@ -256,11 +254,11 @@
 
     - name: 6.3.4.2 | Ensure audit log files are mode 0640 or less permissive | Set permission
       loop: "{{ _rhel9cis_audit_log_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
       tags:
         - always
         - molecule-idempotence-notest
@@ -281,11 +279,11 @@
 
     - name: 6.3.4.3 | Ensure only authorized users own audit log files | Set permission
       loop: "{{ _rhel9cis_audit_log_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 6.3.4.4 | Ensure only authorized groups are assigned ownership of audit log files
   when:
@@ -304,11 +302,11 @@
 
     - name: 6.3.4.4 | Ensure only authorized groups are assigned ownership of audit log files | Set permission
       loop: "{{ _rhel9cis_audit_log_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         group: root
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 6.3.4.5 | Ensure audit configuration files are 640 or more restrictive
   when:
@@ -326,13 +324,13 @@
 
     - name: 6.3.4.5 | Ensure audit configuration files are 640 or more restrictive | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       when:
         - item.path != '/etc/audit/rules.d/99-audit.rules'
       ansible.builtin.file:
         path: "{{ item.path }}"
         mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 6.3.4.6 | Ensure audit configuration files are owned by root
   when:
@@ -350,11 +348,11 @@
 
     - name: 6.3.4.6 | Ensure audit configuration files are owned by root | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 6.3.4.7 | Ensure audit configuration files belong to group root
   when:
@@ -372,11 +370,11 @@
 
     - name: 6.3.4.7 | Ensure audit configuration files belong to group root | Set permissions
       loop: "{{ _rhel9cis_audit_conf_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.file:
         path: "{{ item.path }}"
         group: 'root'
-      loop_control:
-        label: "{{ item.path }}"
 
 - name: 6.3.4.8 | Ensure audit tools are 755 or more restrictive
   loop:

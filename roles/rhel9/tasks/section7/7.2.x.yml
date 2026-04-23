@@ -154,6 +154,8 @@
   block:
     - name: 7.2.8 | Ensure local interactive user home directories are configured | Check if home directories exist
       loop: "{{ _rhel9cis_passwd }}"
+      loop_control:
+        loop_var: user
       when:
         - user.uid >= 1000
         - user.uid <= 60000
@@ -166,19 +168,17 @@
         owner: "{{ user.id }}"
         group: "{{ user.id }}"
         mode: 'u=rwx,g-w,o-rwx'
-      loop_control:
-        loop_var: user
 
     - name: 7.2.8 | Ensure local interactive user home directories are configured | Add warning
       loop: "{{ _rhel9cis_passwd }}"
+      loop_control:
+        loop_var: user
       when:
         - user.uid >= 1000
         - user.uid <= 60000
         - user.dir is not defined or user.dir == ''
       ansible.builtin.set_fact:
         _rhel9cis_no_home_users: "{{ _rhel9cis_no_home_users | default([]) + [user.id] }}"
-      loop_control:
-        loop_var: user
 
     - name: 7.2.8 | Ensure local interactive user home directories are configured | Add warning
       when:
@@ -195,6 +195,8 @@
 
 - name: 7.2.9 | Ensure local interactive user dot files access is configured
   loop: "{{ _rhel9cis_passwd }}"
+  loop_control:
+    loop_var: user
   when:
     - rhel9cis_rule_7_2_9_enabled
     - user.uid >= 1000
@@ -202,5 +204,3 @@
     - user.dir is defined
     - user.dir != ''
   ansible.builtin.include_tasks: section7/manage-dotfiles.yml
-  loop_control:
-    loop_var: user

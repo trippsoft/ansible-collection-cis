@@ -13,11 +13,11 @@
 
 - name: 7.2.9 | Ensure local interactive user dot files access is configured | Set permissions on dot files
   loop: "{{ _rhel9cis_user_dot_files.files }}"
+  loop_control:
+    label: "{{ item.path }}"
   become: true
   ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ user.id }}"
     group: "{{ user.id }}"
     mode: 'g-w,o-w'
-  loop_control:
-    label: "{{ item.path }}"

@@ -289,13 +289,13 @@
 
     - name: 6.2.3.8 | Ensure rsyslog logrotate is configured | /etc/logrotate.d/*
       loop: "{{ _rhel9cis_logrotate_d.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       become: true
       ansible.builtin.replace:
         path: "{{ item.path }}"
         regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
         replace: "\\1{{ rhel9cis_logrotate_frequency }}"
-      loop_control:
-        label: "{{ item.path }}"
 
     - name: 6.2.3.8 | Ensure rsyslog logrotate is configured | Add warning
       ansible.builtin.include_tasks: ../add-warning.yml
@@ -318,6 +318,8 @@
 
     - name: 6.2.4.1 | Ensure all logfiles have appropriate access configured | Set permissions
       loop: "{{ _rhel9cis_log_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       when:
         - item.path != '/var/log/btmp'
         - item.path != '/var/log/utmp'
@@ -328,8 +330,6 @@
       ansible.builtin.file:
         path: "{{ item.path }}"
         mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
       tags:
         - always
         - molecule-idempotence-notest
