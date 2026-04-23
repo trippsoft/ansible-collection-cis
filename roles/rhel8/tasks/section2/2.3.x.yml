@@ -1,46 +1,32 @@
 ---
-- name: 2.3.1 | Ensure ftp client is not installed
+- name: 2.3.1 | Ensure time synchronization is in use
   when:
     - rhel8cis_rule_2_3_1_enabled
   become: true
   ansible.builtin.dnf:
-    name:
-      - ftp
-    state: absent
+    name: chrony
+    state: present
 
-- name: 2.3.2 | Ensure ldap client is not installed
+- name: 2.3.2 | Ensure chrony is configured
   when:
     - rhel8cis_rule_2_3_2_enabled
-    - rhel8cis_rule_2_3_2_force or _rhel8cis_level2
   become: true
-  ansible.builtin.dnf:
-    name:
-      - openldap-clients
-    state: absent
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - _rhel8cis_restart_chronyd
 
-- name: 2.3.3 | Ensure nis client is not installed
+- name: 2.3.3 | Ensure chrony is not run as the root user
   when:
     - rhel8cis_rule_2_3_3_enabled
   become: true
-  ansible.builtin.dnf:
-    name:
-      - ypbind
-    state: absent
-
-- name: 2.3.4 | Ensure telnet client is not installed
-  when:
-    - rhel8cis_rule_2_3_4_enabled
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - telnet
-    state: absent
-
-- name: 2.3.5 | Ensure tftp client is not installed
-  when:
-    - rhel8cis_rule_2_3_5_enabled
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - tftp
-    state: absent
+  ansible.builtin.lineinfile:
+    path: /etc/sysconfig/chronyd
+    regexp: '^OPTIONS='
+    line: 'OPTIONS="-u chrony"'
+  notify:
+    - _rhel8cis_restart_chronyd

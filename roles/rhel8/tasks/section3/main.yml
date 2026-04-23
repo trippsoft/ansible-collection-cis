@@ -7,6 +7,3 @@
 
 - name: Execute the 3.3.x tasks
   ansible.builtin.import_tasks: section3/3.3.x.yml
-
-- name: Execute the 3.4.x tasks
-  ansible.builtin.import_tasks: section3/3.4.x.yml

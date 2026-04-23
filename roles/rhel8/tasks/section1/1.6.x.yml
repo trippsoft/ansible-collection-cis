@@ -1,10 +1,13 @@
 ---
-- name: 1.6.x | Get system wide crypto policy
+- name: 1.6.x | Configure system wide crypto policy | Get system wide crypto policy
   when:
     - rhel8cis_rule_1_6_1_enabled or
       rhel8cis_rule_1_6_2_enabled or
       rhel8cis_rule_1_6_3_enabled or
-      rhel8cis_rule_1_6_4_enabled
+      rhel8cis_rule_1_6_4_enabled or
+      rhel8cis_rule_1_6_5_enabled or
+      rhel8cis_rule_1_6_6_enabled
+  check_mode: false
   become: true
   ansible.builtin.command: update-crypto-policies --show
   changed_when: false
@@ -24,9 +27,20 @@
     group: root
     mode: '0644'
 
-- name: 1.6.3 | Ensure system wide crypto policy disables cbc for ssh
+- name: 1.6.3 | Ensure system wide crypto policy macs are configured
   when:
     - rhel8cis_rule_1_6_3_enabled
+  become: true
+  ansible.builtin.copy:
+    content: mac = -*-128*
+    dest: /etc/crypto-policies/policies/modules/NO-WEAKMAC.pmod
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: 1.6.4 | Ensure system wide crypto policy disables cbc for ssh
+  when:
+    - rhel8cis_rule_1_6_4_enabled
   become: true
   ansible.builtin.copy:
     content: cipher@SSH = -*-CBC
@@ -35,13 +49,24 @@
     group: root
     mode: '0644'
 
-- name: 1.6.4 | Ensure system wide crypto policy disables macs less than 128 bits
+- name: 1.6.5 | Ensure system wide crypto policy disables chacha20-poly1305 for ssh
   when:
-    - rhel8cis_rule_1_6_4_enabled
+    - rhel8cis_rule_1_6_5_enabled
   become: true
   ansible.builtin.copy:
-    content: mac = -*-64*
-    dest: /etc/crypto-policies/policies/modules/NO-WEAKMAC.pmod
+    content: cipher@SSH = -CHACHA20-POLY1305
+    dest: /etc/crypto-policies/policies/modules/NO-CHACHA20.pmod
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: 1.6.6 | Ensure system wide crypto policy disables EtM for ssh
+  when:
+    - rhel8cis_rule_1_6_6_enabled
+  become: true
+  ansible.builtin.copy:
+    content: ssh_etm = 0
+    dest: /etc/crypto-policies/policies/modules/NO-SSHETM.pmod
     owner: root
     group: root
     mode: '0644'
@@ -49,13 +74,17 @@
 - name: |
     1.6.1 | Ensure system wide crypto policy is not set to legacy
     1.6.2 | Ensure system wide crypto policy disables sha1 hash and signature support
-    1.6.3 | Ensure system wide crypto policy disables cbc for ssh
-    1.6.4 | Ensure system wide crypto policy disables macs less than 128 bits
+    1.6.3 | Ensure system wide crypto policy macs are configured
+    1.6.4 | Ensure system wide crypto policy disables cbc for ssh
+    1.6.5 | Ensure system wide crypto policy disables chacha20-poly1305 for ssh
+    1.6.6 | Ensure system wide crypto policy disables EtM for ssh
   when:
     - rhel8cis_rule_1_6_1_enabled or
       rhel8cis_rule_1_6_2_enabled or
       rhel8cis_rule_1_6_3_enabled or
-      rhel8cis_rule_1_6_4_enabled
+      rhel8cis_rule_1_6_4_enabled or
+      rhel8cis_rule_1_6_5_enabled or
+      rhel8cis_rule_1_6_6_enabled
     - _rhel8cis_expected_crypto_policy != _rhel8cis_crypto_policy.stdout
   become: true
   ansible.builtin.command: "update-crypto-policies --set {{ _rhel8cis_expected_crypto_policy }}"

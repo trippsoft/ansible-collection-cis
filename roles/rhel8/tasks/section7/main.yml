@@ -1,0 +1,6 @@
+---
+- name: Execute the 7.1.x tasks
+  ansible.builtin.import_tasks: section7/7.1.x.yml
+
+- name: Execute the 7.2.x tasks
+  ansible.builtin.import_tasks: section7/7.2.x.yml

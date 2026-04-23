@@ -1,82 +1,77 @@
 ---
-- name: 1.3.x | Determine if system is EFI booted
+- name: 1.3.1.1 | Ensure SELinux is installed
+  when:
+    - rhel8cis_rule_1_3_1_1_enabled
   become: true
-  ansible.builtin.stat:
-    path: /sys/firmware/efi
-  register: _rhel8cis_efi
+  ansible.builtin.dnf:
+    name:
+      - libselinux
+    state: present
 
-- name: 1.3.x | Set facts (EFI)
+- name: 1.3.1.2 | Ensure SELinux is not disabled in bootloader configuration
   when:
-    - _rhel8cis_efi.stat.exists
-  ansible.builtin.set_fact:
-    _rhel8cis_grub_config_path: /etc/grub2-efi.cfg
-    _rhel8cis_bootloader_base_path: /boot/efi/EFI
-    _rhel8cis_bootloader_file_permissions: '0700'
-  
-- name: 1.3.x | Set facts (BIOS)
-  when:
-    - not _rhel8cis_efi.stat.exists
-  ansible.builtin.set_fact:
-    _rhel8cis_grub_config_path: /etc/grub2.cfg
-    _rhel8cis_bootloader_base_path: /boot/grub2
-    _rhel8cis_bootloader_file_permissions: '0600'
+    - rhel8cis_rule_1_3_1_2_enabled
+  become: true
+  ansible.builtin.replace:
+    path: /etc/default/grub
+    regexp: '(selinux|enforcing)\s*=\s*0\s*'
+    replace: ''
+  notify:
+    - _rhel8cis_grub2-mkconfig
 
-- name: 1.3.1 | Ensure bootloader password is set
+- name: |
+    1.3.1.3 | Ensure SELinux policy is configured
+    1.3.1.4 | Ensure the SELinux mode is not disabled
+    1.3.1.5 | Ensure the SELinux state is enforcing
   when:
-    - rhel8cis_rule_1_3_1_enabled
+    - rhel8cis_rule_1_3_1_3_enabled or
+      rhel8cis_rule_1_3_1_4_enabled or
+      (rhel8cis_rule_1_3_1_5_enabled and
+      (rhel8cis_rule_1_3_1_5_force or _rhel8cis_level2))
+  become: true
+  ansible.posix.selinux:
+    conf: /etc/selinux/config
+    policy: "{{ rhel8cis_selinux_policy }}"
+    state: "{{ rhel8cis_selinux_mode }}"
+
+- name: 1.3.1.6 | Ensure no unconfined services exist
+  when:
+    - rhel8cis_rule_1_3_1_6_enabled
+    - rhel8cis_rule_1_3_1_6_force or _rhel8cis_level2
   block:
-    - name: 1.3.1 | Ensure bootloader password is set | Check current password
+    - name: 1.3.1.6 | Ensure no unconfined services exist | Get list of unconfined services # noqa risky-shell-pipe
       become: true
-      ansible.builtin.find:
-        paths: 
-          - /boot
-        file_type: file
-        recurse: true
-        patterns:
-          - user.cfg
-      register: _rhel8cis_bootloader_password_files
+      ansible.builtin.shell: |
+        ps -eZ | grep unconfined_service_t | egrep -vw "tr|ps|egrep|bash|awk" | tr ':' ' ' | awk '{ print $NF }'
+      changed_when: false
+      register: _rhel8cis_unconfined_services
 
-    - name: 1.3.1 | Ensure bootloader password is set | Set password
+    - name: 1.3.1.6 | Ensure no unconfined services exist | Generate warning
       when:
-        - rhel8cis_force_reset_bootloader_password or
-          _rhel8cis_bootloader_password_files.files | length == 0
-      block:
-        - name: 1.3.1 | Ensure bootloader password is set | Install pexpect package
-          become: true
-          ansible.builtin.dnf:
-            name:
-              - python3-pexpect
-            state: present
+        - _rhel8cis_unconfined_services.stdout | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '1.3.1.6'
+        _rhel8cis_warning_description:
+          - 'The following unconfined services are running:'
+          - ''
+          - "{{ _rhel8cis_unconfined_services.stdout_lines }}"
 
-        - name: 1.3.1 | Ensure bootloader password is set | Set password
-          become: true
-          ansible.builtin.expect:
-            command: grub2-setpassword
-            responses:
-              Enter password: "{{ rhel8cis_bootloader_password }}"
-              Confirm password: "{{ rhel8cis_bootloader_password }}"
-          notify:
-            - _rhel8cis_grub2-mkconfig
-
-- name: 1.3.2 | Ensure permissions on bootloader config are configured
+- name: 1.3.1.7 | Ensure the MCS Translation Service (mcstrans) is not installed
   when:
-    - rhel8cis_rule_1_3_2_enabled
+    - rhel8cis_rule_1_3_1_7_enabled
   become: true
-  block:
-    - name: 1.3.2 | Ensure permissions on bootloader config are configured | Get list of files and directories
-      ansible.builtin.find:
-        paths:
-          - "{{ _rhel8cis_bootloader_base_path }}"
-        file_type: any
-        recurse: true
-      register: _rhel8cis_bootloader_files
+  ansible.builtin.dnf:
+    name:
+      - mcstrans
+    state: absent
 
-    - name: 1.3.2 | Ensure permissions on bootloader config are configured | Set permissions
-      loop: "{{ _rhel8cis_bootloader_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        owner: root
-        group: root
-        mode: "{{ _rhel8cis_bootloader_file_permissions }}"
-      loop_control:
-        label: "{{ item.path }}"
+- name: 1.3.1.8 | Ensure SETroubleshoot is not installed
+  when:
+    - rhel8cis_rule_1_3_1_8_enabled
+    - _rhel8cis_server
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - setroubleshoot
+    state: absent

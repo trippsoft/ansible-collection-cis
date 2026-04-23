@@ -1,6 +1,6 @@
 ---
 - name: |
-    1.1.2.2.1 | Ensure /dev/shm is a separate partition
+    1.1.2.2.1 | Ensure /dev/shm is tmpfs
     1.1.2.2.2 | Ensure nodev option set on /dev/shm partition
     1.1.2.2.3 | Ensure nosuid option set on /dev/shm partition
     1.1.2.2.4 | Ensure noexec option set on /dev/shm partition

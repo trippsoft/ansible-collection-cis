@@ -1,271 +1,381 @@
 ---
-- name: 5.1.1.1 | Ensure rsyslog is installed
+- name: 5.1.1 | Ensure sshd crypto_policy is not set
   when:
-    - rhel8cis_rule_5_1_1_1_enabled
-    - rhel8cis_syslog == 'rsyslog'
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - rsyslog
-    state: present
-
-- name: 5.1.1.2 | Ensure rsyslog service is enabled
-  when:
-    - rhel8cis_rule_5_1_1_2_enabled
-    - rhel8cis_syslog == 'rsyslog'
-  become: true
-  ansible.builtin.systemd_service:
-    name: rsyslog.service
-    enabled: true
-
-- name: 5.1.1.3 | Ensure journald is configured to send logs to rsyslog
-  when:
-    - rhel8cis_rule_5_1_1_3_enabled
-    - rhel8cis_syslog == 'rsyslog'
+    - rhel8cis_rule_5_1_1_enabled
   become: true
   ansible.builtin.lineinfile:
-    path: /etc/systemd/journald.conf
-    regexp: '^#?\s?ForwardToSyslog='
-    line: 'ForwardToSyslog=yes'
-    state: present
+    path: /etc/sysconfig/sshd
+    regexp: '^#?\s*CRYPTO_POLICY'
+    state: absent
   notify:
-    - _rhel8cis_restart_systemd-journald
+    - _rhel8cis_restart_sshd
 
-- name: 5.1.1.4 | Ensure rsyslog default file permissions are configured
+- name: 5.1.2 | Ensure permissions on /etc/ssh/sshd_config are configured
   when:
-    - rhel8cis_rule_5_1_1_4_enabled
-    - rhel8cis_syslog == 'rsyslog'
+    - rhel8cis_rule_5_1_2_enabled
   become: true
-  ansible.builtin.lineinfile:
-    path: /etc/rsyslog.conf
-    regexp: '^#?\s?\$FileCreateMode'
-    line: '$FileCreateMode 0640'
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - _rhel8cis_restart_rsyslog
-
-- name: 5.1.1.5 | Ensure logging is configured
-  when:
-    - rhel8cis_rule_5_1_1_5_enabled
-  ansible.builtin.include_tasks: ../add-warning.yml
-  vars:
-    _rhel8cis_warning_rule: '5.1.1.5'
-    _rhel8cis_warning_description: This cannot be automated.  Please ensure the logging is configured as required.
-
-- name: 5.1.1.6 | Ensure rsyslog is configured to send logs to a remote log host
-  when:
-    - rhel8cis_rule_5_1_1_6_enabled
-    - rhel8cis_syslog == 'rsyslog'
-  become: true
-  ansible.builtin.blockinfile:
-    path: /etc/rsyslog.conf
-    state: present
-    block: |
-      *.* @@{{ rhel8cis_remote_log_server }}
-    insertafter: EOF
-  notify:
-    - _rhel8cis_restart_rsyslog
-
-- name: 5.1.1.7 | Ensure rsyslog is not configured to receive logs from a remote client
-  loop:
-    - '^(\$ModLoad imtcp)'
-    - '^(\$InputTCPServerRun)'
-    - '^(module\(load="imtcp"\))'
-    - '^(input\(type="imtcp")'
-  when:
-    - rhel8cis_rule_5_1_1_7_enabled
-    - rhel8cis_syslog == 'rsyslog'
-  become: true
-  ansible.builtin.replace:
-    path: /etc/rsyslog.conf
-    regexp: '({{ item }})'
-    replace: '#\1'
-  notify:
-    - _rhel8cis_restart_rsyslog
-
-- name: 5.1.2.1.1 | Ensure systemd-journal-remote is installed
-  when:
-    - rhel8cis_rule_5_1_2_1_1_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - systemd-journal-remote
-    state: present
-
-- name: 5.1.2.1.2 | Ensure systemd-journal-remote is configured
-  loop:
-    - regexp: '^#?\s?URL='
-      line: 'URL={{ rhel8cis_remote_log_server }}'
-    - regexp: '^#?\s?ServerKeyFile='
-      line: 'ServerKeyFile={{ rhel8cis_journal_server_key_file }}'
-    - regexp: '^#?\s?ServerCertificateFile='
-      line: 'ServerCertificateFile={{ rhel8cis_journal_server_cert_file }}'
-    - regexp: '^#?\s?TrustedCertificateFile='
-      line: 'TrustedCertificateFile={{ rhel8cis_journal_server_trusted_cert_file }}'
-  when:
-    - rhel8cis_rule_5_1_2_1_2_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/journal-upload.conf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    state: present
-  notify:
-    - _rhel8cis_restart_systemd-journal-remote
-
-- name: 5.1.2.1.3 | Ensure systemd-journal-remote is enabled
-  when:
-    - rhel8cis_rule_5_1_2_1_3_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.systemd_service:
-    name: systemd-journal-remote.service
-    enabled: true
-    state: started
-
-- name: 5.1.2.1.4 | Ensure journald is not configured to receive logs from a remote client
-  when:
-    - rhel8cis_rule_5_1_2_1_4_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.systemd_service:
-    name: systemd-journal-remote.socket
-    enabled: false
-    masked: true
-    state: stopped
-
-- name: 5.1.2.2 | Ensure journald service is enabled
-  when:
-    - rhel8cis_rule_5_1_2_2_enabled
-  become: true
-  ansible.builtin.systemd_service:
-    name: systemd-journald.service
-    enabled: true
-    state: started
-
-- name: 5.1.2.3 | Ensure journald is configured to compress large log files
-  when:
-    - rhel8cis_rule_5_1_2_3_enabled
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/journald.conf
-    regexp: '^#?\s?Compress='
-    line: 'Compress=yes'
-  notify:
-    - _rhel8cis_restart_systemd-journald
-
-- name: 5.1.2.4 | Ensure journald is configured to write logfiles to persistent disk
-  when:
-    - rhel8cis_rule_5_1_2_4_enabled
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/journald.conf
-    regexp: '^#?\s?Storage='
-    line: 'Storage=persistent'
-  notify:
-    - _rhel8cis_restart_systemd-journald
-
-- name: 5.1.2.5 | Ensure journald is not configured to send logs to rsyslog
-  when:
-    - rhel8cis_rule_5_1_2_5_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.replace:
-    path: /etc/systemd/journald.conf
-    regexp: '^#?\s?ForwardToSyslog='
-    replace: 'ForwardToSyslog=no'
-
-- name: 5.1.2.6 | Ensure journald log rotation is configured per site policy
-  loop:
-    - regexp: '^#?\s?SystemMaxUse='
-      line: 'SystemMaxUse={{ rhel8cis_journald_systemmaxuse }}'
-    - regexp: '^#?\s?SystemKeepFree='
-      line: 'SystemKeepFree={{ rhel8cis_journald_systemkeepfree }}'
-    - regexp: '^#?\s?RuntimeMaxUse='
-      line: 'RuntimeMaxUse={{ rhel8cis_journald_runtimemaxuse }}'
-    - regexp: '^#?\s?RuntimeKeepFree='
-      line: 'RuntimeKeepFree={{ rhel8cis_journald_runtimekeepfree }}'
-    - regexp: '^#?\s?MaxFileSec='
-      line: 'MaxFileSec={{ rhel8cis_journald_maxfilesec }}'
-  when:
-    - rhel8cis_rule_5_1_2_6_enabled
-    - rhel8cis_syslog == 'journald'
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/journald.conf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    state: present
-  notify:
-    - _rhel8cis_restart_systemd-journald
-
-- name: 5.1.3 | Ensure logrotate is configured
-  when:
-    - rhel8cis_rule_5_1_3_enabled
   block:
-    - name: 5.1.3 | Ensure logrotate is configured | Get /etc/logrotate.d/* files
-      become: true
-      ansible.builtin.find:
-        paths: 
-          - /etc/logrotate.d
-        file_type: file
-        recurse: true
-      register: _rhel8cis_logrotate_d
+    - name: 5.1.2 | Ensure permissions on /etc/ssh/sshd_config are configured | /etc/ssh/sshd_config
+      ansible.builtin.file:
+        path: /etc/ssh/sshd_config
+        owner: root
+        group: root
+        mode: '0600'
 
-    - name: 5.1.3 | Ensure logrotate is configured | /etc/logrotate.conf
-      become: true
-      ansible.builtin.replace:
-        path: /etc/logrotate.conf
-        regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
-        replace: "\\1{{ rhel8cis_logrotate_frequency }}"
-    
-    - name: 5.1.3 | Ensure logrotate is configured | /etc/logrotate.d/*
-      loop: "{{ _rhel8cis_logrotate_d.files }}"
-      become: true
-      ansible.builtin.replace:
-        path: "{{ item.path }}"
-        regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
-        replace: "\\1{{ rhel8cis_logrotate_frequency }}"
+    - name: 5.1.2 | Ensure permissions on /etc/ssh/sshd_config are configured | Get /etc/ssh/sshd_config.d/*
+      ansible.builtin.find:
+        paths: /etc/ssh/sshd_config.d
+        patterns: '*.conf'
+        file_type: file
+      register: _rhel8cis_sshd_config_d_files
+
+    - name: 5.1.2 | Ensure permissions on /etc/ssh/sshd_config are configured | /etc/ssh/sshd_config.d/*
+      loop: "{{ _rhel8cis_sshd_config_d_files.files }}"
       loop_control:
         label: "{{ item.path }}"
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        owner: root
+        group: root
+        mode: '0600'
 
-    - name: 5.1.3 | Ensure logrotate is configured | Add warning
-      ansible.builtin.include_tasks: ../add-warning.yml
-      vars:
-        _rhel8cis_warning_rule: '5.1.3'
-        _rhel8cis_warning_description: "This cannot be fully automated. Please ensure logrotate is configured as required for all log types."
+- name: 5.1.3 | Ensure access to /etc/sysconfig/sshd is configured
+  when:
+    - rhel8cis_rule_5_1_3_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/sysconfig/sshd
+    owner: root
+    group: root
+    mode: '0640'
 
-- name: 5.1.4 | Ensure all logfiles have appropriate access configured
+- name: 5.1.4 | Ensure permissions on SSH private host key files are configured
   when:
     - rhel8cis_rule_5_1_4_enabled
   become: true
   block:
-    - name: 5.1.4 | Ensure all logfiles have appropriate access configured | Get list of log files
+    - name: 5.1.4 | Ensure permissions on SSH private host key files are configured | Get /etc/ssh/ssh_host_*_key
       ansible.builtin.find:
-        paths: 
-          - /var/log
-        file_type: file
+        paths:
+          - /etc/ssh
+        patterns:
+          - 'ssh_host_*_key'
         recurse: true
-      register: _rhel8cis_log_files
+        file_type: file
+      register: _rhel8cis_ssh_host_private_keys
 
-    - name: 5.1.4 | Ensure all logfiles have appropriate access configured | Set permissions
-      loop: "{{ _rhel8cis_log_files.files }}"
-      when:
-        - item.path != '/var/log/btmp'
-        - item.path != '/var/log/utmp'
-        - item.path != '/var/log/wtmp'
-        - item.path != '/var/log/lastlog'
-        - item.path != '/var/log/chrony/measurements.log'
-        - item.path != '/var/log/chrony/tracking.log'
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        mode: 'u=rw,g-wx,o-rwx'
+    - name: 5.1.4 | Ensure permissions on SSH private host key files are configured | /etc/ssh/ssh_host_*_key
+      loop: "{{ _rhel8cis_ssh_host_private_keys.files }}"
       loop_control:
         label: "{{ item.path }}"
-      tags:
-        - always
-        - molecule-idempotence-notest
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        owner: root
+        group: ssh_keys
+        mode: 'u=rw,g-wx,o-rwx'
+
+- name: 5.1.5 | Ensure permissions on SSH public host key files are configured
+  when:
+    - rhel8cis_rule_5_1_5_enabled
+  become: true
+  block:
+    - name: 5.1.5 | Ensure permissions on SSH public host key files are configured | Get /etc/ssh/ssh_host_*_key.pub
+      ansible.builtin.find:
+        paths:
+          - /etc/ssh
+        patterns:
+          - 'ssh_host_*_key.pub'
+        recurse: true
+        file_type: file
+      register: _rhel8cis_ssh_host_public_keys
+
+    - name: 5.1.5 | Ensure permissions on SSH public host key files are configured | /etc/ssh/ssh_host_*_key.pub
+      loop: "{{ _rhel8cis_ssh_host_public_keys.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        owner: root
+        group: root
+        mode: 'u=rw,g-wx,o-wx'
+
+- name: 5.1.6 | Ensure sshd access is configured
+  when:
+    - rhel8cis_rule_5_1_6_enabled
+  become: true
+  block:
+    - name: 5.1.6 | Ensure sshd access is configured | No AllowUsers
+      when:
+        - rhel8cis_sshd_allow_users | length == 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?AllowUsers'
+        line: '#AllowUsers'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | AllowUsers
+      when:
+        - rhel8cis_sshd_allow_users | length > 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?AllowUsers'
+        line: 'AllowUsers {{ rhel8cis_sshd_allow_users | join(" ") }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | No AllowGroups
+      when:
+        - rhel8cis_sshd_allow_groups | length == 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?AllowGroups'
+        line: '#AllowGroups'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | AllowGroups
+      when:
+        - rhel8cis_sshd_allow_groups | length > 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?AllowGroups'
+        line: 'AllowGroups {{ rhel8cis_sshd_allow_groups | join(" ") }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | No DenyUsers
+      when:
+        - rhel8cis_sshd_deny_users | length == 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?DenyUsers'
+        line: '#DenyUsers'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | DenyUsers
+      when:
+        - rhel8cis_sshd_deny_users | length > 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?DenyUsers'
+        line: 'DenyUsers {{ rhel8cis_sshd_deny_users | join(" ") }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | No DenyGroups
+      when:
+        - rhel8cis_sshd_deny_groups | length == 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?DenyGroups'
+        line: '#DenyGroups'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.6 | Ensure sshd access is configured | DenyGroups
+      when:
+        - rhel8cis_sshd_deny_groups | length > 0
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?DenyGroups'
+        line: 'DenyGroups {{ rhel8cis_sshd_deny_groups | join(" ") }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+- name: 5.1.7 | Ensure sshd Banner is configured
+  when:
+    - rhel8cis_rule_5_1_7_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?Banner'
+    line: 'Banner /etc/issue.net'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.8 | Ensure sshd Ciphers are configured
+  when:
+    - rhel8cis_rule_5_1_8_enabled
+  ansible.builtin.debug:
+    msg: Rule 5.1.8 is implemented through the system-wide crypto policy.
+
+- name: 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured
+  when:
+    - rhel8cis_rule_5_1_9_enabled
+  block:
+    - name: 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveInterval
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?ClientAliveInterval'
+        line: 'ClientAliveInterval {{ rhel8cis_sshd_client_alive_interval }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+    - name: 5.1.9 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured | ClientAliveCountMax
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?ClientAliveCountMax'
+        line: 'ClientAliveCountMax {{ rhel8cis_sshd_client_alive_count_max }}'
+      notify:
+        - _rhel8cis_restart_sshd
+
+- name: 5.1.10 | Ensure sshd DisableForwarding is enabled
+  when:
+    - rhel8cis_rule_5_1_10_enabled
+    - rhel8cis_rule_5_1_10_force or _rhel8cis_workstation or _rhel8cis_level2
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?DisableForwarding'
+    line: 'DisableForwarding yes'
+
+- name: 5.1.11 | Ensure sshd GSSAPIAuthentication is disabled
+  when:
+    - rhel8cis_rule_5_1_11_enabled
+    - rhel8cis_rule_5_1_11_force or _rhel8cis_workstation or _rhel8cis_level2
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?GSSAPIAuthentication'
+    line: 'GSSAPIAuthentication no'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.12 | Ensure sshd HostbasedAuthentication is disabled
+  when:
+    - rhel8cis_rule_5_1_12_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?HostbasedAuthentication'
+    line: 'HostbasedAuthentication no'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.13 | Ensure sshd IgnoreRhosts is enabled
+  when:
+    - rhel8cis_rule_5_1_13_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?IgnoreRhosts'
+    line: 'IgnoreRhosts yes'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.14 | Ensure sshd KexAlgorithms is configured
+  when:
+    - rhel8cis_rule_5_1_14_enabled
+  ansible.builtin.debug:
+    msg: Rule 5.1.14 is implemented through the system-wide crypto policy.
+
+
+- name: 5.1.15 | Ensure sshd LoginGraceTime is configured
+  when:
+    - rhel8cis_rule_5_1_15_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?LoginGraceTime'
+    line: 'LoginGraceTime {{ rhel8cis_sshd_login_grace_time }}'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.16 | Ensure sshd LogLevel is configured
+  when:
+    - rhel8cis_rule_5_1_16_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?LogLevel'
+    line: 'LogLevel {{ rhel8cis_sshd_log_level }}'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.17 | Ensure sshd MACs are configured
+  when:
+    - rhel8cis_rule_5_1_17_enabled
+  become: true
+  ansible.builtin.debug:
+    msg: Rule 5.1.17 is implemented through the system-wide crypto policy.
+
+- name: 5.1.18 | Ensure sshd MaxAuthTries is configured
+  when:
+    - rhel8cis_rule_5_1_18_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?MaxAuthTries'
+    line: 'MaxAuthTries {{ rhel8cis_sshd_max_auth_tries }}'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.19 | Ensure sshd MaxSessions is configured
+  when:
+    - rhel8cis_rule_5_1_19_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?MaxSessions'
+    line: 'MaxSessions {{ rhel8cis_sshd_max_sessions }}'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.20 | Ensure sshd MaxStartups is configured
+  when:
+    - rhel8cis_rule_5_1_20_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?MaxStartups'
+    line: 'MaxStartups {{ rhel8cis_sshd_max_startups_before_dropping }}:{{ rhel8cis_sshd_max_startups_drop_percentage }}:{{ rhel8cis_sshd_max_startups_absolute_maximum }}'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.21 | Ensure sshd PermitEmptyPasswords is disabled
+  when:
+    - rhel8cis_rule_5_1_21_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitEmptyPasswords'
+    line: 'PermitEmptyPasswords no'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.22 | Ensure sshd PermitRootLogin is disabled
+  when:
+    - rhel8cis_rule_5_1_22_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.23 | Ensure sshd PermitUserEnvironment is disabled
+  when:
+    - rhel8cis_rule_5_1_23_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitUserEnvironment'
+    line: 'PermitUserEnvironment no'
+  notify:
+    - _rhel8cis_restart_sshd
+
+- name: 5.1.24 | Ensure sshd UsePAM is enabled
+  when:
+    - rhel8cis_rule_5_1_24_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?UsePAM'
+    line: 'UsePAM yes'
+  notify:
+    - _rhel8cis_restart_sshd

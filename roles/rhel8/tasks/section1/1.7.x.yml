@@ -1,72 +1,60 @@
 ---
-- name: 1.7.1 | Ensure message of the day is configured properly
+- name: 1.7.1 | Ensure /etc/motd is configured
   when:
     - rhel8cis_rule_1_7_1_enabled
   become: true
   block:
-    - name: 1.7.1 | Ensure message of the day is configured properly | Set content # noqa risky-file-permissions
+    - name: 1.7.1 | Ensure /etc/motd is configured | Set content # noqa risky-file-permissions
       when:
         - rhel8cis_use_motd
       ansible.builtin.copy:
         content: "{{ rhel8cis_motd_banner }}"
         dest: /etc/motd
 
-    - name: 1.7.1 | Ensure message of the day is configured properly | Remove content # noqa risky-file-permissions
+    - name: 1.7.1 | Ensure /etc/motd is configured | Remove content # noqa risky-file-permissions
       when:
         - not rhel8cis_use_motd
       ansible.builtin.copy:
         content: ''
         dest: /etc/motd
 
-- name: 1.7.2 | Ensure local login warning banner is configured properly    
+- name: 1.7.2 | Ensure /etc/issue is configured
   when:
     - rhel8cis_rule_1_7_2_enabled
   become: true
   block:
-    - name: 1.7.2 | Ensure local login warning banner is configured properly | Set content # noqa risky-file-permissions
+    - name: 1.7.2 | Ensure /etc/issue is configured | Set content # noqa risky-file-permissions
       when:
         - rhel8cis_use_issue
       ansible.builtin.copy:
         content: "{{ rhel8cis_issue_banner }}"
         dest: /etc/issue
-        owner: root
-        group: root
-        mode: '0644'
 
-    - name: 1.7.2 | Ensure local login warning banner is configured properly | Remove content # noqa risky-file-permissions
+    - name: 1.7.2 | Ensure /etc/issue is configured | Remove content # noqa risky-file-permissions
       when:
         - not rhel8cis_use_issue
       ansible.builtin.copy:
         content: ''
         dest: /etc/issue
-        owner: root
-        group: root
-        mode: '0644'
 
-- name: 1.7.3 | Ensure remote login warning banner is configured properly
+- name: 1.7.3 | Ensure /etc/issue.net is configured
   when:
     - rhel8cis_rule_1_7_3_enabled
   become: true
   block:
-    - name: 1.7.3 | Ensure remote login warning banner is configured properly | Set content # noqa risky-file-permissions
+    - name: 1.7.3 | Ensure /etc/issue.net is configured | Set content # noqa risky-file-permissions
       when:
         - rhel8cis_use_issue_net
       ansible.builtin.copy:
         content: "{{ rhel8cis_issue_net_banner }}"
         dest: /etc/issue.net
-        owner: root
-        group: root
-        mode: '0644'
 
-    - name: 1.7.3 | Ensure remote login warning banner is configured properly | Remove content # noqa risky-file-permissions
+    - name: 1.7.3 | Ensure /etc/issue.net is configured | Remove content # noqa risky-file-permissions
       when:
         - not rhel8cis_use_issue_net
       ansible.builtin.copy:
         content: ''
         dest: /etc/issue.net
-        owner: root
-        group: root
-        mode: '0644'
 
 - name: 1.7.4 | Ensure access to /etc/motd is configured
   when:

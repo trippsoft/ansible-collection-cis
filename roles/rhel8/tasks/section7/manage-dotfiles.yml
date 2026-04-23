@@ -1,0 +1,61 @@
+---
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Remove senstive files
+  loop:
+    - "{{ user.home }}/.forward"
+    - "{{ user.home }}/.rhosts"
+    - "{{ user.home }}/.netrc"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Get list of dot files
+  become: true
+  ansible.builtin.find:
+    paths: "{{ user.home }}"
+    patterns:
+      - '.*'
+    excludes:
+      - .bash_history
+    file_type: file
+    recurse: true
+  register: _rhel8cis_user_dot_files
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Set permissions on dot files
+  loop: "{{ _rhel8cis_user_dot_files.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: "{{ user.username }}"
+    group: "{{ user.username }}"
+    mode: 'u=rw,g-wx,o-rwx'
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Check .bash_history
+  become: true
+  ansible.builtin.stat:
+    path: "{{ user.home }}/.bash_history"
+  register: _rhel8cis_bash_history
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Set permissions on .bash_history
+  when:
+    - _rhel8cis_bash_history.stat.exists
+  become: true
+  ansible.builtin.file:
+    path: "{{ user.home }}/.bash_history"
+    owner: "{{ user.username }}"
+    group: "{{ user.username }}"
+    mode: '0600'
+    state: file
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured | Create .bash_history
+  when:
+    - not _rhel8cis_bash_history.stat.exists
+  become: true
+  ansible.builtin.file:
+    path: "{{ user.home }}/.bash_history"
+    owner: "{{ user.username }}"
+    group: "{{ user.username }}"
+    mode: '0600'
+    state: touch

@@ -1,424 +1,116 @@
 ---
-- name: 5.2.1.1 | Ensure audit is installed
+- name: 5.2.1 | Ensure sudo is installed
   when:
-    - rhel8cis_rule_5_2_1_1_enabled
-    - rhel8cis_rule_5_2_1_1_force or _rhel8cis_level2
+    - rhel8cis_rule_5_2_1_enabled
   become: true
   ansible.builtin.dnf:
     name:
-      - audit
+      - sudo
     state: present
 
-- name: 5.2.1.2 | Ensure auditing for processes that start prior to auditd is enabled
+- name: 5.2.2 | Ensure sudo commands use pty
   when:
-    - rhel8cis_rule_5_2_1_2_enabled
-    - rhel8cis_rule_5_2_1_2_force or _rhel8cis_level2
+    - rhel8cis_rule_5_2_2_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: 'Defaults use_pty'
+    insertbefore: '^#includedir /etc/sudoers.d'
+
+- name: 5.2.3 | Ensure sudo log file exists
+  when:
+    - rhel8cis_rule_5_2_3_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^Defaults\s+logfile='
+    line: 'Defaults logfile={{ rhel8cis_sudo_log_file }}'
+    insertbefore: '^#includedir /etc/sudoers.d'
+
+- name: 5.2 | Configure privilege escalation | Get /etc/sudoers.d/* files
+  when:
+    - (rhel8cis_rule_5_2_4_enabled and
+      (rhel8cis_rule_5_2_4_force or _rhel8cis_level2)) or
+      rhel8cis_rule_5_2_5_enabled
+  become: true
+  ansible.builtin.find:
+    paths:
+      - /etc/sudoers.d
+    file_type: file
+    recurse: true
+  register: _rhel8cis_sudoers_d_files
+
+- name: 5.2.4 | Ensure users must provide password for escalation
+  when:
+    - rhel8cis_rule_5_2_4_enabled
+    - rhel8cis_rule_5_2_4_force or _rhel8cis_level2
   become: true
   block:
-    - name: 5.2.1.2 | Ensure auditing for processes that start prior to auditd is enabled | Get GRUB_CMDLINE_LINUX # noqa risky-shell-pipe
-      check_mode: false
-      ansible.builtin.shell: |
-        grep 'GRUB_CMDLINE_LINUX=' /etc/default/grub | sed 's/.$//'
-      changed_when: false
-      failed_when: false
-      register: _rhel8cis_grub_cmdline_linux
-
-    - name: 5.2.1.2 | Ensure auditing for processes that start prior to auditd is enabled | Replace existing setting
-      when:
-        - "'audit=' in _rhel8cis_grub_cmdline_linux.stdout"
+    - name: 5.2.4 | Ensure users must provide password for escalation | /etc/sudoers
       ansible.builtin.replace:
-        path: /etc/default/grub
-        regexp: 'audit=\d'
-        replace: 'audit=1'
-      notify:
-        - _rhel8cis_grub2-mkconfig
+        path: /etc/sudoers
+        regexp: '^([^#|].*)NOPASSWD(.*)'
+        replace: '\1PASSWD\2'
 
-    - name: 5.2.1.2 | Ensure auditing for processes that start prior to auditd is enabled | Add audit setting if missing
-      when:
-        - "'audit=' not in _rhel8cis_grub_cmdline_linux.stdout"
-      ansible.builtin.lineinfile:
-        path: /etc/default/grub
-        regexp: '^GRUB_CMDLINE_LINUX='
-        line: '{{ _rhel8cis_grub_cmdline_linux.stdout }} audit=1"'
-      notify:
-        - _rhel8cis_grub2-mkconfig
-
-- name: 5.2.1.3 | Ensure audit_backlog_limit is sufficient
-  when:
-    - rhel8cis_rule_5_2_1_3_enabled
-    - rhel8cis_rule_5_2_1_3_force or _rhel8cis_level2
-  block:
-    - name: 5.2.1.3 | Ensure audit_backlog_limit is sufficient | Get GRUB_CMDLINE_LINUX # noqa risky-shell-pipe
-      become: true
-      check_mode: false
-      ansible.builtin.shell: |
-        grep 'GRUB_CMDLINE_LINUX=' /etc/default/grub | sed 's/.$//'
-      changed_when: false
-      failed_when: false
-      register: _rhel8cis_grub_cmdline_linux
-
-    - name: 5.2.1.3 | Ensure audit_backlog_limit is sufficient | Replace existing setting
-      when:
-        - "'audit_backlog_limit=' in _rhel8cis_grub_cmdline_linux.stdout"
-      become: true
+    - name: 5.2.4 | Ensure users must provide password for escalation | /etc/sudoers.d/*
+      loop: "{{ _rhel8cis_sudoers_d_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.replace:
-        path: /etc/default/grub
-        regexp: 'audit_backlog_limit=\d+'
-        replace: 'audit_backlog_limit={{ rhel8cis_audit_backlog_limit }}'
-      notify:
-        - _rhel8cis_grub2-mkconfig
+        path: "{{ item.path }}"
+        regexp: '^([^#|].*)NOPASSWD(.*)'
+        replace: '\1PASSWD\2'
 
-    - name: 5.2.1.3 | Ensure audit_backlog_limit is sufficient | Add audit setting if missing
-      when:
-        - "'audit_backlog_limit=' not in _rhel8cis_grub_cmdline_linux.stdout"
-      become: true
+- name: 5.2.5 | Ensure re-authentication for privilege escalation is not disabled globally
+  when:
+    - rhel8cis_rule_5_2_5_enabled
+  become: true
+  block:
+    - name: 5.2.5 | Ensure re-authentication for privilege escalation is not disabled globally | /etc/sudoers
+      ansible.builtin.replace:
+        path: /etc/sudoers
+        regexp: '^([^#].*)!authenticate(.*)'
+        replace: '\1authenticate\2'
+
+    - name: 5.2.5 | Ensure re-authentication for privilege escalation is not disabled globally | /etc/sudoers.d/*
+      loop: "{{ _rhel8cis_sudoers_d_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      ansible.builtin.replace:
+        path: "{{ item.path }}"
+        regexp: '^([^#].*)!authenticate(.*)'
+        replace: '\1authenticate\2'
+
+- name: 5.2.6 | Ensure sudo timestamp_timeout is configured
+  when:
+    - rhel8cis_rule_5_2_6_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^#?Defaults\s+timestamp_timeout='
+    line: 'Defaults timestamp_timeout={{ rhel8cis_sudo_authentication_timeout }}'
+    insertbefore: '^#includedir /etc/sudoers.d'
+
+- name: 5.2.7 | Ensure access to the su command is restricted
+  when:
+    - rhel8cis_rule_5_2_7_enabled
+  become: true
+  block:
+    - name: 5.2.7 | Ensure access to the su command is restricted | Create group
+      ansible.builtin.group:
+        name: "{{ rhel8cis_su_group_name }}"
+        system: true
+        state: present
+
+    - name: 5.2.7 | Ensure access to the su command is restricted | Set group membership
       ansible.builtin.lineinfile:
-        path: /etc/default/grub
-        regexp: '^GRUB_CMDLINE_LINUX='
-        line: '{{ _rhel8cis_grub_cmdline_linux.stdout }} audit_backlog_limit={{ rhel8cis_audit_backlog_limit }}"'
-      notify:
-        - _rhel8cis_grub2-mkconfig
+        path: /etc/group
+        regexp: '^{{ rhel8cis_su_group_name }}(:.:.*:).*$'
+        line: '{{ rhel8cis_su_group_name }}\1{{ rhel8cis_su_group_members | join(",") }}'
+        backrefs: true
 
-- name: 5.2.1.4 | Ensure auditd service is enabled
-  when:
-    - rhel8cis_rule_5_2_1_4_enabled
-    - rhel8cis_rule_5_2_1_4_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.systemd_service:
-    name: auditd.service
-    enabled: true
-  notify:
-    - _rhel8cis_reboot
-
-- name: 5.2.2.1 | Ensure audit log storage size is configured
-  when:
-    - rhel8cis_rule_5_2_2_1_enabled
-    - rhel8cis_rule_5_2_2_1_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/audit/auditd.conf
-    regexp: '^#?\s?max_log_file\s?='
-    line: "max_log_file = {{ rhel8cis_auditd_max_log_file }}"
-  notify:
-    - _rhel8cis_reboot
-
-- name: 5.2.2.2 | Ensure audit logs are not automatically deleted
-  when:
-    - rhel8cis_rule_5_2_2_2_enabled
-    - rhel8cis_rule_5_2_2_2_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/audit/auditd.conf
-    regexp: '^#?\s?max_log_file_action\s?='
-    line: "max_log_file_action = keep_logs"
-  notify:
-    - _rhel8cis_reboot
-
-- name: 5.2.2.3 | Ensure system is disabled when audit logs are full
-  loop:
-    - name: disk_full_action
-      regexp: '^#?\s?disk_full_action\s?='
-      line: "disk_full_action = {{ rhel8cis_auditd_disk_full_action }}"
-    - name: disk_error_action
-      regexp: '^#?\s?disk_error_action\s?='
-      line: "disk_error_action = {{ rhel8cis_auditd_disk_error_action }}"
-  when:
-    - rhel8cis_rule_5_2_2_3_enabled
-    - rhel8cis_rule_5_2_2_3_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/audit/auditd.conf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-  notify:
-    - _rhel8cis_reboot
-  loop_control:
-    label: "{{ item.name }}"
-
-- name: 5.2.3.6 | Ensure use of privileged commands are collected # noqa risky-shell-pipe
-  when:
-    - rhel8cis_rule_5_2_3_6_enabled
-    - rhel8cis_rule_5_2_3_6_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.shell: |
-    for i in  $(df | grep '^/dev' | awk '{ print $NF }'); do find $i -xdev -type f -perm /6000 2>/dev/null; done
-  changed_when: false
-  failed_when: false
-  register: _rhel8cis_privileged_processes
-
-- name: |
-    5.2.3.1 | Ensure changes to system administration scope (sudoers) is collected
-    5.2.3.2 | Ensure actions as another user are always logged
-    5.2.3.3 | Ensure events that modify the sudo log file are collected
-    5.2.3.4 | Ensure events that modify date and time information are collected
-    5.2.3.5 | Ensure events that modify the system's network environment are collected
-    5.2.3.6 | Ensure use of privileged commands are collected
-    5.2.3.7 | Ensure unsuccessful file access attempts are collected
-    5.2.3.8 | Ensure events that modify user/group information are collected
-    5.2.3.9 | Ensure discretionary access control permission modification events are collected
-    5.2.3.10 | Ensure successful file system mounts are collected
-    5.2.3.11 | Ensure session initiation information is collected
-    5.2.3.12 | Ensure login and logout events are collected
-    5.2.3.13 | Ensure file deletion events by users are collected
-    5.2.3.14 | Ensure events that modify the system's Mandatory Access Controls are collected
-    5.2.3.15 | Ensure successful and unsuccessful attempts to use the chcon command are recorded
-    5.2.3.16 | Ensure successful and unsuccessful attempts to use the setfacl command are recorded
-    5.2.3.17 | Ensure successful and unsuccessful attempts to use the chacl command are recorded
-    5.2.3.18 | Ensure successful and unsuccessful attempts to use the usermod command are recorded
-    5.2.3.19 | Ensure kernel module loading unloading and modification is collected
-    5.2.3.20 | Ensure the audit configuration is immutable
-  when:
-    - (rhel8cis_rule_5_2_3_1_enabled and
-      (rhel8cis_rule_5_2_3_1_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_2_enabled and
-      (rhel8cis_rule_5_2_3_2_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_3_enabled and
-      (rhel8cis_rule_5_2_3_3_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_4_enabled and
-      (rhel8cis_rule_5_2_3_4_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_5_enabled and
-      (rhel8cis_rule_5_2_3_5_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_6_enabled and
-      (rhel8cis_rule_5_2_3_6_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_7_enabled and
-      (rhel8cis_rule_5_2_3_7_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_8_enabled and
-      (rhel8cis_rule_5_2_3_8_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_9_enabled and
-      (rhel8cis_rule_5_2_3_9_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_10_enabled and
-      (rhel8cis_rule_5_2_3_10_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_11_enabled and
-      (rhel8cis_rule_5_2_3_11_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_12_enabled and
-      (rhel8cis_rule_5_2_3_12_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_13_enabled and
-      (rhel8cis_rule_5_2_3_13_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_14_enabled and
-      (rhel8cis_rule_5_2_3_14_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_15_enabled and
-      (rhel8cis_rule_5_2_3_15_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_16_enabled and
-      (rhel8cis_rule_5_2_3_16_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_17_enabled and
-      (rhel8cis_rule_5_2_3_17_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_18_enabled and
-      (rhel8cis_rule_5_2_3_18_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_19_enabled and
-      (rhel8cis_rule_5_2_3_19_force or _rhel8cis_level2)) or
-      (rhel8cis_rule_5_2_3_20_enabled and
-      (rhel8cis_rule_5_2_3_20_force or _rhel8cis_level2))
-  become: true
-  ansible.builtin.template:
-    src: 99-auditd.rules.j2
-    dest: /etc/audit/rules.d/99-audit.rules
-    owner: root
-    group: root
-    mode: '0600'
-  notify:
-    - _rhel8cis_auditd_rules_reload
-
-- name: 5.2.3.21 | Ensure the running and on disk configuration is the same
-  when:
-    - rhel8cis_rule_5_2_3_21_enabled
-    - rhel8cis_rule_5_2_3_21_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.command: augenrules --check
-  changed_when: "not 'No change' in _rhel8cis_augenrules_check.stdout"
-  notify:
-    - _rhel8cis_auditd_rules_reload
-  register: _rhel8cis_augenrules_check
-
-- name: 5.2.4.1 | Ensure the audit log directory is 0750 or more restrictive
-  when:
-    - rhel8cis_rule_5_2_4_1_enabled
-    - rhel8cis_rule_5_2_4_1_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.file:
-    path: /var/log/audit
-    mode: u=rwx,g-w,o-rwx
-
-- name: 5.2.4.2 | Ensure audit log files are mode 0640 or less permissive
-  when:
-    - rhel8cis_rule_5_2_4_2_enabled
-    - rhel8cis_rule_5_2_4_2_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.2 | Ensure audit log files are mode 0640 or less permissive | Get /var/log/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /var/log/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_log_files
-
-    - name: 5.2.4.2 | Ensure audit log files are mode 0640 or less permissive | Set permission
-      loop: "{{ _rhel8cis_audit_log_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
-      tags:
-        - always
-        - molecule-idempotence-notest
-
-- name: 5.2.4.3 | Ensure only authorized users own audit log files
-  when:
-    - rhel8cis_rule_5_2_4_3_enabled
-    - rhel8cis_rule_5_2_4_3_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.3 | Ensure only authorized users own audit log files | Get /var/log/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /var/log/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_log_files
-
-    - name: 5.2.4.3 | Ensure only authorized users own audit log files | Set permission
-      loop: "{{ _rhel8cis_audit_log_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        owner: root
-      loop_control:
-        label: "{{ item.path }}"
-
-- name: 5.2.4.4 | Ensure only authorized groups are assigned ownership of audit log files
-  when:
-    - rhel8cis_rule_5_2_4_4_enabled
-    - rhel8cis_rule_5_2_4_4_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.4 | Ensure only authorized groups are assigned ownership of audit log files | Get /var/log/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /var/log/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_log_files
-
-    - name: 5.2.4.4 | Ensure only authorized groups are assigned ownership of audit log files | Set permission
-      loop: "{{ _rhel8cis_audit_log_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        group: root
-      loop_control:
-        label: "{{ item.path }}"
-
-- name: 5.2.4.5 | Ensure audit configuration files are 640 or more restrictive
-  when:
-    - rhel8cis_rule_5_2_4_5_enabled
-    - rhel8cis_rule_5_2_4_5_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.5 | Ensure audit configuration files are 640 or more restrictive | Get /etc/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /etc/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_conf_files
-    
-    - name: 5.2.4.5 | Ensure audit configuration files are 640 or more restrictive | Set permissions
-      loop: "{{ _rhel8cis_audit_conf_files.files }}"
-      when:
-        - item.path != '/etc/audit/rules.d/99-audit.rules'
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        mode: 'u=rw,g-wx,o-rwx'
-      loop_control:
-        label: "{{ item.path }}"
-
-- name: 5.2.4.6 | Ensure audit configuration files are owned by root
-  when:
-    - rhel8cis_rule_5_2_4_6_enabled
-    - rhel8cis_rule_5_2_4_6_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.6 | Ensure audit configuration files are owned by root | Get /etc/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /etc/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_conf_files
-    
-    - name: 5.2.4.6 | Ensure audit configuration files are owned by root | Set permissions
-      loop: "{{ _rhel8cis_audit_conf_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        owner: root
-      loop_control:
-        label: "{{ item.path }}"
-
-- name: 5.2.4.7 | Ensure audit configuration files belong to group root
-  when:
-    - rhel8cis_rule_5_2_4_7_enabled
-    - rhel8cis_rule_5_2_4_7_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 5.2.4.7 | Ensure audit configuration files belong to group root | Get /etc/audit/* files
-      ansible.builtin.find:
-        paths:
-          - /etc/audit
-        file_type: file
-        recurse: true
-      register: _rhel8cis_audit_conf_files
-    
-    - name: 5.2.4.7 | Ensure audit configuration files belong to group root | Set permissions
-      loop: "{{ _rhel8cis_audit_conf_files.files }}"
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        group: 'root'
-      loop_control:
-        label: "{{ item.path }}"
-
-- name: 5.2.4.8 | Ensure audit tools are 755 or more restrictive
-  loop:
-    - /sbin/auditctl
-    - /sbin/aureport
-    - /sbin/ausearch
-    - /sbin/autrace
-    - /sbin/auditd
-    - /sbin/augenrules
-  when:
-    - rhel8cis_rule_5_2_4_8_enabled
-    - rhel8cis_rule_5_2_4_8_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    mode: 'u=rwx,g-w,o-w'
-
-- name: 5.2.4.9 | Ensure audit tools are owned by root
-  loop:
-    - /sbin/auditctl
-    - /sbin/aureport
-    - /sbin/ausearch
-    - /sbin/autrace
-    - /sbin/auditd
-    - /sbin/augenrules
-  when:
-    - rhel8cis_rule_5_2_4_9_enabled
-    - rhel8cis_rule_5_2_4_9_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    owner: root
-
-- name: 5.2.4.10 | Ensure audit tools belong to group root
-  loop:
-    - /sbin/auditctl
-    - /sbin/aureport
-    - /sbin/ausearch
-    - /sbin/autrace
-    - /sbin/auditd
-    - /sbin/augenrules
-  when:
-    - rhel8cis_rule_5_2_4_10_enabled
-    - rhel8cis_rule_5_2_4_10_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    group: root
+    - name: 5.2.7 | Ensure access to the su command is restricted | /etc/pam.d/su
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/su
+        regexp: '^(#)?auth\s+required\s+pam_wheel\.so'
+        line: "auth required pam_wheel.so use_uid group={{ rhel8cis_su_group_name }}"

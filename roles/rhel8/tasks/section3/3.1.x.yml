@@ -2,7 +2,7 @@
 - name: 3.1.1 | Ensure IPv6 status is identified
   loop:
     - net.ipv6.conf.all.disable_ipv6
-    - net.ipv6.conf.default.disable_ipv6    
+    - net.ipv6.conf.default.disable_ipv6
   when:
     - rhel8cis_rule_3_1_1_enabled
     - not rhel8cis_ipv6_needed
@@ -19,6 +19,7 @@
   become: true
   block:
     - name: 3.1.2 | Ensure wireless interfaces are disabled | Check if wifi is enabled
+      check_mode: false
       ansible.builtin.command: nmcli radio wifi
       changed_when: false
       failed_when: false

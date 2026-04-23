@@ -10,8 +10,7 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.4.1'
-        _rhel8cis_warning_description: >-
-          /var is not a separate partition.
+        _rhel8cis_warning_description: /var is not a separate partition.
 
     - name: 1.1.2.4.2 | Ensure nodev option set on /var partition
       when:
@@ -19,17 +18,15 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.4.2'
-        _rhel8cis_warning_description: >-
-          /var is not a separate partition.
-    
+        _rhel8cis_warning_description: /var is not a separate partition.
+
     - name: 1.1.2.4.3 | Ensure nosuid option set on /var partition'
       when:
         - rhel8cis_rule_1_1_2_4_3_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.4.3'
-        _rhel8cis_warning_description: >-
-          /var is not a separate partition.
+        _rhel8cis_warning_description: /var is not a separate partition.
 
 - name: 1.1.2.4.x | Configure /var
   when:
@@ -41,11 +38,7 @@
   block:
     - name: '1.1.2.4.x | Set existing /var mount configuration fact'
       ansible.builtin.set_fact:
-        _rhel8cis_existing_var_mount: >-
-          {{ ansible_mounts |
-              selectattr('mount', 'equalto', '/var') |
-              list |
-              first }}
+        _rhel8cis_existing_var_mount: "{{ ansible_mounts | selectattr('mount', 'equalto', '/var') | list | first }}"
 
     - name: 1.1.2.4.x | Get UUID of /var partition
       when:

@@ -29,6 +29,20 @@
     name: postfix.service
     state: restarted
 
+- name: Restart firewalld
+  listen: _rhel8cis_restart_firewalld
+  become: true
+  ansible.builtin.systemd_service:
+    name: firewalld.service
+    state: restarted
+
+- name: Reload firewalld
+  listen: _rhel8cis_reload_firewalld
+  become: true
+  ansible.builtin.systemd_service:
+    name: firewalld.service
+    state: reloaded
+
 - name: Restart sshd
   listen: _rhel8cis_restart_sshd
   become: true

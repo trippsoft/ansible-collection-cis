@@ -4,3 +4,6 @@
 
 - name: Execute the 6.2.x tasks
   ansible.builtin.import_tasks: section6/6.2.x.yml
+
+- name: Execute the 6.3.x tasks
+  ansible.builtin.import_tasks: section6/6.3.x.yml

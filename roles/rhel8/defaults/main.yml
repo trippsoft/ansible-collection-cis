@@ -19,10 +19,26 @@ rhel8cis_rule_1_1_1_5_enabled: true
 rhel8cis_rule_1_1_1_6_enabled: true
 rhel8cis_rule_1_1_1_7_enabled: true
 rhel8cis_rule_1_1_1_8_enabled: true
+rhel8cis_rule_1_1_1_9_enabled: true
+rhel8cis_rule_1_1_1_10_enabled: true
+rhel8cis_rule_1_1_1_11_enabled: true
 
 rhel8cis_rule_1_1_1_6_force: false
 rhel8cis_rule_1_1_1_7_force: false
 rhel8cis_rule_1_1_1_8_force: false
+rhel8cis_rule_1_1_1_10_force: false
+
+rhel8cis_ceph_needed: true
+rhel8cis_cifs_needed: true
+rhel8cis_exfat_needed: true
+rhel8cis_ext_needed: true
+rhel8cis_fat_needed: true
+rhel8cis_fscache_needed: true
+rhel8cis_fuse_needed: true
+rhel8cis_gfs2_needed: true
+rhel8cis_nfs_common_needed: true
+rhel8cis_nfsd_needed: true
+rhel8cis_smbfs_common_needed: true
 
 # 1.1.2 - Configure Filesystem Partitions
 
@@ -137,45 +153,64 @@ rhel8cis_var_log_audit_mount_opts:
 
 # 1.2 - Configure Software and Patch Management
 
-rhel8cis_rule_1_2_1_enabled: true
-rhel8cis_rule_1_2_2_enabled: true
-rhel8cis_rule_1_2_3_enabled: true
-rhel8cis_rule_1_2_4_enabled: true
-rhel8cis_rule_1_2_5_enabled: true
+# 1.2.1 - Configure Package Repositories
 
-rhel8cis_rule_1_2_3_force: false
+rhel8cis_rule_1_2_1_1_enabled: true
+rhel8cis_rule_1_2_1_2_enabled: true
+rhel8cis_rule_1_2_1_3_enabled: true
+rhel8cis_rule_1_2_1_4_enabled: true
+rhel8cis_rule_1_2_1_5_enabled: true
 
-# 1.3 - Configure Secure Boot Settings
+rhel8cis_rule_1_2_1_3_force: false
+rhel8cis_rule_1_2_1_5_force: false
 
-rhel8cis_rule_1_3_1_enabled: true
-rhel8cis_rule_1_3_2_enabled: true
+# 1.2.2 - Configure Package Updates
 
-rhel8cis_force_reset_bootloader_password: false
+rhel8cis_rule_1_2_2_1_enabled: true
 
-# 1.4 - Configure Additional Process Hardening
+# 1.3 - Mandatory Access Control
 
-rhel8cis_rule_1_4_1_enabled: true
-rhel8cis_rule_1_4_2_enabled: true
-rhel8cis_rule_1_4_3_enabled: true
-rhel8cis_rule_1_4_4_enabled: true
+# 1.3.1 - Configure SELinux
 
-# 1.5 - Mandatory Access Control
+rhel8cis_rule_1_3_1_1_enabled: true
+rhel8cis_rule_1_3_1_2_enabled: true
+rhel8cis_rule_1_3_1_3_enabled: true
+rhel8cis_rule_1_3_1_4_enabled: true
+rhel8cis_rule_1_3_1_5_enabled: true
+rhel8cis_rule_1_3_1_6_enabled: true
+rhel8cis_rule_1_3_1_7_enabled: true
+rhel8cis_rule_1_3_1_8_enabled: true
 
-# 1.5.1 - Configure SELinux
-
-rhel8cis_rule_1_5_1_1_enabled: true
-rhel8cis_rule_1_5_1_2_enabled: true
-rhel8cis_rule_1_5_1_3_enabled: true
-rhel8cis_rule_1_5_1_4_enabled: true
-rhel8cis_rule_1_5_1_5_enabled: true
-rhel8cis_rule_1_5_1_6_enabled: true
-rhel8cis_rule_1_5_1_7_enabled: true
-rhel8cis_rule_1_5_1_8_enabled: true
-
-rhel8cis_rule_1_5_1_5_force: false
+rhel8cis_rule_1_3_1_5_force: false
+rhel8cis_rule_1_3_1_6_force: false
 
 rhel8cis_selinux_policy: targeted
 rhel8cis_selinux_mode: enforcing
+
+# 1.4 - Configure Bootloader
+
+rhel8cis_rule_1_4_1_enabled: true
+rhel8cis_rule_1_4_2_enabled: true
+
+rhel8cis_force_reset_bootloader_password: false
+
+# 1.5 - Configure Additional Process Hardening
+
+rhel8cis_rule_1_5_1_enabled: true
+rhel8cis_rule_1_5_2_enabled: true
+rhel8cis_rule_1_5_3_enabled: true
+rhel8cis_rule_1_5_4_enabled: true
+rhel8cis_rule_1_5_5_enabled: true
+rhel8cis_rule_1_5_6_enabled: true
+rhel8cis_rule_1_5_7_enabled: true
+rhel8cis_rule_1_5_8_enabled: true
+rhel8cis_rule_1_5_9_enabled: true
+rhel8cis_rule_1_5_10_enabled: true
+
+rhel8cis_rule_1_5_3_force: false
+
+rhel8cis_kptr_restrict: mask_unprivileged
+rhel8cis_ptrace_scope: restricted_ptrace
 
 # 1.6 - Configure system wide crypto policy
 
@@ -183,6 +218,8 @@ rhel8cis_rule_1_6_1_enabled: true
 rhel8cis_rule_1_6_2_enabled: true
 rhel8cis_rule_1_6_3_enabled: true
 rhel8cis_rule_1_6_4_enabled: true
+rhel8cis_rule_1_6_5_enabled: true
+rhel8cis_rule_1_6_6_enabled: true
 
 rhel8cis_crypto_policy: DEFAULT
 rhel8cis_additional_crypto_subpolicies: []
@@ -214,67 +251,48 @@ rhel8cis_rule_1_8_4_enabled: true
 rhel8cis_rule_1_8_5_enabled: true
 rhel8cis_rule_1_8_6_enabled: true
 rhel8cis_rule_1_8_7_enabled: true
-rhel8cis_rule_1_8_8_enabled: true
-rhel8cis_rule_1_8_9_enabled: true
-rhel8cis_rule_1_8_10_enabled: true
 
-rhel8cis_rule_1_8_1_force: false
-rhel8cis_rule_1_8_6_force: false
+rhel8cis_rule_1_8_4_force: false
 rhel8cis_rule_1_8_7_force: false
 
 # 2 - Services
 
-# 2.1 - Configure Time Synchronization
+# 2.1 - Configure Special Purpose Services
 
 rhel8cis_rule_2_1_1_enabled: true
 rhel8cis_rule_2_1_2_enabled: true
 rhel8cis_rule_2_1_3_enabled: true
+rhel8cis_rule_2_1_4_enabled: true
+rhel8cis_rule_2_1_5_enabled: true
+rhel8cis_rule_2_1_6_enabled: true
+rhel8cis_rule_2_1_7_enabled: true
+rhel8cis_rule_2_1_8_enabled: true
+rhel8cis_rule_2_1_9_enabled: true
+rhel8cis_rule_2_1_10_enabled: true
+rhel8cis_rule_2_1_11_enabled: true
+rhel8cis_rule_2_1_12_enabled: true
+rhel8cis_rule_2_1_13_enabled: true
+rhel8cis_rule_2_1_14_enabled: true
+rhel8cis_rule_2_1_15_enabled: true
+rhel8cis_rule_2_1_16_enabled: true
+rhel8cis_rule_2_1_17_enabled: true
+rhel8cis_rule_2_1_18_enabled: true
+rhel8cis_rule_2_1_19_enabled: true
+rhel8cis_rule_2_1_20_enabled: true
+rhel8cis_rule_2_1_21_enabled: true
+rhel8cis_rule_2_1_22_enabled: true
+rhel8cis_rule_2_1_23_enabled: true
+rhel8cis_rule_2_1_24_enabled: true
 
-rhel8cis_chrony_servers:
-  - name: 0.pool.ntp.org
-    options:
-      - minpoll 8
-  - name: 1.pool.ntp.org
-    options:
-      - minpoll 8
-  - name: 2.pool.ntp.org
-    options:
-      - minpoll 8
-  - name: 3.pool.ntp.org
-    options:
-      - minpoll 8
-
-# 2.2 - Configure Special Purpose Services
-
-rhel8cis_rule_2_2_1_enabled: true
-rhel8cis_rule_2_2_2_enabled: true
-rhel8cis_rule_2_2_3_enabled: true
-rhel8cis_rule_2_2_4_enabled: true
-rhel8cis_rule_2_2_5_enabled: true
-rhel8cis_rule_2_2_6_enabled: true
-rhel8cis_rule_2_2_7_enabled: true
-rhel8cis_rule_2_2_8_enabled: true
-rhel8cis_rule_2_2_9_enabled: true
-rhel8cis_rule_2_2_10_enabled: true
-rhel8cis_rule_2_2_11_enabled: true
-rhel8cis_rule_2_2_12_enabled: true
-rhel8cis_rule_2_2_13_enabled: true
-rhel8cis_rule_2_2_14_enabled: true
-rhel8cis_rule_2_2_15_enabled: true
-rhel8cis_rule_2_2_16_enabled: true
-rhel8cis_rule_2_2_17_enabled: true
-rhel8cis_rule_2_2_18_enabled: true
-rhel8cis_rule_2_2_19_enabled: true
-rhel8cis_rule_2_2_20_enabled: true
-rhel8cis_rule_2_2_21_enabled: true
-rhel8cis_rule_2_2_22_enabled: true
-
-rhel8cis_rule_2_2_1_force: false
-rhel8cis_rule_2_2_2_force: false
-rhel8cis_rule_2_2_20_force: false
+rhel8cis_rule_2_1_1_force: false
+rhel8cis_rule_2_1_2_force: false
+rhel8cis_rule_2_1_3_force: false
+rhel8cis_rule_2_1_21_force: false
+rhel8cis_rule_2_1_22_force: false
 
 rhel8cis_autofs_package_needed: false
 rhel8cis_avahi_package_needed: false
+rhel8cis_cockpit_ws_needed: false
 rhel8cis_dhcp_server_package_needed: false
 rhel8cis_bind_package_needed: false
 rhel8cis_dnsmasq_package_needed: false
@@ -296,15 +314,53 @@ rhel8cis_nginx_needed: false
 rhel8cis_xinetd_package_needed: false
 rhel8cis_xorg_needed: false
 
-# 2.3 - Configure Service Clients
+# 2.2 - Configure Service Clients
+
+rhel8cis_rule_2_2_1_enabled: true
+rhel8cis_rule_2_2_2_enabled: true
+rhel8cis_rule_2_2_3_enabled: true
+rhel8cis_rule_2_2_4_enabled: true
+rhel8cis_rule_2_2_5_enabled: true
+
+rhel8cis_rule_2_2_2_force: false
+
+# 2.3 - Configure Time Synchronization
 
 rhel8cis_rule_2_3_1_enabled: true
 rhel8cis_rule_2_3_2_enabled: true
 rhel8cis_rule_2_3_3_enabled: true
-rhel8cis_rule_2_3_4_enabled: true
-rhel8cis_rule_2_3_5_enabled: true
 
-rhel8cis_rule_2_3_2_force: false
+rhel8cis_chrony_servers:
+  - name: 0.pool.ntp.org
+    options:
+      - minpoll 8
+  - name: 1.pool.ntp.org
+    options:
+      - minpoll 8
+  - name: 2.pool.ntp.org
+    options:
+      - minpoll 8
+  - name: 3.pool.ntp.org
+    options:
+      - minpoll 8
+
+# 2.4 - Job schedulers
+
+# 2.4.1 - Configure cron
+
+rhel8cis_rule_2_4_1_1_enabled: true
+rhel8cis_rule_2_4_1_2_enabled: true
+rhel8cis_rule_2_4_1_3_enabled: true
+rhel8cis_rule_2_4_1_4_enabled: true
+rhel8cis_rule_2_4_1_5_enabled: true
+rhel8cis_rule_2_4_1_6_enabled: true
+rhel8cis_rule_2_4_1_7_enabled: true
+rhel8cis_rule_2_4_1_8_enabled: true
+rhel8cis_rule_2_4_1_9_enabled: true
+
+# 2.4.2 - Configure at
+
+rhel8cis_rule_2_4_2_1_enabled: true
 
 # 3 - Network
 
@@ -324,88 +380,94 @@ rhel8cis_rule_3_2_1_enabled: true
 rhel8cis_rule_3_2_2_enabled: true
 rhel8cis_rule_3_2_3_enabled: true
 rhel8cis_rule_3_2_4_enabled: true
+rhel8cis_rule_3_2_5_enabled: true
+rhel8cis_rule_3_2_6_enabled: true
 
-rhel8cis_rule_3_2_1_force: false
-rhel8cis_rule_3_2_2_force: false
-rhel8cis_rule_3_2_3_force: false
-rhel8cis_rule_3_2_4_force: false
+rhel8cis_rule_3_2_5_force: false
 
 # 3.3 - Configure Network Kernel Parameters
 
-rhel8cis_rule_3_3_1_enabled: true
-rhel8cis_rule_3_3_2_enabled: true
-rhel8cis_rule_3_3_3_enabled: true
-rhel8cis_rule_3_3_4_enabled: true
-rhel8cis_rule_3_3_5_enabled: true
-rhel8cis_rule_3_3_6_enabled: true
-rhel8cis_rule_3_3_7_enabled: true
-rhel8cis_rule_3_3_8_enabled: true
-rhel8cis_rule_3_3_9_enabled: true
-rhel8cis_rule_3_3_10_enabled: true
-rhel8cis_rule_3_3_11_enabled: true
+# 3.3.1 - Configure IPv4 parameters
 
-# 3.4 - Configure Host Based Firewall
+rhel8cis_rule_3_3_1_1_enabled: true
+rhel8cis_rule_3_3_1_2_enabled: true
+rhel8cis_rule_3_3_1_3_enabled: true
+rhel8cis_rule_3_3_1_4_enabled: true
+rhel8cis_rule_3_3_1_5_enabled: true
+rhel8cis_rule_3_3_1_6_enabled: true
+rhel8cis_rule_3_3_1_7_enabled: true
+rhel8cis_rule_3_3_1_8_enabled: true
+rhel8cis_rule_3_3_1_9_enabled: true
+rhel8cis_rule_3_3_1_10_enabled: true
+rhel8cis_rule_3_3_1_11_enabled: true
+rhel8cis_rule_3_3_1_12_enabled: true
+rhel8cis_rule_3_3_1_13_enabled: true
+rhel8cis_rule_3_3_1_14_enabled: true
+rhel8cis_rule_3_3_1_15_enabled: true
+rhel8cis_rule_3_3_1_16_enabled: true
+rhel8cis_rule_3_3_1_17_enabled: true
+rhel8cis_rule_3_3_1_18_enabled: true
 
-# 3.4.1 - Configure a firewall utility
+rhel8cis_rule_3_3_1_1_force: false
 
-rhel8cis_rule_3_4_1_1_enabled: true
-rhel8cis_rule_3_4_1_2_enabled: true
+# 3.3.2 - Configure IPv6 parameters
 
-rhel8cis_firewall: firewalld
+rhel8cis_rule_3_3_2_1_enabled: true
+rhel8cis_rule_3_3_2_2_enabled: true
+rhel8cis_rule_3_3_2_3_enabled: true
+rhel8cis_rule_3_3_2_4_enabled: true
+rhel8cis_rule_3_3_2_5_enabled: true
+rhel8cis_rule_3_3_2_6_enabled: true
+rhel8cis_rule_3_3_2_7_enabled: true
+rhel8cis_rule_3_3_2_8_enabled: true
 
-# 3.4.2 - Configure firewall rules
+# 4 - Host Based Firewall
 
-rhel8cis_rule_3_4_2_1_enabled: true
-rhel8cis_rule_3_4_2_2_enabled: true
-rhel8cis_rule_3_4_2_3_enabled: true
-rhel8cis_rule_3_4_2_4_enabled: true
-rhel8cis_rule_3_4_2_5_enabled: true
+# 4.1 - Configure firewalld
 
-# 4 - Access, Authentication and Authorization
+rhel8cis_rule_4_1_1_enabled: true
+rhel8cis_rule_4_1_2_enabled: true
+rhel8cis_rule_4_1_3_enabled: true
+rhel8cis_rule_4_1_4_enabled: true
+rhel8cis_rule_4_1_5_enabled: true
+rhel8cis_rule_4_1_6_enabled: true
+rhel8cis_rule_4_1_7_enabled: true
 
-# 4.1 - Configure job schedulers
+rhel8cis_firewalld_backend: nftables
+rhel8cis_firewalld_active_zone: public
+rhel8cis_firewalld_active_zone_target: DROP
 
-# 4.1.1 - Configure cron
+# 5 - Access Control
 
-rhel8cis_rule_4_1_1_1_enabled: true
-rhel8cis_rule_4_1_1_2_enabled: true
-rhel8cis_rule_4_1_1_3_enabled: true
-rhel8cis_rule_4_1_1_4_enabled: true
-rhel8cis_rule_4_1_1_5_enabled: true
-rhel8cis_rule_4_1_1_6_enabled: true
-rhel8cis_rule_4_1_1_7_enabled: true
-rhel8cis_rule_4_1_1_8_enabled: true
+# 5.1 - Configure SSH Server
 
-# 4.1.2 - Configure at
+rhel8cis_rule_5_1_1_enabled: true
+rhel8cis_rule_5_1_2_enabled: true
+rhel8cis_rule_5_1_3_enabled: true
+rhel8cis_rule_5_1_4_enabled: true
+rhel8cis_rule_5_1_5_enabled: true
+rhel8cis_rule_5_1_6_enabled: true
+rhel8cis_rule_5_1_7_enabled: true
+rhel8cis_rule_5_1_8_enabled: true
+rhel8cis_rule_5_1_9_enabled: true
+rhel8cis_rule_5_1_10_enabled: true
+rhel8cis_rule_5_1_11_enabled: true
+rhel8cis_rule_5_1_12_enabled: true
+rhel8cis_rule_5_1_13_enabled: true
+rhel8cis_rule_5_1_14_enabled: true
+rhel8cis_rule_5_1_15_enabled: true
+rhel8cis_rule_5_1_16_enabled: true
+rhel8cis_rule_5_1_17_enabled: true
+rhel8cis_rule_5_1_18_enabled: true
+rhel8cis_rule_5_1_19_enabled: true
+rhel8cis_rule_5_1_20_enabled: true
+rhel8cis_rule_5_1_21_enabled: true
+rhel8cis_rule_5_1_22_enabled: true
+rhel8cis_rule_5_1_23_enabled: true
+rhel8cis_rule_5_1_24_enabled: true
 
-rhel8cis_rule_4_1_2_1_enabled: true
-
-# 4.2 - Configure SSH server
-
-rhel8cis_rule_4_2_1_enabled: true
-rhel8cis_rule_4_2_2_enabled: true
-rhel8cis_rule_4_2_3_enabled: true
-rhel8cis_rule_4_2_4_enabled: true
-rhel8cis_rule_4_2_5_enabled: true
-rhel8cis_rule_4_2_6_enabled: true
-rhel8cis_rule_4_2_7_enabled: true
-rhel8cis_rule_4_2_8_enabled: true
-rhel8cis_rule_4_2_9_enabled: true
-rhel8cis_rule_4_2_10_enabled: true
-rhel8cis_rule_4_2_11_enabled: true
-rhel8cis_rule_4_2_12_enabled: true
-rhel8cis_rule_4_2_13_enabled: true
-rhel8cis_rule_4_2_14_enabled: true
-rhel8cis_rule_4_2_15_enabled: true
-rhel8cis_rule_4_2_16_enabled: true
-rhel8cis_rule_4_2_17_enabled: true
-rhel8cis_rule_4_2_18_enabled: true
-rhel8cis_rule_4_2_19_enabled: true
-rhel8cis_rule_4_2_20_enabled: true
-rhel8cis_rule_4_2_21_enabled: true
-rhel8cis_rule_4_2_22_enabled: true
-
-rhel8cis_rule_4_2_8_force: false
+rhel8cis_rule_5_1_10_force: false
+rhel8cis_rule_5_1_11_force: false
 
 rhel8cis_sshd_allow_users: []
 rhel8cis_sshd_allow_groups:
@@ -415,28 +477,7 @@ rhel8cis_sshd_deny_groups: []
 
 rhel8cis_sshd_client_alive_interval: 15
 rhel8cis_sshd_client_alive_count_max: 3
-rhel8cis_sshd_removed_ciphers:
-  - 3des-cbc
-  - aes128-cbc
-  - aes192-cbc
-  - aes256-cbc
-  - rijndael-cbc@lysator.liu.se
-rhel8cis_sshd_removed_kex_algorithms:
-  - diffie-hellman-group1-sha1
-  - diffie-hellman-group14-sha1
-  - diffie-hellman-group-exchange-sha1
 rhel8cis_sshd_login_grace_time: 60
-rhel8cis_sshd_removed_macs:
-  - hmac-md5
-  - hmac-md5-96
-  - hmac-ripemd160
-  - hmac-sha1-96
-  - umac-64@openssh.com
-  - hmac-md5-etm@openssh.com
-  - hmac-md5-96-etm@openssh.com
-  - hmac-ripemd160-etm@openssh.com
-  - hmac-sha1-96-etm@openssh.com
-  - umac-64-etm@openssh.com
 rhel8cis_sshd_max_auth_tries: 4
 rhel8cis_sshd_max_sessions: 10
 rhel8cis_sshd_max_startups_before_dropping: 10
@@ -445,17 +486,17 @@ rhel8cis_sshd_max_startups_absolute_maximum: 60
 
 rhel8cis_sshd_log_level: INFO
 
-# 4.3 - Configure privilege escalation
+# 5.2 - Configure privilege escalation
 
-rhel8cis_rule_4_3_1_enabled: true
-rhel8cis_rule_4_3_2_enabled: true
-rhel8cis_rule_4_3_3_enabled: true
-rhel8cis_rule_4_3_4_enabled: true
-rhel8cis_rule_4_3_5_enabled: true
-rhel8cis_rule_4_3_6_enabled: true
-rhel8cis_rule_4_3_7_enabled: true
+rhel8cis_rule_5_2_1_enabled: true
+rhel8cis_rule_5_2_2_enabled: true
+rhel8cis_rule_5_2_3_enabled: true
+rhel8cis_rule_5_2_4_enabled: true
+rhel8cis_rule_5_2_5_enabled: true
+rhel8cis_rule_5_2_6_enabled: true
+rhel8cis_rule_5_2_7_enabled: true
 
-rhel8cis_rule_4_3_4_force: false
+rhel8cis_rule_5_2_4_force: false
 
 rhel8cis_sudo_log_file: /var/log/sudo.log
 rhel8cis_sudo_authentication_timeout: 15
@@ -464,283 +505,289 @@ rhel8cis_su_group_name: su
 rhel8cis_su_group_members:
   - root
 
-# 4.4 - Configure Pluggable Authentication Modules
+# 5.3 - Configure Pluggable Authentication Modules
 
-# 4.4.1 - Configure PAM software packages
+# 5.3.1 - Configure PAM software packages
 
-rhel8cis_rule_4_4_1_1_enabled: true
-rhel8cis_rule_4_4_1_2_enabled: true
+rhel8cis_rule_5_3_1_1_enabled: true
+rhel8cis_rule_5_3_1_2_enabled: true
 
-# 4.4.2 - Configure authselect
+# 5.3.3 - Configure pluggable module arguments
 
-rhel8cis_rule_4_4_2_1_enabled: true
-rhel8cis_rule_4_4_2_2_enabled: true
-rhel8cis_rule_4_4_2_3_enabled: true
-rhel8cis_rule_4_4_2_4_enabled: true
-rhel8cis_rule_4_4_2_5_enabled: true
+# 5.3.3.1 - Configure pam_faillock module
 
-# 4.4.3 - Configure pluggable module arguments
+rhel8cis_rule_5_3_3_1_1_enabled: true
+rhel8cis_rule_5_3_3_1_2_enabled: true
+rhel8cis_rule_5_3_3_1_3_enabled: true
 
-# 4.4.3.1 - Configure pam_faillock module
-
-rhel8cis_rule_4_4_3_1_1_enabled: true
-rhel8cis_rule_4_4_3_1_2_enabled: true
-rhel8cis_rule_4_4_3_1_3_enabled: true
-
-rhel8cis_rule_4_4_3_1_3_force: false
+rhel8cis_rule_5_3_3_1_3_force: false
 
 rhel8cis_lockout_failed_attempts: 5
 rhel8cis_lockout_unlock_time: 900
 rhel8cis_lockout_root_unlock_time: 900
 
-# 4.4.3.2 - Configure pam_pwquality module
+# 5.3.3.2 - Configure pam_pwquality module
 
-rhel8cis_rule_4_4_3_2_1_enabled: true
-rhel8cis_rule_4_4_3_2_2_enabled: true
-rhel8cis_rule_4_4_3_2_3_enabled: true
-rhel8cis_rule_4_4_3_2_4_enabled: true
-rhel8cis_rule_4_4_3_2_5_enabled: true
-rhel8cis_rule_4_4_3_2_6_enabled: true
-rhel8cis_rule_4_4_3_2_7_enabled: true
+rhel8cis_rule_5_3_3_2_1_enabled: true
+rhel8cis_rule_5_3_3_2_2_enabled: true
+rhel8cis_rule_5_3_3_2_3_enabled: true
+rhel8cis_rule_5_3_3_2_4_enabled: true
+rhel8cis_rule_5_3_3_2_5_enabled: true
+rhel8cis_rule_5_3_3_2_6_enabled: true
+rhel8cis_rule_5_3_3_2_7_enabled: true
 
 rhel8cis_password_min_changed_characters: 2
 rhel8cis_password_min_length: 14
 rhel8cis_password_max_repeat_characters: 3
 rhel8cis_password_max_sequential_characters: 3
 
-# 4.4.3.3 - Configure pam_pwhistory module
+# 5.3.3.3 - Configure pam_pwhistory module
 
-rhel8cis_rule_4_4_3_3_1_enabled: true
-rhel8cis_rule_4_4_3_3_2_enabled: true
-rhel8cis_rule_4_4_3_3_3_enabled: true
+rhel8cis_rule_5_3_3_3_1_enabled: true
+rhel8cis_rule_5_3_3_3_2_enabled: true
+rhel8cis_rule_5_3_3_3_3_enabled: true
 
 rhel8cis_passwords_remembered: 24
 
-# 4.4.3.4 - Configure pam_unix module
+# 5.3.3.4 - Configure pam_unix module
 
-rhel8cis_rule_4_4_3_4_1_enabled: true
-rhel8cis_rule_4_4_3_4_2_enabled: true
-rhel8cis_rule_4_4_3_4_3_enabled: true
-rhel8cis_rule_4_4_3_4_4_enabled: true
+rhel8cis_rule_5_3_3_4_1_enabled: true
+rhel8cis_rule_5_3_3_4_2_enabled: true
+rhel8cis_rule_5_3_3_4_3_enabled: true
+rhel8cis_rule_5_3_3_4_4_enabled: true
 
-# 4.5 - User Accounts and Environment
+# 5.4 - User Accounts and Environment
 
-# 4.5.1 - Configure shadow password suite parameters
+# 5.4.1 - Configure shadow password suite parameters
 
-rhel8cis_rule_4_5_1_1_enabled: true
-rhel8cis_rule_4_5_1_2_enabled: true
-rhel8cis_rule_4_5_1_3_enabled: true
-rhel8cis_rule_4_5_1_4_enabled: true
-rhel8cis_rule_4_5_1_5_enabled: true
+rhel8cis_rule_5_4_1_1_enabled: true
+rhel8cis_rule_5_4_1_2_enabled: true
+rhel8cis_rule_5_4_1_3_enabled: true
+rhel8cis_rule_5_4_1_4_enabled: true
+rhel8cis_rule_5_4_1_5_enabled: true
+rhel8cis_rule_5_4_1_6_enabled: true
 
-rhel8cis_password_encryption_algorithm: SHA512
+rhel8cis_rule_5_4_1_2_force: false
+
 rhel8cis_password_expiration_days: 365
+rhel8cis_password_minimum_days: 1
+rhel8cis_password_encryption_algorithm: SHA512
 rhel8cis_password_expiration_warning_days: 7
 rhel8cis_inactive_password_lock_days: 30
 
-# 4.5.2 - Configure root and system accounts and environment
+# 5.4.2 - Configure root and system accounts and environment
 
-rhel8cis_rule_4_5_2_1_enabled: true
-rhel8cis_rule_4_5_2_2_enabled: true
-rhel8cis_rule_4_5_2_3_enabled: true
-rhel8cis_rule_4_5_2_4_enabled: true
+rhel8cis_rule_5_4_2_1_enabled: true
+rhel8cis_rule_5_4_2_2_enabled: true
+rhel8cis_rule_5_4_2_3_enabled: true
+rhel8cis_rule_5_4_2_4_enabled: true
+rhel8cis_rule_5_4_2_5_enabled: true
+rhel8cis_rule_5_4_2_6_enabled: true
+rhel8cis_rule_5_4_2_7_enabled: true
+rhel8cis_rule_5_4_2_8_enabled: true
 
-# 4.5.3 - Configure user default environment
+# 5.4.3 - Configure user default environment
 
-rhel8cis_rule_4_5_3_1_enabled: true
-rhel8cis_rule_4_5_3_2_enabled: true
-rhel8cis_rule_4_5_3_3_enabled: true
+rhel8cis_rule_5_4_3_1_enabled: true
+rhel8cis_rule_5_4_3_2_enabled: true
+rhel8cis_rule_5_4_3_3_enabled: true
 
-rhel8cis_rule_4_5_3_1_force: false
+rhel8cis_rule_5_4_3_1_force: false
 
-# 5 - Logging and Auditing
+rhel8cis_default_user_shell_timeout_seconds: 900
 
-# 5.1 - Configure Logging
+# 6 - Logging and Auditing
 
-# 5.1.1 - Configure rsyslog
+# 6.1 - Configure Integrity Checking
 
-rhel8cis_rule_5_1_1_1_enabled: true
-rhel8cis_rule_5_1_1_2_enabled: true
-rhel8cis_rule_5_1_1_3_enabled: true
-rhel8cis_rule_5_1_1_4_enabled: true
-rhel8cis_rule_5_1_1_5_enabled: true
-rhel8cis_rule_5_1_1_6_enabled: true
-rhel8cis_rule_5_1_1_7_enabled: true
-
-rhel8cis_syslog: rsyslog
-rhel8cis_remote_log_server: loghost.example.com
-
-# 5.1.2 - Configure journald
-
-# 5.1.2.1 - Ensure journald is configured to send logs to a remote log host
-
-rhel8cis_rule_5_1_2_1_1_enabled: true
-rhel8cis_rule_5_1_2_1_2_enabled: true
-rhel8cis_rule_5_1_2_1_3_enabled: true
-rhel8cis_rule_5_1_2_1_4_enabled: true
-
-rhel8cis_rule_5_1_2_2_enabled: true
-rhel8cis_rule_5_1_2_3_enabled: true
-rhel8cis_rule_5_1_2_4_enabled: true
-rhel8cis_rule_5_1_2_5_enabled: true
-rhel8cis_rule_5_1_2_6_enabled: true
-
-rhel8cis_rule_5_1_3_enabled: true
-rhel8cis_rule_5_1_4_enabled: true
-
-rhel8cis_journal_server_key_file: /etc/ssl/private/journal-upload.pem
-rhel8cis_journal_server_cert_file: /etc/ssl/certs/journal-upload.pem
-rhel8cis_journal_server_trusted_cert_file: /etc/ssl/ca/trusted.pem
-rhel8cis_journald_systemmaxuse: 10M
-rhel8cis_journald_systemkeepfree: 100G
-rhel8cis_journald_runtimemaxuse: 10M
-rhel8cis_journald_runtimekeepfree: 100G
-rhel8cis_journald_maxfilesec: 1month
-rhel8cis_logrotate_frequency: daily
-
-# 5.2 - Configure System Accounting (auditd)
-
-# 5.2.1 - Ensure auditing is enabled
-
-rhel8cis_rule_5_2_1_1_enabled: true
-rhel8cis_rule_5_2_1_2_enabled: true
-rhel8cis_rule_5_2_1_3_enabled: true
-rhel8cis_rule_5_2_1_4_enabled: true
-
-rhel8cis_rule_5_2_1_1_force: false
-rhel8cis_rule_5_2_1_2_force: false
-rhel8cis_rule_5_2_1_3_force: false
-rhel8cis_rule_5_2_1_4_force: false
-
-rhel8cis_audit_backlog_limit: 8192
-
-# 5.2.2 - Configure Data Retention
-
-rhel8cis_rule_5_2_2_1_enabled: true
-rhel8cis_rule_5_2_2_2_enabled: true
-rhel8cis_rule_5_2_2_3_enabled: true
-rhel8cis_rule_5_2_2_4_enabled: true
-
-rhel8cis_rule_5_2_2_1_force: false
-rhel8cis_rule_5_2_2_2_force: false
-rhel8cis_rule_5_2_2_3_force: false
-rhel8cis_rule_5_2_2_4_force: false
-
-rhel8cis_auditd_max_log_file: 10
-rhel8cis_auditd_disk_full_action: halt
-rhel8cis_auditd_disk_error_action: halt
-
-# 5.2.3 - Configure auditd rules
-
-rhel8cis_rule_5_2_3_1_enabled: true
-rhel8cis_rule_5_2_3_2_enabled: true
-rhel8cis_rule_5_2_3_3_enabled: true
-rhel8cis_rule_5_2_3_4_enabled: true
-rhel8cis_rule_5_2_3_5_enabled: true
-rhel8cis_rule_5_2_3_6_enabled: true
-rhel8cis_rule_5_2_3_7_enabled: true
-rhel8cis_rule_5_2_3_8_enabled: true
-rhel8cis_rule_5_2_3_9_enabled: true
-rhel8cis_rule_5_2_3_10_enabled: true
-rhel8cis_rule_5_2_3_11_enabled: true
-rhel8cis_rule_5_2_3_12_enabled: true
-rhel8cis_rule_5_2_3_13_enabled: true
-rhel8cis_rule_5_2_3_14_enabled: true
-rhel8cis_rule_5_2_3_15_enabled: true
-rhel8cis_rule_5_2_3_16_enabled: true
-rhel8cis_rule_5_2_3_17_enabled: true
-rhel8cis_rule_5_2_3_18_enabled: true
-rhel8cis_rule_5_2_3_19_enabled: true
-rhel8cis_rule_5_2_3_20_enabled: true
-rhel8cis_rule_5_2_3_21_enabled: true
-
-rhel8cis_rule_5_2_3_1_force: false
-rhel8cis_rule_5_2_3_2_force: false
-rhel8cis_rule_5_2_3_3_force: false
-rhel8cis_rule_5_2_3_4_force: false
-rhel8cis_rule_5_2_3_5_force: false
-rhel8cis_rule_5_2_3_6_force: false
-rhel8cis_rule_5_2_3_7_force: false
-rhel8cis_rule_5_2_3_8_force: false
-rhel8cis_rule_5_2_3_9_force: false
-rhel8cis_rule_5_2_3_10_force: false
-rhel8cis_rule_5_2_3_11_force: false
-rhel8cis_rule_5_2_3_12_force: false
-rhel8cis_rule_5_2_3_13_force: false
-rhel8cis_rule_5_2_3_14_force: false
-rhel8cis_rule_5_2_3_15_force: false
-rhel8cis_rule_5_2_3_16_force: false
-rhel8cis_rule_5_2_3_17_force: false
-rhel8cis_rule_5_2_3_18_force: false
-rhel8cis_rule_5_2_3_19_force: false
-rhel8cis_rule_5_2_3_20_force: false
-rhel8cis_rule_5_2_3_21_force: false
-
-# 5.2.4 - Configure auditd file access
-
-rhel8cis_rule_5_2_4_1_enabled: true
-rhel8cis_rule_5_2_4_2_enabled: true
-rhel8cis_rule_5_2_4_3_enabled: true
-rhel8cis_rule_5_2_4_4_enabled: true
-rhel8cis_rule_5_2_4_5_enabled: true
-rhel8cis_rule_5_2_4_6_enabled: true
-rhel8cis_rule_5_2_4_7_enabled: true
-rhel8cis_rule_5_2_4_8_enabled: true
-rhel8cis_rule_5_2_4_9_enabled: true
-rhel8cis_rule_5_2_4_10_enabled: true
-
-rhel8cis_rule_5_2_4_1_force: false
-rhel8cis_rule_5_2_4_2_force: false
-rhel8cis_rule_5_2_4_3_force: false
-rhel8cis_rule_5_2_4_4_force: false
-rhel8cis_rule_5_2_4_5_force: false
-rhel8cis_rule_5_2_4_6_force: false
-rhel8cis_rule_5_2_4_7_force: false
-rhel8cis_rule_5_2_4_8_force: false
-rhel8cis_rule_5_2_4_9_force: false
-rhel8cis_rule_5_2_4_10_force: false
-
-# 5.3 - Configure Integrity Checking
-
-rhel8cis_rule_5_3_1_enabled: true
-rhel8cis_rule_5_3_2_enabled: true
-rhel8cis_rule_5_3_3_enabled: true
+rhel8cis_rule_6_1_1_enabled: true
+rhel8cis_rule_6_1_2_enabled: true
+rhel8cis_rule_6_1_3_enabled: true
 
 rhel8cis_aide_cron_file: /etc/cron.d/aide
 rhel8cis_aide_cron_hour: 5
 rhel8cis_aide_cron_minute: 0
 
-# 6 - System Maintenance
+# 6.2 - System Logging
 
-# 6.1 - System File Permissions
+# 6.2.1 - Configure journald
 
-rhel8cis_rule_6_1_1_enabled: true
-rhel8cis_rule_6_1_2_enabled: true
-rhel8cis_rule_6_1_3_enabled: true
-rhel8cis_rule_6_1_4_enabled: true
-rhel8cis_rule_6_1_5_enabled: true
-rhel8cis_rule_6_1_6_enabled: true
-rhel8cis_rule_6_1_7_enabled: true
-rhel8cis_rule_6_1_8_enabled: true
-rhel8cis_rule_6_1_9_enabled: true
-rhel8cis_rule_6_1_10_enabled: true
-rhel8cis_rule_6_1_11_enabled: true
-rhel8cis_rule_6_1_12_enabled: true
-rhel8cis_rule_6_1_13_enabled: true
-rhel8cis_rule_6_1_14_enabled: true
+rhel8cis_syslog: rsyslog
 
-rhel8cis_rule_6_1_14_force: false
+# 6.2.1.1 - Configure systemd-journald service
 
-# 6.2 - Local User and Group Settings
+rhel8cis_rule_6_2_1_1_1_enabled: true
+rhel8cis_rule_6_2_1_1_2_enabled: true
+rhel8cis_rule_6_2_1_1_3_enabled: true
+rhel8cis_rule_6_2_1_1_4_enabled: true
+rhel8cis_rule_6_2_1_1_5_enabled: true
+rhel8cis_rule_6_2_1_1_6_enabled: true
 
-rhel8cis_rule_6_2_1_enabled: true
-rhel8cis_rule_6_2_2_enabled: true
-rhel8cis_rule_6_2_3_enabled: true
-rhel8cis_rule_6_2_4_enabled: true
-rhel8cis_rule_6_2_5_enabled: true
-rhel8cis_rule_6_2_6_enabled: true
-rhel8cis_rule_6_2_7_enabled: true
-rhel8cis_rule_6_2_8_enabled: true
-rhel8cis_rule_6_2_9_enabled: true
-rhel8cis_rule_6_2_10_enabled: true
-rhel8cis_rule_6_2_11_enabled: true
+rhel8cis_journald_systemmaxuse: 10M
+rhel8cis_journald_systemkeepfree: 100G
+rhel8cis_journald_runtimemaxuse: 10M
+rhel8cis_journald_runtimekeepfree: 100G
+rhel8cis_journald_maxfilesec: 1month
+
+# 6.2.1.2 - Configure systemd-journal-remote
+
+rhel8cis_rule_6_2_1_2_1_enabled: true
+rhel8cis_rule_6_2_1_2_2_enabled: true
+rhel8cis_rule_6_2_1_2_3_enabled: true
+rhel8cis_rule_6_2_1_2_4_enabled: true
+
+rhel8cis_remote_log_server: loghost.example.com
+rhel8cis_journal_server_key_file: /etc/ssl/private/journal-upload.pem
+rhel8cis_journal_server_cert_file: /etc/ssl/certs/journal-upload.pem
+rhel8cis_journal_server_trusted_cert_file: /etc/ssl/ca/trusted.pem
+
+# 6.2.2 - Configure rsyslog
+
+rhel8cis_rule_6_2_2_1_enabled: true
+rhel8cis_rule_6_2_2_2_enabled: true
+rhel8cis_rule_6_2_2_3_enabled: true
+rhel8cis_rule_6_2_2_4_enabled: true
+rhel8cis_rule_6_2_2_5_enabled: true
+rhel8cis_rule_6_2_2_6_enabled: true
+rhel8cis_rule_6_2_2_7_enabled: true
+rhel8cis_rule_6_2_2_8_enabled: true
+
+rhel8cis_logrotate_frequency: daily
+
+# 6.2.3 - Configure Logfiles
+
+rhel8cis_rule_6_2_3_1_enabled: true
+
+# 6.3 - System Auditing
+
+# 6.3.1 - Configure auditd Service
+
+rhel8cis_rule_6_3_1_1_enabled: true
+rhel8cis_rule_6_3_1_2_enabled: true
+rhel8cis_rule_6_3_1_3_enabled: true
+rhel8cis_rule_6_3_1_4_enabled: true
+
+rhel8cis_rule_6_3_1_1_force: false
+rhel8cis_rule_6_3_1_2_force: false
+rhel8cis_rule_6_3_1_3_force: false
+rhel8cis_rule_6_3_1_4_force: false
+
+rhel8cis_audit_backlog_limit: 8192
+
+# 6.3.2 - Configure Data Retention
+
+rhel8cis_rule_6_3_2_1_enabled: true
+rhel8cis_rule_6_3_2_2_enabled: true
+rhel8cis_rule_6_3_2_3_enabled: true
+rhel8cis_rule_6_3_2_4_enabled: true
+
+rhel8cis_rule_6_3_2_1_force: false
+rhel8cis_rule_6_3_2_2_force: false
+rhel8cis_rule_6_3_2_3_force: false
+rhel8cis_rule_6_3_2_4_force: false
+
+rhel8cis_auditd_max_log_file: 10
+rhel8cis_auditd_disk_full_action: halt
+rhel8cis_auditd_disk_error_action: halt
+
+# 6.3.3 - Configure auditd Rules
+
+rhel8cis_rule_6_3_3_1_enabled: true
+rhel8cis_rule_6_3_3_2_enabled: true
+rhel8cis_rule_6_3_3_3_enabled: true
+rhel8cis_rule_6_3_3_4_enabled: true
+rhel8cis_rule_6_3_3_5_enabled: true
+rhel8cis_rule_6_3_3_6_enabled: true
+rhel8cis_rule_6_3_3_7_enabled: true
+rhel8cis_rule_6_3_3_8_enabled: true
+rhel8cis_rule_6_3_3_9_enabled: true
+rhel8cis_rule_6_3_3_10_enabled: true
+rhel8cis_rule_6_3_3_11_enabled: true
+rhel8cis_rule_6_3_3_12_enabled: true
+rhel8cis_rule_6_3_3_13_enabled: true
+rhel8cis_rule_6_3_3_14_enabled: true
+rhel8cis_rule_6_3_3_15_enabled: true
+rhel8cis_rule_6_3_3_16_enabled: true
+rhel8cis_rule_6_3_3_17_enabled: true
+rhel8cis_rule_6_3_3_18_enabled: true
+rhel8cis_rule_6_3_3_19_enabled: true
+rhel8cis_rule_6_3_3_20_enabled: true
+rhel8cis_rule_6_3_3_21_enabled: true
+rhel8cis_rule_6_3_3_22_enabled: true
+
+rhel8cis_rule_6_3_3_1_force: false
+rhel8cis_rule_6_3_3_2_force: false
+rhel8cis_rule_6_3_3_3_force: false
+rhel8cis_rule_6_3_3_4_force: false
+rhel8cis_rule_6_3_3_5_force: false
+rhel8cis_rule_6_3_3_6_force: false
+rhel8cis_rule_6_3_3_7_force: false
+rhel8cis_rule_6_3_3_8_force: false
+rhel8cis_rule_6_3_3_9_force: false
+rhel8cis_rule_6_3_3_10_force: false
+rhel8cis_rule_6_3_3_11_force: false
+rhel8cis_rule_6_3_3_12_force: false
+rhel8cis_rule_6_3_3_13_force: false
+rhel8cis_rule_6_3_3_14_force: false
+rhel8cis_rule_6_3_3_15_force: false
+rhel8cis_rule_6_3_3_16_force: false
+rhel8cis_rule_6_3_3_17_force: false
+rhel8cis_rule_6_3_3_18_force: false
+rhel8cis_rule_6_3_3_19_force: false
+rhel8cis_rule_6_3_3_20_force: false
+rhel8cis_rule_6_3_3_21_force: false
+rhel8cis_rule_6_3_3_22_force: false
+
+# 6.3.4 - Configure auditd File Access
+
+rhel8cis_rule_6_3_4_1_enabled: true
+rhel8cis_rule_6_3_4_2_enabled: true
+rhel8cis_rule_6_3_4_3_enabled: true
+rhel8cis_rule_6_3_4_4_enabled: true
+rhel8cis_rule_6_3_4_5_enabled: true
+rhel8cis_rule_6_3_4_6_enabled: true
+rhel8cis_rule_6_3_4_7_enabled: true
+rhel8cis_rule_6_3_4_8_enabled: true
+rhel8cis_rule_6_3_4_9_enabled: true
+rhel8cis_rule_6_3_4_10_enabled: true
+
+rhel8cis_rule_6_3_4_1_force: false
+rhel8cis_rule_6_3_4_2_force: false
+rhel8cis_rule_6_3_4_3_force: false
+rhel8cis_rule_6_3_4_4_force: false
+rhel8cis_rule_6_3_4_5_force: false
+rhel8cis_rule_6_3_4_6_force: false
+rhel8cis_rule_6_3_4_7_force: false
+rhel8cis_rule_6_3_4_8_force: false
+rhel8cis_rule_6_3_4_9_force: false
+rhel8cis_rule_6_3_4_10_force: false
+
+# 7 - System Maintenance
+
+# 7.1 - Configure system file and directory access
+
+rhel8cis_rule_7_1_1_enabled: true
+rhel8cis_rule_7_1_2_enabled: true
+rhel8cis_rule_7_1_3_enabled: true
+rhel8cis_rule_7_1_4_enabled: true
+rhel8cis_rule_7_1_5_enabled: true
+rhel8cis_rule_7_1_6_enabled: true
+rhel8cis_rule_7_1_7_enabled: true
+rhel8cis_rule_7_1_8_enabled: true
+rhel8cis_rule_7_1_9_enabled: true
+rhel8cis_rule_7_1_10_enabled: true
+rhel8cis_rule_7_1_11_enabled: true
+rhel8cis_rule_7_1_12_enabled: true
+rhel8cis_rule_7_1_13_enabled: true
+
+# 7.2 - Local User and Group Settings
+
+rhel8cis_rule_7_2_1_enabled: true
+rhel8cis_rule_7_2_2_enabled: true
+rhel8cis_rule_7_2_3_enabled: true
+rhel8cis_rule_7_2_4_enabled: true
+rhel8cis_rule_7_2_5_enabled: true
+rhel8cis_rule_7_2_6_enabled: true
+rhel8cis_rule_7_2_7_enabled: true
+rhel8cis_rule_7_2_8_enabled: true
+rhel8cis_rule_7_2_9_enabled: true

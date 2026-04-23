@@ -7,3 +7,6 @@
 
 - name: Execute the 2.3.x tasks
   ansible.builtin.import_tasks: section2/2.3.x.yml
+
+- name: Execute the 2.4.x tasks
+  ansible.builtin.import_tasks: section2/2.4.x.yml

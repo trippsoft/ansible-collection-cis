@@ -1,0 +1,251 @@
+---
+- name: 7.2.1 | Ensure accounts in /etc/passwd use shadowed passwords
+  when:
+    - rhel8cis_rule_7_2_1_enabled
+  become: true
+  ansible.builtin.replace:
+    path: /etc/passwd
+    regexp: '^(\S+)(?::[^:]*):(\d+):(\d+):([^:]*):([^:]*):([^:]*)$'
+    replace: '\1:x:\2:\3:\4:\5:\6'
+
+- name: 7.2.2 | Ensure /etc/shadow password fields are not empty
+  when:
+    - rhel8cis_rule_7_2_2_enabled
+  become: true
+  block:
+    - name: 7.2.2 | Ensure /etc/shadow password fields are not empty | Get list of empty password users # noqa risky-shell-pipe
+      check_mode: false
+      ansible.builtin.shell: |
+        cat /etc/shadow | awk -F: '($2 == \"\" ) { print $1; }'
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_empty_password_users
+
+    - name: 6.2.2 | Ensure /etc/shadow password fields are not empty | Lock empty password users
+      loop: "{{ _rhel8cis_empty_password_users.stdout_lines }}"
+      ansible.builtin.user:
+        name: "{{ item }}"
+        password: "!"
+        password_lock: true
+
+- name: 7.2.3 | Ensure all groups in /etc/passwd exist in /etc/group
+  when:
+    - rhel8cis_rule_7_2_3_enabled
+  block:
+    - name: 7.2.3 | Ensure all groups in /etc/passwd exist in /etc/group | Get list of users with missing groups # noqa risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: |
+        pwck -r | grep 'no group' | awk '{ gsub("[:\47]",""); print $2}'
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_missing_group_users
+
+    - name: 7.2.3 | Ensure all groups in /etc/passwd exist in /etc/group | Add warning
+      when:
+        - _rhel8cis_missing_group_users.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.2.3'
+        _rhel8cis_warning_description:
+          - 'The following users have a group assigned that does not exist on the system:'
+          - ''
+          - "{{ _rhel8cis_missing_group_users.stdout_lines }}"
+
+- name: 7.2.4 | Ensure no duplicate UIDs exist
+  when:
+    - rhel8cis_rule_7_2_4_enabled
+  block:
+    - name: 7.2.4 | Ensure no duplicate UIDs exist | Get list of duplicate UIDs # noqa risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: |
+        pwck -r | awk -F: '{if ($3 in uid) print $1 ; else uid[$3]}' /etc/passwd
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_duplicate_uids
+
+    - name: 7.2.4 | Ensure no duplicate UIDs exist | Add warning
+      when:
+        - _rhel8cis_duplicate_uids.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.2.4'
+        _rhel8cis_warning_description:
+          - 'The following UIDs have duplicate users:'
+          - ''
+          - "{{ _rhel8cis_duplicate_uids.stdout_lines }}"
+
+- name: 7.2.5 | Ensure no duplicate GIDs exist
+  when:
+    - rhel8cis_rule_7_2_5_enabled
+  block:
+    - name: 7.2.5 | Ensure no duplicate GIDs exist | Get list of duplicate GIDs # noqa risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: |
+        pwck -r | awk -F: '{if ($3 in gid) print $1 ; else gid[$3]}' /etc/group
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_duplicate_gids
+
+    - name: 7.2.5 | Ensure no duplicate GIDs exist | Add warning
+      when:
+        - _rhel8cis_duplicate_gids.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.2.5'
+        _rhel8cis_warning_description:
+          - 'The following GIDs have duplicate groups:'
+          - ''
+          - "{{ _rhel8cis_duplicate_gids.stdout_lines }}"
+
+- name: 7.2.6 | Ensure no duplicate user names exist
+  when:
+    - rhel8cis_rule_7_2_6_enabled
+  block:
+    - name: 7.2.6 | Ensure no duplicate user names exist | Get list of duplicate user names # noqa risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: |
+        pwck -r | awk -F: '{if ($1 in users) print $1 ; else users[$1]}' /etc/passwd
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_duplicate_user_names
+
+    - name: 7.2.6 | Ensure no duplicate user names exist | Add warning
+      when:
+        - _rhel8cis_duplicate_user_names.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.2.6'
+        _rhel8cis_warning_description:
+          - 'The following users have duplicate names:'
+          - ''
+          - "{{ _rhel8cis_duplicate_user_names.stdout_lines }}"
+
+- name: 7.2.7 | Ensure no duplicate group names exist
+  when:
+    - rhel8cis_rule_7_2_7_enabled
+  block:
+    - name: 7.2.7 | Ensure no duplicate group names exist | Get list of duplicate group names # noqa risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: |
+        getent passwd | cut -d: -f1 | sort -n | uniq -d
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_duplicate_group_names
+
+    - name: 7.2.7 | Ensure no duplicate group names exist | Add warning
+      when:
+        - _rhel8cis_duplicate_group_names.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '6.2.7'
+        _rhel8cis_warning_description:
+          - 'The following groups have duplicate names:'
+          - ''
+          - "{{ _rhel8cis_duplicate_group_names.stdout_lines }}"
+
+- name: 7.2.8 | Ensure local interactive user home directories are configured
+  when:
+    - rhel8cis_rule_7_2_8_enabled
+  block:
+    - name: 7.2.8 | Ensure local interactive user home directories are configured | Get passwd info
+      ansible.builtin.getent:
+        database: passwd
+      register: _rhel8cis_getent_passwd
+
+    - name: 7.2.8 | Ensure local interactive user home directories are configured | Convert to structured dict
+      ansible.builtin.set_fact:
+        _rhel8cis_passwd: >-
+          {{ _rhel8cis_getent_passwd.ansible_facts.getent_passwd |
+              dict2items |
+              community.general.json_query('[].{key: key, value: {
+                  username: key,
+                  password: value[0],
+                  uid: value[1],
+                  gid: value[2],
+                  gecos: value[3],
+                  home: value[4],
+                  shell: value[5]
+              }}') |
+              items2dict(key_name='key', value_name='value') }}
+
+    - name: 7.2.8 | Ensure local interactive user home directories are configured | Check if home directories exist
+      loop: "{{ _rhel8cis_passwd | dict2items | map(attribute='value') }}"
+      loop_control:
+        loop_var: user
+      when:
+        - user.uid | int >= 1000
+        - user.uid | int <= 60000
+        - user.home is defined
+        - user.home != ''
+      become: true
+      ansible.builtin.file:
+        path: "{{ user.home }}"
+        state: directory
+        owner: "{{ user.username }}"
+        group: "{{ user.username }}"
+        mode: 'u=rwx,g-w,o-rwx'
+
+    - name: 7.2.8 | Ensure local interactive user home directories are configured | Add warning
+      loop: "{{ _rhel8cis_passwd | dict2items | map(attribute='value') }}"
+      loop_control:
+        loop_var: user
+      when:
+        - user.uid | int >= 1000
+        - user.uid | int <= 60000
+        - user.home is not defined or user.home == ''
+      ansible.builtin.set_fact:
+        _rhel8cis_no_home_users: "{{ _rhel8cis_no_home_users | default([]) + [user.username] }}"
+
+    - name: 7.2.8 | Ensure local interactive user home directories are configured | Add warning
+      when:
+        - _rhel8cis_no_home_users | default([]) | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.2.8'
+        _rhel8cis_warning_description: |
+          The following users do not have a home directory.
+
+          {{ _rhel8cis_no_home_users }}
+
+          Please remediate this appropriately.
+
+- name: 7.2.9 | Ensure local interactive user dot files access is configured
+  when:
+    - rhel8cis_rule_7_2_9_enabled
+  block:
+    - name: 7.2.9 | Ensure local interactive user dot files access is configured | Get passwd info
+      ansible.builtin.getent:
+        database: passwd
+      register: _rhel8cis_getent_passwd
+
+    - name: 7.2.9 | Ensure local interactive user dot files access is configured | Convert to structured dict
+      ansible.builtin.set_fact:
+        _rhel8cis_passwd: >-
+          {{ _rhel8cis_getent_passwd.ansible_facts.getent_passwd |
+              dict2items |
+              community.general.json_query('[].{key: key, value: {
+                  username: key,
+                  password: value[0],
+                  uid: value[1],
+                  gid: value[2],
+                  gecos: value[3],
+                  home: value[4],
+                  shell: value[5]
+              }}') |
+              items2dict(key_name='key', value_name='value') }}
+
+    - name: 7.2.9 | Ensure local interactive user dot files access is configured | Manage dot files access
+      loop: "{{ _rhel8cis_passwd | dict2items | map(attribute='value') }}"
+      loop_control:
+        loop_var: user
+      when:
+        - user.uid | int >= 1000
+        - user.uid | int <= 60000
+        - user.home is defined
+        - user.home != ''
+      ansible.builtin.include_tasks: section7/manage-dotfiles.yml

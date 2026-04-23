@@ -1,13 +1,16 @@
 ---
-- name: 1.8.1 | Ensure GNOME Display Manager is removed
+# 1.8.x not implemented yet
+- name: 1.8 | Configure GNOME Display Manager
   when:
-    - rhel8cis_rule_1_8_1_enabled
-    - _rhel8cis_server
-    - rhel8cis_rule_1_8_1_force or _rhel8cis_level2
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - gdm
-    state: absent
-
-# 1.8.2-10 not implemented yet
+    - _rhel8cis_workstation or rhel8cis_xorg_needed
+    - rhel8cis_rule_1_8_1_enabled or
+      rhel8cis_rule_1_8_2_enabled or
+      rhel8cis_rule_1_8_3_enabled or
+      (rhel8cis_rule_1_8_4_enabled and
+      (rhel8cis_rule_1_8_4_force or _rhel8cis_server or _rhel8cis_level2)) or
+      rhel8cis_rule_1_8_5_enabled or
+      rhel8cis_rule_1_8_6_enabled or
+      (rhel8cis_rule_1_8_7_enabled and
+      (rhel8cis_rule_1_8_7_force or _rhel8cis_server or _rhel8cis_level2))
+  ansible.builtin.debug:
+    msg: Rules 1.8.1 - 1.8.7 are not implemented yet.

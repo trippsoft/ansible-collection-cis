@@ -1,76 +1,99 @@
 ---
-- name: 1.5.1.1 | Ensure SELinux is installed
+- name: 1.5.1 | Ensure core file size is configured
   when:
-    - rhel8cis_rule_1_5_1_1_enabled
+    - rhel8cis_rule_1_5_1_enabled
   become: true
-  ansible.builtin.dnf:
-    name:
-      - libselinux
+  community.general.pam_limits:
+    domain: '*'
+    limit_type: hard
+    limit_item: core
+    value: '0'
+
+- name: 1.5.2 | Ensure fs.protected_hardlinks is configured
+  when:
+    - rhel8cis_rule_1_5_2_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: fs.protected_hardlinks
+    value: '1'
     state: present
+    sysctl_set: true
 
-- name: 1.5.1.2 | Ensure SELinux is not disabled in bootloader configuration
+- name: 1.5.3 | Ensure fs.protected_symlinks is configured
   when:
-    - rhel8cis_rule_1_5_1_2_enabled
+    - rhel8cis_rule_1_5_3_enabled
+    - rhel8cis_rule_1_5_3_force or _rhel8cis_level2
   become: true
-  ansible.builtin.replace:
-    path: /etc/default/grub
-    regexp: '(selinux|enforcing)\s*=\s*0\s*'
-    replace: ''
-  notify:
-    - _rhel8cis_grub2-mkconfig
+  ansible.posix.sysctl:
+    name: fs.protected_symlinks
+    value: '1'
+    state: present
+    sysctl_set: true
 
-- name: |
-    1.5.1.3 | Ensure SELinux policy is configured
-    1.5.1.4 | Ensure the SELinux mode is not disabled
-    1.5.1.5 | Ensure the SELinux state is enforcing
+- name: 1.5.4 | Ensure fs.suid_dumpable is configured
   when:
-    - rhel8cis_rule_1_5_1_3_enabled or
-      rhel8cis_rule_1_5_1_4_enabled or
-      (rhel8cis_rule_1_5_1_5_enabled and
-      (rhel8cis_rule_1_5_1_5_force or _rhel8cis_level2))
+    - rhel8cis_rule_1_5_4_enabled
   become: true
-  ansible.posix.selinux:
-    conf: /etc/selinux/config
-    policy: "{{ rhel8cis_selinux_policy }}"
-    state: "{{ rhel8cis_selinux_mode }}"
+  ansible.posix.sysctl:
+    name: fs.suid_dumpable
+    value: '0'
+    state: present
+    sysctl_set: true
 
-- name: 1.5.1.6 | Ensure no unconfined services exist
+- name: 1.5.5 | Ensure kernel.dmesg_restrict is configured
   when:
-    - rhel8cis_rule_1_5_1_6_enabled
-  block:
-    - name: 1.5.1.6 | Ensure no unconfined services exist | Get list of unconfined services # noqa risky-shell-pipe
-      become: true
-      ansible.builtin.shell: |
-        ps -eZ | grep unconfined_service_t | egrep -vw "tr|ps|egrep|bash|awk" | tr ':' ' ' | awk '{ print $NF }'
-      changed_when: false
-      register: _rhel8cis_unconfined_services
-
-    - name: 1.5.1.6 | Ensure no unconfined services exist | Generate warning
-      when:
-        - _rhel8cis_unconfined_services.stdout | length > 0
-      ansible.builtin.include_tasks: ../add-warning.yml
-      vars:
-        _rhel8cis_warning_rule: '1.5.1.6'
-        _rhel8cis_warning_description: 
-          - 'The following unconfined services are running:'
-          - ''
-          - "{{ _rhel8cis_unconfined_services.stdout_lines }}"
-
-- name: 1.5.1.7 | Ensure the MCS Translation Service (mcstrans) is not installed
-  when:
-    - rhel8cis_rule_1_5_1_7_enabled
+    - rhel8cis_rule_1_5_5_enabled
   become: true
-  ansible.builtin.dnf:
-    name:
-      - mcstrans
-    state: absent
+  ansible.posix.sysctl:
+    name: kernel.dmesg_restrict
+    value: '1'
+    state: present
+    sysctl_set: true
 
-- name: 1.5.1.8 | Ensure SETroubleshoot is not installed
+- name: 1.5.6 | Ensure kernel.kptr_restrict is configured
   when:
-    - rhel8cis_rule_1_5_1_8_enabled
-    - _rhel8cis_server
+    - rhel8cis_rule_1_5_6_enabled
   become: true
-  ansible.builtin.dnf:
-    name:
-      - setroubleshoot
-    state: absent
+  ansible.posix.sysctl:
+    name: kernel.kptr_restrict
+    value: "{{ _rhel8cis_kptr_restrict_value }}"
+    state: present
+    sysctl_set: true
+
+- name: 1.5.7 | Ensure kernel.yama.ptrace_scope is configured
+  when:
+    - rhel8cis_rule_1_5_7_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: kernel.yama.ptrace_scope
+    value: "{{ _rhel8cis_ptrace_scope_value }}"
+    state: present
+    sysctl_set: true
+
+- name: 1.5.8 | Ensure kernel.randomize_va_space is configured
+  when:
+    - rhel8cis_rule_1_5_8_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: kernel.randomize_va_space
+    value: '2'
+    state: present
+    sysctl_set: true
+
+- name: 1.5.9 | Ensure systemd-coredump ProcessSizeMax is configured
+  when:
+    - rhel8cis_rule_1_5_9_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/coredump.conf
+    regexp: '^#?\s*ProcessSizeMax='
+    line: 'ProcessSizeMax=0'
+
+- name: 1.5.10 | Ensure systemd-coredump Storage is configured
+  when:
+    - rhel8cis_rule_1_5_10_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/coredump.conf
+    regexp: '^#?\s*Storage='
+    line: 'Storage=none'

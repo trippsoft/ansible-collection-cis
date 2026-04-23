@@ -1,127 +1,235 @@
 ---
-- name: 3.3.1 | Ensure ip forwarding is disabled
-  loop:
-    - net.ipv4.ip_forward
-    - net.ipv6.conf.all.forwarding
+- name: 3.3.1.1 | Ensure net.ipv4.ip_forward is configured
   when:
-    - rhel8cis_rule_3_3_1_enabled
+    - rhel8cis_rule_3_3_1_1_enabled
+    - rhel8cis_rule_3_3_1_1_force or _rhel8cis_level2 or _rhel8cis_workstation
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.ip_forward
     value: '0'
     sysctl_set: true
 
-- name: 3.3.2 | Ensure packet redirect sending is disabled
-  loop:
-    - net.ipv4.conf.all.send_redirects
-    - net.ipv4.conf.default.send_redirects
+- name: 3.3.1.2 | Ensure net.ipv4.conf.all.forwarding is configured
   when:
-    - rhel8cis_rule_3_3_2_enabled
+    - rhel8cis_rule_3_3_1_2_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.conf.all.forwarding
     value: '0'
     sysctl_set: true
 
-- name: 3.3.3 | Ensure bogus icmp responses are ignored
+- name: 3.3.1.3 | Ensure net.ipv4.conf.default.forwarding is configured
   when:
-    - rhel8cis_rule_3_3_3_enabled
+    - rhel8cis_rule_3_3_1_3_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.forwarding
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.4 | Ensure net.ipv4.conf.all.send_redirects is configured
+  when:
+    - rhel8cis_rule_3_3_1_4_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.send_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.5 | Ensure net.ipv4.conf.default.send_redirects is configured
+  when:
+    - rhel8cis_rule_3_3_1_5_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.send_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.6 | Ensure net.ipv4.icmp_ignore_bogus_error_responses is configured
+  when:
+    - rhel8cis_rule_3_3_1_6_enabled
   become: true
   ansible.posix.sysctl:
     name: net.ipv4.icmp_ignore_bogus_error_responses
     value: '1'
     sysctl_set: true
 
-- name: 3.3.4 | Ensure broadcast icmp requests are ignored
+- name: 3.3.1.7 | Ensure net.ipv4.icmp_echo_ignore_broadcasts is configured
   when:
-    - rhel8cis_rule_3_3_4_enabled
+    - rhel8cis_rule_3_3_1_7_enabled
   become: true
   ansible.posix.sysctl:
     name: net.ipv4.icmp_echo_ignore_broadcasts
     value: '1'
     sysctl_set: true
 
-- name: 3.3.5 | Ensure icmp redirects are not accepted
-  loop:
-    - net.ipv4.conf.all.accept_redirects
-    - net.ipv4.conf.default.accept_redirects
-    - net.ipv6.conf.all.accept_redirects
-    - net.ipv6.conf.default.accept_redirects
+- name: 3.3.1.8 | Ensure net.ipv4.conf.all.accept_redirects is configured
   when:
-    - rhel8cis_rule_3_3_5_enabled
+    - rhel8cis_rule_3_3_1_8_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.conf.all.accept_redirects
     value: '0'
     sysctl_set: true
 
-- name: 3.3.6 | Ensure secure icmp redirects are not accepted
-  loop:
-    - net.ipv4.conf.all.secure_redirects
-    - net.ipv4.conf.default.secure_redirects
+- name: 3.3.1.9 | Ensure net.ipv4.conf.default.accept_redirects is configured
   when:
-    - rhel8cis_rule_3_3_6_enabled
+    - rhel8cis_rule_3_3_1_9_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.conf.default.accept_redirects
     value: '0'
     sysctl_set: true
 
-- name: 3.3.7 | Ensure reverse path filtering is enabled
-  loop:
-    - net.ipv4.conf.all.rp_filter
-    - net.ipv4.conf.default.rp_filter
+- name: 3.3.1.10 | Ensure net.ipv4.conf.all.secure_redirects is configured
   when:
-    - rhel8cis_rule_3_3_7_enabled
+    - rhel8cis_rule_3_3_1_10_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.conf.all.secure_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.11 | Ensure net.ipv4.conf.default.secure_redirects is configured
+  when:
+    - rhel8cis_rule_3_3_1_11_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.secure_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.12 | Ensure net.ipv4.conf.all.rp_filter is configured
+  when:
+    - rhel8cis_rule_3_3_1_12_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.rp_filter
     value: '1'
     sysctl_set: true
 
-- name: 3.3.8 | Ensure source routed packets are not accepted
-  loop:
-    - net.ipv4.conf.all.accept_source_route
-    - net.ipv4.conf.default.accept_source_route
-    - net.ipv6.conf.all.accept_source_route
-    - net.ipv6.conf.default.accept_source_route
+- name: 3.3.1.13 | Ensure net.ipv4.conf.default.rp_filter is configured
   when:
-    - rhel8cis_rule_3_3_8_enabled
+    - rhel8cis_rule_3_3_1_13_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
-    value: '0'
-    sysctl_set: true
-
-- name: 3.3.9 | Ensure suspicious packets are logged
-  loop:
-    - net.ipv4.conf.all.log_martians
-    - net.ipv4.conf.default.log_martians
-  when:
-    - rhel8cis_rule_3_3_9_enabled
-  become: true
-  ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv4.conf.default.rp_filter
     value: '1'
     sysctl_set: true
 
-- name: 3.3.10 | Ensure tcp syn cookies is enabled
+- name: 3.3.1.14 | Ensure net.ipv4.conf.all.accept_source_route is configured
   when:
-    - rhel8cis_rule_3_3_10_enabled
+    - rhel8cis_rule_3_3_1_14_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.accept_source_route
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.15 | Ensure net.ipv4.conf.default.accept_source_route is configured
+  when:
+    - rhel8cis_rule_3_3_1_15_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.accept_source_route
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.1.16 | Ensure net.ipv4.conf.all.log_martians is configured
+  when:
+    - rhel8cis_rule_3_3_1_16_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.log_martians
+    value: '1'
+    sysctl_set: true
+
+- name: 3.3.1.17 | Ensure net.ipv4.conf.default.log_martians is configured
+  when:
+    - rhel8cis_rule_3_3_1_17_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.log_martians
+    value: '1'
+    sysctl_set: true
+
+- name: 3.3.1.18 | Ensure net.ipv4.tcp_syncookies is configured
+  when:
+    - rhel8cis_rule_3_3_1_18_enabled
   become: true
   ansible.posix.sysctl:
     name: net.ipv4.tcp_syncookies
     value: '1'
     sysctl_set: true
 
-- name: 3.3.11 | Ensure IPv6 router advertisements are not accepted
-  loop:
-    - net.ipv6.conf.all.accept_ra
-    - net.ipv6.conf.default.accept_ra
+- name: 3.3.2.1 | Ensure net.ipv6.conf.all.forwarding is configured
   when:
-    - rhel8cis_rule_3_3_11_enabled
+    - rhel8cis_rule_3_3_2_1_enabled
   become: true
   ansible.posix.sysctl:
-    name: "{{ item }}"
+    name: net.ipv6.conf.all.forwarding
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.2 | Ensure net.ipv6.conf.default.forwarding is configured
+  when:
+    - rhel8cis_rule_3_3_2_2_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.default.forwarding
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.3 | Ensure net.ipv6.conf.all.accept_redirects is configured
+  when:
+    - rhel8cis_rule_3_3_2_3_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.accept_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.4 | Ensure net.ipv6.conf.default.accept_redirects is configured
+  when:
+    - rhel8cis_rule_3_3_2_4_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.default.accept_redirects
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.5 | Ensure net.ipv6.conf.all.accept_source_route is configured
+  when:
+    - rhel8cis_rule_3_3_2_5_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.accept_source_route
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.6 | Ensure net.ipv6.conf.default.accept_source_route is configured
+  when:
+    - rhel8cis_rule_3_3_2_6_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.default.accept_source_route
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.7 | Ensure net.ipv6.conf.all.accept_ra is configured
+  when:
+    - rhel8cis_rule_3_3_2_7_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.accept_ra
+    value: '0'
+    sysctl_set: true
+
+- name: 3.3.2.8 | Ensure net.ipv6.conf.default.accept_ra is configured
+  when:
+    - rhel8cis_rule_3_3_2_8_enabled
+  become: true
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.default.accept_ra
     value: '0'
     sysctl_set: true

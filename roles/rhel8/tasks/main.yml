@@ -20,6 +20,9 @@
 - name: Execute the section 6 tasks
   ansible.builtin.import_tasks: section6/main.yml
 
+- name: Execute the section 7 tasks
+  ansible.builtin.import_tasks: section7/main.yml
+
 - name: Present warnings to user
   ansible.builtin.debug:
     var: _rhel8cis_warning_list

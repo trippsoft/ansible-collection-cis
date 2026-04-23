@@ -7,3 +7,6 @@
 
 - name: Execute the 5.3.x tasks
   ansible.builtin.import_tasks: section5/5.3.x.yml
+
+- name: Execute the 5.4.x tasks
+  ansible.builtin.import_tasks: section5/5.4.x.yml

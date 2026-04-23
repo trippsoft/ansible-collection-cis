@@ -1,0 +1,289 @@
+---
+- name: 7.1.1 | Ensure access to /etc/passwd is configured
+  when:
+    - rhel8cis_rule_7_1_1_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/passwd
+    owner: root
+    group: root
+    mode: 'u=rw,go-wx'
+
+- name: 7.1.2 | Ensure access to /etc/passwd- is configured
+  when:
+    - rhel8cis_rule_7_1_2_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/passwd-
+    owner: root
+    group: root
+    mode: 'u=rw,go-wx'
+
+- name: 7.1.3 | Ensure access to /etc/group is configured
+  when:
+    - rhel8cis_rule_7_1_3_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/group
+    owner: root
+    group: root
+    mode: 'u=rw,go-wx'
+
+- name: 7.1.4 | Ensure access to /etc/group- is configured
+  when:
+    - rhel8cis_rule_7_1_4_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/group-
+    owner: root
+    group: root
+    mode: 'u=rw,go-wx'
+
+- name: 7.1.5 | Ensure access to /etc/shadow is configured
+  when:
+    - rhel8cis_rule_7_1_5_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/shadow
+    owner: root
+    group: root
+    mode: '0000'
+
+- name: 7.1.6 | Ensure access to /etc/shadow- is configured
+  when:
+    - rhel8cis_rule_7_1_6_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/shadow-
+    owner: root
+    group: root
+    mode: '0000'
+
+- name: 7.1.7 | Ensure access to /etc/gshadow is configured
+  when:
+    - rhel8cis_rule_7_1_7_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/gshadow
+    owner: root
+    group: root
+    mode: '0000'
+
+- name: 7.1.8 | Ensure access to /etc/gshadow- is configured
+  when:
+    - rhel8cis_rule_7_1_8_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/gshadow-
+    owner: root
+    group: root
+    mode: '0000'
+
+- name: 7.1.9 | Ensure access to /etc/shells is configured
+  when:
+    - rhel8cis_rule_7_1_9_enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/shells
+    owner: root
+    group: root
+    mode: 'u=rw,go-wx'
+
+- name: 7.1.10 | Ensure access to /etc/security/opasswd is configured
+  when:
+    - rhel8cis_rule_7_1_10_enabled
+  become: true
+  block:
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Check /etc/security/opasswd
+      ansible.builtin.stat:
+        path: /etc/security/opasswd
+      register: _rhel8cis_opasswd
+
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Modify /etc/security/opasswd
+      when:
+        - _rhel8cis_opasswd.stat.exists
+      ansible.builtin.file:
+        path: /etc/security/opasswd
+        owner: root
+        group: root
+        mode: '0600'
+        state: file
+
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Create /etc/security/opasswd
+      when:
+        - not _rhel8cis_opasswd.stat.exists
+      ansible.builtin.file:
+        path: /etc/security/opasswd
+        owner: root
+        group: root
+        mode: '0600'
+        state: touch
+
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Check /etc/security/opasswd.old
+      ansible.builtin.stat:
+        path: /etc/security/opasswd.old
+      register: _rhel8cis_opasswd_old
+
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Modify /etc/security/opasswd.old
+      when:
+        - _rhel8cis_opasswd_old.stat.exists
+      ansible.builtin.file:
+        path: /etc/security/opasswd.old
+        owner: root
+        group: root
+        mode: '0600'
+        state: file
+
+    - name: 7.1.10 | Ensure access to /etc/security/opasswd is configured | Create /etc/security/opasswd.old
+      when:
+        - not _rhel8cis_opasswd_old.stat.exists
+      ansible.builtin.file:
+        path: /etc/security/opasswd.old
+        owner: root
+        group: root
+        mode: '0600'
+        state: touch
+
+- name: 7.1.11 | Ensure world writable files and directories are secured
+  when:
+    - rhel8cis_rule_7_1_11_enabled
+  become: true
+  block:
+    - name: 7.1.11 | Ensure world writable files and directories are secured | Get list of world writable files
+      ansible.builtin.command: find / -xdev -type f -perm -0002
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_world_writable_files
+
+    - name: 7.1.11 | Ensure world writable files and directories are secured | Get list of world writable directories
+      ansible.builtin.command: find / -xdev -type d -perm -0002
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_world_writable_directories
+
+    - name: 7.1.11 | Ensure world writable files and directories are secured | Set permissions on world writable files
+      loop: "{{ _rhel8cis_world_writable_files.stdout_lines }}"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: 'o-w'
+
+    - name: >-
+        7.1.11 | Ensure world writable files and directories are secured | Set permissions on world writable directories
+      loop: "{{ _rhel8cis_world_writable_directories.stdout_lines }}"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: 'a+t'
+
+- name: 7.1.12 | Ensure no files or directories without an owner and a group
+  when:
+    - rhel8cis_rule_7_1_12_enabled
+  become: true
+  block:
+    - name: 7.1.12 | Ensure no files or directories without an owner and a group | Get list of unowned files
+      ansible.builtin.command: find / -xdev -nouser
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_unowned_files
+
+    - name: 7.1.12 | Ensure no files or directories without an owner and a group | Get list of ungrouped directories
+      ansible.builtin.command: find / -xdev -nogroup
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_ungrouped_files
+
+    - name: 7.1.12 | Ensure no files or directories without an owner and a group | Add warning for unowned only
+      when:
+        - _rhel8cis_unowned_files.stdout_lines | length > 0
+        - _rhel8cis_ungrouped_files.stdout_lines | length == 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.12'
+        _rhel8cis_warning_description: |
+          The following unowned files were found on the system:
+
+          {{ _rhel8cis_unowned_files.stdout_lines }}
+
+    - name: 7.1.12 | Ensure no files or directories without an owner and a group | Add warning for ungrouped only
+      when:
+        - _rhel8cis_unowned_files.stdout_lines | length == 0
+        - _rhel8cis_ungrouped_files.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.12'
+        _rhel8cis_warning_description: |
+          The following ungrouped files were found on the system:
+
+          {{ _rhel8cis_ungrouped_files.stdout_lines }}
+
+    - name: 7.1.12 | Ensure no files or directories without an owner and a group | Add warning for both
+      when:
+        - _rhel8cis_unowned_files.stdout_lines | length > 0
+        - _rhel8cis_ungrouped_files.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.12'
+        _rhel8cis_warning_description: |
+          The following unowned files were found on the system:
+
+          {{ _rhel8cis_unowned_files.stdout_lines }}
+
+          The following ungrouped files were found on the system:
+
+          {{ _rhel8cis_ungrouped_files.stdout_lines }}
+
+- name: 7.1.13 | Ensure SUID and SGID files are reviewed
+  when:
+    - rhel8cis_rule_7_1_13_enabled
+  become: true
+  block:
+    - name: 7.1.13 | Ensure SUID and SGID files are reviewed | Get list of SUID files
+      ansible.builtin.command: find / -xdev -type f -perm -4000
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_suid_files
+
+    - name: 7.1.13 | Ensure SUID and SGID files are reviewed | Get list of SGID files
+      ansible.builtin.command: find / -xdev -type f -perm -2000
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_sgid_files
+
+    - name: 7.1.13 | Ensure SUID and SGID files are reviewed | Add warning for SUID only
+      when:
+        - _rhel8cis_suid_files.stdout_lines | length > 0
+        - _rhel8cis_sgid_files.stdout_lines | length == 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.13'
+        _rhel8cis_warning_description:
+          - 'The following SUID files were found on the system:'
+          - ''
+          - "{{ _rhel8cis_suid_files.stdout }}"
+
+    - name: 7.1.13 | Ensure SUID and SGID files are reviewed | Add warning for SGID only
+      when:
+        - _rhel8cis_suid_files.stdout_lines | length == 0
+        - _rhel8cis_sgid_files.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.13'
+        _rhel8cis_warning_description:
+          - 'The following SGID files were found on the system:'
+          - ''
+          - "{{ _rhel8cis_sgid_files.stdout }}"
+
+    - name: 7.1.13 | Ensure SUID and SGID files are reviewed | Add warning for both
+      when:
+        - _rhel8cis_suid_files.stdout_lines | length > 0
+        - _rhel8cis_sgid_files.stdout_lines | length > 0
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '7.1.13'
+        _rhel8cis_warning_description:
+          - 'The following SUID files were found on the system:'
+          - ''
+          - "{{ _rhel8cis_suid_files.stdout_lines }}"
+          - ''
+          - 'The following SGID files were found on the system:'
+          - ''
+          - "{{ _rhel8cis_sgid_files.stdout_lines }}"

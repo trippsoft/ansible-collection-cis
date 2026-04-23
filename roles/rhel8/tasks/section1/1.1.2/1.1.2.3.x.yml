@@ -10,8 +10,7 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.3.1'
-        _rhel8cis_warning_description: >-
-          /home is not a separate partition.
+        _rhel8cis_warning_description: /home is not a separate partition.
 
     - name: 1.1.2.3.2 | Ensure nodev option set on /home partition
       when:
@@ -19,17 +18,15 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.3.2'
-        _rhel8cis_warning_description: >-
-          /home is not a separate partition.
-    
+        _rhel8cis_warning_description: /home is not a separate partition.
+
     - name: 1.1.2.3.3 | Ensure nosuid option set on /home partition
       when:
         - rhel8cis_rule_1_1_2_3_3_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.3.3'
-        _rhel8cis_warning_description: >-
-          /home is not a separate partition.
+        _rhel8cis_warning_description: /home is not a separate partition.
 
 - name: 1.1.2.3.x | Configure /home
   when:
@@ -41,11 +38,7 @@
   block:
     - name: 1.1.2.3.x | Set existing /home mount configuration fact
       ansible.builtin.set_fact:
-        _rhel8cis_existing_home_mount: >-
-          {{ ansible_mounts |
-              selectattr('mount', 'equalto', '/home') |
-              list |
-              first }}
+        _rhel8cis_existing_home_mount: "{{ ansible_mounts | selectattr('mount', 'equalto', '/home') | list | first }}"
 
     - name: 1.1.2.3.x | Get UUID of /home partition
       when:

@@ -1,5 +1,5 @@
 ---
-- name: 1.2.x | Get /etc/yum.repos.d/ contents
+- name: 1.2.1.x | Get /etc/yum.repos.d/ contents
   become: true
   ansible.builtin.find:
     paths: /etc/yum.repos.d
@@ -9,68 +9,83 @@
       - '*.repo'
   register: _rhel8cis_yum_repos
 
-- name: 1.2.1 | Ensure GPG keys are configured
+- name: 1.2.1.1 | Ensure GPG keys are configured
   loop: "{{ _rhel8cis_yum_repos.files }}"
+  loop_control:
+    label: "{{ item.path }}"
   when:
-    - rhel8cis_rule_1_2_1_enabled
+    - rhel8cis_rule_1_2_1_1_enabled
   ansible.builtin.include_tasks: section1/1.2/check-file-gpgkey.yml
   vars:
     _rhel8cis_gpgkey_file: "{{ item.path }}"
-  loop_control:
-    label: "{{ item.path }}"
 
-- name: 1.2.2 | Ensure gpgcheck is globally activated
+- name: 1.2.1.2 | Ensure gpgcheck is configured
   when:
-    - rhel8cis_rule_1_2_2_enabled
+    - rhel8cis_rule_1_2_1_2_enabled
   become: true
   block:
-    - name: 1.2.2 | Ensure gpgcheck is globally activated | /etc/dnf/dnf.conf
+    - name: 1.2.1.2 | Ensure gpgcheck is configured | /etc/dnf/dnf.conf
       ansible.builtin.replace:
         path: /etc/dnf/dnf.conf
         regexp: '^gpgcheck=0'
         replace: gpgcheck=1
 
-    - name: '1.2.2 | Ensure gpgcheck is globally activated | /etc/yum.repos.d/*'
+    - name: "1.2.1.2 | Ensure gpgcheck is configured | /etc/yum.repos.d/*"
       loop: "{{ _rhel8cis_yum_repos.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.replace:
         path: "{{ item.path }}"
         regexp: '^gpgcheck=0'
         replace: gpgcheck=1
-      loop_control:
-        label: "{{ item.path }}"
 
-- name: 1.2.3 | Ensure repo_gpgcheck is globally activated
+- name: 1.2.1.3 | Ensure repo_gpgcheck is globally activated
   when:
-    - rhel8cis_rule_1_2_3_enabled
-    - rhel8cis_rule_1_2_3_force or _rhel8cis_level2
+    - rhel8cis_rule_1_2_1_3_enabled
+    - rhel8cis_rule_1_2_1_3_force or _rhel8cis_level2
   become: true
   block:
-    - name: 1.2.3 | Ensure repo_gpgcheck is globally activated | /etc/dnf/dnf.conf
+    - name: 1.2.1.3 | Ensure repo_gpgcheck is globally activated | /etc/dnf/dnf.conf
       ansible.builtin.replace:
         path: /etc/dnf/dnf.conf
         regexp: '^repo_gpgcheck=0'
         replace: repo_gpgcheck=1
 
-    - name: '1.2.3 | Ensure repo_gpgcheck is globally activated | /etc/yum.repos.d/*'
+    - name: "1.2.1.3 | Ensure repo_gpgcheck is globally activated | /etc/yum.repos.d/*"
       loop: "{{ _rhel8cis_yum_repos.files }}"
+      loop_control:
+        label: "{{ item.path }}"
       ansible.builtin.replace:
         path: "{{ item.path }}"
         regexp: '^repo_gpgcheck=0'
         replace: repo_gpgcheck=1
-      loop_control:
-        label: "{{ item.path }}"
 
-- name: 1.2.4 | Ensure package manager repositories are configured
+- name: 1.2.1.4 | Ensure package manager repositories are configured
   when:
-    - rhel8cis_rule_1_2_4_enabled
+    - rhel8cis_rule_1_2_1_4_enabled
   ansible.builtin.include_tasks: ../../add-warning.yml
   vars:
-    _rhel8cis_warning_rule: '1.2.4'
-    _rhel8cis_warning_description: "This cannot be automated. Please ensure the repositories are configured as required."
+    _rhel8cis_warning_rule: '1.2.1.4'
+    _rhel8cis_warning_description: This cannot be automated. Please ensure the repositories are configured as required.
 
-- name: 1.2.5 | Ensure updates, patches, and additional security software are installed
+- name: 1.2.1.5 | Ensure weak dependencies are configured
   when:
-    - rhel8cis_rule_1_2_5_enabled
+    - rhel8cis_rule_1_2_1_5_enabled
+    - rhel8cis_rule_1_2_1_5_force or _rhel8cis_level2
+  become: true
+  community.general.ini_file:
+    path: /etc/dnf/dnf.conf
+    section: main
+    option: install_weak_deps
+    value: '0'
+    no_extra_spaces: true
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: 1.2.2.1 | Ensure updates, patches, and additional security software are installed
+  when:
+    - rhel8cis_rule_1_2_2_1_enabled
   become: true
   ansible.builtin.dnf:
     name: '*'

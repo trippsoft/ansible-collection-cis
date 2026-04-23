@@ -23,7 +23,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 1.1.1.1 | Ensure cramfs kernel module is not available | Disable module
       community.general.modprobe:
         name: cramfs
@@ -53,7 +53,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 1.1.1.2 | Ensure freevxfs kernel module is not available | Disable module
       community.general.modprobe:
         name: freevxfs
@@ -83,7 +83,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 1.1.1.3 | Ensure hfs kernel module is not available | Disable module
       community.general.modprobe:
         name: hfs
@@ -113,7 +113,7 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 1.1.1.4 | Ensure hfsplus kernel module is not available | Disable module
       community.general.modprobe:
         name: hfsplus
@@ -143,19 +143,50 @@
         owner: root
         group: root
         mode: '0600'
-    
+
     - name: 1.1.1.5 | Ensure jffs2 kernel module is not available | Disable module
       community.general.modprobe:
         name: jffs2
         state: absent
 
-- name: 1.1.1.6 | Ensure squashfs kernel module is not available
+- name: 1.1.1.6 | Ensure overlay kernel module is not available
   when:
     - rhel8cis_rule_1_1_1_6_enabled
     - rhel8cis_rule_1_1_1_6_force or _rhel8cis_level2
   become: true
   block:
-    - name: 1.1.1.6 | Ensure squashfs kernel module is not available | Prevent modprobe install
+    - name: 1.1.1.6 | Ensure overlay kernel module is not available | Prevent modprobe install
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/overlay.conf
+        regexp: "^(#)?install overlay"
+        line: install overlay /bin/false
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 1.1.1.6 | Ensure overlay kernel module is not available | Add modprobe blacklist
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/overlay.conf
+        regexp: "^(#)?blacklist overlay(\\s|$)"
+        line: blacklist overlay
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 1.1.1.6 | Ensure overlay kernel module is not available | Disable module
+      community.general.modprobe:
+        name: overlay
+        state: absent
+
+- name: 1.1.1.7 | Ensure squashfs kernel module is not available
+  when:
+    - rhel8cis_rule_1_1_1_7_enabled
+    - rhel8cis_rule_1_1_1_7_force or _rhel8cis_level2
+  become: true
+  block:
+    - name: 1.1.1.7 | Ensure squashfs kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/squashfs.conf
         regexp: "^(#)?install squashfs"
@@ -165,7 +196,7 @@
         group: root
         mode: '0600'
 
-    - name: 1.1.1.6 | Ensure squashfs kernel module is not available | Add modprobe blacklist
+    - name: 1.1.1.7 | Ensure squashfs kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/squashfs.conf
         regexp: "^(#)?blacklist squashfs(\\s|$)"
@@ -174,19 +205,19 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 1.1.1.6 | Ensure squashfs kernel module is not available | Disable module
+
+    - name: 1.1.1.7 | Ensure squashfs kernel module is not available | Disable module
       community.general.modprobe:
         name: squashfs
         state: absent
 
-- name: 1.1.1.7 | Ensure udf kernel module is not available
+- name: 1.1.1.8 | Ensure udf kernel module is not available
   when:
-    - rhel8cis_rule_1_1_1_7_enabled
-    - rhel8cis_rule_1_1_1_7_force or _rhel8cis_level2
+    - rhel8cis_rule_1_1_1_8_enabled
+    - rhel8cis_rule_1_1_1_8_force or _rhel8cis_level2
   become: true
   block:
-    - name: 1.1.1.7 | Ensure udf kernel module is not available | Prevent modprobe install
+    - name: 1.1.1.8 | Ensure udf kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/udf.conf
         regexp: "^(#)?install udf"
@@ -196,7 +227,7 @@
         group: root
         mode: '0600'
 
-    - name: 1.1.1.7 | Ensure udf kernel module is not available | Add modprobe blacklist
+    - name: 1.1.1.8 | Ensure udf kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/udf.conf
         regexp: "^(#)?blacklist udf(\\s|$)"
@@ -205,19 +236,49 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 1.1.1.7 | Ensure udf kernel module is not available | Disable module
+
+    - name: 1.1.1.8 | Ensure udf kernel module is not available | Disable module
       community.general.modprobe:
         name: udf
         state: absent
 
-- name: 1.1.1.8 | Ensure usb-storage kernel module is not available
+- name: 1.1.1.9 | Ensure firewire-core kernel module is not available
   when:
-    - rhel8cis_rule_1_1_1_8_enabled
-    - rhel8cis_rule_1_1_1_8_force or _rhel8cis_server or _rhel8cis_level2
+    - rhel8cis_rule_1_1_1_9_enabled
   become: true
   block:
-    - name: 1.1.1.8 | Ensure usb-storage kernel module is not available | Prevent modprobe install
+    - name: 1.1.1.9 | Ensure firewire-core kernel module is not available | Prevent modprobe install
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/firewire-core.conf
+        regexp: "^(#)?install firewire-core"
+        line: install firewire-core /bin/false
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 1.1.1.9 | Ensure firewire-core kernel module is not available | Add modprobe blacklist
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/firewire-core.conf
+        regexp: "^(#)?blacklist firewire-core(\\s|$)"
+        line: blacklist firewire-core
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 1.1.1.9 | Ensure firewire-core kernel module is not available | Disable module
+      community.general.modprobe:
+        name: firewire-core
+        state: absent
+
+- name: 1.1.1.10 | Ensure usb-storage kernel module is not available
+  when:
+    - rhel8cis_rule_1_1_1_10_enabled
+    - rhel8cis_rule_1_1_1_10_force or _rhel8cis_server or _rhel8cis_level2
+  become: true
+  block:
+    - name: 1.1.1.10 | Ensure usb-storage kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/usb-storage.conf
         regexp: "^(#)?install usb-storage"
@@ -227,7 +288,7 @@
         group: root
         mode: '0600'
 
-    - name: 1.1.1.8 | Ensure usb-storage kernel module is not available | Add modprobe blacklist
+    - name: 1.1.1.10 | Ensure usb-storage kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/usb-storage.conf
         regexp: "^(#)?blacklist usb-storage(\\s|$)"
@@ -236,8 +297,339 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 1.1.1.8 | Ensure usb-storage kernel module is not available | Disable module
+
+    - name: 1.1.1.10 | Ensure usb-storage kernel module is not available | Disable module
       community.general.modprobe:
         name: usb-storage
         state: absent
+
+- name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available
+  when:
+    - rhel8cis_rule_1_1_1_11_enabled
+  become: true
+  block:
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ceph
+      when:
+        - not rhel8cis_ceph_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ceph | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/ceph.conf
+            regexp: "^(#)?install ceph"
+            line: install ceph /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ceph | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/ceph.conf
+            regexp: "^(#)?blacklist ceph(\\s|$)"
+            line: blacklist ceph
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ceph | Disable module
+          community.general.modprobe:
+            name: ceph
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | cifs
+      when:
+        - not rhel8cis_cifs_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | cifs | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/cifs.conf
+            regexp: "^(#)?install cifs"
+            line: install cifs /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | cifs | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/cifs.conf
+            regexp: "^(#)?blacklist cifs(\\s|$)"
+            line: blacklist cifs
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | cifs | Disable module
+          community.general.modprobe:
+            name: cifs
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | exfat
+      when:
+        - not rhel8cis_exfat_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | exfat | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/exfat.conf
+            regexp: "^(#)?install exfat"
+            line: install exfat /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | exfat | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/exfat.conf
+            regexp: "^(#)?blacklist exfat(\\s|$)"
+            line: blacklist exfat
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | exfat | Disable module
+          community.general.modprobe:
+            name: exfat
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ext
+      when:
+        - not rhel8cis_ext_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ext | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/ext.conf
+            regexp: "^(#)?install ext"
+            line: install ext /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ext | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/ext.conf
+            regexp: "^(#)?blacklist ext(\\s|$)"
+            line: blacklist ext
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | ext | Disable module
+          community.general.modprobe:
+            name: ext
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fat
+      when:
+        - not rhel8cis_fat_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fat | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fat.conf
+            regexp: "^(#)?install fat"
+            line: install fat /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fat | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fat.conf
+            regexp: "^(#)?blacklist fat(\\s|$)"
+            line: blacklist fat
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fat | Disable module
+          community.general.modprobe:
+            name: fat
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache
+      when:
+        - not rhel8cis_fscache_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fscache.conf
+            regexp: "^(#)?install fscache"
+            line: install fscache /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fscache.conf
+            regexp: "^(#)?blacklist fscache(\\s|$)"
+            line: blacklist fscache
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache | Disable module
+          community.general.modprobe:
+            name: fscache
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fuse
+      when:
+        - not rhel8cis_fuse_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fuse | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fuse.conf
+            regexp: "^(#)?install fuse"
+            line: install fuse /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fuse | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/fuse.conf
+            regexp: "^(#)?blacklist fuse(\\s|$)"
+            line: blacklist fuse
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fuse | Disable module
+          community.general.modprobe:
+            name: fuse
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | gfs2
+      when:
+        - not rhel8cis_gfs2_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | gfs2 | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/gfs2.conf
+            regexp: "^(#)?install gfs2"
+            line: install gfs2 /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | gfs2 | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/gfs2.conf
+            regexp: "^(#)?blacklist gfs2(\\s|$)"
+            line: blacklist gfs2
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | gfs2 | Disable module
+          community.general.modprobe:
+            name: gfs2
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfs_common
+      when:
+        - not rhel8cis_nfs_common_needed
+      block:
+        - name: >-
+            1.1.1.11 |
+            Ensure unused filesystems kernel modules are not available | nfs_common | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/nfs_common.conf
+            regexp: "^(#)?install nfs_common"
+            line: install nfs_common /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: >-
+            1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfs_common | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/nfs_common.conf
+            regexp: "^(#)?blacklist nfs_common(\\s|$)"
+            line: blacklist nfs_common
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfs_common | Disable module
+          community.general.modprobe:
+            name: nfs_common
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfsd
+      when:
+        - not rhel8cis_nfsd_needed
+      block:
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfsd | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/nfsd.conf
+            regexp: "^(#)?install nfsd"
+            line: install nfsd /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfsd | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/nfsd.conf
+            regexp: "^(#)?blacklist nfsd(\\s|$)"
+            line: blacklist nfsd
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | nfsd | Disable module
+          community.general.modprobe:
+            name: nfsd
+            state: absent
+
+    - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | smbfs_common
+      when:
+        - not rhel8cis_smbfs_common_needed
+      block:
+        - name: >-
+            1.1.1.11 |
+            Ensure unused filesystems kernel modules are not available | smbfs_common | Prevent modprode install
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/smbfs_common.conf
+            regexp: "^(#)?install smbfs_common"
+            line: install smbfs_common /bin/false
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: >-
+            1.1.1.11 |
+            Ensure unused filesystems kernel modules are not available | smbfs_common | Add modprobe blacklist
+          ansible.builtin.lineinfile:
+            path: /etc/modprobe.d/smbfs_common.conf
+            regexp: "^(#)?blacklist smbfs_common(\\s|$)"
+            line: blacklist smbfs_common
+            create: true
+            owner: root
+            group: root
+            mode: '0600'
+
+        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | smbfs_common | Disable module
+          community.general.modprobe:
+            name: smbfs_common
+            state: absent

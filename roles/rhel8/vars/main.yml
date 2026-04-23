@@ -14,28 +14,56 @@ _rhel8cis_no_sha1_crypto_subpolicies: >-
   {% endif %}
   ]
 
-_rhel8cis_no_sshcbc_crypto_subpolicies: >-
+_rhel8cis_no_weakmac_crypto_subpolicies: >-
   [
   {% if rhel8cis_rule_1_6_3_enabled %}
+    "NO-WEAKMAC"
+  {% endif %}
+  ]
+
+_rhel8cis_no_sshcbc_crypto_subpolicies: >-
+  [
+  {% if rhel8cis_rule_1_6_4_enabled %}
     "NO-SSHCBC"
   {% endif %}
   ]
 
-_rhel8cis_no_weakmac_crypto_subpolicies: >-
+_rhel8cis_no_chacha20_crypto_subpolicies: >-
   [
-  {% if rhel8cis_rule_1_6_4_enabled %}
-    "NO-WEAKMAC"
+  {% if rhel8cis_rule_1_6_5_enabled %}
+    "NO-CHACHA20"
+  {% endif %}
+  ]
+
+_rhel8cis_no_ssh_etm_crypto_subpolicies: >-
+  [
+  {% if rhel8cis_rule_1_6_6_enabled %}
+    "NO-SSHETM"
   {% endif %}
   ]
 
 _rhel8cis_crypto_subpolicies: >-
   {{ _rhel8cis_no_sha1_crypto_subpolicies +
-      _rhel8cis_no_sshcbc_crypto_subpolicies +
       _rhel8cis_no_weakmac_crypto_subpolicies +
+      _rhel8cis_no_sshcbc_crypto_subpolicies +
+      _rhel8cis_no_chacha20_crypto_subpolicies +
+      _rhel8cis_no_ssh_etm_crypto_subpolicies +
       rhel8cis_additional_crypto_subpolicies | unique | list }}
 
 _rhel8cis_expected_crypto_policy: >-
   {{ rhel8cis_crypto_policy }}{% if _rhel8cis_crypto_subpolicies | length > 0 %}:{{ _rhel8cis_crypto_subpolicies | join(':') }}{% endif %}
+
+_rhel8cis_kptr_restrict_map:
+  mask_unprivileged: '1'
+  mask_all: '2'
+
+_rhel8cis_ptrace_scope_map:
+  restricted_ptrace: '1'
+  admin_only_attach: '2'
+  no_attach: '3'
+
+_rhel8cis_kptr_restrict_value: "{{ _rhel8cis_kptr_restrict_map[rhel8cis_kptr_restrict] }}"
+_rhel8cis_ptrace_scope_value: "{{ _rhel8cis_ptrace_scope_map[rhel8cis_ptrace_scope] }}"
 
 _rhel8cis_default_bluez_package_needed: "{{ _rhel8cis_workstation or rhel8cis_xorg_needed }}"
 _rhel8cis_bluez_package_needed: "{{ rhel8cis_bluez_package_needed | default(_rhel8cis_default_bluez_package_needed) }}"

@@ -1,11 +1,70 @@
 ---
-- name: 3.2.1 | Ensure dccp kernel module is not available
+- name: 3.2.1 | Ensure atm kernel module is not available
   when:
     - rhel8cis_rule_3_2_1_enabled
-    - rhel8cis_rule_3_2_1_force or _rhel8cis_level2
   become: true
   block:
-    - name: 3.2.1 | Ensure dccp kernel module is not available | Prevent modprobe install
+    - name: 3.2.1 | Ensure atm kernel module is not available | Prevent modprobe install
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/atm.conf
+        regexp: "^(#)?install atm"
+        line: install atm /bin/false
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.1 | Ensure atm kernel module is not available | Add modprobe blacklist
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/atm.conf
+        regexp: "^(#)?blacklist atm(\\s|$)"
+        line: blacklist atm
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.1 | Ensure atm kernel module is not available | Disable module
+      community.general.modprobe:
+        name: atm
+        state: absent
+
+- name: 3.2.2 | Ensure can kernel module is not available
+  when:
+    - rhel8cis_rule_3_2_2_enabled
+  become: true
+  block:
+    - name: 3.2.2 | Ensure can kernel module is not available | Prevent modprobe install
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/can.conf
+        regexp: "^(#)?install can"
+        line: install can /bin/false
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.2 | Ensure can kernel module is not available | Add modprobe blacklist
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/can.conf
+        regexp: "^(#)?blacklist can(\\s|$)"
+        line: blacklist can
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.2 | Ensure can kernel module is not available | Disable module
+      community.general.modprobe:
+        name: can
+        state: absent
+
+- name: 3.2.3 | Ensure dccp kernel module is not available
+  when:
+    - rhel8cis_rule_3_2_3_enabled
+  become: true
+  block:
+    - name: 3.2.3 | Ensure dccp kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/dccp.conf
         regexp: "^(#)?install dccp"
@@ -15,7 +74,7 @@
         group: root
         mode: '0600'
 
-    - name: 3.2.1 | Ensure dccp kernel module is not available | Add modprobe blacklist
+    - name: 3.2.3 | Ensure dccp kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/dccp.conf
         regexp: "^(#)?blacklist dccp(\\s|$)"
@@ -24,50 +83,18 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 3.2.1 | Ensure dccp kernel module is not available | Disable module
+
+    - name: 3.2.3 | Ensure dccp kernel module is not available | Disable module
       community.general.modprobe:
         name: dccp
         state: absent
 
-- name: 3.2.2 | Ensure tipc kernel module is not available
+- name: 3.2.4 | Ensure rds kernel module is not available
   when:
-    - rhel8cis_rule_3_2_2_enabled
-    - rhel8cis_rule_3_2_2_force or _rhel8cis_level2
+    - rhel8cis_rule_3_2_4_enabled
   become: true
   block:
-    - name: 3.2.2 | Ensure tipc kernel module is not available | Prevent modprobe install
-      ansible.builtin.lineinfile:
-        path: /etc/modprobe.d/tipc.conf
-        regexp: "^(#)?install tipc"
-        line: install tipc /bin/false
-        create: true
-        owner: root
-        group: root
-        mode: '0600'
-
-    - name: 3.2.2 | Ensure tipc kernel module is not available | Add modprobe blacklist
-      ansible.builtin.lineinfile:
-        path: /etc/modprobe.d/tipc.conf
-        regexp: "^(#)?blacklist tipc(\\s|$)"
-        line: blacklist tipc
-        create: true
-        owner: root
-        group: root
-        mode: '0600'
-    
-    - name: 3.2.2 | Ensure tipc kernel module is not available | Disable module
-      community.general.modprobe:
-        name: tipc
-        state: absent
-
-- name: 3.2.3 | Ensure rds kernel module is not available
-  when:
-    - rhel8cis_rule_3_2_3_enabled
-    - rhel8cis_rule_3_2_3_force or _rhel8cis_level2
-  become: true
-  block:
-    - name: 3.2.3 | Ensure rds kernel module is not available | Prevent modprobe install
+    - name: 3.2.4 | Ensure rds kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/rds.conf
         regexp: "^(#)?install rds"
@@ -77,7 +104,7 @@
         group: root
         mode: '0600'
 
-    - name: 3.2.3 | Ensure rds kernel module is not available | Add modprobe blacklist
+    - name: 3.2.4 | Ensure rds kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/rds.conf
         regexp: "^(#)?blacklist rds(\\s|$)"
@@ -86,19 +113,19 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 3.2.3 | Ensure rds kernel module is not available | Disable module
+
+    - name: 3.2.4 | Ensure rds kernel module is not available | Disable module
       community.general.modprobe:
         name: rds
         state: absent
 
-- name: 3.2.4 | Ensure sctp kernel module is not available
+- name: 3.2.5 | Ensure sctp kernel module is not available
   when:
-    - rhel8cis_rule_3_2_4_enabled
-    - rhel8cis_rule_3_2_4_force or _rhel8cis_level2
+    - rhel8cis_rule_3_2_5_enabled
+    - rhel8cis_rule_3_2_5_force or _rhel8cis_level2
   become: true
   block:
-    - name: 3.2.4 | Ensure sctp kernel module is not available | Prevent modprobe install
+    - name: 3.2.5 | Ensure sctp kernel module is not available | Prevent modprobe install
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/sctp.conf
         regexp: "^(#)?install sctp"
@@ -108,7 +135,7 @@
         group: root
         mode: '0600'
 
-    - name: 3.2.4 | Ensure sctp kernel module is not available | Add modprobe blacklist
+    - name: 3.2.5 | Ensure sctp kernel module is not available | Add modprobe blacklist
       ansible.builtin.lineinfile:
         path: /etc/modprobe.d/sctp.conf
         regexp: "^(#)?blacklist sctp(\\s|$)"
@@ -117,8 +144,38 @@
         owner: root
         group: root
         mode: '0600'
-    
-    - name: 3.2.4 | Ensure sctp kernel module is not available | Disable module
+
+    - name: 3.2.5 | Ensure sctp kernel module is not available | Disable module
       community.general.modprobe:
         name: sctp
+        state: absent
+
+- name: 3.2.6 | Ensure tipc kernel module is not available
+  when:
+    - rhel8cis_rule_3_2_6_enabled
+  become: true
+  block:
+    - name: 3.2.6 | Ensure tipc kernel module is not available | Prevent modprobe install
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/tipc.conf
+        regexp: "^(#)?install tipc"
+        line: install tipc /bin/false
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.6 | Ensure tipc kernel module is not available | Add modprobe blacklist
+      ansible.builtin.lineinfile:
+        path: /etc/modprobe.d/tipc.conf
+        regexp: "^(#)?blacklist tipc(\\s|$)"
+        line: blacklist tipc
+        create: true
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: 3.2.6 | Ensure tipc kernel module is not available | Disable module
+      community.general.modprobe:
+        name: tipc
         state: absent

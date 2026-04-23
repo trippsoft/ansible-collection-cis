@@ -10,8 +10,7 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.7.1'
-        _rhel8cis_warning_description: >-
-          /var/log/audit is not a separate partition.
+        _rhel8cis_warning_description: /var/log/audit is not a separate partition.
 
     - name: 1.1.2.7.2 | Ensure nodev option set on /var/log/audit partition
       when:
@@ -19,26 +18,23 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.7.2'
-        _rhel8cis_warning_description: >-
-          /var/log/audit is not a separate partition.
-    
+        _rhel8cis_warning_description: /var/log/audit is not a separate partition.
+
     - name: 1.1.2.7.3 | Ensure nosuid option set on /var/log/audit partition
       when:
         - rhel8cis_rule_1_1_2_7_3_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.7.3'
-        _rhel8cis_warning_description: >-
-          /var/log/audit is not a separate partition.
-    
+        _rhel8cis_warning_description: /var/log/audit is not a separate partition.
+
     - name: 1.1.2.7.4 | Ensure noexec option set on /var/log/audit partition
       when:
         - rhel8cis_rule_1_1_2_7_4_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.7.4'
-        _rhel8cis_warning_description: >-
-          /var/log/audit is not a separate partition.
+        _rhel8cis_warning_description: /var/log/audit is not a separate partition.
 
 - name: 1.1.2.7.x | Configure /var/log/audit
   when:
@@ -52,23 +48,26 @@
     - name: 1.1.2.7.x | Set existing /var/log/audit mount configuration fact
       ansible.builtin.set_fact:
         _rhel8cis_existing_var_log_audit_mount: >-
-          {{ ansible_mounts | selectattr('mount', 'equalto', '/var/log/audit') | list | first }}
+          {{ ansible_mounts |
+              selectattr('mount', 'equalto', '/var/log/audit') |
+              list |
+              first }}
 
-    - name: 1.1.2.6.x | Get UUID of /var/log/audit partition
+    - name: 1.1.2.7.x | Get UUID of /var/log/audit partition
       when:
         - rhel8cis_var_log_audit_mount_with_uuid
       block:
-        - name: 1.1.2.6.x | Get UUID of /var/log/audit partition
+        - name: 1.1.2.7.x | Get UUID of /var/log/audit partition
           become: true
           ansible.builtin.command: "lsblk -no UUID {{ _rhel8cis_existing_var_log_audit_mount.device }}"
           changed_when: false
           register: _rhel8cis_var_log_audit_uuid
 
-        - name: 1.1.2.6.x | Set /var/log/audit UUID to source variable
+        - name: 1.1.2.7.x | Set /var/log/audit UUID to source variable
           ansible.builtin.set_fact:
             _rhel8cis_var_log_audit_source: "UUID={{ _rhel8cis_var_log_audit_uuid.stdout }}"
 
-    - name: 1.1.2.6.x | Set /var/log/audit device path to source variable
+    - name: 1.1.2.7.x | Set /var/log/audit device path to source variable
       when:
         - not rhel8cis_var_log_audit_mount_with_uuid
       ansible.builtin.set_fact:

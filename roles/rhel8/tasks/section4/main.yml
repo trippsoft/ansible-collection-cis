@@ -1,15 +1,131 @@
 ---
-- name: Execute the 4.1.x tasks
-  ansible.builtin.import_tasks: section4/4.1.x.yml
+- name: 4.1.1 | Ensure firewalld is installed
+  when:
+    - rhel8cis_rule_4_1_1_enabled
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - firewalld
+    state: present
 
-- name: Execute the 4.2.x tasks
-  ansible.builtin.import_tasks: section4/4.2.x.yml
+- name: 4.1.2 | Ensure firewalld backend is configured
+  when:
+    - rhel8cis_rule_4_1_2_enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/firewalld/firewalld.conf
+    regexp: '^#?\s*FirewallBackend='
+    line: "FirewallBackend={{ rhel8cis_firewalld_backend }}"
+    state: present
+  notify:
+    - _rhel8cis_restart_firewalld
 
-- name: Execute the 4.3.x tasks
-  ansible.builtin.import_tasks: section4/4.3.x.yml
+- name: 4.1.3 | Ensure firewalld.service is configured
+  when:
+    - rhel8cis_rule_4_1_3_enabled
+  become: true
+  ansible.builtin.systemd_service:
+    name: firewalld.service
+    state: started
+    enabled: true
+    masked: false
 
-- name: Execute the 4.4.x tasks
-  ansible.builtin.import_tasks: section4/4.4.x.yml
+- name: 4.1.4 | Ensure firewalld active zone target is configured
+  when:
+    - rhel8cis_rule_4_1_4_enabled
+  become: true
+  block:
+    - name: 4.1.4 | Ensure firewalld active zone target is configured | Create zone
+      ansible.posix.firewalld:
+        zone: "{{ rhel8cis_firewalld_active_zone }}"
+        permanent: true
+        state: present
+      notify:
+        - _rhel8cis_reload_firewalld
 
-- name: Execute the 4.5.x tasks
-  ansible.builtin.import_tasks: section4/4.5.x.yml
+    - name: 4.1.4 | Ensure firewalld active zone target is configured | Set active zone
+      ansible.posix.firewalld:
+        zone: "{{ rhel8cis_firewalld_active_zone }}"
+        permanent: true
+        state: enabled
+      notify:
+        - _rhel8cis_reload_firewalld
+
+    - name: 4.1.4 | Ensure firewalld active zone target is configured | Set active zone target
+      ansible.posix.firewalld:
+        zone: "{{ rhel8cis_firewalld_active_zone }}"
+        permanent: true
+        target: "{{ rhel8cis_firewalld_active_zone_target }}"
+        state: enabled
+      notify:
+        - _rhel8cis_reload_firewalld
+
+- name: 4.1.5 | Ensure firewalld loopback traffic is configured
+  when:
+    - rhel8cis_rule_4_1_5_enabled
+  become: true
+  ansible.posix.firewalld:
+    zone: trusted
+    interface: lo
+    permanent: true
+    state: enabled
+  notify:
+    - _rhel8cis_reload_firewalld
+
+- name: 4.1.6 | Ensure firewalld loopback source address traffic is configured
+  when:
+    - rhel8cis_rule_4_1_6_enabled
+  become: true
+  block:
+    - name: >-
+        4.1.6 | Ensure firewalld loopback source address traffic is configured | firewalld block IPv4 loopback rule
+      ansible.posix.firewalld:
+        rich_rule: 'rule family=ipv4 source address="127.0.0.1" destination not address="127.0.0.1" drop'
+        permanent: true
+        state: enabled
+
+    - name: >-
+        4.1.6 | Ensure firewalld loopback source address traffic is configured | firewalld block IPv4 loopback zone rule
+      ansible.posix.firewalld:
+        rich_rule: 'rule family=ipv4 source address="127.0.0.1" destination not address="127.0.0.1" drop'
+        zone: trusted
+        permanent: true
+        state: enabled
+
+    - name: 4.1.6 | Ensure firewalld loopback source address traffic is configured | firewalld block IPv6 loopback rule
+      ansible.posix.firewalld:
+        rich_rule: 'rule family=ipv6 source address="::1" destination not address="::1" drop'
+        permanent: true
+        state: enabled
+
+    - name: >-
+        4.1.6 | Ensure firewalld loopback source address traffic is configured | firewalld block IPv6 loopback zone rule
+      ansible.posix.firewalld:
+        rich_rule: 'rule family=ipv6 source address="::1" destination not address="::1" drop'
+        zone: trusted
+        permanent: true
+        state: enabled
+
+- name: 4.1.7 | Ensure firewalld services and ports are configured
+  when:
+    - rhel8cis_rule_4_1_7_enabled
+  block:
+    - name: 4.1.7 | Ensure firewalld services and ports are configured | Get services and ports # noqa command-instead-of-module risky-shell-pipe
+      check_mode: false
+      become: true
+      ansible.builtin.shell: >-
+        systemctl is-enabled firewalld.service |
+          grep -q 'enabled' && firewall-cmd --list-all --zone="$(firewall-cmd --list-all |
+          awk '/\(active\)/ { print $1 }')" | grep -P -- '^\h*(services:|ports:)'
+      changed_when: false
+      failed_when: false
+      register: _rhel8cis_firewalld_services
+
+    - name: 4.1.7 | Ensure firewalld services and ports are configured | Add warning
+      ansible.builtin.include_tasks: ../add-warning.yml
+      vars:
+        _rhel8cis_warning_rule: '4.1.7'
+        _rhel8cis_warning_description:
+          - Remediation cannot be automated. Please review the output below for unnecessary firewalld services and ports.
+          - ''
+          - '{{ _rhel8cis_firewalld_services.stdout_lines }}'

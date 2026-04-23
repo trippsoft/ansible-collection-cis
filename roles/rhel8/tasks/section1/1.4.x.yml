@@ -1,38 +1,82 @@
 ---
-- name: 1.4.1 | Ensure address space layout randomization (ASLR) is enabled
+- name: 1.4.x | Determine if system is EFI booted
+  become: true
+  ansible.builtin.stat:
+    path: /sys/firmware/efi
+  register: _rhel8cis_efi
+
+- name: 1.4.x | Set facts (EFI)
+  when:
+    - _rhel8cis_efi.stat.exists
+  ansible.builtin.set_fact:
+    _rhel8cis_grub_config_path: /etc/grub2-efi.cfg
+    _rhel8cis_bootloader_base_path: /boot/efi/EFI
+    _rhel8cis_bootloader_file_permissions: '0700'
+
+- name: 1.4.x | Set facts (BIOS)
+  when:
+    - not _rhel8cis_efi.stat.exists
+  ansible.builtin.set_fact:
+    _rhel8cis_grub_config_path: /etc/grub2.cfg
+    _rhel8cis_bootloader_base_path: /boot/grub2
+    _rhel8cis_bootloader_file_permissions: '0600'
+
+- name: 1.4.1 | Ensure bootloader password is set
   when:
     - rhel8cis_rule_1_4_1_enabled
-  become: true
-  ansible.posix.sysctl:
-    name: kernel.randomize_va_space
-    value: '2'
-    state: present
-    sysctl_set: true
+  block:
+    - name: 1.4.1 | Ensure bootloader password is set | Check current password
+      become: true
+      ansible.builtin.find:
+        paths:
+          - /boot
+        file_type: file
+        recurse: true
+        patterns:
+          - user.cfg
+      register: _rhel8cis_bootloader_password_files
 
-- name: 1.4.2 | Ensure ptrace_scope is restricted
+    - name: 1.4.1 | Ensure bootloader password is set | Set password
+      when:
+        - rhel8cis_force_reset_bootloader_password or
+          _rhel8cis_bootloader_password_files.files | length == 0
+      block:
+        - name: 1.4.1 | Ensure bootloader password is set | Install pexpect package
+          become: true
+          ansible.builtin.dnf:
+            name:
+              - python3-pexpect
+            state: present
+
+        - name: 1.4.1 | Ensure bootloader password is set | Set password
+          become: true
+          ansible.builtin.expect:
+            command: grub2-setpassword
+            responses:
+              Enter password: "{{ rhel8cis_bootloader_password }}"
+              Confirm password: "{{ rhel8cis_bootloader_password }}"
+          notify:
+            - _rhel8cis_grub2-mkconfig
+
+- name: 1.4.2 | Ensure permissions on bootloader config are configured
   when:
     - rhel8cis_rule_1_4_2_enabled
   become: true
-  ansible.posix.sysctl:
-    name: kernel.yama.ptrace_scope
-    value: '1'
-    state: present
-    sysctl_set: true
+  block:
+    - name: 1.4.2 | Ensure permissions on bootloader config are configured | Get list of files and directories
+      ansible.builtin.find:
+        paths:
+          - "{{ _rhel8cis_bootloader_base_path }}"
+        file_type: any
+        recurse: true
+      register: _rhel8cis_bootloader_files
 
-- name: 1.4.3 | Ensure core dump backtraces are disabled
-  when:
-    - rhel8cis_rule_1_4_3_enabled
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/coredump.conf
-    regexp: '^#?ProcessSizeMax='
-    line: 'ProcessSizeMax=0'
-
-- name: 1.4.4 | Ensure core dump storage is disabled
-  when:
-    - rhel8cis_rule_1_4_4_enabled
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/coredump.conf
-    regexp: '^#?Storage='
-    line: 'Storage=none'
+    - name: 1.4.2 | Ensure permissions on bootloader config are configured | Set permissions
+      loop: "{{ _rhel8cis_bootloader_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        owner: root
+        group: root
+        mode: "{{ _rhel8cis_bootloader_file_permissions }}"

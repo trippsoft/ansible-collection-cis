@@ -3,7 +3,7 @@ galaxy_info:
   author: Jim Tarpley (@trippsc2)
   namespace: trippsc2
   role_name: rhel8
-  description: This role applies the CIS Benchmark hardening steps on RHEL8-based machines.  It is based on the CIS Benchmark for RHEL 8, v2.0.0.
+  description: This role applies the CIS Benchmark hardening steps on RHEL8-based machines.  It is based on the CIS Benchmark for RHEL 8, v3.0.0.
 
   license: MIT
 

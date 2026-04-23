@@ -10,8 +10,7 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.6.1'
-        _rhel8cis_warning_description: >-
-          /var/log is not a separate partition.
+        _rhel8cis_warning_description: /var/log is not a separate partition.
 
     - name: 1.1.2.6.2 | Ensure nodev option set on /var/log partition
       when:
@@ -19,26 +18,23 @@
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.6.2'
-        _rhel8cis_warning_description: >-
-          /var/log is not a separate partition.
-    
+        _rhel8cis_warning_description: /var/log is not a separate partition.
+
     - name: 1.1.2.6.3 | Ensure nosuid option set on /var/log partition
       when:
         - rhel8cis_rule_1_1_2_6_3_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.6.3'
-        _rhel8cis_warning_description: >-
-          /var/log is not a separate partition.
-    
+        _rhel8cis_warning_description: /var/log is not a separate partition.
+
     - name: 1.1.2.6.4 | Ensure noexec option set on /var/log partition
       when:
         - rhel8cis_rule_1_1_2_6_4_enabled
       ansible.builtin.include_tasks: ../../add-warning.yml
       vars:
         _rhel8cis_warning_rule: '1.1.2.6.4'
-        _rhel8cis_warning_description: >-
-          /var/log is not a separate partition.
+        _rhel8cis_warning_description: /var/log is not a separate partition.
 
 - name: 1.1.2.6.x | Configure /var/log
   when:
@@ -52,7 +48,10 @@
     - name: 1.1.2.6.x | Set existing /var/log mount configuration fact
       ansible.builtin.set_fact:
         _rhel8cis_existing_var_log_mount: >-
-          {{ ansible_mounts | selectattr('mount', 'equalto', '/var/log') | list | first }}
+          {{ ansible_mounts |
+              selectattr('mount', 'equalto', '/var/log') |
+              list |
+              first }}
 
     - name: 1.1.2.6.x | Get UUID of /var/log partition
       when:

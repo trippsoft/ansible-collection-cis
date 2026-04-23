@@ -1,22 +1,22 @@
 {{ ansible_managed | comment }}
 
-{% if rhel8cis_rule_5_2_3_1_enabled and (rhel8cis_rule_5_2_3_1_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_1_enabled and (rhel8cis_rule_6_3_3_1_force or _rhel8cis_level2) %}
 -w /etc/sudoers -p wa -k scope
 -w /etc/sudoers.d/ -p wa -k scope
 {% endif %}
-{% if rhel8cis_rule_5_2_3_2_enabled and (rhel8cis_rule_5_2_3_2_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_2_enabled and (rhel8cis_rule_6_3_3_2_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -C euid!=uid -F auid!=unset -S execve -k user_emulation
 -a always,exit -F arch=b32 -C euid!=uid -F auid!=unset -S execve -k user_emulation
 {% endif %}
-{% if rhel8cis_rule_5_2_3_3_enabled and (rhel8cis_rule_5_2_3_3_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_3_enabled and (rhel8cis_rule_6_3_3_3_force or _rhel8cis_level2) %}
 -w /var/log/sudo.log -p wa -k sudo_log_file
 {% endif %}
-{% if rhel8cis_rule_5_2_3_4_enabled and (rhel8cis_rule_5_2_3_4_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_4_enabled and (rhel8cis_rule_6_3_3_4_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change
 -a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change
 -w /etc/localtime -p wa -k time-change
 {% endif %}
-{% if rhel8cis_rule_5_2_3_5_enabled and (rhel8cis_rule_5_2_3_5_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_5_enabled and (rhel8cis_rule_6_3_3_5_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -S sethostname,setdomainname -F key=system-locale
 -a always,exit -F arch=b32 -S sethostname,setdomainname -F key=system-locale
 -w /etc/issue -p wa -k system-locale
@@ -25,25 +25,25 @@
 -w /etc/sysconfig/network -p wa -k system-locale
 -w /etc/sysconfig/network-scripts -p wa -k system-locale
 {% endif %}
-{% if rhel8cis_rule_5_2_3_6_enabled and (rhel8cis_rule_5_2_3_6_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_6_enabled and (rhel8cis_rule_6_3_3_6_force or _rhel8cis_level2) %}
 {% for process in _rhel8cis_privileged_processes.stdout_lines -%}
 -a always,exit -F path={{ process }} -F perm=x -F auid>=1000 -F auid!=unset -k privileged
 {% endfor %}
 {% endif %}
-{% if rhel8cis_rule_5_2_3_7_enabled and (rhel8cis_rule_5_2_3_7_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_7_enabled and (rhel8cis_rule_6_3_3_7_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=access
 -a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=access
 -a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=access
 -a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=access
 {% endif %}
-{% if rhel8cis_rule_5_2_3_8_enabled and (rhel8cis_rule_5_2_3_8_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_8_enabled and (rhel8cis_rule_6_3_3_8_force or _rhel8cis_level2) %}
 -w /etc/group -p wa -k identity
 -w /etc/passwd -p wa -k identity
 -w /etc/gshadow -p wa -k identity
 -w /etc/shadow -p wa -k identity
 -w /etc/security/opasswd -p wa -k identity
 {% endif %}
-{% if rhel8cis_rule_5_2_3_9_enabled and (rhel8cis_rule_5_2_3_9_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_9_enabled and (rhel8cis_rule_6_3_3_9_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=unset -F key=perm_mod
 -a always,exit -F arch=b64 -S chown,fchown,lchown,fchownat -F auid>=1000 -F auid!=unset -F key=perm_mod
 -a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=unset -F key=perm_mod
@@ -51,44 +51,47 @@
 -a always,exit -F arch=b64 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=unset -F key=perm_mod
 -a always,exit -F arch=b32 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=unset -F key=perm_mod
 {% endif %}
-{% if rhel8cis_rule_5_2_3_10_enabled and (rhel8cis_rule_5_2_3_10_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_10_enabled and (rhel8cis_rule_6_3_3_10_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=unset -k mounts
 -a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=unset -k mounts
 {% endif %}
-{% if rhel8cis_rule_5_2_3_11_enabled and (rhel8cis_rule_5_2_3_11_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_11_enabled and (rhel8cis_rule_6_3_3_11_force or _rhel8cis_level2) %}
 -w /var/run/utmp -p wa -k session
 -w /var/log/wtmp -p wa -k session
 -w /var/log/btmp -p wa -k session
 {% endif %}
-{% if rhel8cis_rule_5_2_3_12_enabled and (rhel8cis_rule_5_2_3_12_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_12_enabled and (rhel8cis_rule_6_3_3_12_force or _rhel8cis_level2) %}
 -w /var/log/lastlog -p wa -k logins
 -w /var/run/faillock -p wa -k logins
 {% endif %}
-{% if rhel8cis_rule_5_2_3_13_enabled and (rhel8cis_rule_5_2_3_13_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_13_enabled and (rhel8cis_rule_6_3_3_13_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b64 -S rename,unlink,unlinkat,renameat -F auid>=1000 -F auid!=unset -F key=delete
 -a always,exit -F arch=b32 -S rename,unlink,unlinkat,renameat -F auid>=1000 -F auid!=unset -F key=delete
 {% endif %}
-{% if rhel8cis_rule_5_2_3_14_enabled and (rhel8cis_rule_5_2_3_14_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_14_enabled and (rhel8cis_rule_6_3_3_14_force or _rhel8cis_level2) %}
 -w /etc/selinux/ -p wa -k MAC-policy
 -w /usr/share/selinux/ -p wa -k MAC-policy
 {% endif %}
-{% if rhel8cis_rule_5_2_3_15_enabled and (rhel8cis_rule_5_2_3_15_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_15_enabled and (rhel8cis_rule_6_3_3_15_force or _rhel8cis_level2) %}
 -a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=unset -k perm_chng
 {% endif %}
-{% if rhel8cis_rule_5_2_3_16_enabled and (rhel8cis_rule_5_2_3_16_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_16_enabled and (rhel8cis_rule_6_3_3_16_force or _rhel8cis_level2) %}
 -a always,exit -F path=/usr/bin/setfacl -F perm=x -F auid>=1000 -F auid!=unset -k perm_chng
 {% endif %}
-{% if rhel8cis_rule_5_2_3_17_enabled and (rhel8cis_rule_5_2_3_17_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_17_enabled and (rhel8cis_rule_6_3_3_17_force or _rhel8cis_level2) %}
 -a always,exit -F path=/usr/bin/chacl -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
 {% endif %}
-{% if rhel8cis_rule_5_2_3_18_enabled and (rhel8cis_rule_5_2_3_18_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_18_enabled and (rhel8cis_rule_6_3_3_18_force or _rhel8cis_level2) %}
 -a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=unset -k usermod
 {% endif %}
-{% if rhel8cis_rule_5_2_3_19_enabled and (rhel8cis_rule_5_2_3_19_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_19_enabled and (rhel8cis_rule_6_3_3_19_force or _rhel8cis_level2) %}
 -a always,exit -F arch=b32 -S init_module,finit_module,delete_module,create_module,query_module -F auid>=1000 -F auid!=unset -k kernel_modules
 -a always,exit -F arch=b64 -S init_module,finit_module,delete_module,create_module,query_module -F auid>=1000 -F auid!=unset -k kernel_modules
 -a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset -k kernel_modules
 {% endif %}
-{% if rhel8cis_rule_5_2_3_20_enabled and (rhel8cis_rule_5_2_3_20_force or _rhel8cis_level2) %}
+{% if rhel8cis_rule_6_3_3_21_enabled and (rhel8cis_rule_6_3_3_21_force or _rhel8cis_level2) %}
 -e 2
+{% endif %}
+{% if rhel8cis_rule_6_3_3_20_enabled and (rhel8cis_rule_6_3_3_20_force or _rhel8cis_level2) %}
+-c
 {% endif %}
