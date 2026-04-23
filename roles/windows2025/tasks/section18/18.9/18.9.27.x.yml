@@ -8,6 +8,7 @@
     name: AllowCustomSSPsAPs
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.27.2 | NG | Ensure 'Configures LSASS to run as a protected process' is set to 'Enabled: Enabled with UEFI Lock'
@@ -19,3 +20,4 @@
     name: RunAsPPL
     data: 1
     type: dword
+    state: present

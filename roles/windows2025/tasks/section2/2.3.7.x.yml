@@ -8,6 +8,7 @@
     name: DisableCAD
     data: 0
     type: dword
+    state: present
 
 - name: "2.3.7.2 | L1 | Ensure 'Interactive logon: Don't display last signed-in' is set to 'Enabled'"
   when:
@@ -17,6 +18,7 @@
     name: DontDisplayLastUserName
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.7.3 | L1 | Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'
@@ -27,6 +29,7 @@
     name: InactivityTimeoutSecs
     data: "{{ w2025cis_inactivity_timeout_in_seconds }}"
     type: dword
+    state: present
 
 - name: "2.3.7.4 | L1 | Configure 'Interactive logon: Message text for users attempting to log on'"
   when:
@@ -36,6 +39,7 @@
     name: LegalNoticeText
     data: "{{ w2025cis_login_message_text }}"
     type: string
+    state: present
 
 - name: "2.3.7.5 | L1 | Configure 'Interactive logon: Message title for users attempting to log on'"
   when:
@@ -45,6 +49,7 @@
     name: LegalNoticeCaption
     data: "{{ w2025cis_login_message_title }}"
     type: string
+    state: present
 
 - name: >-
     2.3.7.6 | L2 |
@@ -60,6 +65,7 @@
     name: cachedlogonscount
     data: "{{ w2025cis_cached_logons_count }}"
     type: string
+    state: present
 
 - name: >-
     2.3.7.7 | L1 |
@@ -71,6 +77,7 @@
     name: PasswordExpiryWarning
     data: "{{ w2025cis_password_expiry_warning_in_days }}"
     type: dword
+    state: present
 
 - name: >-
     2.3.7.8 | L1 |
@@ -84,6 +91,7 @@
     name: ForceUnlockLogon
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.7.9 | L1 | Ensure 'Interactive logon: Smart card removal behavior' is set to 'Lock Workstation' or higher
@@ -94,3 +102,4 @@
     name: scremoveoption
     data: "{{ _w2025cis_smart_card_removal_behavior_value }}"
     type: dword
+    state: present

@@ -13,6 +13,7 @@
         name: EnableSmartScreen
         data: 1
         type: dword
+        state: present
 
     - name: >-
         18.10.77.2.1 | L1 |
@@ -23,3 +24,4 @@
         name: ShellSmartScreenLevel
         data: Block
         type: string
+        state: present

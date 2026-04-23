@@ -40,7 +40,7 @@
   ansible.builtin.assert:
     that:
       - ansible_os_family == 'Windows'
-      - ansible_distribution | regex_search('(Microsoft Windows Server 2025)')
+      - '"Microsoft Windows Server 2025" in ansible_distribution'
     fail_msg: >-
       This role can only be run against Windows Server 2025.
       {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
@@ -309,10 +309,10 @@
       Value: {{ w2025cis_public_firewall_log_size_in_kb }}
 
 - name: >-
-    Validate | 18.6.7.6 | L1 |
+    Validate | 18.6.7.7 | L1 |
     Ensure 'Set authentication rate limiter delay (milliseconds)' is set to 'Enabled: 2000' or more
   when:
-    - w2025cis_rule_18_6_7_6_enabled
+    - w2025cis_rule_18_6_7_7_enabled
   ansible.builtin.assert:
     that:
       - w2025cis_smb_authentication_rate_limiter_delay_in_ms | int >= 2000

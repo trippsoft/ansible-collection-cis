@@ -10,6 +10,7 @@
     name: EnableMPR
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.10.83.2 | L1 | Ensure 'Sign-in and lock last interactive user automatically after a restart' is set to 'Disabled'
@@ -20,3 +21,4 @@
     name: DisableAutomaticRestartSignOn
     data: 1
     type: dword
+    state: present

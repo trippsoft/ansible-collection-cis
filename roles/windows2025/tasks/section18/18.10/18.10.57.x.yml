@@ -7,6 +7,7 @@
     name: DisablePasswordSaving
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.10.57.3.2.1 | L2 |
@@ -19,6 +20,7 @@
     name: fSingleSessionPerUser
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.1 | L2 | Ensure 'Allow UI Automation redirection' is set to 'Disabled'"
   when:
@@ -29,6 +31,7 @@
     name: EnableUiaRedirection
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.2 | L2 | Ensure 'Do not allow COM port redirection' is set to 'Enabled'"
   when:
@@ -39,6 +42,7 @@
     name: fDisableCcm
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.3 | L1 | Ensure 'Do not allow drive redirection' is set to 'Enabled'"
   when:
@@ -48,6 +52,7 @@
     name: fDisableCdm
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.4 | L2 | Ensure 'Do not allow location redirection' is set to 'Enabled'"
   when:
@@ -58,6 +63,7 @@
     name: fDisableLocationRedir
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.5 | L2 | Ensure 'Do not allow LPT port redirection' is set to 'Enabled'"
   when:
@@ -68,6 +74,7 @@
     name: fDisableLPT
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.3.6 | L2 | Ensure 'Do not allow supported Plug and Play device redirection' is set to 'Enabled'"
   when:
@@ -78,6 +85,7 @@
     name: fDisablePNPRedir
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.9.1 | L1 | Ensure 'Always prompt for password upon connection' is set to 'Enabled'"
   when:
@@ -87,6 +95,7 @@
     name: fPromptForPassword
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.9.2 | L1 | Ensure 'Require secure RPC communication' is set to 'Enabled'"
   when:
@@ -96,6 +105,7 @@
     name: fEncryptRPCTraffic
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.10.57.3.9.3 | L1 |
@@ -107,6 +117,7 @@
     name: SecurityLayer
     data: 2
     type: dword
+    state: present
 
 - name: >-
     18.10.57.3.9.4 | L1 |
@@ -119,6 +130,7 @@
     name: UserAuthentication
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.9.5 | L1 | Ensure 'Set client connection encryption level' is set to 'Enabled: High Level'"
   when:
@@ -128,6 +140,7 @@
     name: MinEncryptionLevel
     data: 3
     type: dword
+    state: present
 
 - name: >-
     18.10.57.3.10.1 | L2 |
@@ -141,6 +154,7 @@
     name: MaxIdleTime
     data: 900000
     type: dword
+    state: present
 
 - name: "18.10.57.3.10.2 | L2 |Ensure 'Set time limit for disconnected sessions' is set to 'Enabled: 1 minute'"
   when:
@@ -151,6 +165,7 @@
     name: MaxDisconnectionTime
     data: 60000
     type: dword
+    state: present
 
 - name: "18.10.57.3.11.1 | L1 | Ensure 'Do not delete temp folders upon exit' is set to 'Disabled'"
   when:
@@ -160,6 +175,7 @@
     name: DeleteTempDirsOnExit
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.57.3.11.2 | L1 | Ensure 'Do not use temporary folders per session' is set to 'Disabled'"
   when:
@@ -169,3 +185,4 @@
     name: PerSessionTempDir
     data: 1
     type: dword
+    state: present

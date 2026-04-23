@@ -7,6 +7,7 @@
     name: DisableConsumerAccountStateContent
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.13.2 | L2 | Ensure 'Turn off cloud optimized content' is set to 'Enabled'"
   when:
@@ -17,3 +18,4 @@
     name: DisableWindowsConsumerFeatures
     data: 1
     type: dword
+    state: present

@@ -119,11 +119,6 @@ _w2025cis_laps_post_authentication_actions_map:
   reset_password_and_reboot: 5
   reset_password_and_terminal_processes: 11
 
-_w2025cis_doh_policy_map:
-  require: 3
-  allow: 2
-  prohibit: 1
-
 _w2025cis_netbios_dns_resolution_behavior_map:
   disabled: 0
   disabled_on_public_networks: 2
@@ -176,16 +171,14 @@ _w2025cis_outgoing_ntlm_traffic_requirement_value: >-
   {{ _w2025cis_outgoing_ntlm_traffic_requirement_map[w2025cis_outgoing_ntlm_traffic_requirement] }}
 _w2025cis_admin_uac_elevation_behavior_value: >-
   {{ _w2025cis_admin_uac_elevation_behavior_map[w2025cis_admin_uac_elevation_behavior] }}
+_w2025cis_netbios_dns_resolution_behavior_value: >-
+  {{ _w2025cis_netbios_dns_resolution_behavior_map[w2025cis_netbios_dns_resolution_behavior] }}
 _w2025cis_laps_directory_value: >-
   {{ _w2025cis_laps_directory_map[w2025cis_laps_directory] }}
 _w2025cis_laps_password_complexity_value: >-
   {{ _w2025cis_laps_password_complexity_map[w2025cis_laps_password_complexity] }}
 _w2025cis_laps_post_authentication_actions_value: >-
   {{ _w2025cis_laps_post_authentication_actions_map[w2025cis_laps_post_authentication_actions] }}
-_w2025cis_doh_policy_value: >-
-  {{ _w2025cis_doh_policy_map[w2025cis_doh_policy] }}
-_w2025cis_netbios_dns_resolution_behavior_value: >-
-  {{ _w2025cis_netbios_dns_resolution_behavior_map[w2025cis_netbios_dns_resolution_behavior] }}
 _w2025cis_rpc_listener_authentication_protocol_value: >-
   {{ _w2025cis_rpc_listener_authentication_protocol_map[w2025cis_rpc_listener_authentication_protocol] }}
 _w2025cis_vbs_platform_security_level_value: >-

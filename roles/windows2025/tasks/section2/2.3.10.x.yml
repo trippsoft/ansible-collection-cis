@@ -19,6 +19,7 @@
     name: RestrictAnonymousSAM
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.10.3 | L1 |
@@ -32,6 +33,7 @@
     name: RestrictAnonymous
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.10.4 | L2 |
@@ -45,6 +47,7 @@
     name: DisableDomainCreds
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.10.5 | L1 | Ensure 'Network access: Let Everyone permissions apply to anonymous users' is set to 'Disabled'
@@ -55,6 +58,7 @@
     name: EveryoneIncludesAnonymous
     data: 0
     type: dword
+    state: present
 
 - name: >-
     2.3.10.6 | L1 | Ensure 'Network access: Named Pipes that can be accessed anonymously' is configured | DC only
@@ -71,6 +75,7 @@
       - HydraLSPipe
       - TermServLicensing
     type: multistring
+    state: present
 
 - name: "2.3.10.7 | L1 | Ensure 'Network access: Named Pipes that can be accessed anonymously' is configured | MS only"
   when:
@@ -81,6 +86,7 @@
     name: NullSessionPipes
     data: "{{ w2025cis_null_session_pipes }}"
     type: multistring
+    state: present
 
 - name: "2.3.10.8 | L1 | Ensure 'Network access: Remotely accessible registry paths' is configured"
   when:
@@ -93,6 +99,7 @@
       - 'System\CurrentControlSet\Control\Server Applications'
       - 'Software\Microsoft\Windows NT\CurrentVersion'
     type: multistring
+    state: present
 
 - name: "2.3.10.9 | L1 | Ensure 'Network access: Remotely accessible registry paths and sub-paths' is configured"
   when:
@@ -112,6 +119,7 @@
     name: RestrictNullSessAccess
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.10.11 | L1 |
@@ -126,6 +134,7 @@
     name: RestrictRemoteSAM
     data: "O:BAG:BAD:(A;;RC;;;BA)"
     type: string
+    state: present
 
 - name: "2.3.10.12 | L1 | Ensure 'Network access: Shares that can be accessed anonymously' is set to 'None'"
   when:
@@ -135,6 +144,7 @@
     name: NullSessionShares
     data: ""
     type: multistring
+    state: present
 
 - name: >-
     2.3.10.13 | L1 |
@@ -147,3 +157,4 @@
     name: ForceGuest
     data: 0
     type: dword
+    state: present

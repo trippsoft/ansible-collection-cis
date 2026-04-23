@@ -10,6 +10,7 @@
     name: AllowTelemetry
     data: "{{ _w2025cis_telemetry_level_value }}"
     type: dword
+    state: present
 
 - name: >-
     18.10.16.2 | L2 |
@@ -23,6 +24,7 @@
     name: DisableEnterpriseAuthProxy
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.16.3 | L1 | Ensure 'Do not show feedback notifications' is set to 'Enabled'"
   when:
@@ -32,6 +34,7 @@
     name: DoNotShowFeedbackNotifications
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.16.4 | L2 | Ensure 'Enable OneSettings Auditing' is set to 'Enabled'"
   when:
@@ -42,6 +45,7 @@
     name: EnableOneSettingsAuditing
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.16.5 | L2 | Ensure 'Limit Diagnostic Log Collection' is set to 'Enabled'"
   when:
@@ -52,6 +56,7 @@
     name: LimitDiagnosticLogCollection
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.16.6 | L2 | Ensure 'Limit Dump Collection' is set to 'Enabled'"
   when:
@@ -62,3 +67,4 @@
     name: LimitDumpCollection
     data: 1
     type: dword
+    state: present

@@ -8,6 +8,7 @@
     name: AllowSuggestedAppsInWindowsInkWorkspace
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.10.81.2 | L1 |
@@ -20,3 +21,4 @@
     name: AllowWindowsInkWorkspace
     data: "{{ _w2025cis_windows_ink_workspace_access_value }}"
     type: dword
+    state: present

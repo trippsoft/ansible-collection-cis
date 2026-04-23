@@ -9,6 +9,7 @@
     name: DisableMotWOnInsecurePathCopy
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.29.3 | L1 | Ensure 'Turn off Data Execution Prevention for Explorer' is set to 'Disabled'"
   when:
@@ -18,6 +19,7 @@
     name: NoDataExecutionPrevention
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.29.4 | L1 | Ensure 'Turn off heap termination on corruption' is set to 'Disabled'"
   when:
@@ -27,6 +29,7 @@
     name: NoHeapTerminationOnCorruption
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.29.5 | L1 | Ensure 'Turn off shell protocol protected mode' is set to 'Disabled'"
   when:
@@ -36,3 +39,4 @@
     name: PreXPSP2ShellProtocolBehavior
     data: 0
     type: dword
+    state: present

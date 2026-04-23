@@ -8,6 +8,7 @@
     name: UseMachineId
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.11.2 | L1 | Ensure 'Network security: Allow LocalSystem NULL session fallback' is set to 'Disabled'
@@ -18,6 +19,7 @@
     name: allownullsessionfallback
     data: 0
     type: dword
+    state: present
 
 - name: >-
     2.3.11.3 | L1 |
@@ -30,6 +32,7 @@
     name: AllowOnlineID
     data: 0
     type: dword
+    state: present
 
 - name: >-
     2.3.11.4 | L1 |
@@ -42,6 +45,7 @@
     name: SupportedEncryptionTypes
     data: 2147483640
     type: dword
+    state: present
 
 - name: "2.3.11.5 | L1 | Ensure 'Network security: Force logoff when logon hours expire' is set to 'Enabled'"
   when:
@@ -51,6 +55,7 @@
     name: EnableForcedLogOff
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.11.6 | L1 |
@@ -62,6 +67,7 @@
     name: LMCompatibilityLevel
     data: 5
     type: dword
+    state: present
 
 - name: >-
     2.3.11.7 | L1 |
@@ -73,6 +79,7 @@
     name: LDAPClientConfidentiality
     data: "{{ _w2025cis_ldap_client_encryption_requirements_value }}"
     type: dword
+    state: present
 
 - name: >-
     2.3.11.8 | L1 | Ensure 'Network security: LDAP client signing requirements' is set to 'Negotiate signing' or higher
@@ -83,6 +90,7 @@
     name: LDAPClientIntegrity
     data: "{{ _w2025cis_ldap_client_signing_requirements_value }}"
     type: dword
+    state: present
 
 - name: >-
     2.3.11.9 | L1 |
@@ -95,6 +103,7 @@
     name: NTLMMinClientSec
     data: 537395200
     type: dword
+    state: present
 
 - name: >-
     2.3.11.10 | L1 |
@@ -107,6 +116,7 @@
     name: NTLMMinServerSec
     data: 537395200
     type: dword
+    state: present
 
 - name: >-
     2.3.11.11 | L1 |
@@ -118,6 +128,7 @@
     name: AuditReceivingNTLMTraffic
     data: 2
     type: dword
+    state: present
 
 - name: >-
     2.3.11.12 | L1 |
@@ -131,6 +142,7 @@
     name: AuditNTLMInDomain
     data: 7
     type: dword
+    state: present
 
 - name: >-
     2.3.11.13 | L1 |
@@ -142,3 +154,4 @@
     name: RestrictSendingNTLMTraffic
     data: "{{ _w2025cis_outgoing_ntlm_traffic_requirement_value }}"
     type: dword
+    state: present

@@ -10,6 +10,7 @@
     name: autodisconnect
     data: "{{ w2025cis_idle_smb_timeout_in_minutes }}"
     type: dword
+    state: present
 
 - name: "2.3.9.2 | L1 | Ensure 'Microsoft network server: Digitally sign communications (always)' is set to 'Enabled'"
   when:
@@ -19,6 +20,7 @@
     name: requiresecuritysignature
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.9.3 | L1 | Ensure 'Microsoft network server: Disconnect clients when logon hours expire' is set to 'Enabled'
@@ -29,6 +31,7 @@
     name: enableforcedlogoff
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.9.4 | L1 |
@@ -43,3 +46,4 @@
     name: SMBServerNameHardeningLevel
     data: "{{ _w2025cis_smb_spn_target_name_validation_level_value }}"
     type: dword
+    state: present

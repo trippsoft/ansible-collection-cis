@@ -7,3 +7,4 @@
     name: ProcessCreationIncludeCmdLine_Enabled
     data: 1
     type: dword
+    state: present

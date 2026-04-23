@@ -12,6 +12,7 @@
     name: SamNGCKeyROCAValidation
     data: 2
     type: dword
+    state: present
 
 - name: >-
     18.9.41.2 | L1 |
@@ -26,6 +27,7 @@
     name: SamrChangeUserPasswordApiPolicy
     data: 2
     type: dword
+    state: present
 
 - name: >-
     18.9.41.3 | L1 |
@@ -40,3 +42,4 @@
     name: SamrChangeUserPasswordApiPolicy
     data: 1
     type: dword
+    state: present

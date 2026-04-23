@@ -7,6 +7,7 @@
     name: NoAutoplayfornonVolume
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.10.8.2 | L1 | Ensure 'Set the default behavior for AutoRun'
@@ -18,6 +19,7 @@
     name: NoAutorun
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.8.3 | L1 | Ensure 'Turn off Autoplay' is set to 'Enabled: All drives'"
   when:
@@ -27,3 +29,4 @@
     name: NoDriveTypeAutoRun
     data: 255
     type: dword
+    state: present

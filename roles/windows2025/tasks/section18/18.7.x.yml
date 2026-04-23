@@ -9,6 +9,7 @@
     name: RegisterSpoolerRemoteRpcEndPoint
     data: 0
     type: dword
+    state: present
 
 - name: "18.7.2 | L1 | Ensure 'Configure Redirection Guard' is set to 'Enabled: Redirection Guard Enabled'"
   when:
@@ -18,6 +19,7 @@
     name: RedirectionGuardPolicy
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.7.3 | L1 |
@@ -30,6 +32,7 @@
     name: RpcUseNamedPipeProtocol
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.7.4 | L1 |
@@ -42,6 +45,7 @@
     name: RpcAuthentication
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.7.5 | L1 |
@@ -54,6 +58,7 @@
     name: RpcProtocols
     data: 5
     type: dword
+    state: present
 
 - name: >-
     18.7.6 | L1 |
@@ -66,6 +71,7 @@
     name: ForceKerberosForRpc
     data: "{{ _w2025cis_rpc_listener_authentication_protocol_value }}"
     type: dword
+    state: present
 
 - name: "18.7.7 | L1 | Ensure 'Configure RPC over TCP port' is set to 'Enabled: 0'"
   when:
@@ -75,6 +81,7 @@
     name: RpcTcpPort
     data: 0
     type: dword
+    state: present
 
 - name: "18.7.8 | L1 | Ensure 'Configure RPC packet level privacy setting for incoming connections' is set to 'Enabled'"
   when:
@@ -84,6 +91,7 @@
     name: RpcAuthnLevelPrivacyEnabled
     data: 1
     type: dword
+    state: present
 
 - name: "18.7.9 | L2 | Ensure 'Configure Windows protected print' is set to 'Enabled'"
   when:
@@ -94,6 +102,7 @@
     name: WindowsProtectedPrintGroupPolicyState
     data: 1
     type: dword
+    state: present
 
 - name: "18.7.10 | L1 | Ensure 'Limits print driver installation to Administrators' is set to 'Enabled'"
   when:
@@ -128,6 +137,7 @@
     name: NoWarningNoElevationOnInstall
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.7.13 | L1 |
@@ -140,6 +150,7 @@
     name: UpdatePromptSettings
     data: 0
     type: dword
+    state: present
 
 - name: "18.7.14 | L2 | Ensure 'Require IPPS for IPP printers' is set to 'Enabled'"
   when:
@@ -150,6 +161,7 @@
     name: RequireIpps
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.7.15 | L2 |
@@ -163,6 +175,7 @@
     name: SecurityFlagsBlockUnknownCA
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.7.16 | L2 |
@@ -175,6 +188,7 @@
     name: SecurityFlagsBlockCertWrongUsage
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.7.17 | L2 |
@@ -188,6 +202,7 @@
     name: SecurityFlagsBlockCertCNInvalid
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.7.18 | L2 |
@@ -201,3 +216,4 @@
     name: SecurityFlagsBlockCertDateInvalid
     data: 1
     type: dword
+    state: present

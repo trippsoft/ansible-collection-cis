@@ -7,6 +7,7 @@
     name: AllowEncryptionOracle
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.4.2 | L1 | Ensure 'Remote host allows delegation of non-exportable credentials' is set to 'Enabled'"
   when:
@@ -16,3 +17,4 @@
     name: AllowProtectedCreds
     data: 1
     type: dword
+    state: present

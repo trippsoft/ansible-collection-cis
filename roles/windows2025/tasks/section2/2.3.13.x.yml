@@ -7,3 +7,4 @@
     name: ShutdownWithoutLogon
     data: 0
     type: dword
+    state: present

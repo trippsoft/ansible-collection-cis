@@ -7,6 +7,7 @@
     name: PassiveRemediation
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.5.1 | L1 | Ensure 'Configure local setting override for reporting to Microsoft MAPS' is set to 'Disabled'"
   when:
@@ -16,6 +17,7 @@
     name: LocalSettingOverrideSpynetReporting
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.5.2 | L1 | Ensure 'Join Microsoft MAPS' is set to 'Enabled: Advanced'"
   when:
@@ -25,6 +27,7 @@
     name: SpynetReporting
     data: 2
     type: dword
+    state: present
 
 - name: "18.10.42.6.1.1 | L1 | Ensure 'Configure Attack Surface Reduction rules' is set to 'Enabled'"
   when:
@@ -34,6 +37,7 @@
     name: ExploitGuard_ASR_Rules
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.6.1.2 | L1 | Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured"
   loop:
@@ -56,6 +60,7 @@
     name: "{{ item }}"
     data: 1
     type: string
+    state: present
 
 - name: "18.10.42.6.3.1 | L1 | Ensure 'Prevent users and apps from accessing dangerous websites' is set to 'Enabled: Block'"
   when:
@@ -65,6 +70,7 @@
     name: EnableNetworkProtection
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.7.1 | L2 | Ensure 'Enable file hash computation feature' is set to 'Enabled'"
   when:
@@ -75,6 +81,7 @@
     name: EnableFileHashComputation
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.8.1 | L2 | Ensure 'Convert warn verdict to block' is set to 'Enabled'"
   when:
@@ -85,6 +92,7 @@
     name: EnableConvertWarnToBlock
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.10.1 | L1 | Ensure 'Configure real-time protection and Security Intelligence Updates during OOBE' is set to 'Enabled'"
   when:
@@ -94,6 +102,7 @@
     name: OobeEnableRtpAndSigUpdate
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.10.2 | L1 | Ensure 'Scan all downloaded files and attachments' is set to 'Enabled'"
   when:
@@ -103,6 +112,7 @@
     name: DisableIOAVProtection
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.10.3 | L1 | Ensure 'Turn off real-time protection' is set to 'Disabled'"
   when:
@@ -112,6 +122,7 @@
     name: DisableRealtimeMonitoring
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.10.4 | L1 | Ensure 'Turn on behavior monitoring' is set to 'Enabled'"
   when:
@@ -121,6 +132,7 @@
     name: DisableBehaviorMonitoring
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.10.5 | L1 | Ensure 'Turn on script scanning' is set to 'Enabled'"
   when:
@@ -130,6 +142,7 @@
     name: DisableScriptScanning
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.11.1.1.1 | L2 | Ensure 'Configure Brute-Force Protection aggressiveness' is set to 'Enabled: Medium' or higher"
   when:
@@ -140,6 +153,7 @@
     name: BruteForceProtectionAggressiveness
     data: "{{ _w2025cis_brute_force_protection_aggressiveness_value }}"
     type: dword
+    state: present
 
 - name: "18.10.42.11.1.1.2 | L1 | Ensure 'Configure Remote Encryption Protection Mode' is set to 'Enabled: Audit' or higher"
   when:
@@ -149,6 +163,7 @@
     name: BruteForceProtectionConfiguredState
     data: "{{ _w2025cis_brute_force_protection_configured_state_value }}"
     type: dword
+    state: present
 
 - name: "18.10.42.11.1.2.1 | L2 | Ensure 'Configure how aggressively Remote Encryption Protection blocks threats' is set to 'Enabled: Medium' or higher"
   when:
@@ -159,6 +174,7 @@
     name: RemoteEncryptionProtectionAggressiveness
     data: "{{ _w2025cis_remote_encryption_protection_aggressiveness_value }}"
     type: dword
+    state: present
 
 - name: "18.10.42.12.1 | L2 | Ensure 'Configure Watson events' is set to 'Disabled'"
   when:
@@ -169,6 +185,7 @@
     name: DisableGenericRePorts
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.13.1 | L1 | Ensure 'Scan excluded files and directories during quick scans' is set to 'Enabled: 1'"
   when:
@@ -178,6 +195,7 @@
     name: QuickScanIncludeExclusions
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.13.2 | L1 | Ensure 'Scan packed executables' is set to 'Enabled'"
   when:
@@ -187,6 +205,7 @@
     name: DisablePackedExeScanning
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.13.3 | L1 | Ensure 'Scan removable drives' is set to 'Enabled'"
   when:
@@ -196,6 +215,7 @@
     name: DisableRemovableDriveScanning
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.13.4 | L1 | Ensure 'Trigger a quick scan after X days without any scans' is set to 'Enabled: 7'"
   when:
@@ -205,6 +225,7 @@
     name: DaysUntilAggressiveCatchupQuickScan
     data: 7
     type: dword
+    state: present
 
 - name: "18.10.42.13.5 | L1 | Ensure 'Turn on e-mail scanning' is set to 'Enabled'"
   when:
@@ -214,6 +235,7 @@
     name: DisableEmailScanning
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.42.16 | L1 | Ensure 'Configure detection for potentially unwanted applications' is set to 'Enabled: Block'"
   when:
@@ -223,6 +245,7 @@
     name: PUAProtection
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.42.17 | L1 | Ensure 'Control whether exclusions are visible to local users' is set to 'Enabled'"
   when:
@@ -232,3 +255,4 @@
     name: HideExclusionsFromLocalUsers
     data: 1
     type: dword
+    state: present

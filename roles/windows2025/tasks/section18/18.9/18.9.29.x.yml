@@ -7,6 +7,7 @@
     name: BlockUserFromShowingAccountDetailsOnSignin
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.29.2 | L1 | Ensure 'Do not display network selection UI' is set to 'Enabled'"
   when:
@@ -16,6 +17,7 @@
     name: DontDisplayNetworkSelectionUI
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.29.3 | L1 | Ensure 'Do not enumerate connected users on domain-joined computers' is set to 'Enabled'"
   when:
@@ -25,6 +27,7 @@
     name: DontEnumerateConnectedUsers
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.29.4 | L1 | Ensure 'Enumerate local users on domain-joined computers' is set to 'Disabled' | MS only"
   when:
@@ -35,6 +38,7 @@
     name: EnumerateLocalUsers
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.29.5 | L1 | Ensure 'Turn off app notifications on the lock screen' is set to 'Enabled'"
   when:
@@ -44,6 +48,7 @@
     name: DisableLockScreenAppNotifications
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.29.6 | L1 | Ensure 'Turn on convenience PIN sign-in' is set to 'Disabled'"
   when:
@@ -53,3 +58,4 @@
     name: AllowDomainPINLogon
     data: 0
     type: dword
+    state: present

@@ -7,3 +7,4 @@
     name: ClfsAuthenticationChecking
     data: 1
     type: dword
+    state: present

@@ -8,6 +8,7 @@
     name: AllowSharedLocalAppData
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.10.4.2 | L1 |
@@ -20,3 +21,4 @@
     name: DisablePerUserUnsignedPackagesByDefault
     data: 1
     type: dword
+    state: present
