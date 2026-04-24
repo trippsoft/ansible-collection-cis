@@ -23,6 +23,7 @@
 - name: "18.10.59.4 | L2 | Ensure 'Allow search highlights' is set to 'Disabled'"
   when:
     - w2025cis_rule_18_10_59_4_enabled
+    - w2025cis_rule_18_10_59_4_force or _w2025cis_level2
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
     name: EnableDynamicContentInWSB

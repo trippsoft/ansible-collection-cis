@@ -1005,6 +1005,7 @@ w2025cis_rule_18_10_59_3_enabled: true
 w2025cis_rule_18_10_59_4_enabled: true
 
 w2025cis_rule_18_10_59_2_force: false
+w2025cis_rule_18_10_59_4_force: false
 
 # 18.10.63 - Software Protection Platform
 

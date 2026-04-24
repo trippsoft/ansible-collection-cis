@@ -3894,29 +3894,36 @@ argument_specs:
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.58.2.
+          - Whether to enable rule 18.10.59.2.
           - This applies when the level and machine type are appropriate.
       w2025cis_rule_18_10_59_2_force:
         type: bool
         required: false
         default: false
         description:
-          - Whether to override the level requirement for CIS rule 18.10.58.2.
+          - Whether to override the level requirement for CIS rule 18.10.59.2.
           - This applies when the machine type is appropriate.
       w2025cis_rule_18_10_59_3_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.58.3.
+          - Whether to enable rule 18.10.59.3.
           - This applies when the level and machine type are appropriate.
       w2025cis_rule_18_10_59_4_enabled:
         type: bool
         required: false
         default: true
         description:
-          - Whether to enable rule 18.10.58.4.
+          - Whether to enable rule 18.10.59.4.
           - This applies when the level and machine type are appropriate.
+      w2025cis_rule_18_10_59_4_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.59.4.
+          - This applies when the machine type is appropriate.
       w2025cis_rule_18_10_63_1_enabled:
         type: bool
         required: false
