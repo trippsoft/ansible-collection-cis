@@ -635,6 +635,8 @@
       vars:
         _rhel8cis_warning_rule: '2.1.24'
         _rhel8cis_warning_description:
-          - Remediation cannot be automated. Please review the output below for listening services on network interfaces.
+          - >-
+            Remediation cannot be automated.
+            Please review the output below for listening services on network interfaces.
           - ''
           - "{{ _rhel8cis_listening_services.stdout_lines }}"

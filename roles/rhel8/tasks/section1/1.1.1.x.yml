@@ -457,7 +457,8 @@
       when:
         - not rhel8cis_fscache_needed
       block:
-        - name: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache | Prevent modprode install
+        - name: >-
+            1.1.1.11 | Ensure unused filesystems kernel modules are not available | fscache | Prevent modprode install
           ansible.builtin.lineinfile:
             path: /etc/modprobe.d/fscache.conf
             regexp: "^(#)?install fscache"

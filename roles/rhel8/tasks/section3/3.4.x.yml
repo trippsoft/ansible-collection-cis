@@ -115,7 +115,9 @@
       vars:
         _rhel8cis_warning_rule: '3.4.2.3'
         _rhel8cis_warning_description:
-          - Remediation cannot be automated. Please review the output below for unnecessary firewalld services and ports.
+          - >-
+            Remediation cannot be automated.
+            Please review the output below for unnecessary firewalld services and ports.
           - ''
           - '{{ _rhel8cis_firewalld_services.stdout_lines }}'
 
