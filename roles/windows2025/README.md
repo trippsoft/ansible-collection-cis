@@ -574,10 +574,11 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2025 machi
 | w2025cis_rule_18_10_57_3_11_1_enabled | <p>Whether to enable rule 18.10.57.3.11.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2025cis_rule_18_10_57_3_11_2_enabled | <p>Whether to enable rule 18.10.57.3.11.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2025cis_rule_18_10_58_1_enabled | <p>Whether to enable rule 18.10.58.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2025cis_rule_18_10_59_2_enabled | <p>Whether to enable rule 18.10.58.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2025cis_rule_18_10_59_2_force | <p>Whether to override the level requirement for CIS rule 18.10.58.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
-| w2025cis_rule_18_10_59_3_enabled | <p>Whether to enable rule 18.10.58.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
-| w2025cis_rule_18_10_59_4_enabled | <p>Whether to enable rule 18.10.58.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2025cis_rule_18_10_59_2_enabled | <p>Whether to enable rule 18.10.59.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2025cis_rule_18_10_59_2_force | <p>Whether to override the level requirement for CIS rule 18.10.59.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
+| w2025cis_rule_18_10_59_3_enabled | <p>Whether to enable rule 18.10.59.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2025cis_rule_18_10_59_4_enabled | <p>Whether to enable rule 18.10.59.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2025cis_rule_18_10_59_4_force | <p>Whether to override the level requirement for CIS rule 18.10.59.4.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2025cis_rule_18_10_63_1_enabled | <p>Whether to enable rule 18.10.63.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2025cis_rule_18_10_63_1_force | <p>Whether to override the level requirement for CIS rule 18.10.63.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2025cis_rule_18_10_77_2_1_enabled | <p>Whether to enable rule 18.10.77.2.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
