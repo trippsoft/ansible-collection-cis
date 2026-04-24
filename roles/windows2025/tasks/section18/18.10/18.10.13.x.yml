@@ -15,7 +15,7 @@
     - w2025cis_rule_18_10_13_2_force or _w2025cis_level2
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
-    name: DisableWindowsConsumerFeatures
+    name: DisableCloudOptimizedContent
     data: 1
     type: dword
     state: present
