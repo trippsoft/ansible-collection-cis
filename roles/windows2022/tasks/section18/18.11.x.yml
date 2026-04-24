@@ -7,6 +7,7 @@
     name: DisableWpad
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.11.2 | L1 |
@@ -19,3 +20,4 @@
     name: DisableProxyAuthenticationSchemes
     data: "{{ _w2022cis_disable_http_proxy_features_value }}"
     type: dword
+    state: present

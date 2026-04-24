@@ -7,3 +7,4 @@
     name: MSAOptional
     data: 1
     type: dword
+    state: present

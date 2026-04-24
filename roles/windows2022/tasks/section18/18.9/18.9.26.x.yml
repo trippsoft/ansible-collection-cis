@@ -11,6 +11,7 @@
     name: BackupDirectory
     data: "{{ _w2022cis_laps_directory_value }}"
     type: dword
+    state: present
 
 - name: >-
     18.9.26.2 | L1 | Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'
@@ -22,6 +23,7 @@
     name: PwdExpirationProtectionEnabled
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.26.3 | L1 | Ensure 'Enable password encryption' is set to 'Enabled'"
   when:
@@ -32,6 +34,7 @@
     name: ADPasswordEncryptionEnabled
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.9.26.4 | L1 |
@@ -45,6 +48,7 @@
     name: PasswordComplexity
     data: "{{ _w2022cis_laps_password_complexity_value }}"
     type: dword
+    state: present
 
 - name: "18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
@@ -55,6 +59,7 @@
     name: PasswordLength
     data: "{{ w2022cis_laps_password_length }}"
     type: dword
+    state: present
 
 - name: "18.9.26.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
   when:
@@ -65,6 +70,7 @@
     name: PasswordAgeDays
     data: "{{ w2022cis_laps_password_age_in_days }}"
     type: dword
+    state: present
 
 - name: >-
     18.9.26.7 | L1 |
@@ -77,6 +83,7 @@
     name: PostAuthenticationResetDelay
     data: "{{ w2022cis_laps_post_authentication_grace_period_in_hours }}"
     type: dword
+    state: present
 
 - name: >-
     18.9.26.8 | L1 |
@@ -90,3 +97,4 @@
     name: PostAuthenticationActions
     data: "{{ _w2022cis_laps_post_authentication_actions_value }}"
     type: dword
+    state: present

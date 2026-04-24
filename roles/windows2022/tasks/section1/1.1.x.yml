@@ -47,6 +47,7 @@
     name: RelaxMinimumPasswordLengthLimits
     data: 1
     type: dword
+    state: present
 
 - name: "1.1.7 | L1 | Ensure 'Store passwords using reversible encryption' is set to 'Disabled'"
   when:

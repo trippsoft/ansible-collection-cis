@@ -8,6 +8,7 @@
     name: EnableScriptBlockLogging
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.88.2 | L2 | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled'"
   when:
@@ -18,3 +19,4 @@
     name: EnableTranscripting
     data: 1
     type: dword
+    state: present

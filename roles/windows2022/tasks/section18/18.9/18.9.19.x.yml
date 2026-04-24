@@ -10,6 +10,7 @@
     name: NoBackgroundPolicy
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.19.3 | L1 |
@@ -22,6 +23,7 @@
     name: NoGPOListChanges
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.19.4 | L1 | Ensure 'Continue experiences on this device' is set to 'Disabled'"
   when:
@@ -31,6 +33,7 @@
     name: EnableCdp
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.19.5 | L1 | Ensure 'Turn off background refresh of Group Policy' is set to 'Disabled'"
   when:

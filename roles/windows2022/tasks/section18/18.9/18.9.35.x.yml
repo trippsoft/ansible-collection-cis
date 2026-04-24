@@ -9,6 +9,7 @@
     name: DCSettingIndex
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.35.6.2 | L2 | Ensure 'Allow network connectivity during connected-standby (plugged in)' is set to 'Disabled'
@@ -20,6 +21,7 @@
     name: ACSettingIndex
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.35.6.3 | L1 | Ensure 'Require a password when a computer wakes (on battery)' is set to 'Enabled'"
   when:
@@ -29,6 +31,7 @@
     name: DCSettingIndex
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.35.6.4 | L1 | Ensure 'Require a password when a computer wakes (plugged in)' is set to 'Enabled'"
   when:
@@ -38,3 +41,4 @@
     name: ACSettingIndex
     data: 1
     type: dword
+    state: present

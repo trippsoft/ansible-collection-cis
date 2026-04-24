@@ -8,6 +8,7 @@
     name: AllowCloudSearch
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.59.3 | L1 | Ensure 'Allow indexing of encrypted files' is set to 'Disabled'"
   when:
@@ -17,6 +18,7 @@
     name: AllowIndexingEncryptedStoresOrItems
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.59.4 | L2 | Ensure 'Allow search highlights' is set to 'Disabled'"
   when:
@@ -26,3 +28,4 @@
     name: EnableDynamicContentInWSB
     data: 0
     type: dword
+    state: present

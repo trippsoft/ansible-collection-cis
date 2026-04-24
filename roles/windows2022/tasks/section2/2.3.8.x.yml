@@ -7,6 +7,7 @@
     name: RequireSecuritySignature
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.8.2 | L1 |
@@ -18,3 +19,4 @@
     name: EnablePlainTextPassword
     data: 0
     type: dword
+    state: present

@@ -7,6 +7,7 @@
     name: DisableEnclosureDownload
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.58.2 | L1 | Ensure 'Turn on Basic feed authentication over HTTP' is set to 'Disabled'"
   when:
@@ -16,3 +17,4 @@
     name: AllowBasicAuthInClear
     data: 0
     type: dword
+    state: present

@@ -7,6 +7,7 @@
     name: Enabled
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.53.1.2 | L1 | Ensure 'Enable Windows NTP Server' is set to 'Disabled' | MS only"
   when:
@@ -17,3 +18,4 @@
     name: Enabled
     data: 1
     type: dword
+    state: present

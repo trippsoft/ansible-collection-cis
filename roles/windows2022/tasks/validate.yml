@@ -40,7 +40,7 @@
   ansible.builtin.assert:
     that:
       - ansible_os_family == 'Windows'
-      - "'Microsoft Windows Server 2022' in ansible_distribution"
+      - '"Microsoft Windows Server 2022" in ansible_distribution'
     fail_msg: >-
       This role can only be run against Windows Server 2022.
       {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.

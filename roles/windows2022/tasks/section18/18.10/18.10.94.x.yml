@@ -9,6 +9,7 @@
     name: NoAutoRebootWithLoggedOnUsers
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.94.2.1 | L1 | Ensure 'Configure Automatic Updates' is set to 'Enabled'"
   when:
@@ -18,6 +19,7 @@
     name: NoAutoUpdate
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.94.2.2 | L1 | Ensure 'Configure Automatic Updates: Scheduled install day' is set to '0 - Every day'"
   when:
@@ -27,6 +29,7 @@
     name: ScheduledInstallDay
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.94.4.1 | L1 | Ensure 'Manage preview builds' is set to 'Disabled'"
   when:
@@ -38,6 +41,7 @@
         name: ManagePreviewBuilds
         data: 1
         type: dword
+        state: present
 
     - name: "18.10.94.4.1 | L1 | Ensure 'Manage preview builds' is set to 'Disabled' | ManagePreviewBuildsPolicyValue"
       ansible.windows.win_regedit:
@@ -45,6 +49,7 @@
         name: ManagePreviewBuildsPolicyValue
         data: 0
         type: dword
+        state: present
 
 - name: "18.10.94.4.2 | L1 | Ensure 'Select when Quality Updates are received' is set to 'Enabled: 0 days'"
   when:
@@ -59,6 +64,7 @@
         name: DeferQualityUpdates
         data: 1
         type: dword
+        state: present
 
     - name: >-
         18.10.94.4.2 | L1 |
@@ -69,3 +75,4 @@
         name: DeferQualityUpdatesPeriodInDays
         data: 0
         type: dword
+        state: present

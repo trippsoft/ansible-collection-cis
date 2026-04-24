@@ -10,6 +10,7 @@
     name: SCENoApplyLegacyAuditPolicy
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.2.2 | L1 | Ensure 'Audit: Shut down system immediately if unable to log security audits' is set to 'Disabled'
@@ -20,3 +21,4 @@
     name: CrashOnAuditFail
     data: 0
     type: dword
+    state: present

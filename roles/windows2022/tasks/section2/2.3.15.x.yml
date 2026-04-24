@@ -8,6 +8,7 @@
     name: ObCaseInsensitive
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.15.2 | L1 |
@@ -20,3 +21,4 @@
     name: ProtectionMode
     data: 1
     type: dword
+    state: present

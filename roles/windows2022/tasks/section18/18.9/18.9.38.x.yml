@@ -8,6 +8,7 @@
     name: EnableAuthEpResolution
     data: 1
     type: dword
+    state: present
   notify:
     - _w2022cis_reboot_windows
 
@@ -21,5 +22,6 @@
     name: RestrictRemoteClients
     data: 1
     type: dword
+    state: present
   notify:
     - _w2022cis_reboot_windows

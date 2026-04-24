@@ -8,3 +8,4 @@
     name: AllowSharedLocalAppData
     data: 0
     type: dword
+    state: present

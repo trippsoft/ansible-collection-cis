@@ -4,10 +4,10 @@
     - w2022cis_rule_18_5_1_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
-    state: present
-    value: AutoAdminLogon
+    name: AutoAdminLogon
     data: 0
-    datatype: string
+    type: string
+    state: present
 
 - name: >-
     18.5.2 | L1 |
@@ -17,10 +17,10 @@
     - w2022cis_rule_18_5_2_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
-    state: present
-    value: DisableIPSourceRouting
+    name: DisableIPSourceRouting
     data: 2
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.3 | L1 |
@@ -30,10 +30,10 @@
     - w2022cis_rule_18_5_3_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: DisableIPSourceRouting
+    name: DisableIPSourceRouting
     data: 2
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.4 | L1 |
@@ -42,10 +42,10 @@
     - w2022cis_rule_18_5_4_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: EnableICMPRedirect
+    name: EnableICMPRedirect
     data: 0
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.5 | L2 |
@@ -56,10 +56,10 @@
     - w2022cis_rule_18_5_5_force or _w2022cis_level2
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: KeepAliveTime
+    name: KeepAliveTime
     data: 300000
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.6 | L1 |
@@ -69,10 +69,10 @@
     - w2022cis_rule_18_5_6_enabled
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
-    state: present
     name: NoNameReleaseOnDemand
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.5.7 | L2 |
@@ -83,10 +83,10 @@
     - w2022cis_rule_18_5_7_force or _w2022cis_level2
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
-    state: present
     name: PerformRouterDiscovery
     data: 0
     type: dword
+    state: present
 
 - name: "18.5.8 | L1 | Ensure 'MSS: (SafeDllSearchMode) Enable Safe DLL search mode' is set to 'Enabled'"
   when:
@@ -110,6 +110,7 @@
     name: TcpMaxDataRetransmissions
     data: 3
     type: dword
+    state: present
 
 - name: >-
     18.5.10 | L2 |
@@ -123,6 +124,7 @@
     name: TcpMaxDataRetransmissions
     data: 3
     type: dword
+    state: present
 
 - name: >-
     18.5.11 | L1 |
@@ -135,3 +137,4 @@
     name: WarningLevel
     data: 90
     type: dword
+    state: present

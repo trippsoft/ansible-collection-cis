@@ -13,6 +13,7 @@
         name: DevicePKInitBehavior
         data: 0
         type: dword
+        state: present
 
     - name: >-
         18.9.23.1 | L2 |
@@ -23,3 +24,4 @@
         name: DevicePKInitEnabled
         data: 1
         type: dword
+        state: present

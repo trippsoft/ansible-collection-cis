@@ -8,6 +8,7 @@
     name: AllowCrossDeviceClipboard
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.33.2 | L2 | Ensure 'Allow upload of User Activities' is set to 'Disabled'"
   when:
@@ -18,3 +19,4 @@
     name: UploadUserActivities
     data: 0
     type: dword
+    state: present

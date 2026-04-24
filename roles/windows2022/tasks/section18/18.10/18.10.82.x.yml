@@ -7,6 +7,7 @@
     name: EnableUserControl
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.82.2 | L1 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
   when:
@@ -16,6 +17,7 @@
     name: AlwaysInstallElevated
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.10.82.3 | L2 |
@@ -28,3 +30,4 @@
     name: SafeForScripting
     data: 0
     type: dword
+    state: present

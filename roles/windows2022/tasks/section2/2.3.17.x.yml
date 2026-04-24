@@ -9,6 +9,7 @@
     name: FilterAdministratorToken
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.17.2 | L1 |
@@ -21,6 +22,7 @@
     name: ConsentPromptBehaviorAdmin
     data: "{{ _w2022cis_admin_uac_elevation_behavior_value }}"
     type: dword
+    state: present
 
 - name: >-
     2.3.17.3 | L1 |
@@ -33,6 +35,7 @@
     name: ConsentPromptBehaviorUser
     data: 0
     type: dword
+    state: present
 
 - name: >-
     2.3.17.4 | L1 |
@@ -44,6 +47,7 @@
     name: EnableInstallerDetection
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.17.5 | L1 |
@@ -56,6 +60,7 @@
     name: EnableSecureUIAPaths
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.17.6 | L1 | Ensure 'User Account Control: Run all administrators in Admin Approval Mode' is set to 'Enabled'
@@ -66,6 +71,7 @@
     name: EnableLUA
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.17.7 | L1 |
@@ -77,6 +83,7 @@
     name: PromptOnSecureDesktop
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.17.8 | L1 |
@@ -88,3 +95,4 @@
     name: EnableVirtualization
     data: 1
     type: dword
+    state: present

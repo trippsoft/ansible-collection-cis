@@ -7,3 +7,4 @@
     name: RequirePinForPairing
     data: "{{ _w2022cis_windows_connect_pin_requirement_value }}"
     type: dword
+    state: present

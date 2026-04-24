@@ -9,6 +9,7 @@
     name: SaveZoneInformation
     data: 2
     type: dword
+    state: present
 
 - name: "19.7.5.2 | L1 | Ensure 'Notify antivirus programs when opening attachments' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -20,6 +21,7 @@
     name: ScanWithAntiVirus
     data: 3
     type: dword
+    state: present
 
 - name: "19.7.8.1 | L1 | Ensure 'Configure Windows spotlight on lock screen' is set to Disabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -31,6 +33,7 @@
     name: ConfigureWindowsSpotlight
     data: 2
     type: dword
+    state: present
 
 - name: "19.7.8.2 | L1 | Ensure 'Do not suggest third-party content in Windows spotlight' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -42,6 +45,7 @@
     name: DisableThirdPartySuggestions
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.3 | L2 | Ensure 'Do not use diagnostic data for tailored experiences' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -54,6 +58,7 @@
     name: DisableTailoredExperiencesWithDiagnosticData
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.4 | L2 | Ensure 'Turn off all Windows spotlight features' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -66,6 +71,7 @@
     name: DisableWindowsSpotlightFeatures
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.5 | L1 | Ensure 'Turn off Spotlight collection on Desktop' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -77,6 +83,7 @@
     name: DisableSpotlightCollectionOnDesktop
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.26.1 | L1 | Ensure 'Prevent users from sharing files within their profile.' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -88,6 +95,7 @@
     name: NoInplaceSharing
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.46.2.1 | L2 | Ensure 'Prevent Codec Download' is set to 'Enabled'"
   loop: "{{ _w2022cis_user_hives.sub_keys }}"
@@ -100,3 +108,4 @@
     name: PreventCodecDownload
     data: 1
     type: dword
+    state: present

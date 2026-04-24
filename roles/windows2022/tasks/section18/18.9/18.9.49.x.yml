@@ -11,6 +11,7 @@
     name: DisableQueryRemoteServer
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.49.11.1 | L2 | Ensure 'Enable/Disable PerfTrack' is set to 'Disabled'"
   when:
@@ -21,3 +22,4 @@
     name: ScenarioExecutionEnabled
     data: 0
     type: dword
+    state: present

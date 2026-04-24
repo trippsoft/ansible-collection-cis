@@ -9,3 +9,4 @@
     name: DriverLoadPolicy
     data: 3
     type: dword
+    state: present

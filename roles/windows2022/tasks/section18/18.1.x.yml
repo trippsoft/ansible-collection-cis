@@ -7,6 +7,7 @@
     name: NoLockScreenCamera
     data: 1
     type: dword
+    state: present
 
 - name: "18.1.1.2 | L1 | Ensure 'Prevent enabling lock screen slide show' is set to 'Enabled'"
   when:
@@ -16,6 +17,7 @@
     name: NoLockScreenSlideshow
     data: 1
     type: dword
+    state: present
 
 - name: "18.1.2.2 | L1 | Ensure 'Allow users to enable online speech recognition services' is set to 'Disabled'"
   when:
@@ -25,6 +27,7 @@
     name: "AllowInputPersonalization"
     data: 0
     type: dword
+    state: present
 
 - name: "18.1.3 | L2 | Ensure 'Allow Online Tips' is set to 'Disabled'"
   when:
@@ -35,3 +38,4 @@
     name: AllowOnlineTips
     data: 0
     type: dword
+    state: present

@@ -7,6 +7,7 @@
     name: AllowBasic
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.90.1.2 | L1 | Ensure 'Allow unencrypted traffic' is set to 'Disabled'"
   when:
@@ -16,6 +17,7 @@
     name: AllowUnencryptedTraffic
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.90.1.3 | L1 | Ensure 'Disallow Digest authentication' is set to 'Enabled'"
   when:
@@ -25,6 +27,7 @@
     name: AllowDigest
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.90.2.1 | L1 | Ensure 'Allow Basic authentication' is set to 'Disabled'"
   when:
@@ -34,6 +37,7 @@
     name: AllowBasic
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.90.2.2 | L2 | Ensure 'Allow remote server management through WinRM' is set to 'Disabled'"
   when:
@@ -44,6 +48,7 @@
     name: AllowAutoConfig
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.90.2.3 | L1 | Ensure 'Allow unencrypted traffic' is set to 'Disabled'"
   when:
@@ -53,6 +58,7 @@
     name: AllowUnencryptedTraffic
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.90.2.4 | L1 | Ensure 'Disallow WinRM from storing RunAs credentials' is set to 'Enabled'"
   when:
@@ -62,3 +68,4 @@
     name: DisableRunAs
     data: 1
     type: dword
+    state: present
