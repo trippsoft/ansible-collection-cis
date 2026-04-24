@@ -167,7 +167,8 @@
         path: "{{ item }}"
         mode: 'o-w'
 
-    - name: 7.1.11 | Ensure world writable files and directories are secured | Set permissions on world writable directories
+    - name: >-
+        7.1.11 | Ensure world writable files and directories are secured | Set permissions on world writable directories
       loop: "{{ _rhel9cis_world_writable_directories.stdout_lines }}"
       ansible.builtin.file:
         path: "{{ item }}"

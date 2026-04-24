@@ -301,7 +301,8 @@
       ansible.builtin.include_tasks: ../add-warning.yml
       vars:
         _rhel9cis_warning_rule: '6.2.3.8'
-        _rhel9cis_warning_description: "This cannot be fully automated. Please ensure logrotate is configured as required for all log types."
+        _rhel9cis_warning_description: >-
+          This cannot be fully automated. Please ensure logrotate is configured as required for all log types.
 
 - name: 6.2.4.1 | Ensure all logfiles have appropriate access configured
   when:
