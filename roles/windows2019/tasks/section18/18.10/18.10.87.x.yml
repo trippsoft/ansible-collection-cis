@@ -1,5 +1,5 @@
 ---
-- name: "18.10.87.1 | L1 | Ensure 'Turn on PowerShell Script Block Logging' is set to 'Enabled'"
+- name: "18.10.87.1 | L2 | Ensure 'Turn on PowerShell Script Block Logging' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_10_87_1_enabled
     - w2019cis_rule_18_10_87_1_force or _w2019cis_level2
@@ -10,7 +10,7 @@
     type: dword
     state: present
 
-- name: "18.10.87.2 | L1 | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled'"
+- name: "18.10.87.2 | L2 | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_10_87_2_enabled
     - w2019cis_rule_18_10_87_2_force or _w2019cis_level2

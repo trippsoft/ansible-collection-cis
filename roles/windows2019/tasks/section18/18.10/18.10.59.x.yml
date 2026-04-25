@@ -20,7 +20,7 @@
     type: dword
     state: present
 
-- name: "18.10.59.4 | L2 | Ensure 'Allow search highlights' is set to 'Disabled'"
+- name: "18.10.59.4 | L1 | Ensure 'Allow search highlights' is set to 'Disabled'"
   when:
     - w2019cis_rule_18_10_59_4_enabled
   ansible.windows.win_regedit:
