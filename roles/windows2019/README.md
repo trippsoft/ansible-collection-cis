@@ -268,6 +268,8 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_4_4_enabled | <p>Whether to enable rule 18.4.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_4_5_enabled | <p>Whether to enable rule 18.4.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_4_6_enabled | <p>Whether to enable rule 18.4.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_4_7_enabled | <p>Whether to enable rule 18.4.7.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_4_8_enabled | <p>Whether to enable rule 18.4.8.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_1_enabled | <p>Whether to enable rule 18.5.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_2_enabled | <p>Whether to enable rule 18.5.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_5_3_enabled | <p>Whether to enable rule 18.5.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
@@ -285,6 +287,7 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_5_11_force | <p>Whether to override the level requirement for CIS rule 18.5.11.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_18_5_12_enabled | <p>Whether to enable rule 18.5.12.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_screensaver_grace_period_in_seconds | <p>The screensaver grace period in seconds.</p> | int | no |  | 5 |
+| w2019cis_security_log_warning_level | <p>The percentage of the security log that must be filled before a warning event is generated.</p> | int | no |  | 90 |
 | w2019cis_rule_18_6_4_1_enabled | <p>Whether to enable rule 18.6.4.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_6_4_2_enabled | <p>Whether to enable rule 18.6.4.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_6_4_3_enabled | <p>Whether to enable rule 18.6.4.3.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
@@ -449,6 +452,7 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_10_16_4_enabled | <p>Whether to enable rule 18.10.16.4.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_16_5_enabled | <p>Whether to enable rule 18.10.16.5.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_16_6_enabled | <p>Whether to enable rule 18.10.16.6.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_rule_18_10_16_7_enabled | <p>Whether to enable rule 18.10.16.7.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_allow_telemetry | <p>Whether to allow telemetry.</p> | str | no | <ul><li>required</li><li>off</li></ul> | off |
 | w2019cis_rule_18_10_18_1_enabled | <p>Whether to enable rule 18.10.18.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_18_1_force | <p>Whether to override the level requirement for CIS rule 18.10.18.1.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
@@ -536,6 +540,7 @@ This role applies the CIS Benchmark hardening steps on Windows Server 2019 machi
 | w2019cis_rule_18_10_57_3_10_2_force | <p>Whether to override the level requirement for CIS rule 18.10.57.3.10.2.</p><p>This applies when the machine type is appropriate.</p> | bool | no |  | False |
 | w2019cis_rule_18_10_57_3_11_1_enabled | <p>Whether to enable rule 18.10.57.3.11.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_57_3_11_2_enabled | <p>Whether to enable rule 18.10.57.3.11.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
+| w2019cis_remote_desktop_services_max_idle_time_in_ms | <p>The maximum idle time for Remote Desktop Services in milliseconds.</p> | int | no |  | 900000 |
 | w2019cis_rule_18_10_58_1_enabled | <p>Whether to enable rule 18.10.58.1.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_58_2_enabled | <p>Whether to enable rule 18.10.58.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
 | w2019cis_rule_18_10_59_2_enabled | <p>Whether to enable rule 18.10.59.2.</p><p>This applies when the level and machine type are appropriate.</p> | bool | no |  | True |
