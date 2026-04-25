@@ -4,10 +4,10 @@
     - w2019cis_rule_18_5_1_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
-    state: present
-    value: AutoAdminLogon
+    name: AutoAdminLogon
     data: 0
-    datatype: string
+    type: string
+    state: present
 
 - name: >-
     18.5.2 | L1 |
@@ -17,10 +17,10 @@
     - w2019cis_rule_18_5_2_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
-    state: present
-    value: DisableIPSourceRouting
+    name: DisableIPSourceRouting
     data: 2
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.3 | L1 |
@@ -30,10 +30,10 @@
     - w2019cis_rule_18_5_3_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: DisableIPSourceRouting
+    name: DisableIPSourceRouting
     data: 2
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.4 | L1 |
@@ -42,10 +42,10 @@
     - w2019cis_rule_18_5_4_enabled
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: EnableICMPRedirect
+    name: EnableICMPRedirect
     data: 0
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.5 | L2 |
@@ -56,23 +56,23 @@
     - w2019cis_rule_18_5_5_force or _w2019cis_level2
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-    state: present
-    value: KeepAliveTime
+    name: KeepAliveTime
     data: 300000
-    datatype: dword
+    type: dword
+    state: present
 
 - name: >-
     18.5.6 | L1 |
-    Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers'
-    is set to 'Enabled'
+    Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS
+    servers' is set to 'Enabled'
   when:
     - w2019cis_rule_18_5_6_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
-    state: present
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
     name: NoNameReleaseOnDemand
     data: 1
     type: dword
+    state: present
 
 - name: >-
     18.5.7 | L2 |
@@ -82,17 +82,17 @@
     - w2019cis_rule_18_5_7_enabled
     - w2019cis_rule_18_5_7_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
-    state: present
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
     name: PerformRouterDiscovery
     data: 0
     type: dword
+    state: present
 
 - name: "18.5.8 | L1 | Ensure 'MSS: (SafeDllSearchMode) Enable Safe DLL search mode' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_5_8_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Session Manager
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager
     name: SafeDllSearchMode
     data: 1
     type: dword
@@ -105,7 +105,7 @@
   when:
     - w2019cis_rule_18_5_9_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
     name: ScreenSaverGracePeriod
     data: "{{ w2019cis_screensaver_grace_period_in_seconds }}"
     type: string
@@ -119,10 +119,11 @@
     - w2019cis_rule_18_5_10_enabled
     - w2019cis_rule_18_5_10_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters
     name: TcpMaxDataRetransmissions
     data: 3
     type: dword
+    state: present
 
 - name: >-
     18.5.11 | L2 |
@@ -131,19 +132,21 @@
     - w2019cis_rule_18_5_11_enabled
     - w2019cis_rule_18_5_11_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
     name: TcpMaxDataRetransmissions
     data: 3
     type: dword
+    state: present
 
 - name: >-
     18.5.12 | L1 |
-    Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning'
-    is set to 'Enabled: 90% or less'
+    Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a
+    warning' is set to 'Enabled: 90% or less'
   when:
     - w2019cis_rule_18_5_12_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Eventlog\Security
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Eventlog\Security
     name: WarningLevel
-    data: 90
+    data: "{{ w2019cis_security_log_warning_level }}"
     type: dword
+    state: present

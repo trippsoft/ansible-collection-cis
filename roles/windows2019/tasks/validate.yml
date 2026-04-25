@@ -2,12 +2,15 @@
 - name: Gather distribution info
   when:
     - ansible_distribution is not defined or
-      ansible_os_family is not defined
+      ansible_os_family is not defined or
+      ansible_windows_domain_role is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
       - '!min'
       - distribution
+      - os_family
+      - windows_domain
 
 - name: Get Windows installation type
   ansible.windows.win_reg_stat:
@@ -22,12 +25,13 @@
 - name: Run PowerShell to check if Hyper-V is installed.
   ansible.windows.win_powershell:
     script: |
+      $Ansible.Changed = $false
+
       try {
         $Ansible.Result = Get-WindowsFeature Hyper-V | Select-Object -ExpandProperty Installed
       } catch {
         $Ansible.Result = $false
       }
-      $Ansible.Changed = $false
   register: _w2019cis_hyperv_installed
 
 - name: Set the Hyper-V variable
@@ -38,7 +42,7 @@
   ansible.builtin.assert:
     that:
       - ansible_os_family == 'Windows'
-      - ansible_distribution | regex_search('(Microsoft Windows Server 2019)')
+      - '"Microsoft Windows Server 2019" in ansible_distribution'
     fail_msg: >-
       This role can only be run against Windows Server 2019.
       {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
@@ -198,16 +202,16 @@
   ansible.builtin.assert:
     that:
       - w2019cis_login_message_text is defined
-    fail_msg: "The variable 'w2019cis_login_message_text' must be defined."
+    fail_msg: The variable 'w2019cis_login_message_text' must be defined.
     success_msg: The variable 'w2019cis_login_message_text' is defined.
 
-- name: "2.3.7.5 | L1 | Configure 'Interactive logon: Message title for users attempting to log on'"
+- name: "Validate | 2.3.7.5 | L1 | Configure 'Interactive logon: Message title for users attempting to log on'"
   when:
     - w2019cis_rule_2_3_7_5_enabled
   ansible.builtin.assert:
     that:
       - w2019cis_login_message_title is defined
-    fail_msg: "The variable 'w2019cis_login_message_title' must be defined."
+    fail_msg: The variable 'w2019cis_login_message_title' must be defined.
     success_msg: The variable 'w2019cis_login_message_title' is defined.
 
 - name: >-
@@ -218,7 +222,7 @@
   when:
     - w2019cis_rule_2_3_7_6_enabled
     - _w2019cis_member_server
-    - w2019cis_rule_2_3_7_6_force or _w2019cis_level2_member_server
+    - w2019cis_rule_2_3_7_6_force or _w2019cis_level2
   ansible.builtin.assert:
     that:
       - w2019cis_cached_logons_count | int <= 4
@@ -263,9 +267,9 @@
       Value: {{ w2019_idle_smb_timeout_in_minutes }}
 
 - name: >-
-    Validate | 9.1.6 | L1 | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'
+    Validate | 9.1.5 | L1 | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
-    - w2019cis_rule_9_1_6_enabled
+    - w2019cis_rule_9_1_5_enabled
   ansible.builtin.assert:
     that:
       - w2019cis_domain_firewall_log_size_in_kb | int >= 16384
@@ -277,10 +281,10 @@
       Value: {{ w2019cis_domain_firewall_log_size_in_kb }}
 
 - name: >-
-    Validate | 9.2.6 | L1 | Ensure 'Windows Firewall: Private: Logging: Size limit (KB)'
-    is set to '16,384 KB or greater'
+    Validate | 9.2.5 | L1 |
+    Ensure 'Windows Firewall: Private: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
-    - w2019cis_rule_9_2_6_enabled
+    - w2019cis_rule_9_2_5_enabled
   ansible.builtin.assert:
     that:
       - w2019cis_private_firewall_log_size_in_kb | int >= 16384
@@ -292,9 +296,9 @@
       Value: {{ w2019cis_private_firewall_log_size_in_kb }}
 
 - name: >-
-    Validate | 9.3.8 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'
+    Validate | 9.3.7 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'
   when:
-    - w2019cis_rule_9_3_8_enabled
+    - w2019cis_rule_9_3_7_enabled
   ansible.builtin.assert:
     that:
       - w2019cis_public_firewall_log_size_in_kb | int >= 16384
@@ -307,7 +311,7 @@
 
 - name: >-
     Validate | 18.5.9 | L1 |
-    Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)'
+    Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires'
     is set to 'Enabled: 5 or fewer seconds'
   when:
     - w2019cis_rule_18_5_9_enabled
@@ -321,6 +325,23 @@
     success_msg: >-
       The variable 'w2019cis_screensaver_grace_period_in_seconds' is set to between 0 and 5.
       Value: {{ w2019cis_screensaver_grace_period_in_seconds }}
+
+- name: >-
+    Validate | 18.5.12 | L1 |
+    Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a
+    warning' is set to 'Enabled: 90% or less'
+  when:
+    - w2019cis_rule_18_5_12_enabled
+  ansible.builtin.assert:
+    that:
+      - w2019cis_security_log_warning_level | int <= 90
+      - w2019cis_security_log_warning_level | int >= 0
+    fail_msg: >-
+      The variable 'w2019cis_security_log_warning_level' must be set to between 0 and 90.
+      Value: {{ w2019cis_security_log_warning_level }}
+    success_msg: >-
+      The variable 'w2019cis_security_log_warning_level' is set to between 0 and 90.
+      Value: {{ w2019cis_security_log_warning_level }}
 
 - name: "Validate | 18.9.25.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
@@ -426,3 +447,21 @@
     success_msg: >-
       The variable 'w2019cis_system_log_max_size_in_kb' is set to 32768 or more.
       Value: {{ w2019cis_system_log_max_size_in_kb }}
+
+- name: >-
+    Validate | 18.10.57.3.10.1 | L2 |
+    Ensure 'Set time limit for active but idle Remote Desktop Services sessions'
+    is set to 'Enabled: 15 minutes or less, but not Never (0)'
+  when:
+    - w2019cis_rule_18_10_57_3_10_1_enabled
+    - w2019cis_rule_18_10_57_3_10_1_force or _w2019cis_level2
+  ansible.builtin.assert:
+    that:
+      - w2019cis_remote_desktop_services_max_idle_time_in_ms | int <= 900000
+      - w2019cis_remote_desktop_services_max_idle_time_in_ms | int > 0
+    fail_msg: >-
+      The variable 'w2019cis_remote_desktop_services_max_idle_time_in_ms' must be set to a value between 1 and 900000.
+      Value: {{ w2019cis_remote_desktop_services_max_idle_time_in_ms }}
+    success_msg: >-
+      The variable 'w2019cis_remote_desktop_services_max_idle_time_in_ms' is set to a value between 1 and 900000.
+      Value: {{ w2019cis_remote_desktop_services_max_idle_time_in_ms }}

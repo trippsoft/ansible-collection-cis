@@ -1718,6 +1718,20 @@ argument_specs:
         description:
           - Whether to enable rule 18.4.6.
           - This applies when the level and machine type are appropriate.
+      w2019cis_rule_18_4_7_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.4.7.
+          - This applies when the level and machine type are appropriate.
+      w2019cis_rule_18_4_8_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.4.8.
+          - This applies when the level and machine type are appropriate.
       w2019cis_rule_18_5_1_enabled:
         type: bool
         required: false
@@ -1836,6 +1850,12 @@ argument_specs:
         default: 5
         description:
           - The screensaver grace period in seconds.
+      w2019cis_security_log_warning_level:
+        type: int
+        required: false
+        default: 90
+        description:
+          - The percentage of the security log that must be filled before a warning event is generated.
       w2019cis_rule_18_6_4_1_enabled:
         type: bool
         required: false
@@ -2993,6 +3013,13 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.16.6.
           - This applies when the level and machine type are appropriate.
+      w2019cis_rule_18_10_16_7_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.16.7.
+          - This applies when the level and machine type are appropriate.
       w2019cis_allow_telemetry:
         type: str
         required: false
@@ -3606,6 +3633,12 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.57.3.11.2.
           - This applies when the level and machine type are appropriate.
+      w2019cis_remote_desktop_services_max_idle_time_in_ms:
+        type: int
+        required: false
+        default: 900000
+        description:
+          - The maximum idle time for Remote Desktop Services in milliseconds.
       w2019cis_rule_18_10_58_1_enabled:
         type: bool
         required: false

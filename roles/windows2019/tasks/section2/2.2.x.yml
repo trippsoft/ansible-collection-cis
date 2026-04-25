@@ -9,8 +9,8 @@
 
 - name: >-
     2.2.2 | L1 |
-    Ensure 'Access this computer from the network' is set to
-    'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS' |
+    Ensure 'Access this computer from the network'
+    is set to 'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS' |
     DC only
   when:
     - w2019cis_rule_2_2_2_enabled
@@ -25,7 +25,8 @@
 
 - name: >-
     2.2.3 | L1 |
-    Ensure 'Access this computer from the network' is set to 'Administrators, Authenticated Users' | MS only
+    Ensure 'Access this computer from the network' is set to 'Administrators, Authenticated Users' |
+    MS only
   when:
     - w2019cis_rule_2_2_3_enabled
     - _w2019cis_standalone_or_member_server
@@ -96,7 +97,8 @@
 
 - name: >-
     2.2.10 | L1 |
-    Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users' | MS only
+    Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users' |
+    MS only
   when:
     - w2019cis_rule_2_2_10_enabled
     - _w2019cis_standalone_or_member_server
@@ -182,7 +184,8 @@
 
 - name: >-
     2.2.19 | L1 |
-    Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' | MS only
+    Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+    MS only
   when:
     - w2019cis_rule_2_2_19_enabled
     - _w2019cis_standalone_or_member_server
@@ -230,38 +233,44 @@
     name: SeDenyNetworkLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.22 | L1 |
     Ensure 'Deny access to this computer from the network' to include
     'Guests, Local account and member of Administrators group' |
-    MS only |
-    Domain MS
+    MS only
   when:
     - w2019cis_rule_2_2_22_enabled
-    - _w2019cis_member_server
-  ansible.windows.win_user_right:
-    name: SeDenyNetworkLogonRight
-    users:
-      - Guests
-      - Local account and member of Administrators group
-    action: set
+  block:
+    - name: >-
+        2.2.22 | L1 |
+        Ensure 'Deny access to this computer from the network' to include
+        'Guests, Local account and member of Administrators group' |
+        MS only |
+        Domain MS
+      when:
+        - _w2019cis_member_server
+      ansible.windows.win_user_right:
+        name: SeDenyNetworkLogonRight
+        users:
+          - Guests
+          - Local account and member of Administrators group
+        action: add
 
-- name: >-
-    2.2.22 | L1 |
-    Ensure 'Deny access to this computer from the network' to include
-    'Guests, Local account and member of Administrators group' |
-    MS only |
-    Standalone
-  when:
-    - w2019cis_rule_2_2_22_enabled
-    - _w2019cis_standalone
-  ansible.windows.win_user_right:
-    name: SeDenyNetworkLogonRight
-    users:
-      - Guests
-    action: set
+    - name: >-
+        2.2.22 | L1 |
+        Ensure 'Deny access to this computer from the network' to include
+        'Guests, Local account and member of Administrators group' |
+        MS only |
+        Standalone
+      when:
+        - _w2019cis_standalone
+      ansible.windows.win_user_right:
+        name: SeDenyNetworkLogonRight
+        users:
+          - Guests
+        action: add
 
 - name: "2.2.23 | L1 | Ensure 'Deny log on as a batch job' to include 'Guests'"
   when:
@@ -270,7 +279,7 @@
     name: SeDenyBatchLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.24 | L1 | Ensure 'Deny log on as a service' to include 'Guests'"
   when:
@@ -279,7 +288,7 @@
     name: SeDenyServiceLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.25 | L1 | Ensure 'Deny log on locally' to include 'Guests'"
   when:
@@ -298,38 +307,46 @@
     name: SeDenyRemoteInteractiveLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.27 | L1 |
     Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' |
-    MS only |
-    Domain MS
+    MS only
   when:
     - w2019cis_rule_2_2_27_enabled
-    - _w2019cis_member_server
-  ansible.windows.win_user_right:
-    name: SeDenyRemoteInteractiveLogonRight
-    users:
-      - Guests
-      - Local Account
-    action: set
+  block:
+    - name: >-
+        2.2.27 | L1 |
+        Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' |
+        MS only |
+        Domain MS
+      when:
+        - _w2019cis_member_server
+      ansible.windows.win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users:
+          - Guests
+          - Local Account
+        action: add
 
-- name: >-
-    2.2.27 | L1 |
-    Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' | MS only | Standalone
-  when:
-    - w2019cis_rule_2_2_27_enabled
-    - _w2019cis_standalone
-  ansible.windows.win_user_right:
-    name: SeDenyRemoteInteractiveLogonRight
-    users:
-      - Guests
-    action: set
+    - name: >-
+        2.2.27 | L1 |
+        Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' |
+        MS only |
+        Standalone
+      when:
+        - _w2019cis_standalone
+      ansible.windows.win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users:
+          - Guests
+        action: add
 
 - name: >-
     2.2.28 | L1 |
-    Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'Administrators' | DC only
+    Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'Administrators' |
+    DC only
   when:
     - w2019cis_rule_2_2_28_enabled
     - _w2019cis_domain_controller
@@ -385,8 +402,8 @@
 
 - name: >-
     2.2.33 | L1 |
-    Ensure 'Impersonate a client after authentication' is set to
-    'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' and
+    Ensure 'Impersonate a client after authentication'
+    is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' and
     (when the Web Server (IIS) Role with Web Services Role Service is installed) 'IIS_IUSRS' |
     MS only
   when:
@@ -398,7 +415,7 @@
     action: set
 
 - name: >-
-    2.2.34 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'
+    2.2.34 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\Window Manager Group'
   when:
     - w2019cis_rule_2_2_34_enabled
   ansible.windows.win_user_right:
@@ -430,13 +447,14 @@
     - w2019cis_rule_2_2_37_force or _w2019cis_level2_domain_controller
   ansible.windows.win_user_right:
     name: SeBatchLogonRight
-    users: Administrators
+    users:
+      - Administrators
     action: set
 
 - name: >-
     2.2.38 | L1 |
-    Ensure 'Manage auditing and security log' is set to 'Administrators'
-    and (when Exchange is running in the environment) 'Exchange Servers' |
+    Ensure 'Manage auditing and security log'
+    is set to 'Administrators' and (when Exchange is running in the environment) 'Exchange Servers' |
     DC only
   when:
     - w2019cis_rule_2_2_38_enabled

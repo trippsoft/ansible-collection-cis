@@ -4,7 +4,8 @@
     - w2019cis_rule_18_10_4_1_enabled
     - w2019cis_rule_18_10_4_1_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Currentversion\Appmodel\Statemanager
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\AppModel\StateManager
     name: AllowSharedLocalAppData
     data: 0
     type: dword
+    state: present

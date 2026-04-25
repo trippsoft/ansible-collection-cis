@@ -3,62 +3,69 @@
   when:
     - w2019cis_rule_18_9_28_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: BlockUserFromShowingAccountDetailsOnSignin
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.28.2 | L1 | Ensure 'Do not display network selection UI' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_9_28_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DontDisplayNetworkSelectionUI
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.28.3 | L1 | Ensure 'Do not enumerate connected users on domain-joined computers' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_9_28_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DontEnumerateConnectedUsers
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.28.4 | L1 | Ensure 'Enumerate local users on domain-joined computers' is set to 'Disabled' | MS only"
   when:
     - w2019cis_rule_18_9_28_4_enabled
     - _w2019cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: EnumerateLocalUsers
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.28.5 | L1 | Ensure 'Turn off app notifications on the lock screen' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_9_28_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DisableLockScreenAppNotifications
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.28.6 | L1 | Ensure 'Turn off picture password sign-in' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_9_28_6_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: BlockDomainPicturePassword
     data: 1
     type: dword
+    state: present
 
 - name: "18.9.28.7 | L1 | Ensure 'Turn on convenience PIN sign-in' is set to 'Disabled'"
   when:
     - w2019cis_rule_18_9_28_7_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: AllowDomainPINLogon
     data: 0
     type: dword
+    state: present

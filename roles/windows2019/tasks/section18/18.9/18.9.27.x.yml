@@ -6,7 +6,8 @@
     - w2019cis_rule_18_9_27_1_enabled
     - w2019cis_rule_18_9_27_1_force or _w2019cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Control Panel\International
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International
     name: BlockUserInputMethodsForSignIn
     data: 1
     type: dword
+    state: present

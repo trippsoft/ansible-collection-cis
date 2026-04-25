@@ -3,7 +3,8 @@
   when:
     - w2019cis_rule_18_10_51_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Onedrive
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive
     name: DisableFileSyncNGSC
     data: 1
     type: dword
+    state: present

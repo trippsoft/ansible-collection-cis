@@ -6,10 +6,11 @@
   when:
     - w2019cis_rule_18_9_19_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}
     name: NoBackgroundPolicy
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.19.3 | L1 |
@@ -18,10 +19,11 @@
   when:
     - w2019cis_rule_18_9_19_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}
     name: NoGPOListChanges
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.19.4 | L1 |
@@ -30,10 +32,11 @@
   when:
     - w2019cis_rule_18_9_19_4_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
     name: NoBackgroundPolicy
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.9.19.5 | L1 |
@@ -42,10 +45,11 @@
   when:
     - w2019cis_rule_18_9_19_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
     name: NoGPOListChanges
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.19.6 | L1 | Ensure 'Continue experiences on this device' is set to 'Disabled'"
   when:
@@ -55,11 +59,12 @@
     name: EnableCdp
     data: 0
     type: dword
+    state: present
 
 - name: "18.9.19.7 | L1 | Ensure 'Turn off background refresh of Group Policy' is set to 'Disabled'"
   when:
     - w2019cis_rule_18_9_19_7_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: DisableBkGndGroupPolicy
     state: absent

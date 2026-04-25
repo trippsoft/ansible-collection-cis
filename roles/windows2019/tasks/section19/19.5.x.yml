@@ -5,7 +5,8 @@
     - w2019cis_rule_19_5_1_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\Currentversion\\Pushnotifications"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications"
     name: NoToastApplicationNotificationOnLockScreen
     data: 1
     type: dword
+    state: present

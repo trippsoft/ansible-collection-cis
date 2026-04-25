@@ -5,19 +5,22 @@
     - w2019cis_rule_18_4_1_enabled
     - _w2019cis_standalone_or_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: LocalAccountTokenFilterPolicy
     data: 0
     type: dword
+    state: present
 
 - name: "18.4.2 | L1 | Ensure 'Configure SMB v1 client driver' is set to 'Enabled: Disable driver (recommended)'"
   when:
     - w2019cis_rule_18_4_2_enabled
-  ansible.windows.win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Services\mrxsmb10
-    name: Start
-    data: 4
-    type: dword
+  ansible.windows.win_service:
+    name: mrxsmb10
+    start_mode: disabled
+  register: _w2019cis_smbv1_client_driver
+  failed_when:
+    - _w2019cis_smbv1_client_driver is failed
+    - ("is not installed" not in _w2019cis_smbv1_client_driver.msg)
 
 - name: "18.4.3 | L1 | Ensure 'Configure SMB v1 server' is set to 'Disabled'"
   when:
@@ -41,6 +44,7 @@
         name: EnableCertPaddingCheck
         data: 1
         type: dword
+        state: present
 
     - name: "18.4.4 | L1 | Ensure 'Enable Certificate Padding' is set to 'Enabled' | 32-bit"
       ansible.windows.win_regedit:
@@ -48,23 +52,44 @@
         name: EnableCertPaddingCheck
         data: 1
         type: dword
+        state: present
 
 - name: "18.4.5 | L1 | Ensure 'Enable Structured Exception Handling Overwrite Protection (SEHOP)' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_4_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel
     name: DisableExceptionChainValidation
     data: 0
     type: dword
     state: present
 
-- name: "18.4.6 | L1 | Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node (recommended)'"
+- name: "18.4.6 | L1 | Ensure 'LSA Protection' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_4_6_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RunAsPPL
+    data: 1
+    type: dword
     state: present
-    value: NodeType
+
+- name: "18.4.7 | L1 | Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node (recommended)'"
+  when:
+    - w2019cis_rule_18_4_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
+    name: NodeType
     data: 2
-    datatype: dword
+    type: dword
+    state: present
+
+- name: "18.4.8 | L1 | Ensure 'WDigest Authentication' is set to 'Disabled'"
+  when:
+    - w2019cis_rule_18_4_8_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+    name: UseLogonCredential
+    data: 0
+    type: dword
+    state: present

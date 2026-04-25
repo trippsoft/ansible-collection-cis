@@ -3,7 +3,8 @@
   when:
     - w2019cis_rule_18_10_42_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\MicrosoftAccount
+    path: HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount
     name: DisableUserAuth
     data: 1
     type: dword
+    state: present

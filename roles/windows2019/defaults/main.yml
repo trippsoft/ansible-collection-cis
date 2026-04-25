@@ -384,6 +384,8 @@ w2019cis_rule_18_4_3_enabled: true
 w2019cis_rule_18_4_4_enabled: true
 w2019cis_rule_18_4_5_enabled: true
 w2019cis_rule_18_4_6_enabled: true
+w2019cis_rule_18_4_7_enabled: true
+w2019cis_rule_18_4_8_enabled: true
 
 # 18.5 - MSS (Legacy)
 
@@ -406,6 +408,7 @@ w2019cis_rule_18_5_10_force: false
 w2019cis_rule_18_5_11_force: false
 
 w2019cis_screensaver_grace_period_in_seconds: 5
+w2019cis_security_log_warning_level: 90
 
 # 18.6 - Network
 
@@ -722,6 +725,7 @@ w2019cis_rule_18_10_16_3_enabled: true
 w2019cis_rule_18_10_16_4_enabled: true
 w2019cis_rule_18_10_16_5_enabled: true
 w2019cis_rule_18_10_16_6_enabled: true
+w2019cis_rule_18_10_16_7_enabled: true
 
 w2019cis_rule_18_10_16_2_force: false
 
@@ -896,6 +900,8 @@ w2019cis_rule_18_10_57_3_3_3_force: false
 w2019cis_rule_18_10_57_3_3_4_force: false
 w2019cis_rule_18_10_57_3_10_1_force: false
 w2019cis_rule_18_10_57_3_10_2_force: false
+
+w2019cis_remote_desktop_services_max_idle_time_in_ms: 900000
 
 # 18.10.58 - RSS Feeds
 

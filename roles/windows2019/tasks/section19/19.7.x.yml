@@ -5,10 +5,11 @@
     - w2019cis_rule_19_7_5_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments"
     name: SaveZoneInformation
     data: 2
     type: dword
+    state: present
 
 - name: "19.7.5.2 | L1 | Ensure 'Notify antivirus programs when opening attachments' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -16,21 +17,23 @@
     - w2019cis_rule_19_7_5_2_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Microsoft\\Windows\\Currentversion\\Policies\\Attachments"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments"
     name: ScanWithAntiVirus
     data: 3
     type: dword
+    state: present
 
-- name: "19.7.8.1 | L1 | Ensure 'Configure Windows spotlight on lock screen' is set to Disabled'"
+- name: "19.7.8.1 | L1 | Ensure 'Configure Windows spotlight on lock screen' is set to 'Disabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_8_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: ConfigureWindowsSpotlight
     data: 2
     type: dword
+    state: present
 
 - name: "19.7.8.2 | L1 | Ensure 'Do not suggest third-party content in Windows spotlight' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -38,10 +41,11 @@
     - w2019cis_rule_19_7_8_2_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableThirdPartySuggestions
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.3 | L2 | Ensure 'Do not use diagnostic data for tailored experiences' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -50,10 +54,11 @@
     - w2019cis_rule_19_7_8_3_force or _w2019cis_level2
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableTailoredExperiencesWithDiagnosticData
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.4 | L2 | Ensure 'Turn off all Windows spotlight features' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -62,10 +67,11 @@
     - w2019cis_rule_19_7_8_4_force or _w2019cis_level2
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableWindowsSpotlightFeatures
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.8.5 | L1 | Ensure 'Turn off Spotlight collection on Desktop' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -73,10 +79,11 @@
     - w2019cis_rule_19_7_8_5_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableSpotlightCollectionOnDesktop
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.26.1 | L1 | Ensure 'Prevent users from sharing files within their profile.' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -84,10 +91,11 @@
     - w2019cis_rule_19_7_26_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Microsoft\\Windows\\Currentversion\\Policies\\Explorer"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
     name: NoInplaceSharing
     data: 1
     type: dword
+    state: present
 
 - name: "19.7.44.1 | L1 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -95,10 +103,11 @@
     - w2019cis_rule_19_7_44_1_enabled
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windows\\Installer"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer"
     name: AlwaysInstallElevated
     data: 0
     type: dword
+    state: present
 
 - name: "19.7.46.2.1 | L2 | Ensure 'Prevent Codec Download' is set to 'Enabled'"
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
@@ -107,7 +116,8 @@
     - w2019cis_rule_19_7_46_2_1_force or _w2019cis_level2
     - "'Classes' not in item"
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Windowsmediaplayer"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\WindowsMediaPlayer"
     name: PreventCodecDownload
     data: 1
     type: dword
+    state: present

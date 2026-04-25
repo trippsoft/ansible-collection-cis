@@ -8,6 +8,7 @@
     name: EnableAppInstaller
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.18.2 | L1 | Ensure 'Enable App Installer Experimental Features' is set to 'Disabled'"
   when:
@@ -17,6 +18,7 @@
     name: EnableExperimentalFeatures
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.18.3 | L1 | Ensure 'Enable App Installer Hash Override' is set to 'Disabled'"
   when:
@@ -26,6 +28,7 @@
     name: EnableHashOverride
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.18.4 | L1 | Ensure 'Enable App Installer Local Archive Malware Scan Override' is set to 'Disabled'"
   when:
@@ -35,6 +38,7 @@
     name: EnableLocalArchiveMalwareScanOverride
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.18.5 | L1 | Ensure 'Enable App Installer ms-appinstaller protocol' is set to 'Disabled'"
   when:
@@ -44,6 +48,7 @@
     name: EnableMSAppInstallerProtocol
     data: 0
     type: dword
+    state: present
 
 - name: >-
     18.10.18.6 | L1 |
@@ -55,6 +60,7 @@
     name: EnableBypassCertificatePinningForMicrosoftStore
     data: 0
     type: dword
+    state: present
 
 - name: "18.10.18.7 | L2 | Ensure 'Enable Windows Package Manager command line interfaces' is set to 'Disabled'"
   when:
@@ -65,3 +71,4 @@
     name: EnableWindowsPackageManagerCommandLineInterfaces
     data: 0
     type: dword
+    state: present

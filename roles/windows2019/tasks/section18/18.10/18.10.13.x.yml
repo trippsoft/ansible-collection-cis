@@ -3,16 +3,18 @@
   when:
     - w2019cis_rule_18_10_13_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableConsumerAccountStateContent
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.13.2 | L1 | Ensure 'Turn off Microsoft consumer experiences' is set to 'Enabled'"
   when:
     - w2019cis_rule_18_10_13_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableWindowsConsumerFeatures
     data: 1
     type: dword
+    state: present

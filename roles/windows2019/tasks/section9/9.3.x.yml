@@ -7,6 +7,7 @@
     name: EnableFirewall
     data: 1
     type: dword
+    state: present
 
 - name: "9.3.2 | L1 | Ensure 'Windows Firewall: Public: Inbound connections' is set to 'Block (default)'"
   when:
@@ -16,6 +17,7 @@
     name: DefaultInboundAction
     data: 1
     type: dword
+    state: present
 
 - name: "9.3.3 | L1 | Ensure 'Windows Firewall: Public: Settings: Display a notification' is set to 'No'"
   when:
@@ -25,6 +27,7 @@
     name: DisableNotifications
     data: 1
     type: dword
+    state: present
 
 - name: "9.3.4 | L1 | Ensure 'Windows Firewall: Public: Settings: Apply local firewall rules' is set to 'No'"
   when:
@@ -34,6 +37,7 @@
     name: AllowLocalPolicyMerge
     data: 0
     type: dword
+    state: present
 
 - name: "9.3.5 | L1 | Ensure 'Windows Firewall: Public: Settings: Apply local connection security rules' is set to 'No'"
   when:
@@ -43,11 +47,11 @@
     name: AllowLocalIPsecPolicyMerge
     data: 0
     type: dword
+    state: present
 
 - name: >-
     9.3.6 | L1 |
-    Ensure 'Windows Firewall: Public: Logging: Name'
-    is set to '%SystemRoot%\\System32\\logfiles\\firewall\\publicfw.log'
+    Ensure 'Windows Firewall: Public: Logging: Name' is set to '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
   when:
     - w2019cis_rule_9_3_6_enabled
   ansible.windows.win_regedit:
@@ -55,6 +59,7 @@
     name: LogFilePath
     data: '{{ w2019cis_public_firewall_log_path }}'
     type: string
+    state: present
 
 - name: "9.3.7 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'"
   when:
@@ -64,6 +69,7 @@
     name: LogFileSize
     data: '{{ w2019cis_public_firewall_log_size_in_kb }}'
     type: dword
+    state: present
 
 - name: "9.3.8 | L1 | Ensure 'Windows Firewall: Public: Logging: Log dropped packets' is set to 'Yes'"
   when:
@@ -73,6 +79,7 @@
     name: LogDroppedPackets
     data: 1
     type: dword
+    state: present
 
 - name: "9.3.9 | L1 | Ensure 'Windows Firewall: Public: Logging: Log successful connections' is set to 'Yes'"
   when:
@@ -82,3 +89,4 @@
     name: LogSuccessfulConnections
     data: 1
     type: dword
+    state: present

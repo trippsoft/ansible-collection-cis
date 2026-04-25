@@ -3,10 +3,11 @@
   when:
     - w2019cis_rule_2_3_8_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
     name: RequireSecuritySignature
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.8.2 | L1 |
@@ -14,10 +15,11 @@
   when:
     - w2019cis_rule_2_3_8_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
     name: EnableSecuritySignature
     data: 1
     type: dword
+    state: present
 
 - name: >-
     2.3.8.3 | L1 |
@@ -25,7 +27,8 @@
   when:
     - w2019cis_rule_2_3_8_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
     name: EnablePlainTextPassword
     data: 0
     type: dword
+    state: present

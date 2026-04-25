@@ -3,16 +3,18 @@
   when:
     - w2019cis_rule_18_10_58_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
     name: DisableEnclosureDownload
     data: 1
     type: dword
+    state: present
 
 - name: "18.10.58.2 | L1 | Ensure 'Turn on Basic feed authentication over HTTP' is set to 'Disabled'"
   when:
     - w2019cis_rule_18_10_58_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
     name: AllowBasicAuthInClear
     data: 0
     type: dword
+    state: present
