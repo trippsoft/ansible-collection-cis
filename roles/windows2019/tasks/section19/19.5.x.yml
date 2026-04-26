@@ -3,7 +3,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_5_1_1_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications"
     name: NoToastApplicationNotificationOnLockScreen

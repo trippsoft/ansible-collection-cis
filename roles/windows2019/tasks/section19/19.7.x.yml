@@ -3,7 +3,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_5_1_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments"
     name: SaveZoneInformation
@@ -15,7 +15,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_5_2_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments"
     name: ScanWithAntiVirus
@@ -27,7 +27,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_8_1_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: ConfigureWindowsSpotlight
@@ -39,7 +39,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_8_2_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableThirdPartySuggestions
@@ -52,7 +52,7 @@
   when:
     - w2019cis_rule_19_7_8_3_enabled
     - w2019cis_rule_19_7_8_3_force or _w2019cis_level2
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableTailoredExperiencesWithDiagnosticData
@@ -65,7 +65,7 @@
   when:
     - w2019cis_rule_19_7_8_4_enabled
     - w2019cis_rule_19_7_8_4_force or _w2019cis_level2
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableWindowsSpotlightFeatures
@@ -77,7 +77,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_8_5_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent"
     name: DisableSpotlightCollectionOnDesktop
@@ -89,7 +89,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_26_1_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
     name: NoInplaceSharing
@@ -101,7 +101,7 @@
   loop: "{{ _w2019cis_user_hives.sub_keys }}"
   when:
     - w2019cis_rule_19_7_44_1_enabled
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer"
     name: AlwaysInstallElevated
@@ -114,7 +114,7 @@
   when:
     - w2019cis_rule_19_7_46_2_1_enabled
     - w2019cis_rule_19_7_46_2_1_force or _w2019cis_level2
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
     path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\WindowsMediaPlayer"
     name: PreventCodecDownload
