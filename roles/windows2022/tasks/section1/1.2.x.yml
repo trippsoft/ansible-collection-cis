@@ -18,7 +18,7 @@
   ignore_errors: true
   # Ignore errors in case the lockout and reset duration must be set in the opposite order
 
-- name: "1.2.3 | L1 | Ensure 'Allow Administrator account lockout' is set to 'Enabled'"
+- name: "1.2.3 | L1 | Ensure 'Allow Administrator account lockout' is set to 'Enabled' | MS only"
   when:
     - w2022cis_rule_1_2_3_enabled
     - _w2022cis_standalone_or_member_server

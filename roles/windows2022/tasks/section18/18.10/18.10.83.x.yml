@@ -6,7 +6,7 @@
   when:
     - w2022cis_rule_18_10_83_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: EnableMPR
     data: 0
     type: dword
@@ -17,7 +17,7 @@
   when:
     - w2022cis_rule_18_10_83_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: DisableAutomaticRestartSignOn
     data: 1
     type: dword

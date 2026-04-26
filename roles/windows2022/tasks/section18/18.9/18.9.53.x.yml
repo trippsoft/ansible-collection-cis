@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_9_53_1_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpclient
+    path: HKLM:\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient
     name: Enabled
     data: 1
     type: dword
@@ -14,8 +14,8 @@
     - w2022cis_rule_18_9_53_1_2_enabled
     - _w2022cis_standalone_or_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpserver
+    path: HKLM:\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer
     name: Enabled
-    data: 1
+    data: 0
     type: dword
     state: present

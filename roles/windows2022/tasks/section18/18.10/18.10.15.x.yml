@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_10_15_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Credui
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredUI
     name: DisablePasswordReveal
     data: 1
     type: dword
@@ -13,7 +13,7 @@
   when:
     - w2022cis_rule_18_10_15_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Credui
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI
     name: EnumerateAdministrators
     data: 0
     type: dword

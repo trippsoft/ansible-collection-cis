@@ -169,7 +169,7 @@
 
 - name: >-
     2.2.18 | L1 |
-    Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+    Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\Virtual Machines' |
     MS only
   when:
     - w2022cis_rule_2_2_18_enabled
@@ -177,7 +177,7 @@
   block:
     - name: >-
         2.2.18 | L1 |
-        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\Virtual Machines' |
         MS only |
         No Hyper-V
       when:
@@ -190,7 +190,7 @@
 
     - name: >-
         2.2.18 | L1 |
-        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\\Virtual Machines' |
+        Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\Virtual Machines' |
         MS only |
         With Hyper-V
       when:
@@ -218,7 +218,7 @@
     name: SeDenyNetworkLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.21 | L1 |
@@ -241,7 +241,7 @@
         users:
           - Guests
           - Local account and member of Administrators group
-        action: set
+        action: add
 
     - name: >-
         2.2.21 | L1 |
@@ -255,7 +255,7 @@
         name: SeDenyNetworkLogonRight
         users:
           - Guests
-        action: set
+        action: add
 
 - name: "2.2.22 | L1 | Ensure 'Deny log on as a batch job' to include 'Guests'"
   when:
@@ -264,7 +264,7 @@
     name: SeDenyBatchLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.23 | L1 | Ensure 'Deny log on as a service' to include 'Guests'"
   when:
@@ -273,7 +273,7 @@
     name: SeDenyServiceLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.24 | L1 | Ensure 'Deny log on locally' to include 'Guests'"
   when:
@@ -282,7 +282,7 @@
     name: SeDenyInteractiveLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.25 | L1 | Ensure 'Deny log on through Remote Desktop Services' to include 'Guests' | DC only"
   when:
@@ -292,7 +292,7 @@
     name: SeDenyRemoteInteractiveLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.26 | L1 |
@@ -360,10 +360,7 @@
       - Administrators
     action: set
 
-- name: >-
-    2.2.30 | L1 |
-    Ensure 'Generate security audits'
-    is set to 'LOCAL SERVICE, NETWORK SERVICE, RESTRICTED SERVICES\PrintSpoolerService'
+- name: "2.2.30 | L1 | Ensure 'Generate security audits' is set to 'LOCAL SERVICE, NETWORK SERVICE'"
   when:
     - w2022cis_rule_2_2_30_enabled
   ansible.windows.win_user_right:
@@ -391,7 +388,7 @@
 - name: >-
     2.2.32 | L1 |
     Ensure 'Impersonate a client after authentication'
-    is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, RESTRICTED SERVICES\PrintSpoolerService' |
+    is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE' |
     MS only
   when:
     - w2022cis_rule_2_2_32_enabled
@@ -402,7 +399,7 @@
     action: set
 
 - name: >-
-    2.2.33 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'
+    2.2.33 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\Window Manager Group'
   when:
     - w2022cis_rule_2_2_33_enabled
   ansible.windows.win_user_right:
@@ -434,14 +431,11 @@
     - w2022cis_rule_2_2_36_force or _w2022cis_level2_domain_controller
   ansible.windows.win_user_right:
     name: SeBatchLogonRight
-    users: Administrators
+    users:
+      - Administrators
     action: set
 
-- name: >-
-    2.2.37 | L1 |
-    Ensure 'Manage auditing and security log'
-    is set to 'Administrators' and (when Exchange is running in the environment) 'Exchange Servers' |
-    DC only
+- name: "2.2.37 | L1 | Ensure 'Manage auditing and security log' is set to 'Administrators' | DC only"
   when:
     - w2022cis_rule_2_2_37_enabled
     - _w2022cis_domain_controller

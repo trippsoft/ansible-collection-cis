@@ -4,9 +4,9 @@
   when:
     - w2022cis_rule_19_6_6_1_1_enabled
     - w2022cis_rule_19_6_6_1_1_force or _w2022cis_level2
-    - "'Classes' not in item"
+    - ("Classes" not in item)
   ansible.windows.win_regedit:
-    path: "HKU:\\{{ item }}\\Software\\Policies\\Microsoft\\Assistance\\Client\\1.0"
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Assistance\\Client\\1.0"
     name: NoImplicitFeedback
     data: 1
     type: dword

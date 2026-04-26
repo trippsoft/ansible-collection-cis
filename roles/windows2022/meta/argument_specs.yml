@@ -1070,6 +1070,13 @@ argument_specs:
         description:
           - Whether to enable rule 2.3.11.12.
           - This applies when the level and machine type are appropriate.
+      w2022cis_rule_2_3_11_13_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 2.3.11.13.
+          - This applies when the level and machine type are appropriate.
       w2022cis_ldap_client_signing_requirements:
         type: str
         required: false
@@ -1812,6 +1819,12 @@ argument_specs:
         description:
           - Whether to enable rule 18.5.11.
           - This applies when the level and machine type are appropriate.
+      w2022cis_security_log_warning_level:
+        type: int
+        required: false
+        default: 90
+        description:
+          - The percentage of the security log that must be filled before a warning event is generated.
       w2022cis_rule_18_6_4_1_enabled:
         type: bool
         required: false
@@ -3594,6 +3607,20 @@ argument_specs:
         description:
           - Whether to override the level requirement for CIS rule 18.10.57.3.3.6.
           - This applies when the machine type is appropriate.
+      w2022cis_rule_18_10_57_3_3_7_enabled:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable rule 18.10.57.3.3.7.
+          - This applies when the level and machine type are appropriate.
+      w2022cis_rule_18_10_57_3_3_7_force:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to override the level requirement for CIS rule 18.10.57.3.3.7.
+          - This applies when the machine type is appropriate.
       w2022cis_rule_18_10_57_3_9_1_enabled:
         type: bool
         required: false
@@ -3671,6 +3698,12 @@ argument_specs:
         description:
           - Whether to enable rule 18.10.57.3.11.2.
           - This applies when the level and machine type are appropriate.
+      w2022cis_remote_desktop_services_max_idle_time_in_ms:
+        type: int
+        required: false
+        default: 900000
+        description:
+          - The maximum idle time for Remote Desktop Services in milliseconds.
       w2022cis_rule_18_10_58_1_enabled:
         type: bool
         required: false

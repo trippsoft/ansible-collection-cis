@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_9_37_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
     name: fAllowUnsolicited
     data: 0
     type: dword
@@ -13,7 +13,7 @@
   when:
     - w2022cis_rule_18_9_37_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
     name: fAllowToGetHelp
     data: 0
     type: dword

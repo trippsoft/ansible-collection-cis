@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_1_1_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Personalization
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
     name: NoLockScreenCamera
     data: 1
     type: dword
@@ -13,7 +13,7 @@
   when:
     - w2022cis_rule_18_1_1_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Personalization
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
     name: NoLockScreenSlideshow
     data: 1
     type: dword
@@ -23,8 +23,8 @@
   when:
     - w2022cis_rule_18_1_2_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\InputPersonalization
-    name: "AllowInputPersonalization"
+    path: HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization
+    name: AllowInputPersonalization
     data: 0
     type: dword
     state: present

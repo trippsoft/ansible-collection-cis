@@ -2,13 +2,15 @@
 - name: Gather distribution info
   when:
     - ansible_distribution is not defined or
-      ansible_os_family is not defined
+      ansible_os_family is not defined or
+      ansible_windows_domain_role is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
       - '!min'
       - distribution
       - os_family
+      - windows_domain
 
 - name: Get Windows installation type
   ansible.windows.win_reg_stat:
@@ -56,7 +58,8 @@
       The variable 'w2022cis_password_history_size' must be set to 24 or more.
       Value: {{ w2022cis_password_history_size }}
     success_msg: >-
-      The variable 'w2022cis_password_history_size' is set to 24 or more. Value: {{ w2022cis_password_history_size }}
+      The variable 'w2022cis_password_history_size' is set to 24 or more.
+      Value: {{ w2022cis_password_history_size }}
 
 - name: "Validate | 1.1.2 | L1 | Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
   when:
@@ -308,21 +311,6 @@
       The variable 'w2022cis_public_firewall_log_size_in_kb' is set to 16384 or more.
       Value: {{ w2022cis_public_firewall_log_size_in_kb }}
 
-- name: >-
-    Validate | 18.5.9 | L1 |
-    Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)'
-    is set to 'Enabled: 5 or fewer seconds'
-  ansible.builtin.assert:
-    that:
-      - w2022cis_screensaver_grace_period_in_seconds | int <= 5
-      - w2022cis_screensaver_grace_period_in_seconds | int >= 0
-    fail_msg: >-
-      The variable 'w2022cis_screensaver_grace_period_in_seconds' must be set to between 0 and 5.
-      Value: {{ w2022cis_screensaver_grace_period_in_seconds }}
-    success_msg: >-
-      The variable 'w2022cis_screensaver_grace_period_in_seconds' is set to between 0 and 5.
-      Value: {{ w2022cis_screensaver_grace_period_in_seconds }}
-
 - name: "Validate | 18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
     - w2022cis_rule_18_9_26_5_enabled
@@ -426,3 +414,21 @@
     success_msg: >-
       The variable 'w2022cis_system_log_max_size_in_kb' is set to 32768 or more.
       Value: {{ w2022cis_system_log_max_size_in_kb }}
+
+- name: >-
+    Validate | 18.10.57.3.10.1 | L2 |
+    Ensure 'Set time limit for active but idle Remote Desktop Services sessions'
+    is set to 'Enabled: 15 minutes or less, but not Never (0)'
+  when:
+    - w2022cis_rule_18_10_57_3_10_1_enabled
+    - w2022cis_rule_18_10_57_3_10_1_force or _w2022cis_level2
+  ansible.builtin.assert:
+    that:
+      - w2022cis_remote_desktop_services_max_idle_time_in_ms | int <= 900000
+      - w2022cis_remote_desktop_services_max_idle_time_in_ms | int > 0
+    fail_msg: >-
+      The variable 'w2022cis_remote_desktop_services_max_idle_time_in_ms' must be set to a value between 1 and 900000.
+      Value: {{ w2022cis_remote_desktop_services_max_idle_time_in_ms }}
+    success_msg: >-
+      The variable 'w2022cis_remote_desktop_services_max_idle_time_in_ms' is set to a value between 1 and 900000.
+      Value: {{ w2022cis_remote_desktop_services_max_idle_time_in_ms }}

@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_9_29_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: BlockUserFromShowingAccountDetailsOnSignin
     data: 1
     type: dword
@@ -13,7 +13,7 @@
   when:
     - w2022cis_rule_18_9_29_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DontDisplayNetworkSelectionUI
     data: 1
     type: dword
@@ -23,7 +23,7 @@
   when:
     - w2022cis_rule_18_9_29_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DontEnumerateConnectedUsers
     data: 1
     type: dword
@@ -34,7 +34,7 @@
     - w2022cis_rule_18_9_29_4_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: EnumerateLocalUsers
     data: 0
     type: dword
@@ -44,7 +44,7 @@
   when:
     - w2022cis_rule_18_9_29_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: DisableLockScreenAppNotifications
     data: 1
     type: dword
@@ -54,7 +54,7 @@
   when:
     - w2022cis_rule_18_9_29_6_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
     name: AllowDomainPINLogon
     data: 0
     type: dword

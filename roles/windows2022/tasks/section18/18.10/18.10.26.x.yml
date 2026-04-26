@@ -5,7 +5,7 @@
   when:
     - w2022cis_rule_18_10_26_1_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\EventLog\Application
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application
     name: Retention
     data: 0
     type: string
@@ -17,7 +17,7 @@
   when:
     - w2022cis_rule_18_10_26_1_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Application
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application
     name: MaxSize
     data: "{{ w2022cis_application_log_max_size_in_kb }}"
     type: dword
@@ -29,7 +29,7 @@
   when:
     - w2022cis_rule_18_10_26_2_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security
     name: Retention
     data: 0
     type: string
@@ -41,7 +41,7 @@
   when:
     - w2022cis_rule_18_10_26_2_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security
     name: MaxSize
     data: "{{ w2022cis_security_log_max_size_in_kb }}"
     type: dword
@@ -53,7 +53,7 @@
   when:
     - w2022cis_rule_18_10_26_3_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup
     name: Retention
     data: 0
     type: string
@@ -64,7 +64,7 @@
   when:
     - w2022cis_rule_18_10_26_3_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup
     name: MaxSize
     data: "{{ w2022cis_setup_log_max_size_in_kb }}"
     type: dword
@@ -76,7 +76,7 @@
   when:
     - w2022cis_rule_18_10_26_4_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System
     name: Retention
     data: 0
     type: string
@@ -87,7 +87,7 @@
   when:
     - w2022cis_rule_18_10_26_4_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System
     name: MaxSize
     data: "{{ w2022cis_system_log_max_size_in_kb }}"
     type: dword

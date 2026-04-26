@@ -7,7 +7,7 @@
     - w2022cis_rule_18_9_26_1_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: BackupDirectory
     data: "{{ _w2022cis_laps_directory_value }}"
     type: dword
@@ -19,8 +19,8 @@
     - w2022cis_rule_18_9_26_2_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
-    name: PwdExpirationProtectionEnabled
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PasswordExpirationProtectionEnabled
     data: 1
     type: dword
     state: present
@@ -30,7 +30,7 @@
     - w2022cis_rule_18_9_26_3_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: ADPasswordEncryptionEnabled
     data: 1
     type: dword
@@ -44,7 +44,7 @@
     - w2022cis_rule_18_9_26_4_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: PasswordComplexity
     data: "{{ _w2022cis_laps_password_complexity_value }}"
     type: dword
@@ -55,7 +55,7 @@
     - w2022cis_rule_18_9_26_5_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: PasswordLength
     data: "{{ w2022cis_laps_password_length }}"
     type: dword
@@ -66,7 +66,7 @@
     - w2022cis_rule_18_9_26_6_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: PasswordAgeDays
     data: "{{ w2022cis_laps_password_age_in_days }}"
     type: dword
@@ -79,7 +79,7 @@
     - w2022cis_rule_18_9_26_7_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: PostAuthenticationResetDelay
     data: "{{ w2022cis_laps_post_authentication_grace_period_in_hours }}"
     type: dword
@@ -93,7 +93,7 @@
     - w2022cis_rule_18_9_26_8_enabled
     - _w2022cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
     name: PostAuthenticationActions
     data: "{{ _w2022cis_laps_post_authentication_actions_value }}"
     type: dword

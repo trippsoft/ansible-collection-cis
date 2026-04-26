@@ -4,7 +4,7 @@
   when:
     - w2022cis_rule_2_3_15_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Session Manager\Kernel
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel
     name: ObCaseInsensitive
     data: 1
     type: dword
@@ -17,7 +17,7 @@
   when:
     - w2022cis_rule_2_3_15_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Session Manager
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager
     name: ProtectionMode
     data: 1
     type: dword

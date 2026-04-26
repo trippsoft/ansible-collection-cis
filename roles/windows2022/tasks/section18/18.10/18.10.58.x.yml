@@ -3,7 +3,7 @@
   when:
     - w2022cis_rule_18_10_58_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
     name: DisableEnclosureDownload
     data: 1
     type: dword
@@ -13,7 +13,7 @@
   when:
     - w2022cis_rule_18_10_58_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
     name: AllowBasicAuthInClear
     data: 0
     type: dword

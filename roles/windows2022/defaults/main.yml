@@ -218,6 +218,7 @@ w2022cis_rule_2_3_11_9_enabled: true
 w2022cis_rule_2_3_11_10_enabled: true
 w2022cis_rule_2_3_11_11_enabled: true
 w2022cis_rule_2_3_11_12_enabled: true
+w2022cis_rule_2_3_11_13_enabled: true
 
 w2022cis_ldap_client_signing_requirements: negotiate
 w2022cis_outgoing_ntlm_traffic_requirement: audit_all
@@ -401,7 +402,7 @@ w2022cis_rule_18_5_7_force: false
 w2022cis_rule_18_5_9_force: false
 w2022cis_rule_18_5_10_force: false
 
-w2022cis_screensaver_grace_period_in_seconds: 5
+w2022cis_security_log_warning_level: 90
 
 # 18.6 - Network
 
@@ -932,12 +933,14 @@ w2022cis_rule_18_10_57_3_3_3_enabled: true
 w2022cis_rule_18_10_57_3_3_4_enabled: true
 w2022cis_rule_18_10_57_3_3_5_enabled: true
 w2022cis_rule_18_10_57_3_3_6_enabled: true
+w2022cis_rule_18_10_57_3_3_7_enabled: true
 
 w2022cis_rule_18_10_57_3_3_1_force: false
 w2022cis_rule_18_10_57_3_3_2_force: false
 w2022cis_rule_18_10_57_3_3_4_force: false
 w2022cis_rule_18_10_57_3_3_5_force: false
 w2022cis_rule_18_10_57_3_3_6_force: false
+w2022cis_rule_18_10_57_3_3_7_force: false
 
 # 18.10.57.3.9 - Security
 
@@ -954,6 +957,8 @@ w2022cis_rule_18_10_57_3_10_2_enabled: true
 
 w2022cis_rule_18_10_57_3_10_1_force: false
 w2022cis_rule_18_10_57_3_10_2_force: false
+
+w2022cis_remote_desktop_services_max_idle_time_in_ms: 900000
 
 # 18.10.57.3.11 - Temporary folders
 
