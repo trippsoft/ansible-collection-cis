@@ -17,10 +17,10 @@
   ansible.windows.win_service:
     name: mrxsmb10
     start_mode: disabled
-  register: _w2019cis_smbv1_client_driver
+  register: _w2022cis_smbv1_client_driver
   failed_when:
-    - _w2019cis_smbv1_client_driver is failed
-    - ("is not installed" not in _w2019cis_smbv1_client_driver.msg)
+    - _w2022cis_smbv1_client_driver is failed
+    - ("is not installed" not in _w2022cis_smbv1_client_driver.msg)
 
 - name: "18.4.3 | L1 | Ensure 'Configure SMB v1 server' is set to 'Disabled'"
   when:
