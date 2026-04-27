@@ -3,7 +3,7 @@
   when:
     - w2025cis_rule_18_10_93_2_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender Security Center\App and Browser protection
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection
     name: DisallowExploitProtectionOverride
     data: 1
     type: dword

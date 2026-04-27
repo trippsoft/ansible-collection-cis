@@ -219,7 +219,7 @@
     name: SeDenyNetworkLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.21 | L1 |
@@ -242,7 +242,7 @@
         users:
           - Guests
           - Local account and member of Administrators group
-        action: set
+        action: add
 
     - name: >-
         2.2.21 | L1 |
@@ -256,7 +256,7 @@
         name: SeDenyNetworkLogonRight
         users:
           - Guests
-        action: set
+        action: add
 
 - name: "2.2.22 | L1 | Ensure 'Deny log on as a batch job' to include 'Guests'"
   when:
@@ -265,7 +265,7 @@
     name: SeDenyBatchLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.23 | L1 | Ensure 'Deny log on as a service' to include 'Guests'"
   when:
@@ -274,7 +274,7 @@
     name: SeDenyServiceLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.24 | L1 | Ensure 'Deny log on locally' to include 'Guests'"
   when:
@@ -283,7 +283,7 @@
     name: SeDenyInteractiveLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: "2.2.25 | L1 | Ensure 'Deny log on through Remote Desktop Services' to include 'Guests' | DC only"
   when:
@@ -293,7 +293,7 @@
     name: SeDenyRemoteInteractiveLogonRight
     users:
       - Guests
-    action: set
+    action: add
 
 - name: >-
     2.2.26 | L1 | Ensure 'Deny log on through Remote Desktop Services' is set to 'Guests, Local account' | MS only
@@ -404,10 +404,6 @@
     name: SeImpersonatePrivilege
     users: "{{ _w2025cis_impersonate_a_client_after_authentication_users | reject('equalto', omit) | list }}"
     action: set
-  register: _w2025cis_impersonate_a_client_after_authentication_result
-  failed_when:
-    - _w2025cis_impersonate_a_client_after_authentication_result is failed
-    - _w2025cis_impersonate_a_client_after_authentication_result.msg != "Failed to translate the account 'RESTRICTED SERVICES\\PrintSpoolerService' to a SID"
 
 - name: >-
     2.2.33 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'

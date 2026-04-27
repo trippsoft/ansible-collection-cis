@@ -14,7 +14,7 @@
   when:
     - w2025cis_rule_2_3_1_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
     name: LimitBlankPasswordUse
     data: 1
     type: dword
@@ -25,7 +25,7 @@
     - w2025cis_rule_2_3_1_3_enabled
   community.windows.win_security_policy:
     section: System Access
-    key: newadministratorname
+    key: NewAdministratorName
     value: "{{ w2025cis_admin_username }}"
 
 - name: "2.3.1.4 | L1 | Configure 'Accounts: Rename guest account'"

@@ -4,7 +4,7 @@
     - w2025cis_rule_2_3_7_1_enabled
     - w2025cis_rule_2_3_7_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: DisableCAD
     data: 0
     type: dword
@@ -14,7 +14,7 @@
   when:
     - w2025cis_rule_2_3_7_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: DontDisplayLastUserName
     data: 1
     type: dword
@@ -25,7 +25,7 @@
   when:
     - w2025cis_rule_2_3_7_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: InactivityTimeoutSecs
     data: "{{ w2025cis_inactivity_timeout_in_seconds }}"
     type: dword
@@ -35,7 +35,7 @@
   when:
     - w2025cis_rule_2_3_7_4_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: LegalNoticeText
     data: "{{ w2025cis_login_message_text }}"
     type: string
@@ -45,7 +45,7 @@
   when:
     - w2025cis_rule_2_3_7_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
     name: LegalNoticeCaption
     data: "{{ w2025cis_login_message_title }}"
     type: string
@@ -61,8 +61,8 @@
     - _w2025cis_member_server
     - w2025cis_rule_2_3_7_6_force or _w2025cis_level2_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
-    name: cachedlogonscount
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: CachedLogonsCount
     data: "{{ w2025cis_cached_logons_count }}"
     type: string
     state: present
@@ -73,7 +73,7 @@
   when:
     - w2025cis_rule_2_3_7_7_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
     name: PasswordExpiryWarning
     data: "{{ w2025cis_password_expiry_warning_in_days }}"
     type: dword
@@ -87,7 +87,7 @@
     - w2025cis_rule_2_3_7_8_enabled
     - _w2025cis_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
     name: ForceUnlockLogon
     data: 1
     type: dword
@@ -98,8 +98,8 @@
   when:
     - w2025cis_rule_2_3_7_9_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
-    name: scremoveoption
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: ScRemoveOption
     data: "{{ _w2025cis_smart_card_removal_behavior_value }}"
     type: dword
     state: present

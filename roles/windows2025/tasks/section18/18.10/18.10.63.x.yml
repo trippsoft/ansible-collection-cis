@@ -4,7 +4,7 @@
     - w2025cis_rule_18_10_63_1_enabled
     - w2025cis_rule_18_10_63_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Currentversion\Software Protection Platform
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform
     name: NoGenTicket
     data: 1
     type: dword

@@ -3,7 +3,7 @@
   when:
     - w2025cis_rule_17_6_1_enabled
   block:
-    - name: "17.6.1 | L1 | Ensure 'Audit Detailed File Share' is set to include 'Failure'"
+    - name: "17.6.1 | L1 | Ensure 'Audit Detailed File Share' is set to include 'Failure' | Get status"
       check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9244-69ae-11d9-bed3-505054503030}" -r |
@@ -13,16 +13,17 @@
       failed_when: false
       register: _w2025cis_rule_17_6_1_audit
 
-    - name: "17.6.1 | L1 | Ensure 'Audit Detailed File Share' is set to include 'Failure'"
+    - name: "17.6.1 | L1 | Ensure 'Audit Detailed File Share' is set to include 'Failure' | Failure"
       when:
-        - "'Failure' not in _w2025cis_rule_17_6_1_audit.stdout"
+        - ("Failure" not in _w2025cis_rule_17_6_1_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9244-69ae-11d9-bed3-505054503030}" /failure:enable
+      changed_when: true
 
 - name: "17.6.2 | L1 | Ensure 'Audit File Share' is set to 'Success and Failure'"
   when:
     - w2025cis_rule_17_6_2_enabled
   block:
-    - name: "17.6.2 | L1 | Ensure 'Audit File Share' is set to 'Success and Failure'"
+    - name: "17.6.2 | L1 | Ensure 'Audit File Share' is set to 'Success and Failure' | Get status"
       check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9224-69ae-11d9-bed3-505054503030}" -r |
@@ -34,19 +35,21 @@
 
     - name: "17.6.2 | L1 | Ensure 'Audit File Share' is set to 'Success and Failure' | Success"
       when:
-        - "'Success' not in _w2025cis_rule_17_6_2_audit.stdout"
+        - ("Success" not in _w2025cis_rule_17_6_2_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9224-69ae-11d9-bed3-505054503030}" /success:enable
+      changed_when: true
 
     - name: "17.6.2 | L1 | Ensure 'Audit File Share' is set to 'Success and Failure' | Failure"
       when:
-        - "'Failure' not in _w2025cis_rule_17_6_2_audit.stdout"
+        - ("Failure" not in _w2025cis_rule_17_6_2_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9224-69ae-11d9-bed3-505054503030}" /failure:enable
+      changed_when: true
 
 - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure'"
   when:
     - w2025cis_rule_17_6_3_enabled
   block:
-    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure'"
+    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure' | Get status"
       check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9227-69ae-11d9-bed3-505054503030}" -r |
@@ -56,21 +59,23 @@
       failed_when: false
       register: _w2025cis_rule_17_6_3_audit
 
-    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure'"
+    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure' | Success"
       when:
-        - "'Success' not in _w2025cis_rule_17_6_3_audit.stdout"
+        - ("Success" not in _w2025cis_rule_17_6_3_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9227-69ae-11d9-bed3-505054503030}" /success:enable
+      changed_when: true
 
-    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure'"
+    - name: "17.6.3 | L1 | Ensure 'Audit Other Object Access Events' is set to 'Success and Failure' | Failure"
       when:
-        - "'Failure' not in _w2025cis_rule_17_6_3_audit.stdout"
+        - ("Failure" not in _w2025cis_rule_17_6_3_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9227-69ae-11d9-bed3-505054503030}" /failure:enable
+      changed_when: true
 
 - name: "17.6.4 | L1 | Ensure 'Audit Removable Storage' is set to 'Success and Failure'"
   when:
     - w2025cis_rule_17_6_4_enabled
   block:
-    - name: "17.6.4 | L1 | Ensure 'Audit Removable Storage' is set to 'Success and Failure'"
+    - name: "17.6.4 | L1 | Ensure 'Audit Removable Storage' is set to 'Success and Failure' | Get status"
       check_mode: false
       ansible.windows.win_shell: >-
         AuditPol /get /subcategory:"{0cce9245-69ae-11d9-bed3-505054503030}" -r |
@@ -82,10 +87,12 @@
 
     - name: "17.6.4 | L1 | Ensure 'Audit Removable Storage' is set to 'Success and Failure' | Success"
       when:
-        - "'Success' not in _w2025cis_rule_17_6_4_audit.stdout"
+        - ("Success" not in _w2025cis_rule_17_6_4_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9245-69ae-11d9-bed3-505054503030}" /success:enable
+      changed_when: true
 
     - name: "17.6.4 | L1 | Ensure 'Audit Removable Storage' is set to 'Success and Failure' | Failure"
       when:
-        - "'Failure' not in _w2025cis_rule_17_6_4_audit.stdout"
+        - ("Failure" not in _w2025cis_rule_17_6_4_audit.stdout)
       ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce9245-69ae-11d9-bed3-505054503030}" /failure:enable
+      changed_when: true

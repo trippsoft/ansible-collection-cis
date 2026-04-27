@@ -3,7 +3,7 @@
   when:
     - w2025cis_rule_2_3_4_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers
     name: AddPrinterDrivers
     data: 1
     type: dword

@@ -3,19 +3,19 @@
   when:
     - w2025cis_rule_18_10_8_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Explorer
-    name: NoAutoplayfornonVolume
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+    name: NoAutoplayforNonVolume
     data: 1
     type: dword
     state: present
 
 - name: >-
-    18.10.8.2 | L1 | Ensure 'Set the default behavior for AutoRun'
-    is set to 'Enabled: Do not execute any autorun commands'
+    18.10.8.2 | L1 |
+    Ensure 'Set the default behavior for AutoRun' is set to 'Enabled: Do not execute any autorun commands'
   when:
     - w2025cis_rule_18_10_8_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
     name: NoAutorun
     data: 1
     type: dword
@@ -25,7 +25,7 @@
   when:
     - w2025cis_rule_18_10_8_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
     name: NoDriveTypeAutoRun
     data: 255
     type: dword

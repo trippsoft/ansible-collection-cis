@@ -9,11 +9,12 @@
     type: dword
     state: present
 
-- name: "18.10.42.5.1 | L1 | Ensure 'Configure local setting override for reporting to Microsoft MAPS' is set to 'Disabled'"
+- name: >-
+    18.10.42.5.1 | L1 | Ensure 'Configure local setting override for reporting to Microsoft MAPS' is set to 'Disabled'
   when:
     - w2025cis_rule_18_10_42_5_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Spynet
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet
     name: LocalSettingOverrideSpynetReporting
     data: 0
     type: dword
@@ -23,7 +24,7 @@
   when:
     - w2025cis_rule_18_10_42_5_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Spynet
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet
     name: SpynetReporting
     data: 2
     type: dword
@@ -33,13 +34,15 @@
   when:
     - w2025cis_rule_18_10_42_6_1_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR
     name: ExploitGuard_ASR_Rules
     data: 1
     type: dword
     state: present
 
-- name: "18.10.42.6.1.2 | L1 | Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured"
+- name: >-
+    18.10.42.6.1.2 | L1 |
+    Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
   loop:
     - 26190899-1602-49e8-8b27-eb1d0a1ce869
     - 3b576869-a4ec-4529-8536-b80a7769e899
@@ -56,17 +59,18 @@
   when:
     - w2025cis_rule_18_10_42_6_1_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules
     name: "{{ item }}"
     data: 1
     type: string
     state: present
 
-- name: "18.10.42.6.3.1 | L1 | Ensure 'Prevent users and apps from accessing dangerous websites' is set to 'Enabled: Block'"
+- name: >-
+    18.10.42.6.3.1 | L1 | Ensure 'Prevent users and apps from accessing dangerous websites' is set to 'Enabled: Block'
   when:
     - w2025cis_rule_18_10_42_6_3_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection
     name: EnableNetworkProtection
     data: 1
     type: dword
@@ -94,7 +98,9 @@
     type: dword
     state: present
 
-- name: "18.10.42.10.1 | L1 | Ensure 'Configure real-time protection and Security Intelligence Updates during OOBE' is set to 'Enabled'"
+- name: >-
+    18.10.42.10.1 | L1 |
+    Ensure 'Configure real-time protection and Security Intelligence Updates during OOBE' is set to 'Enabled'
   when:
     - w2025cis_rule_18_10_42_10_1_enabled
   ansible.windows.win_regedit:
@@ -118,7 +124,7 @@
   when:
     - w2025cis_rule_18_10_42_10_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableRealtimeMonitoring
     data: 0
     type: dword
@@ -128,7 +134,7 @@
   when:
     - w2025cis_rule_18_10_42_10_4_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableBehaviorMonitoring
     data: 0
     type: dword
@@ -138,39 +144,49 @@
   when:
     - w2025cis_rule_18_10_42_10_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableScriptScanning
     data: 0
     type: dword
     state: present
 
-- name: "18.10.42.11.1.1.1 | L2 | Ensure 'Configure Brute-Force Protection aggressiveness' is set to 'Enabled: Medium' or higher"
+- name: >-
+    18.10.42.11.1.1.1 | L2 |
+    Ensure 'Configure Brute-Force Protection aggressiveness' is set to 'Enabled: Medium' or higher
   when:
     - w2025cis_rule_18_10_42_11_1_1_1_enabled
     - w2025cis_rule_18_10_42_11_1_1_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection
+    path: |-
+      HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection
     name: BruteForceProtectionAggressiveness
     data: "{{ _w2025cis_brute_force_protection_aggressiveness_value }}"
     type: dword
     state: present
 
-- name: "18.10.42.11.1.1.2 | L1 | Ensure 'Configure Remote Encryption Protection Mode' is set to 'Enabled: Audit' or higher"
+- name: >-
+    18.10.42.11.1.1.2 | L1 | Ensure 'Configure Remote Encryption Protection Mode' is set to 'Enabled: Audit' or higher
   when:
     - w2025cis_rule_18_10_42_11_1_1_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection
+    path: |-
+      HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection
     name: BruteForceProtectionConfiguredState
     data: "{{ _w2025cis_brute_force_protection_configured_state_value }}"
     type: dword
     state: present
 
-- name: "18.10.42.11.1.2.1 | L2 | Ensure 'Configure how aggressively Remote Encryption Protection blocks threats' is set to 'Enabled: Medium' or higher"
+- name: >-
+    18.10.42.11.1.2.1 | L2 |
+    Ensure 'Configure how aggressively Remote Encryption Protection blocks threats'
+    is set to 'Enabled: Medium' or higher
   when:
     - w2025cis_rule_18_10_42_11_1_2_1_enabled
     - w2025cis_rule_18_10_42_11_1_2_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Remote Encryption Protection
+    path: >-
+      HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Remote Encryption
+      Protection
     name: RemoteEncryptionProtectionAggressiveness
     data: "{{ _w2025cis_remote_encryption_protection_aggressiveness_value }}"
     type: dword
@@ -181,7 +197,7 @@
     - w2025cis_rule_18_10_42_12_1_enabled
     - w2025cis_rule_18_10_42_12_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Reporting
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting
     name: DisableGenericRePorts
     data: 1
     type: dword
@@ -191,7 +207,7 @@
   when:
     - w2025cis_rule_18_10_42_13_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Scan
     name: QuickScanIncludeExclusions
     data: 1
     type: dword
@@ -201,7 +217,7 @@
   when:
     - w2025cis_rule_18_10_42_13_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Scan
     name: DisablePackedExeScanning
     data: 0
     type: dword
@@ -211,7 +227,7 @@
   when:
     - w2025cis_rule_18_10_42_13_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Scan
     name: DisableRemovableDriveScanning
     data: 0
     type: dword
@@ -221,7 +237,7 @@
   when:
     - w2025cis_rule_18_10_42_13_4_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Scan
     name: DaysUntilAggressiveCatchupQuickScan
     data: 7
     type: dword
@@ -231,17 +247,18 @@
   when:
     - w2025cis_rule_18_10_42_13_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Scan
     name: DisableEmailScanning
     data: 0
     type: dword
     state: present
 
-- name: "18.10.42.16 | L1 | Ensure 'Configure detection for potentially unwanted applications' is set to 'Enabled: Block'"
+- name: >-
+    18.10.42.16 | L1 | Ensure 'Configure detection for potentially unwanted applications' is set to 'Enabled: Block'
   when:
     - w2025cis_rule_18_10_42_16_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Defender
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender
     name: PUAProtection
     data: 1
     type: dword

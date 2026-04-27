@@ -4,7 +4,7 @@
     - w2025cis_rule_18_10_81_1_enabled
     - w2025cis_rule_18_10_81_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\WindowsInkWorkspace
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace
     name: AllowSuggestedAppsInWindowsInkWorkspace
     data: 0
     type: dword
@@ -12,8 +12,7 @@
 
 - name: >-
     18.10.81.2 | L1 |
-    Ensure 'Allow Windows Ink Workspace'
-    is set to 'Enabled: On, but disallow access above lock' OR 'Disabled' but not 'Enabled: On'
+    Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled'
   when:
     - w2025cis_rule_18_10_81_2_enabled
   ansible.windows.win_regedit:

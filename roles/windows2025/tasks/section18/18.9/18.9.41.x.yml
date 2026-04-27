@@ -1,8 +1,7 @@
 ---
 - name: >-
     18.9.41.1 | L1 |
-    Ensure 'Configure validation of ROCA-vulnerable WHfB keys during authentication'
-    is set to 'Enabled: Audit' or higher |
+    Ensure 'Configure validation of ROCA-vulnerable WHfB keys during authentication' is set to 'Enabled: Block' |
     DC only
   when:
     - w2025cis_rule_18_9_41_1_enabled

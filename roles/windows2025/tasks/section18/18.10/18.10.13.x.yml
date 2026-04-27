@@ -3,7 +3,7 @@
   when:
     - w2025cis_rule_18_10_13_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableConsumerAccountStateContent
     data: 1
     type: dword
@@ -14,7 +14,7 @@
     - w2025cis_rule_18_10_13_2_enabled
     - w2025cis_rule_18_10_13_2_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableCloudOptimizedContent
     data: 1
     type: dword

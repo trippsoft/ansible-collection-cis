@@ -6,8 +6,8 @@
   when:
     - w2025cis_rule_2_3_9_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-    name: autodisconnect
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
+    name: AutoDisconnect
     data: "{{ w2025cis_idle_smb_timeout_in_minutes }}"
     type: dword
     state: present
@@ -16,8 +16,8 @@
   when:
     - w2025cis_rule_2_3_9_2_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-    name: requiresecuritysignature
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
+    name: RequireSecuritySignature
     data: 1
     type: dword
     state: present
@@ -27,8 +27,8 @@
   when:
     - w2025cis_rule_2_3_9_3_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-    name: enableforcedlogoff
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
+    name: EnableForcedLogoff
     data: 1
     type: dword
     state: present
@@ -42,7 +42,7 @@
     - w2025cis_rule_2_3_9_4_enabled
     - _w2025cis_standalone_or_member_server
   ansible.windows.win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
     name: SMBServerNameHardeningLevel
     data: "{{ _w2025cis_smb_spn_target_name_validation_level_value }}"
     type: dword

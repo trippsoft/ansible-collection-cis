@@ -7,7 +7,7 @@
     - w2025cis_rule_18_9_49_5_1_enabled
     - w2025cis_rule_18_9_49_5_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Scripteddiagnosticsprovider\Policy
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Policy
     name: DisableQueryRemoteServer
     data: 0
     type: dword
@@ -18,7 +18,7 @@
     - w2025cis_rule_18_9_49_11_1_enabled
     - w2025cis_rule_18_9_49_11_1_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Wdi\{9C5A40Da-B965-4Fc3-8781-88Dd50A6299D}
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WDI\{9c5a40da-b965-4fc3-8781-88dd50a6299d}
     name: ScenarioExecutionEnabled
     data: 0
     type: dword

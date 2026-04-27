@@ -4,7 +4,7 @@
   when:
     - w2025cis_rule_18_9_20_1_1_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Printers
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers
     name: DisableWebPnPDownload
     data: 1
     type: dword
@@ -15,7 +15,7 @@
     - w2025cis_rule_18_9_20_1_2_enabled
     - w2025cis_rule_18_9_20_1_2_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Tabletpc
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC
     name: PreventHandwritingDataSharing
     data: 1
     type: dword
@@ -26,7 +26,7 @@
     - w2025cis_rule_18_9_20_1_3_enabled
     - w2025cis_rule_18_9_20_1_3_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Handwritingerrorreports
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports
     name: PreventHandwritingErrorReports
     data: 1
     type: dword
@@ -39,7 +39,7 @@
     - w2025cis_rule_18_9_20_1_4_enabled
     - w2025cis_rule_18_9_20_1_4_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Internet Connection Wizard
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Connection Wizard
     name: ExitOnMSICW
     data: 1
     type: dword
@@ -51,7 +51,7 @@
   when:
     - w2025cis_rule_18_9_20_1_5_enabled
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
     name: NoWebServices
     data: 1
     type: dword
@@ -62,7 +62,7 @@
     - w2025cis_rule_18_9_20_1_6_enabled
     - w2025cis_rule_18_9_20_1_6_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows Nt\Printers
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers
     name: DisableHTTPPrinting
     data: 1
     type: dword
@@ -75,7 +75,7 @@
     - w2025cis_rule_18_9_20_1_7_enabled
     - w2025cis_rule_18_9_20_1_7_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Windows\Registration Wizard Control
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Registration Wizard Control
     name: NoRegistration
     data: 1
     type: dword
@@ -86,7 +86,7 @@
     - w2025cis_rule_18_9_20_1_8_enabled
     - w2025cis_rule_18_9_20_1_8_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Searchcompanion
+    path: HKLM:\SOFTWARE\Policies\Microsoft\SearchCompanion
     name: DisableContentFileUpdates
     data: 1
     type: dword
@@ -97,7 +97,7 @@
     - w2025cis_rule_18_9_20_1_9_enabled
     - w2025cis_rule_18_9_20_1_9_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
     name: NoOnlinePrintsWizard
     data: 1
     type: dword
@@ -108,7 +108,7 @@
     - w2025cis_rule_18_9_20_1_10_enabled
     - w2025cis_rule_18_9_20_1_10_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
     name: NoPublishingWizard
     data: 1
     type: dword
@@ -121,7 +121,7 @@
     - w2025cis_rule_18_9_20_1_11_enabled
     - w2025cis_rule_18_9_20_1_11_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Messenger\Client
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Messenger\Client
     name: CEIP
     data: 2
     type: dword
@@ -132,7 +132,7 @@
     - w2025cis_rule_18_9_20_1_12_enabled
     - w2025cis_rule_18_9_20_1_12_force or _w2025cis_level2
   ansible.windows.win_regedit:
-    path: HKLM:\Software\Policies\Microsoft\Sqmclient\Windows
+    path: HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows
     name: CEIPEnable
     data: 0
     type: dword
@@ -146,7 +146,7 @@
     - name: >-
         18.9.20.1.13 | L2 | Ensure 'Turn off Windows Error Reporting' is set to 'Enabled' | Windows Error Reporting
       ansible.windows.win_regedit:
-        path: HKLM:\Software\Policies\Microsoft\Windows\Windows Error Reporting
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting
         name: Disabled
         data: 1
         type: dword
