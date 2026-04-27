@@ -15,6 +15,14 @@ name: Generate Role Docs
       - roles/rhel8/README.md
       - roles/rhel8/meta/argument_specs.yml
       - roles/rhel8/meta/main.yml
+      - roles/windows11/.aar_doc.yml
+      - roles/windows11/README.md
+      - roles/windows11/meta/argument_specs.yml
+      - roles/windows11/meta/main.yml
+      - roles/windows11_standalone/.aar_doc.yml
+      - roles/windows11_standalone/README.md
+      - roles/windows11_standalone/meta/argument_specs.yml
+      - roles/windows11_standalone/meta/main.yml
       - roles/windows2025/.aar_doc.yml
       - roles/windows2025/README.md
       - roles/windows2025/meta/argument_specs.yml
@@ -48,11 +56,29 @@ jobs:
     with:
       working_directory: 'trippsc2.cis'
       role_name: 'rhel8'
+  docs_windows11:
+    name: Generate windows11 role documentation
+    permissions:
+      contents: write
+    needs: docs_rhel8
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.cis'
+      role_name: 'windows11'
+  docs_windows11_standalone:
+    name: Generate windows11_standalone role documentation
+    permissions:
+      contents: write
+    needs: docs_windows11
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.cis'
+      role_name: 'windows11_standalone'
   docs_windows2025:
     name: Generate windows2025 role documentation
     permissions:
       contents: write
-    needs: docs_rhel8
+    needs: docs_windows11_standalone
     uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
     with:
       working_directory: 'trippsc2.cis'

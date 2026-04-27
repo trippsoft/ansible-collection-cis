@@ -1,0 +1,60 @@
+---
+name: Molecule - windows11 role
+'on':
+  workflow_call: {}
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+      - roles/windows11/**
+      - '!roles/windows11/.aar_doc.yml'
+      - '!roles/windows11/README.md'
+      - '!roles/windows11/meta/argument_specs.yml'
+      - '!roles/windows11/meta/main.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+      - roles/windows11/**
+      - '!roles/windows11/.aar_doc.yml'
+      - '!roles/windows11/README.md'
+      - '!roles/windows11/meta/argument_specs.yml'
+      - '!roles/windows11/meta/main.yml'
+defaults:
+  run:
+    working-directory: 'trippsc2.cis'
+jobs:
+  molecule:
+    name: Run Molecule tests
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    strategy:
+      fail-fast: false
+      matrix:
+        box:
+          - w11_25h2_base
+          - w11_24h2_base
+          - w11_23h2_base
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: 'trippsc2.cis'
+      - name: Run Molecule tests
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          cd ./roles/windows11
+          molecule test
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          deactivate
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: '1'
+          MOLECULE_BOX: ${{ matrix.box }}
