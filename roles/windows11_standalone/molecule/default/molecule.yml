@@ -1,0 +1,135 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  cachier: machine
+  parallel: true
+platforms:
+  - name: l2bitlocker
+    box: jtarpley/${MOLECULE_BOX:-w11_25h2_base}
+    memory: 2048
+    cpus: 2
+    provider_options:
+      default_prefix: cis_w11_
+    groups:
+      - subjects
+      - level2
+      - bitlocker
+      - windows
+  - name: l2
+    box: jtarpley/${MOLECULE_BOX:-w11_25h2_base}
+    memory: 2048
+    cpus: 2
+    provider_options:
+      default_prefix: cis_w11_
+    groups:
+      - subjects
+      - level2
+      - no_bitlocker
+      - windows
+  - name: l1bitlocker
+    box: jtarpley/${MOLECULE_BOX:-w11_25h2_base}
+    memory: 2048
+    cpus: 2
+    provider_options:
+      default_prefix: cis_w11_
+    groups:
+      - subjects
+      - level1
+      - bitlocker
+      - windows
+  - name: l1
+    box: jtarpley/${MOLECULE_BOX:-w11_25h2_base}
+    memory: 2048
+    cpus: 2
+    provider_options:
+      default_prefix: cis_w11_
+    groups:
+      - subjects
+      - level1
+      - no_bitlocker
+      - windows
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      subjects:
+        w11cis_skip_reboot: false
+        w11cis_rule_5_12_enabled: false
+        w11cis_admin_username: localadmin
+        w11cis_guest_username: localguest
+        w11cis_login_message_text: |
+            You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+            By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+            -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+            -At any time, the USG may inspect and seize data stored on this IS.
+
+            -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+            -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+            -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+
+        w11cis_login_message_title: DoD Notice and Consent Banner
+      level1:
+        w11cis_level: 1
+      level2:
+        w11cis_level: 2
+      not_bitlocker:
+        w11cis_bitlocker: false
+      bitlocker:
+        w11cis_bitlocker: true
+      windows:
+        ansible_shell_type: powershell
+        ansible_become_method: runas
+        ansible_become_user: SYSTEM
+        ansible_password: vagrant
+    host_vars:
+      l2bitlocker:
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
+      l2:
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
+      l1bitlocker:
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
+      l1:
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
+verifier:
+  name: ansible

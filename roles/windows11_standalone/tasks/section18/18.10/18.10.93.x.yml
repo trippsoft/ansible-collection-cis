@@ -1,0 +1,10 @@
+---
+- name: "18.10.93.2.1 | L1 | Ensure 'Prevent users from modifying settings' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_93_2_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection
+    name: DisallowExploitProtectionOverride
+    data: 1
+    type: dword
+    state: present

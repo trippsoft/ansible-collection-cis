@@ -1,0 +1,24 @@
+---
+- name: "18.10.6.1 | L1 | Ensure 'Allow Microsoft accounts to be optional' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_6_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: MSAOptional
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.10.6.2 | L2 |
+    Ensure 'Block launching Universal Windows apps with Windows Runtime API access from hosted content.'
+    is set to 'Enabled'
+  when:
+    - w11cis_rule_18_10_6_2_enabled
+    - w11cis_rule_18_10_6_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: BlockHostedAppAccessWinRT
+    data: 1
+    type: dword
+    state: present

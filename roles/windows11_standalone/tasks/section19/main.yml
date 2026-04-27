@@ -1,0 +1,14 @@
+---
+- name: Get user registry hives
+  ansible.windows.win_reg_stat:
+    path: HKU:\
+  register: _w11cis_user_hives
+
+- name: Execute the 19.5.x tasks
+  ansible.builtin.import_tasks: section19/19.5.x.yml
+
+- name: Execute the 19.6.x tasks
+  ansible.builtin.import_tasks: section19/19.6.x.yml
+
+- name: Execute the 19.7.x tasks
+  ansible.builtin.import_tasks: section19/19.7.x.yml

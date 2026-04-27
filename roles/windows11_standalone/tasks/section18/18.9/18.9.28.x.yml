@@ -1,0 +1,13 @@
+---
+- name: >-
+    18.9.28.1 | L2 |
+    Ensure 'Disallow copying of user input methods to the system account for sign-in' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_9_28_1_enabled
+    - w11cis_rule_18_9_28_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International
+    name: BlockUserInputMethodsForSignIn
+    data: 1
+    type: dword
+    state: present

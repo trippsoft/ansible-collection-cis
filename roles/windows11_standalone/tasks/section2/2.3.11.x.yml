@@ -1,0 +1,143 @@
+---
+- name: >-
+    2.3.11.1 | L1 | Ensure 'Network security: Allow Local System to use computer identity for NTLM' is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_11_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: UseMachineId
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.2 | L1 | Ensure 'Network security: Allow LocalSystem NULL session fallback' is set to 'Disabled'
+  when:
+    - w11cis_rule_2_3_11_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: AllowNullSessionFallback
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.3 | L1 |
+    Ensure 'Network Security: Allow PKU2U authentication requests to this computer to use online identities'
+    is set to 'Disabled'
+  when:
+    - w11cis_rule_2_3_11_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\Pku2U
+    name: AllowOnlineID
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.4 | L1 |
+    Ensure 'Network security: Configure encryption types allowed for Kerberos'
+    is set to 'AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types'
+  when:
+    - w11cis_rule_2_3_11_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
+    name: SupportedEncryptionTypes
+    data: 2147483640
+    type: dword
+    state: present
+
+- name: "2.3.11.5 | L1 | Ensure 'Network security: Force logoff when logon hours expire' is set to 'Enabled'"
+  when:
+    - w11cis_rule_2_3_11_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
+    name: EnableForcedLogOff
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.6 | L1 |
+    Ensure 'Network security: LAN Manager authentication level' is set to 'Send NTLMv2 response only. Refuse LM & NTLM'
+  when:
+    - w11cis_rule_2_3_11_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: LmCompatibilityLevel
+    data: 5
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.7 | L1 |
+    Ensure 'Network security: LDAP client encryption requirements' is set to 'Negotiate sealing' or higher
+  when:
+    - w11cis_rule_2_3_11_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LDAP
+    name: LDAPClientConfidentiality
+    data: "{{ _w11cis_ldap_client_encryption_requirements_value }}"
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.8 | L1 | Ensure 'Network security: LDAP client signing requirements' is set to 'Negotiate signing' or higher
+  when:
+    - w11cis_rule_2_3_11_8_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LDAP
+    name: LDAPClientIntegrity
+    data: "{{ _w11cis_ldap_client_signing_requirements_value }}"
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.9 | L1 |
+    Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) clients'
+    is set to 'Require NTLMv2 session security, Require 128-bit encryption'
+  when:
+    - w11cis_rule_2_3_11_9_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: NTLMMinClientSec
+    data: 537395200
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.10 | L1 |
+    Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) servers'
+    is set to 'Require NTLMv2 session security, Require 128-bit encryption'
+  when:
+    - w11cis_rule_2_3_11_10_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: NTLMMinServerSec
+    data: 537395200
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.11 | L1 |
+    Ensure 'Network security: Restrict NTLM: Audit Incoming NTLM Traffic' is set to 'Enable auditing for all accounts'
+  when:
+    - w11cis_rule_2_3_11_11_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: AuditReceivingNTLMTraffic
+    data: 2
+    type: dword
+    state: present
+
+- name: >-
+    2.3.11.12 | L1 |
+    Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher
+  when:
+    - w11cis_rule_2_3_11_12_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: RestrictSendingNTLMTraffic
+    data: "{{ _w11cis_outgoing_ntlm_traffic_requirement_value }}"
+    type: dword
+    state: present

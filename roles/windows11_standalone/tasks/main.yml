@@ -1,0 +1,27 @@
+---
+- name: Validate
+  ansible.builtin.import_tasks: validate.yml
+
+- name: Execute the section 1 tasks
+  ansible.builtin.import_tasks: section1/main.yml
+
+- name: Execute the section 2 tasks
+  ansible.builtin.import_tasks: section2/main.yml
+
+- name: Execute the section 5 tasks
+  ansible.builtin.import_tasks: section5/main.yml
+
+- name: Execute the section 9 tasks
+  ansible.builtin.import_tasks: section9/main.yml
+
+- name: Execute the section 17 tasks
+  ansible.builtin.import_tasks: section17/main.yml
+
+- name: Execute the section 18 tasks
+  ansible.builtin.import_tasks: section18/main.yml
+
+- name: Execute the section 19 tasks
+  ansible.builtin.import_tasks: section19/main.yml
+
+- name: Run Handlers
+  ansible.builtin.meta: flush_handlers

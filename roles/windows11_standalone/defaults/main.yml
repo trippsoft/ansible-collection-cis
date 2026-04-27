@@ -1,0 +1,1239 @@
+---
+w11cis_skip_reboot: true
+
+w11cis_level: 2
+
+w11cis_bitlocker: true
+
+# 1 - Account Policies
+
+# 1.1 - Password Policy
+
+w11cis_rule_1_1_1_enabled: true
+w11cis_rule_1_1_2_enabled: true
+w11cis_rule_1_1_3_enabled: true
+w11cis_rule_1_1_4_enabled: true
+w11cis_rule_1_1_5_enabled: true
+w11cis_rule_1_1_6_enabled: true
+w11cis_rule_1_1_7_enabled: true
+
+w11cis_password_history_size: 24
+w11cis_maximum_password_age: 365
+w11cis_minimum_password_age: 1
+w11cis_minimum_password_length: 14
+
+# 1.2 - Account Lockout Policy
+
+w11cis_rule_1_2_1_enabled: true
+w11cis_rule_1_2_2_enabled: true
+w11cis_rule_1_2_3_enabled: true
+w11cis_rule_1_2_4_enabled: true
+
+w11cis_lockout_duration_in_minutes: 15
+w11cis_lockout_bad_logon_count: 5
+w11cis_lockout_reset_time_in_minutes: 15
+
+# 2 - Local Policies
+
+# 2.2 - User Rights Assignment
+
+w11cis_rule_2_2_1_enabled: true
+w11cis_rule_2_2_2_enabled: true
+w11cis_rule_2_2_3_enabled: true
+w11cis_rule_2_2_4_enabled: true
+w11cis_rule_2_2_5_enabled: true
+w11cis_rule_2_2_6_enabled: true
+w11cis_rule_2_2_7_enabled: true
+w11cis_rule_2_2_8_enabled: true
+w11cis_rule_2_2_9_enabled: true
+w11cis_rule_2_2_10_enabled: true
+w11cis_rule_2_2_11_enabled: true
+w11cis_rule_2_2_12_enabled: true
+w11cis_rule_2_2_13_enabled: true
+w11cis_rule_2_2_14_enabled: true
+w11cis_rule_2_2_15_enabled: true
+w11cis_rule_2_2_16_enabled: true
+w11cis_rule_2_2_17_enabled: true
+w11cis_rule_2_2_18_enabled: true
+w11cis_rule_2_2_19_enabled: true
+w11cis_rule_2_2_20_enabled: true
+w11cis_rule_2_2_21_enabled: true
+w11cis_rule_2_2_22_enabled: true
+w11cis_rule_2_2_23_enabled: true
+w11cis_rule_2_2_24_enabled: true
+w11cis_rule_2_2_25_enabled: true
+w11cis_rule_2_2_26_enabled: true
+w11cis_rule_2_2_27_enabled: true
+w11cis_rule_2_2_28_enabled: true
+w11cis_rule_2_2_29_enabled: true
+w11cis_rule_2_2_30_enabled: true
+w11cis_rule_2_2_31_enabled: true
+w11cis_rule_2_2_32_enabled: true
+w11cis_rule_2_2_33_enabled: true
+w11cis_rule_2_2_34_enabled: true
+w11cis_rule_2_2_35_enabled: true
+w11cis_rule_2_2_36_enabled: true
+w11cis_rule_2_2_37_enabled: true
+w11cis_rule_2_2_38_enabled: true
+
+w11cis_rule_2_2_27_force: false
+w11cis_rule_2_2_28_force: false
+
+w11cis_access_this_computer_from_the_network_additional_users: []
+w11cis_adjust_memory_quotas_for_a_process_additional_users: []
+w11cis_create_global_objects_additional_users: []
+w11cis_debug_programs_additional_users: []
+w11cis_generate_security_audits_additional_users: []
+w11cis_impersonate_a_client_after_authentication_additional_users: []
+w11cis_perform_volume_maintenance_tasks_additional_users: []
+w11cis_replace_a_process_level_token_additional_users: []
+
+# 2.3 - Security Options
+
+# 2.3.1 - Accounts
+
+w11cis_rule_2_3_1_1_enabled: true
+w11cis_rule_2_3_1_2_enabled: true
+w11cis_rule_2_3_1_3_enabled: true
+w11cis_rule_2_3_1_4_enabled: true
+
+# 2.3.2 - Audit
+
+w11cis_rule_2_3_2_1_enabled: true
+w11cis_rule_2_3_2_2_enabled: true
+
+# 2.3.4 - Devices
+
+w11cis_rule_2_3_4_1_enabled: true
+
+w11cis_rule_2_3_4_1_force: false
+
+# 2.3.7 - Interactive logon
+
+w11cis_rule_2_3_7_1_enabled: true
+w11cis_rule_2_3_7_2_enabled: true
+w11cis_rule_2_3_7_3_enabled: true
+w11cis_rule_2_3_7_4_enabled: true
+w11cis_rule_2_3_7_5_enabled: true
+w11cis_rule_2_3_7_6_enabled: true
+w11cis_rule_2_3_7_7_enabled: true
+
+w11cis_rule_2_3_7_1_force: false
+
+w11cis_inactivity_timeout_in_seconds: 900
+
+w11cis_cached_logons_count: 4
+w11cis_password_expiry_warning_in_days: 14
+w11cis_smart_card_removal_behavior: lock
+
+# 2.3.8 - Microsoft network client
+
+w11cis_rule_2_3_8_1_enabled: true
+w11cis_rule_2_3_8_2_enabled: true
+
+# 2.3.9 - Microsoft network server
+
+w11cis_rule_2_3_9_1_enabled: true
+w11cis_rule_2_3_9_2_enabled: true
+w11cis_rule_2_3_9_3_enabled: true
+w11cis_rule_2_3_9_4_enabled: true
+
+w11cis_idle_smb_timeout_in_minutes: 15
+w11cis_smb_spn_target_name_validation_level: accept
+
+# 2.3.10 - Network access
+
+w11cis_rule_2_3_10_1_enabled: true
+w11cis_rule_2_3_10_2_enabled: true
+w11cis_rule_2_3_10_3_enabled: true
+w11cis_rule_2_3_10_4_enabled: true
+w11cis_rule_2_3_10_5_enabled: true
+w11cis_rule_2_3_10_6_enabled: true
+w11cis_rule_2_3_10_7_enabled: true
+w11cis_rule_2_3_10_8_enabled: true
+w11cis_rule_2_3_10_9_enabled: true
+w11cis_rule_2_3_10_10_enabled: true
+w11cis_rule_2_3_10_11_enabled: true
+w11cis_rule_2_3_10_12_enabled: true
+
+w11cis_null_session_pipes: ''
+
+w11cis_remote_registry_paths:
+  - System\CurrentControlSet\Control\Print\Printers
+  - System\CurrentControlSet\Services\Eventlog
+  - Software\Microsoft\OLAP Server
+  - Software\Microsoft\Windows NT\CurrentVersion\Print
+  - Software\Microsoft\Windows NT\CurrentVersion\Windows
+  - System\CurrentControlSet\Control\ContentIndex
+  - System\CurrentControlSet\Control\Terminal Server
+  - System\CurrentControlSet\Control\Terminal Server\UserConfig
+  - System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration
+  - Software\Microsoft\Windows NT\CurrentVersion\Perflib
+  - System\CurrentControlSet\Services\SysmonLog
+
+# 2.3.11 - Network security
+
+w11cis_rule_2_3_11_1_enabled: true
+w11cis_rule_2_3_11_2_enabled: true
+w11cis_rule_2_3_11_3_enabled: true
+w11cis_rule_2_3_11_4_enabled: true
+w11cis_rule_2_3_11_5_enabled: true
+w11cis_rule_2_3_11_6_enabled: true
+w11cis_rule_2_3_11_7_enabled: true
+w11cis_rule_2_3_11_8_enabled: true
+w11cis_rule_2_3_11_9_enabled: true
+w11cis_rule_2_3_11_10_enabled: true
+w11cis_rule_2_3_11_11_enabled: true
+w11cis_rule_2_3_11_12_enabled: true
+
+w11cis_ldap_client_encryption_requirements: negotiate
+w11cis_ldap_client_signing_requirements: negotiate
+w11cis_outgoing_ntlm_traffic_requirement: audit_all
+
+# 2.3.14 - System cryptography
+
+w11cis_rule_2_3_14_1_enabled: true
+
+w11cis_rule_2_3_14_1_force: false
+
+w11cis_private_key_prompt: prompt_first_use
+
+# 2.3.15 - System objects
+
+w11cis_rule_2_3_15_1_enabled: true
+w11cis_rule_2_3_15_2_enabled: true
+
+# 2.3.17 - User Account Control
+
+w11cis_rule_2_3_17_1_enabled: true
+w11cis_rule_2_3_17_2_enabled: true
+w11cis_rule_2_3_17_3_enabled: true
+w11cis_rule_2_3_17_4_enabled: true
+w11cis_rule_2_3_17_5_enabled: true
+w11cis_rule_2_3_17_6_enabled: true
+w11cis_rule_2_3_17_7_enabled: true
+w11cis_rule_2_3_17_8_enabled: true
+
+w11cis_admin_uac_elevation_behavior: prompt_for_consent
+
+# 5 - System Services
+
+w11cis_rule_5_1_enabled: true
+w11cis_rule_5_2_enabled: true
+w11cis_rule_5_3_enabled: true
+w11cis_rule_5_4_enabled: true
+w11cis_rule_5_5_enabled: true
+w11cis_rule_5_6_enabled: true
+w11cis_rule_5_7_enabled: true
+w11cis_rule_5_8_enabled: true
+w11cis_rule_5_9_enabled: true
+w11cis_rule_5_10_enabled: true
+w11cis_rule_5_11_enabled: true
+w11cis_rule_5_12_enabled: true
+w11cis_rule_5_13_enabled: true
+w11cis_rule_5_14_enabled: true
+w11cis_rule_5_15_enabled: true
+w11cis_rule_5_16_enabled: true
+w11cis_rule_5_17_enabled: true
+w11cis_rule_5_18_enabled: true
+w11cis_rule_5_19_enabled: true
+w11cis_rule_5_20_enabled: true
+w11cis_rule_5_21_enabled: true
+w11cis_rule_5_22_enabled: true
+w11cis_rule_5_23_enabled: true
+w11cis_rule_5_24_enabled: true
+w11cis_rule_5_25_enabled: true
+w11cis_rule_5_26_enabled: true
+w11cis_rule_5_27_enabled: true
+w11cis_rule_5_28_enabled: true
+w11cis_rule_5_29_enabled: true
+w11cis_rule_5_30_enabled: true
+w11cis_rule_5_31_enabled: true
+w11cis_rule_5_32_enabled: true
+w11cis_rule_5_33_enabled: true
+w11cis_rule_5_34_enabled: true
+w11cis_rule_5_35_enabled: true
+w11cis_rule_5_36_enabled: true
+w11cis_rule_5_37_enabled: true
+w11cis_rule_5_38_enabled: true
+w11cis_rule_5_39_enabled: true
+w11cis_rule_5_40_enabled: true
+w11cis_rule_5_41_enabled: true
+w11cis_rule_5_42_enabled: true
+w11cis_rule_5_43_enabled: true
+w11cis_rule_5_44_enabled: true
+
+w11cis_rule_5_1_force: false
+w11cis_rule_5_2_force: false
+w11cis_rule_5_4_force: false
+w11cis_rule_5_5_force: false
+w11cis_rule_5_6_force: false
+w11cis_rule_5_9_force: false
+w11cis_rule_5_11_force: false
+w11cis_rule_5_13_force: false
+w11cis_rule_5_14_force: false
+w11cis_rule_5_15_force: false
+w11cis_rule_5_16_force: false
+w11cis_rule_5_17_force: false
+w11cis_rule_5_18_force: false
+w11cis_rule_5_19_force: false
+w11cis_rule_5_20_force: false
+w11cis_rule_5_21_force: false
+w11cis_rule_5_22_force: false
+w11cis_rule_5_24_force: false
+w11cis_rule_5_26_force: false
+w11cis_rule_5_28_force: false
+w11cis_rule_5_33_force: false
+w11cis_rule_5_34_force: false
+w11cis_rule_5_37_force: false
+w11cis_rule_5_38_force: false
+w11cis_rule_5_39_force: false
+
+# 9 - Windows Defender Firewall with Advanced Security (formerly Windows Firewall with Advanced Security)
+
+# 9.2 - Private Profile
+
+w11cis_rule_9_2_1_enabled: true
+w11cis_rule_9_2_2_enabled: true
+w11cis_rule_9_2_3_enabled: true
+w11cis_rule_9_2_4_enabled: true
+w11cis_rule_9_2_5_enabled: true
+w11cis_rule_9_2_6_enabled: true
+w11cis_rule_9_2_7_enabled: true
+
+w11cis_private_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\privatefw.log'
+w11cis_private_firewall_log_size_in_kb: 16384
+
+# 9.3 - Public Profile
+
+w11cis_rule_9_3_1_enabled: true
+w11cis_rule_9_3_2_enabled: true
+w11cis_rule_9_3_3_enabled: true
+w11cis_rule_9_3_4_enabled: true
+w11cis_rule_9_3_5_enabled: true
+w11cis_rule_9_3_6_enabled: true
+w11cis_rule_9_3_7_enabled: true
+
+w11cis_public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
+w11cis_public_firewall_log_size_in_kb: 16384
+
+# 17 - Advanced Audit Policy Configuration
+
+# 17.1 - Account Logon
+
+w11cis_rule_17_1_1_enabled: true
+
+# 17.2 - Account Management
+
+w11cis_rule_17_2_1_enabled: true
+w11cis_rule_17_2_2_enabled: true
+w11cis_rule_17_2_3_enabled: true
+
+# 17.3 - Detailed Tracking
+
+w11cis_rule_17_3_1_enabled: true
+w11cis_rule_17_3_2_enabled: true
+
+# 17.5 - Logon/Logoff
+
+w11cis_rule_17_5_1_enabled: true
+w11cis_rule_17_5_2_enabled: true
+w11cis_rule_17_5_3_enabled: true
+w11cis_rule_17_5_4_enabled: true
+w11cis_rule_17_5_5_enabled: true
+w11cis_rule_17_5_6_enabled: true
+
+# 17.6 - Object Access
+
+w11cis_rule_17_6_1_enabled: true
+w11cis_rule_17_6_2_enabled: true
+w11cis_rule_17_6_3_enabled: true
+w11cis_rule_17_6_4_enabled: true
+
+# 17.7 - Policy Change
+
+w11cis_rule_17_7_1_enabled: true
+w11cis_rule_17_7_2_enabled: true
+w11cis_rule_17_7_3_enabled: true
+w11cis_rule_17_7_4_enabled: true
+w11cis_rule_17_7_5_enabled: true
+
+# 17.8 - Privilege Use
+
+w11cis_rule_17_8_1_enabled: true
+
+# 17.9 - System
+
+w11cis_rule_17_9_1_enabled: true
+w11cis_rule_17_9_2_enabled: true
+w11cis_rule_17_9_3_enabled: true
+w11cis_rule_17_9_4_enabled: true
+w11cis_rule_17_9_5_enabled: true
+
+# 18 - Administrative Templates (Computer)
+
+# 18.1 - Control Panel
+
+# 18.1.1 - Personalization
+
+w11cis_rule_18_1_1_1_enabled: true
+w11cis_rule_18_1_1_2_enabled: true
+
+# 18.1.2 - Regional and Language Options
+
+w11cis_rule_18_1_2_2_enabled: true
+w11cis_rule_18_1_3_enabled: true
+
+w11cis_rule_18_1_3_force: false
+
+# 18.4 - MS Security Guide
+
+w11cis_rule_18_4_1_enabled: true
+w11cis_rule_18_4_2_enabled: true
+w11cis_rule_18_4_3_enabled: true
+w11cis_rule_18_4_4_enabled: true
+w11cis_rule_18_4_5_enabled: true
+w11cis_rule_18_4_6_enabled: true
+
+# 18.5 - MSS (Legacy)
+
+w11cis_rule_18_5_1_enabled: true
+w11cis_rule_18_5_2_enabled: true
+w11cis_rule_18_5_3_enabled: true
+w11cis_rule_18_5_4_enabled: true
+w11cis_rule_18_5_5_enabled: true
+w11cis_rule_18_5_6_enabled: true
+w11cis_rule_18_5_7_enabled: true
+w11cis_rule_18_5_8_enabled: true
+w11cis_rule_18_5_9_enabled: true
+w11cis_rule_18_5_10_enabled: true
+w11cis_rule_18_5_11_enabled: true
+w11cis_rule_18_5_12_enabled: true
+
+w11cis_rule_18_5_4_force: false
+w11cis_rule_18_5_6_force: false
+w11cis_rule_18_5_8_force: false
+w11cis_rule_18_5_10_force: false
+w11cis_rule_18_5_11_force: false
+
+w11cis_security_log_warning_level: 90
+
+# 18.6 - Network
+
+# 18.6.4 - DNS Client
+
+w11cis_rule_18_6_4_1_enabled: true
+w11cis_rule_18_6_4_2_enabled: true
+
+w11cis_rule_18_6_4_2_force: false
+
+w11cis_netbios_dns_resolution_behavior: disabled_on_public_networks
+
+# 18.6.5 - Fonts
+
+w11cis_rule_18_6_5_1_enabled: true
+
+w11cis_rule_18_6_5_1_force: false
+
+# 18.6.7 - Lanman Server
+
+w11cis_rule_18_6_7_1_enabled: true
+w11cis_rule_18_6_7_2_enabled: true
+w11cis_rule_18_6_7_3_enabled: true
+w11cis_rule_18_6_7_4_enabled: true
+w11cis_rule_18_6_7_5_enabled: true
+w11cis_rule_18_6_7_6_enabled: true
+w11cis_rule_18_6_7_7_enabled: true
+
+w11cis_smb_authentication_rate_limiter_delay_in_ms: 2000
+
+# 18.6.8 - Lanman Workstation
+
+w11cis_rule_18_6_8_1_enabled: true
+w11cis_rule_18_6_8_2_enabled: true
+w11cis_rule_18_6_8_3_enabled: true
+w11cis_rule_18_6_8_4_enabled: true
+w11cis_rule_18_6_8_5_enabled: true
+w11cis_rule_18_6_8_6_enabled: true
+w11cis_rule_18_6_8_7_enabled: true
+
+# 18.6.9 - Link-Layer Topology Discovery
+
+w11cis_rule_18_6_9_1_enabled: true
+w11cis_rule_18_6_9_2_enabled: true
+
+w11cis_rule_18_6_9_1_force: false
+w11cis_rule_18_6_9_2_force: false
+
+# 18.6.10 - Microsoft Peer-to-Peer Networking Services
+
+w11cis_rule_18_6_10_2_enabled: true
+
+w11cis_rule_18_6_10_2_force: false
+
+# 18.6.11 - Network Connections
+
+w11cis_rule_18_6_11_2_enabled: true
+w11cis_rule_18_6_11_3_enabled: true
+
+# 18.6.14 - Network Provider
+
+w11cis_rule_18_6_14_1_enabled: true
+
+# 18.6.19 - TCPIP Settings
+
+w11cis_rule_18_6_19_2_1_enabled: true
+
+w11cis_rule_18_6_19_2_1_force: false
+
+# 18.6.20 - Windows Connect Now
+
+w11cis_rule_18_6_20_1_enabled: true
+w11cis_rule_18_6_20_2_enabled: true
+
+w11cis_rule_18_6_20_1_force: false
+w11cis_rule_18_6_20_2_force: false
+
+# 18.6.21 - Windows Connection Manager
+
+w11cis_rule_18_6_21_1_enabled: true
+w11cis_rule_18_6_21_2_enabled: true
+
+w11cis_rule_18_6_21_2_force: false
+
+# 18.6.23 - WLAN Service
+
+# 18.6.23.2 - WLAN Settings
+
+w11cis_rule_18_6_23_2_1_enabled: true
+
+# 18.7 - Printers
+
+w11cis_rule_18_7_1_enabled: true
+w11cis_rule_18_7_2_enabled: true
+w11cis_rule_18_7_3_enabled: true
+w11cis_rule_18_7_4_enabled: true
+w11cis_rule_18_7_5_enabled: true
+w11cis_rule_18_7_6_enabled: true
+w11cis_rule_18_7_7_enabled: true
+w11cis_rule_18_7_8_enabled: true
+w11cis_rule_18_7_9_enabled: true
+w11cis_rule_18_7_10_enabled: true
+w11cis_rule_18_7_11_enabled: true
+w11cis_rule_18_7_12_enabled: true
+w11cis_rule_18_7_13_enabled: true
+w11cis_rule_18_7_14_enabled: true
+w11cis_rule_18_7_15_enabled: true
+w11cis_rule_18_7_16_enabled: true
+w11cis_rule_18_7_17_enabled: true
+w11cis_rule_18_7_18_enabled: true
+
+w11cis_rule_18_7_1_force: false
+w11cis_rule_18_7_9_force: false
+w11cis_rule_18_7_14_force: false
+w11cis_rule_18_7_15_force: false
+w11cis_rule_18_7_16_force: false
+w11cis_rule_18_7_17_force: false
+w11cis_rule_18_7_18_force: false
+
+w11cis_rpc_listener_authentication_protocol: negotiate
+
+# 18.8 - Start Menu and Taskbar
+
+# 18.8.1 - Notifications
+
+w11cis_rule_18_8_1_1_enabled: true
+w11cis_rule_18_8_1_2_enabled: true
+
+w11cis_rule_18_8_1_1_force: false
+w11cis_rule_18_8_1_2_force: false
+
+# 18.9 - System
+
+# 18.9.3 - Audit Process Creation
+
+w11cis_rule_18_9_3_1_enabled: true
+
+# 18.9.4 - Credential Delegation
+
+w11cis_rule_18_9_4_1_enabled: true
+w11cis_rule_18_9_4_2_enabled: true
+
+# 18.9.5 - Device Guard
+
+w11cis_rule_18_9_5_1_enabled: true
+w11cis_rule_18_9_5_2_enabled: true
+w11cis_rule_18_9_5_3_enabled: true
+w11cis_rule_18_9_5_4_enabled: true
+w11cis_rule_18_9_5_5_enabled: true
+w11cis_rule_18_9_5_6_enabled: true
+w11cis_rule_18_9_5_7_enabled: true
+
+w11cis_vbs_platform_security_level: secure_boot
+
+# 18.9.7 - Driver Installation
+
+# 18.9.7.1 - Device Installation Restrictions
+
+w11cis_rule_18_9_7_1_1_enabled: true
+w11cis_rule_18_9_7_1_2_enabled: true
+w11cis_rule_18_9_7_1_3_enabled: true
+
+w11cis_rule_18_9_7_1_1_force: false
+w11cis_rule_18_9_7_1_2_force: false
+w11cis_rule_18_9_7_1_3_force: false
+
+w11cis_rule_18_9_7_2_enabled: true
+
+# 18.9.13 - Early Launch Antimalware
+
+w11cis_rule_18_9_13_1_enabled: true
+
+# 18.9.17 - Filesystem
+
+w11cis_rule_18_9_17_1_enabled: true
+
+# 18.9.19 - Group Policy
+
+w11cis_rule_18_9_19_2_enabled: true
+
+# 18.9.20 - Internet Communication Management
+
+w11cis_rule_18_9_20_1_1_enabled: true
+w11cis_rule_18_9_20_1_2_enabled: true
+w11cis_rule_18_9_20_1_3_enabled: true
+w11cis_rule_18_9_20_1_4_enabled: true
+w11cis_rule_18_9_20_1_5_enabled: true
+w11cis_rule_18_9_20_1_6_enabled: true
+w11cis_rule_18_9_20_1_7_enabled: true
+w11cis_rule_18_9_20_1_8_enabled: true
+w11cis_rule_18_9_20_1_9_enabled: true
+w11cis_rule_18_9_20_1_10_enabled: true
+w11cis_rule_18_9_20_1_11_enabled: true
+w11cis_rule_18_9_20_1_12_enabled: true
+w11cis_rule_18_9_20_1_13_enabled: true
+w11cis_rule_18_9_20_1_14_enabled: true
+
+w11cis_rule_18_9_20_1_1_force: false
+w11cis_rule_18_9_20_1_3_force: false
+w11cis_rule_18_9_20_1_4_force: false
+w11cis_rule_18_9_20_1_5_force: false
+w11cis_rule_18_9_20_1_7_force: false
+w11cis_rule_18_9_20_1_8_force: false
+w11cis_rule_18_9_20_1_9_force: false
+w11cis_rule_18_9_20_1_10_force: false
+w11cis_rule_18_9_20_1_11_force: false
+w11cis_rule_18_9_20_1_12_force: false
+w11cis_rule_18_9_20_1_13_force: false
+w11cis_rule_18_9_20_1_14_force: false
+
+# 18.9.23 - Kerberos
+
+w11cis_rule_18_9_23_1_enabled: true
+
+w11cis_rule_18_9_23_1_force: false
+
+# 18.9.24 - Kernel DMA Protection
+
+w11cis_rule_18_9_24_1_enabled: true
+
+w11cis_rule_18_9_24_1_force: false
+
+# 18.9.27 - Local Security Authority
+
+w11cis_rule_18_9_27_1_enabled: true
+w11cis_rule_18_9_27_2_enabled: true
+
+# 18.9.28 - Locale Services
+
+w11cis_rule_18_9_28_1_enabled: true
+
+w11cis_rule_18_9_28_1_force: false
+
+# 18.9.29 - Logon
+
+w11cis_rule_18_9_29_1_enabled: true
+w11cis_rule_18_9_29_2_enabled: true
+w11cis_rule_18_9_29_3_enabled: true
+w11cis_rule_18_9_29_4_enabled: true
+
+# 18.9.33 - OS Policies
+
+w11cis_rule_18_9_33_1_enabled: true
+w11cis_rule_18_9_33_2_enabled: true
+
+w11cis_rule_18_9_33_1_force: false
+w11cis_rule_18_9_33_2_force: false
+
+# 18.9.35 - Power Management
+
+# 18.9.35.6 - Sleep Settings
+
+w11cis_rule_18_9_35_6_1_enabled: true
+w11cis_rule_18_9_35_6_2_enabled: true
+w11cis_rule_18_9_35_6_3_enabled: true
+w11cis_rule_18_9_35_6_4_enabled: true
+w11cis_rule_18_9_35_6_5_enabled: true
+w11cis_rule_18_9_35_6_6_enabled: true
+
+w11cis_rule_18_9_35_6_3_force: false
+w11cis_rule_18_9_35_6_4_force: false
+
+# 18.9.37 - Remote Assistance
+
+w11cis_rule_18_9_37_1_enabled: true
+w11cis_rule_18_9_37_2_enabled: true
+
+# 18.9.38 - Remote Procedure Call
+
+w11cis_rule_18_9_38_1_enabled: true
+w11cis_rule_18_9_38_2_enabled: true
+
+# 18.9.49 - Troubleshooting and Diagnostics
+
+# 18.9.49.5 - Microsoft Support Diagnostic Tool
+
+w11cis_rule_18_9_49_5_1_enabled: true
+
+w11cis_rule_18_9_49_5_1_force: false
+
+# 18.9.49.11 - Windows Performance PerfTrack
+
+w11cis_rule_18_9_49_11_1_enabled: true
+
+w11cis_rule_18_9_49_11_1_force: false
+
+# 18.9.51 - User Profiles
+
+w11cis_rule_18_9_51_1_enabled: true
+
+w11cis_rule_18_9_51_1_force: false
+
+# 18.9.53 - Windows Time Service
+
+w11cis_rule_18_9_53_1_1_enabled: true
+
+w11cis_rule_18_9_54_enabled: true
+
+# 18.10 - Windows Components
+
+# 18.10.3 - App and Device Inventory
+
+w11cis_rule_18_10_3_1_enabled: true
+w11cis_rule_18_10_3_2_enabled: true
+w11cis_rule_18_10_3_3_enabled: true
+
+w11cis_rule_18_10_3_1_force: false
+w11cis_rule_18_10_3_2_force: false
+w11cis_rule_18_10_3_3_force: false
+
+# 18.10.4 - App Package Deployment
+
+w11cis_rule_18_10_4_1_enabled: true
+w11cis_rule_18_10_4_2_enabled: true
+w11cis_rule_18_10_4_3_enabled: true
+
+w11cis_rule_18_10_4_1_force: false
+
+# 18.10.5 - App Privacy
+
+w11cis_rule_18_10_5_1_enabled: true
+
+# 18.10.6 - App runtime
+
+w11cis_rule_18_10_6_1_enabled: true
+w11cis_rule_18_10_6_2_enabled: true
+
+w11cis_rule_18_10_6_2_force: false
+
+# 18.10.8 - AutoPlay Policies
+
+w11cis_rule_18_10_8_1_enabled: true
+w11cis_rule_18_10_8_2_enabled: true
+w11cis_rule_18_10_8_3_enabled: true
+
+# 18.10.9 - Biometrics
+
+w11cis_rule_18_10_9_1_1_enabled: true
+
+# 18.10.10 - BitLocker Drive Encryption
+
+# 18.10.10.1 - Fixed Data Drives
+
+w11cis_rule_18_10_10_1_1_enabled: true
+w11cis_rule_18_10_10_1_2_enabled: true
+w11cis_rule_18_10_10_1_3_enabled: true
+w11cis_rule_18_10_10_1_4_enabled: true
+w11cis_rule_18_10_10_1_5_enabled: true
+w11cis_rule_18_10_10_1_6_enabled: true
+w11cis_rule_18_10_10_1_7_enabled: true
+w11cis_rule_18_10_10_1_8_enabled: true
+w11cis_rule_18_10_10_1_9_enabled: true
+w11cis_rule_18_10_10_1_10_enabled: true
+
+w11cis_rule_18_10_10_1_1_force: false
+w11cis_rule_18_10_10_1_2_force: false
+w11cis_rule_18_10_10_1_3_force: false
+w11cis_rule_18_10_10_1_4_force: false
+w11cis_rule_18_10_10_1_5_force: false
+w11cis_rule_18_10_10_1_6_force: false
+w11cis_rule_18_10_10_1_7_force: false
+w11cis_rule_18_10_10_1_8_force: false
+w11cis_rule_18_10_10_1_9_force: false
+w11cis_rule_18_10_10_1_10_force: false
+
+w11cis_fixed_drive_recovery_password: allow
+w11cis_fixed_drive_recovery_key: allow
+
+# 18.10.10.2 - Operating System Drives
+
+w11cis_rule_18_10_10_2_1_enabled: true
+w11cis_rule_18_10_10_2_2_enabled: true
+w11cis_rule_18_10_10_2_3_enabled: true
+w11cis_rule_18_10_10_2_4_enabled: true
+w11cis_rule_18_10_10_2_5_enabled: true
+w11cis_rule_18_10_10_2_6_enabled: true
+w11cis_rule_18_10_10_2_7_enabled: true
+w11cis_rule_18_10_10_2_8_enabled: true
+
+w11cis_rule_18_10_10_2_1_force: false
+w11cis_rule_18_10_10_2_2_force: false
+w11cis_rule_18_10_10_2_3_force: false
+w11cis_rule_18_10_10_2_4_force: false
+w11cis_rule_18_10_10_2_5_force: false
+w11cis_rule_18_10_10_2_6_force: false
+w11cis_rule_18_10_10_2_7_force: false
+w11cis_rule_18_10_10_2_8_force: false
+
+# 18.10.10.3 - Removable Data Drives
+
+w11cis_rule_18_10_10_3_1_enabled: true
+w11cis_rule_18_10_10_3_2_enabled: true
+w11cis_rule_18_10_10_3_3_enabled: true
+w11cis_rule_18_10_10_3_4_enabled: true
+w11cis_rule_18_10_10_3_5_enabled: true
+w11cis_rule_18_10_10_3_6_enabled: true
+w11cis_rule_18_10_10_3_7_enabled: true
+w11cis_rule_18_10_10_3_8_enabled: true
+w11cis_rule_18_10_10_3_9_enabled: true
+w11cis_rule_18_10_10_3_10_enabled: true
+w11cis_rule_18_10_10_3_11_enabled: true
+w11cis_rule_18_10_10_3_12_enabled: true
+
+w11cis_rule_18_10_10_3_1_force: false
+w11cis_rule_18_10_10_3_2_force: false
+w11cis_rule_18_10_10_3_3_force: false
+w11cis_rule_18_10_10_3_4_force: false
+w11cis_rule_18_10_10_3_5_force: false
+w11cis_rule_18_10_10_3_6_force: false
+w11cis_rule_18_10_10_3_7_force: false
+w11cis_rule_18_10_10_3_8_force: false
+w11cis_rule_18_10_10_3_9_force: false
+w11cis_rule_18_10_10_3_10_force: false
+w11cis_rule_18_10_10_3_11_force: false
+w11cis_rule_18_10_10_3_12_force: false
+
+# 18.10.11 - Camera
+
+w11cis_rule_18_10_11_1_enabled: true
+
+w11cis_rule_18_10_11_1_force: false
+
+# 18.10.13 - Cloud Content
+
+w11cis_rule_18_10_13_1_enabled: true
+w11cis_rule_18_10_13_2_enabled: true
+w11cis_rule_18_10_13_3_enabled: true
+
+w11cis_rule_18_10_13_2_force: false
+
+# 18.10.14 - Connect
+
+w11cis_rule_18_10_14_1_enabled: true
+
+w11cis_windows_connect_pin_requirement: first_time
+
+# 18.10.15 - Credential User Interface
+
+w11cis_rule_18_10_15_1_enabled: true
+w11cis_rule_18_10_15_2_enabled: true
+w11cis_rule_18_10_15_3_enabled: true
+
+# 18.10.16 - Data Collection and Preview Builds
+
+w11cis_rule_18_10_16_1_enabled: true
+w11cis_rule_18_10_16_2_enabled: true
+w11cis_rule_18_10_16_3_enabled: true
+w11cis_rule_18_10_16_4_enabled: true
+w11cis_rule_18_10_16_5_enabled: true
+w11cis_rule_18_10_16_6_enabled: true
+
+w11cis_rule_18_10_16_2_force: false
+w11cis_rule_18_10_16_4_force: false
+w11cis_rule_18_10_16_5_force: false
+w11cis_rule_18_10_16_6_force: false
+
+w11cis_telemetry_level: 'off'
+
+# 18.10.17 - Delivery Optimization
+
+w11cis_rule_18_10_17_1_enabled: true
+
+w11cis_delivery_optimization_download_mode: lan
+
+# 18.10.18 - Desktop App Installer
+
+w11cis_rule_18_10_18_1_enabled: true
+w11cis_rule_18_10_18_2_enabled: true
+w11cis_rule_18_10_18_3_enabled: true
+w11cis_rule_18_10_18_4_enabled: true
+w11cis_rule_18_10_18_5_enabled: true
+w11cis_rule_18_10_18_6_enabled: true
+w11cis_rule_18_10_18_7_enabled: true
+
+w11cis_rule_18_10_18_1_force: false
+w11cis_rule_18_10_18_7_force: false
+
+# 18.10.26 - Event Log Service
+
+# 18.10.26.1 - Application
+
+w11cis_rule_18_10_26_1_1_enabled: true
+w11cis_rule_18_10_26_1_2_enabled: true
+
+w11cis_application_log_max_size_in_kb: 32768
+
+# 18.10.26.2 - Security
+
+w11cis_rule_18_10_26_2_1_enabled: true
+w11cis_rule_18_10_26_2_2_enabled: true
+
+w11cis_security_log_max_size_in_kb: 196608
+
+# 18.10.26.3 - Setup
+
+w11cis_rule_18_10_26_3_1_enabled: true
+w11cis_rule_18_10_26_3_2_enabled: true
+
+w11cis_setup_log_max_size_in_kb: 32768
+
+# 18.10.26.4 - System
+
+w11cis_rule_18_10_26_4_1_enabled: true
+w11cis_rule_18_10_26_4_2_enabled: true
+
+w11cis_system_log_max_size_in_kb: 32768
+
+# 18.10.29 - File Explorer (formerly Windows Explorer)
+
+w11cis_rule_18_10_29_2_enabled: true
+w11cis_rule_18_10_29_3_enabled: true
+w11cis_rule_18_10_29_4_enabled: true
+w11cis_rule_18_10_29_5_enabled: true
+w11cis_rule_18_10_29_6_enabled: true
+
+w11cis_rule_18_10_29_2_force: false
+
+# 18.10.36 - Location and Sensors
+
+w11cis_rule_18_10_36_1_enabled: true
+
+w11cis_rule_18_10_36_1_force: false
+
+# 18.10.40 - Messaging
+
+w11cis_rule_18_10_40_1_enabled: true
+
+w11cis_rule_18_10_40_1_force: false
+
+# 18.10.41 - Microsoft account
+
+w11cis_rule_18_10_41_1_enabled: true
+
+# 18.10.43 - Microsoft Defender Application Guard (formerly Windows Defender Application Guard)
+
+w11cis_rule_18_10_43_1_enabled: true
+w11cis_rule_18_10_43_2_enabled: true
+w11cis_rule_18_10_43_3_enabled: true
+w11cis_rule_18_10_43_4_enabled: true
+w11cis_rule_18_10_43_5_enabled: true
+w11cis_rule_18_10_43_6_enabled: true
+
+# 18.10.49 - News and interests
+
+w11cis_rule_18_10_49_1_enabled: true
+
+w11cis_rule_18_10_49_1_force: false
+
+# 18.10.50 - OneDrive (formerly SkyDrive)
+
+w11cis_rule_18_10_50_1_enabled: true
+
+w11cis_rule_18_10_50_1_force: false
+
+# 18.10.56 - Push To Install
+
+w11cis_rule_18_10_56_1_enabled: true
+
+w11cis_rule_18_10_56_1_force: false
+
+# 18.10.57 - Remote Desktop Services (formerly Terminal Services)
+
+# 18.10.57.2 - Remote Desktop Connection Client
+
+# 18.10.57.2.1 - RemoteFX USB Device Redirection
+
+w11cis_rule_18_10_57_2_2_enabled: true
+w11cis_rule_18_10_57_2_3_enabled: true
+
+w11cis_rule_18_10_57_2_2_force: false
+
+# 18.10.57.3 - Remote Desktop Session Host (formerly Terminal Server)
+
+# 18.10.57.3.2 - Connections
+
+w11cis_rule_18_10_57_3_2_1_enabled: true
+
+w11cis_rule_18_10_57_3_2_1_force: false
+
+# 18.10.57.3.3 - Device and Resource Redirection
+
+w11cis_rule_18_10_57_3_3_1_enabled: true
+w11cis_rule_18_10_57_3_3_2_enabled: true
+w11cis_rule_18_10_57_3_3_3_enabled: true
+w11cis_rule_18_10_57_3_3_4_enabled: true
+w11cis_rule_18_10_57_3_3_5_enabled: true
+w11cis_rule_18_10_57_3_3_6_enabled: true
+w11cis_rule_18_10_57_3_3_7_enabled: true
+w11cis_rule_18_10_57_3_3_8_enabled: true
+
+w11cis_rule_18_10_57_3_3_1_force: false
+w11cis_rule_18_10_57_3_3_2_force: false
+w11cis_rule_18_10_57_3_3_4_force: false
+w11cis_rule_18_10_57_3_3_5_force: false
+w11cis_rule_18_10_57_3_3_6_force: false
+w11cis_rule_18_10_57_3_3_7_force: false
+w11cis_rule_18_10_57_3_3_8_force: false
+
+# 18.10.57.3.9 - Security
+
+w11cis_rule_18_10_57_3_9_1_enabled: true
+w11cis_rule_18_10_57_3_9_2_enabled: true
+w11cis_rule_18_10_57_3_9_3_enabled: true
+w11cis_rule_18_10_57_3_9_4_enabled: true
+w11cis_rule_18_10_57_3_9_5_enabled: true
+
+# 18.10.57.3.10 - Session Time Limits
+
+w11cis_rule_18_10_57_3_10_1_enabled: true
+
+w11cis_rule_18_10_57_3_10_1_force: false
+
+w11cis_remote_desktop_services_max_idle_time_in_ms: 900000
+
+# 18.10.57.3.11 - Temporary folders
+
+w11cis_rule_18_10_57_3_11_1_enabled: true
+
+# 18.10.58 - RSS Feeds
+
+w11cis_rule_18_10_58_1_enabled: true
+
+# 18.10.59 - Search
+
+w11cis_rule_18_10_59_2_enabled: true
+w11cis_rule_18_10_59_3_enabled: true
+w11cis_rule_18_10_59_4_enabled: true
+w11cis_rule_18_10_59_5_enabled: true
+w11cis_rule_18_10_59_6_enabled: true
+w11cis_rule_18_10_59_7_enabled: true
+
+w11cis_rule_18_10_59_2_force: false
+w11cis_rule_18_10_59_7_force: false
+
+# 18.10.63 - Software Protection Platform
+
+w11cis_rule_18_10_63_1_enabled: true
+
+w11cis_rule_18_10_63_1_force: false
+
+# 18.10.66 - Store
+
+w11cis_rule_18_10_66_1_enabled: true
+w11cis_rule_18_10_66_2_enabled: true
+w11cis_rule_18_10_66_3_enabled: true
+w11cis_rule_18_10_66_4_enabled: true
+
+w11cis_rule_18_10_66_1_force: false
+w11cis_rule_18_10_66_4_force: false
+
+# 18.10.72 - Widgets
+
+w11cis_rule_18_10_72_1_enabled: true
+
+w11cis_rule_18_10_72_1_force: false
+
+# 18.10.73 - Windows AI
+
+w11cis_rule_18_10_73_1_enabled: true
+
+# 18.10.77 - Windows Defender SmartScreen
+
+# 18.10.77.1 - Enhanced Phished Protection
+
+w11cis_rule_18_10_77_1_1_enabled: true
+w11cis_rule_18_10_77_1_2_enabled: true
+w11cis_rule_18_10_77_1_3_enabled: true
+w11cis_rule_18_10_77_1_4_enabled: true
+w11cis_rule_18_10_77_1_5_enabled: true
+
+# 18.10.77.2 - Explorer
+
+w11cis_rule_18_10_77_2_1_enabled: true
+
+# 18.10.79 - Windows Game Recording and Broadcasting
+
+w11cis_rule_18_10_79_1_enabled: true
+
+# 18.10.80 - Windows Hello for Business (formerly Microsoft Passport for Work)
+
+w11cis_rule_18_10_80_1_enabled: true
+
+# 18.10.81 - Windows Ink Workspace
+
+w11cis_rule_18_10_81_1_enabled: true
+w11cis_rule_18_10_81_2_enabled: true
+
+w11cis_rule_18_10_81_1_force: false
+
+w11cis_windows_ink_workspace_access: disallow_above_lock
+
+# 18.10.82 - Windows Installer
+
+w11cis_rule_18_10_82_1_enabled: true
+w11cis_rule_18_10_82_2_enabled: true
+w11cis_rule_18_10_82_3_enabled: true
+
+w11cis_rule_18_10_82_3_force: false
+
+# 18.10.83 - Windows Logon Options
+
+w11cis_rule_18_10_83_1_enabled: true
+w11cis_rule_18_10_83_2_enabled: true
+
+# 18.10.88 - Windows PowerShell
+
+w11cis_rule_18_10_88_1_enabled: true
+w11cis_rule_18_10_88_2_enabled: true
+
+w11cis_rule_18_10_88_1_force: false
+w11cis_rule_18_10_88_2_force: false
+
+# 18.10.90 - Windows Remote Management (WinRM)
+
+# 18.10.90.1 - WinRM Client
+
+w11cis_rule_18_10_90_1_1_enabled: true
+w11cis_rule_18_10_90_1_2_enabled: true
+w11cis_rule_18_10_90_1_3_enabled: true
+
+# 18.10.90.2 - WinRM Service
+
+w11cis_rule_18_10_90_2_1_enabled: true
+w11cis_rule_18_10_90_2_2_enabled: true
+w11cis_rule_18_10_90_2_3_enabled: true
+w11cis_rule_18_10_90_2_4_enabled: true
+
+w11cis_rule_18_10_90_2_2_force: false
+
+# 18.10.91 - Windows Remote Shell
+
+w11cis_rule_18_10_91_1_enabled: true
+
+w11cis_rule_18_10_91_1_force: false
+
+# 18.10.92 - Windows Sandbox
+
+w11cis_rule_18_10_92_1_enabled: true
+w11cis_rule_18_10_92_2_enabled: true
+w11cis_rule_18_10_92_3_enabled: true
+
+w11cis_rule_18_10_92_2_force: false
+
+# 18.10.93 - Windows Security (formerly Windows Defender Security Center)
+
+# 18.10.93.2 - App and browser protection
+
+w11cis_rule_18_10_93_2_1_enabled: true
+
+# 18.10.94 - Windows Update
+
+# 18.10.94.1 - Legacy Policies
+
+w11cis_rule_18_10_94_1_1_enabled: true
+
+# 18.10.94.2 - Manage end user experience
+
+w11cis_rule_18_10_94_2_1_enabled: true
+w11cis_rule_18_10_94_2_2_enabled: true
+w11cis_rule_18_10_94_2_3_enabled: true
+w11cis_rule_18_10_94_2_4_enabled: true
+
+# 18.10.94.4 - Manage updates offered from Windows Update (formerly Defer Windows Updates and Windows Update for Business)
+
+w11cis_rule_18_10_94_4_1_enabled: true
+w11cis_rule_18_10_94_4_2_enabled: true
+w11cis_rule_18_10_94_4_3_enabled: true
+
+# 18.11 - Custom Settings
+
+w11cis_rule_18_11_1_enabled: true
+w11cis_rule_18_11_2_enabled: true
+
+w11cis_disable_http_proxy_features: disable_for_loopback_interfaces
+
+# 19 - Administrative Templates (User)
+
+# 19.5 - Smart Menu and Taskbar
+
+# 19.5.1 - Notifications
+
+w11cis_rule_19_5_1_1_enabled: true
+
+# 19.6 - System
+
+# 19.6.6 - Internet Communication Management
+
+w11cis_rule_19_6_6_1_1_enabled: true
+
+w11cis_rule_19_6_6_1_1_force: false
+
+# 19.7 - Windows Components
+
+# 19.7.5 - Attachment Manager
+
+w11cis_rule_19_7_5_1_enabled: true
+w11cis_rule_19_7_5_2_enabled: true
+
+# 19.7.8 - Cloud Content
+
+w11cis_rule_19_7_8_1_enabled: true
+w11cis_rule_19_7_8_2_enabled: true
+w11cis_rule_19_7_8_3_enabled: true
+w11cis_rule_19_7_8_4_enabled: true
+w11cis_rule_19_7_8_5_enabled: true
+
+w11cis_rule_19_7_8_3_force: false
+w11cis_rule_19_7_8_4_force: false
+
+# 19.7.26 - Network Sharing
+
+w11cis_rule_19_7_26_1_enabled: true
+
+# 19.7.46 - Windows Media Player
+
+# 19.7.46.2 - Playback
+
+w11cis_rule_19_7_46_2_1_enabled: true
+
+w11cis_rule_19_7_46_2_1_force: false

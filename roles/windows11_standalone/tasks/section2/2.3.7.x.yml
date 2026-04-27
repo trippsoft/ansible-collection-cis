@@ -1,0 +1,75 @@
+---
+- name: "2.3.7.1 | L2 | Ensure 'Interactive logon: Do not require CTRL+ALT+DEL' is set to 'Disabled'"
+  when:
+    - w11cis_rule_2_3_7_1_enabled
+    - w11cis_rule_2_3_7_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: DisableCAD
+    data: 0
+    type: dword
+    state: present
+
+- name: "2.3.7.2 | L1 | Ensure 'Interactive logon: Don't display last signed-in' is set to 'Enabled'"
+  when:
+    - w11cis_rule_2_3_7_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: DontDisplayLastUserName
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.7.3 | L1 | Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'
+  when:
+    - w11cis_rule_2_3_7_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: InactivityTimeoutSecs
+    data: "{{ w11cis_inactivity_timeout_in_seconds }}"
+    type: dword
+    state: present
+
+- name: "2.3.7.4 | L1 | Configure 'Interactive logon: Message text for users attempting to log on'"
+  when:
+    - w11cis_rule_2_3_7_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: LegalNoticeText
+    data: "{{ w11cis_login_message_text }}"
+    type: string
+    state: present
+
+- name: "2.3.7.5 | L1 | Configure 'Interactive logon: Message title for users attempting to log on'"
+  when:
+    - w11cis_rule_2_3_7_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: LegalNoticeCaption
+    data: "{{ w11cis_login_message_title }}"
+    type: string
+    state: present
+
+- name: >-
+    2.3.7.6 | L1 |
+    Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'
+  when:
+    - w11cis_rule_2_3_7_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: PasswordExpiryWarning
+    data: "{{ w11cis_password_expiry_warning_in_days }}"
+    type: dword
+    state: present
+
+- name: >-
+    2.3.7.7 | L1 | Ensure 'Interactive logon: Smart card removal behavior' is set to 'Lock Workstation' or higher
+  when:
+    - w11cis_rule_2_3_7_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: ScRemoveOption
+    data: "{{ _w11cis_smart_card_removal_behavior_value }}"
+    type: dword
+    state: present

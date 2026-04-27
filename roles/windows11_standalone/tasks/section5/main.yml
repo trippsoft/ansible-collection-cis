@@ -1,0 +1,436 @@
+---
+- name: "5.1 | L2 | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_1_enabled
+    - w11cis_rule_5_1_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: BTAGService
+    start_mode: disabled
+    state: stopped
+
+- name: "5.2 | L2 | Ensure 'Bluetooth Support Service (bthserv)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_2_enabled
+    - w11cis_rule_5_2_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: bthserv
+    start_mode: disabled
+    state: stopped
+
+- name: "5.3 | L1 | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_3_enabled
+  ansible.windows.win_service:
+    name: Computer Browser
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_computer_browser_service
+  failed_when:
+    - _w11cis_computer_browser_service is failed
+    - ("is not installed" not in _w11cis_computer_browser_service.msg)
+
+- name: "5.4 | L2 | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_4_enabled
+    - w11cis_rule_5_4_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: MapsBroker
+    start_mode: disabled
+    state: stopped
+
+- name: "5.5 | L2 | Ensure 'GameInput Service (GameInputSvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_5_enabled
+    - w11cis_rule_5_5_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: GameInputSvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.6 | L2 | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_6_enabled
+    - w11cis_rule_5_6_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: lfsvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.7 | L1 | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_7_enabled
+  ansible.windows.win_service:
+    name: IISADMIN
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_iis_admin_service
+  failed_when:
+    - _w11cis_iis_admin_service is failed
+    - ("is not installed" not in _w11cis_iis_admin_service.msg)
+
+- name: "5.8 | L1 | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_8_enabled
+  ansible.windows.win_service:
+    name: irmon
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_infrared_monitor_service
+  failed_when:
+    - _w11cis_infrared_monitor_service is failed
+    - ("is not installed" not in _w11cis_infrared_monitor_service.msg)
+
+- name: "5.9 | L2 | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_9_enabled
+    - w11cis_rule_5_9_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: lltdsvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.10 | L1 | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_10_enabled
+  ansible.windows.win_service:
+    name: FTPSVC
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_ftp_service
+  failed_when:
+    - _w11cis_ftp_service is failed
+    - ("is not installed" not in _w11cis_ftp_service.msg)
+
+- name: "5.11 | L2 | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_11_enabled
+    - w11cis_rule_5_11_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: MSiSCSI
+    start_mode: disabled
+    state: stopped
+
+- name: "5.12 | L1 | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_12_enabled
+  ansible.windows.win_service:
+    name: sshd
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_openssh_ssh_server_service
+  failed_when:
+    - _w11cis_openssh_ssh_server_service is failed
+    - ("is not installed" not in _w11cis_openssh_ssh_server_service.msg)
+
+- name: "5.13 | L2 | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_13_enabled
+    - w11cis_rule_5_13_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: PNRPsvc
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_peer_name_resolution_protocol_service
+  failed_when:
+    - _w11cis_peer_name_resolution_protocol_service is failed
+    - ("is not installed" not in _w11cis_peer_name_resolution_protocol_service.msg)
+
+- name: "5.14 | L2 | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_14_enabled
+    - w11cis_rule_5_14_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: p2psvc
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_peer_networking_grouping_service
+  failed_when:
+    - _w11cis_peer_networking_grouping_service is failed
+    - ("is not installed" not in _w11cis_peer_networking_grouping_service.msg)
+
+- name: "5.15 | L2 | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_15_enabled
+    - w11cis_rule_5_15_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: p2pimsvc
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_peer_networking_identity_manager_service
+  failed_when:
+    - _w11cis_peer_networking_identity_manager_service is failed
+    - ("is not installed" not in _w11cis_peer_networking_identity_manager_service.msg)
+
+- name: >-
+    5.16 | L2 | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled' or 'Not Installed'
+  when:
+    - w11cis_rule_5_16_enabled
+    - w11cis_rule_5_16_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: PNRPAutoReg
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_pnrp_machine_name_publication_service
+  failed_when:
+    - _w11cis_pnrp_machine_name_publication_service is failed
+    - ("is not installed" not in _w11cis_pnrp_machine_name_publication_service.msg)
+
+- name: "5.17 | L2 | Ensure 'Print Spooler (Spooler)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_17_enabled
+    - w11cis_rule_5_17_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: spooler
+    start_mode: disabled
+    state: stopped
+
+- name: "5.18 | L2 | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_18_enabled
+    - w11cis_rule_5_18_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: wercplsupport
+    start_mode: disabled
+    state: stopped
+
+- name: "5.19 | L2 | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_19_enabled
+    - w11cis_rule_5_19_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: RasAuto
+    start_mode: disabled
+    state: stopped
+
+- name: "5.20 | L2 | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_20_enabled
+    - w11cis_rule_5_20_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: SessionEnv
+    start_mode: disabled
+    state: stopped
+
+- name: "5.21 | L2 | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_21_enabled
+    - w11cis_rule_5_21_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: TermService
+    start_mode: disabled
+    state: stopped
+
+- name: "5.22 | L2 | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_22_enabled
+    - w11cis_rule_5_22_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: UmRdpService
+    start_mode: disabled
+    state: stopped
+
+- name: "5.23 | L1 | Ensure 'Remote Procedure Call (RPC) Locator (RpcLocator)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_23_enabled
+  ansible.windows.win_service:
+    name: RpcLocator
+    start_mode: disabled
+    state: stopped
+
+- name: "5.24 | L2 | Ensure 'Remote Registry (RemoteRegistry)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_24_enabled
+    - w11cis_rule_5_24_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: RemoteRegistry
+    start_mode: disabled
+    state: stopped
+
+- name: "5.25 | L1 | Ensure 'Routing and Remote Access (RemoteAccess)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_25_enabled
+  ansible.windows.win_service:
+    name: RemoteAccess
+    start_mode: disabled
+    state: stopped
+
+- name: "5.26 | L2 | Ensure 'Server (LanmanServer)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_26_enabled
+    - w11cis_rule_5_26_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: LanmanServer
+    start_mode: disabled
+    state: stopped
+
+- name: "5.27 | L1 | Ensure 'Simple TCP/IP Services (simptcp)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_27_enabled
+  ansible.windows.win_service:
+    name: simptcp
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_simple_tcp_ip_services
+  failed_when:
+    - _w11cis_simple_tcp_ip_services is failed
+    - ("is not installed" not in _w11cis_simple_tcp_ip_services.msg)
+
+- name: "5.28 | L2 | Ensure 'SNMP Service (SNMP)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_28_enabled
+    - w11cis_rule_5_28_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: SNMP
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_snmp_service
+  failed_when:
+    - _w11cis_snmp_service is failed
+    - ("is not installed" not in _w11cis_snmp_service.msg)
+
+- name: "5.29 | L1 | Ensure 'Special Administration Console Helper (sacsvr)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_29_enabled
+  ansible.windows.win_service:
+    name: sacsvr
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_special_administration_console_helper_service
+  failed_when:
+    - _w11cis_special_administration_console_helper_service is failed
+    - ("is not installed" not in _w11cis_special_administration_console_helper_service.msg)
+
+- name: "5.30 | L1 | Ensure 'SSDP Discovery (SSDPSRV)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_30_enabled
+  ansible.windows.win_service:
+    name: SSDPSRV
+    start_mode: disabled
+    state: stopped
+
+- name: "5.31 | L1 | Ensure 'UPnP Device Host (upnphost)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_31_enabled
+  ansible.windows.win_service:
+    name: upnphost
+    start_mode: disabled
+    state: stopped
+
+- name: "5.32 | L1 | Ensure 'Web Management Service (WMSvc)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_32_enabled
+  ansible.windows.win_service:
+    name: WMSvc
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_web_management_service
+  failed_when:
+    - _w11cis_web_management_service is failed
+    - ("is not installed" not in _w11cis_web_management_service.msg)
+
+- name: "5.33 | L2 | Ensure 'Windows Error Reporting Service (WerSvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_33_enabled
+    - w11cis_rule_5_33_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: WerSvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.34 | L2 | Ensure 'Windows Event Collector (Wecsvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_34_enabled
+    - w11cis_rule_5_34_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: Wecsvc
+    start_mode: disabled
+    state: stopped
+
+- name: >-
+    5.35 | L1 |
+    Ensure 'Windows Media Player Network Sharing Service (WMPNetworkSvc)' is set to 'Disabled' or 'Not Installed'
+  when:
+    - w11cis_rule_5_35_enabled
+  ansible.windows.win_service:
+    name: WMPNetworkSvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.36 | L1 | Ensure 'Windows Mobile Hotspot Service (icssvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_36_enabled
+  ansible.windows.win_service:
+    name: icssvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.37 | L2 | Ensure 'Windows Push Notifications System Service (WpnService)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_37_enabled
+    - w11cis_rule_5_37_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: WpnService
+    start_mode: disabled
+    state: stopped
+
+- name: "5.38 | L2 | Ensure 'Windows PushToInstall Service (PushToInstall)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_38_enabled
+    - w11cis_rule_5_38_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: PushToInstall
+    start_mode: disabled
+    state: stopped
+
+- name: "5.39 | L2 | Ensure 'Windows Remote Management (WS-Management) (WinRM)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_39_enabled
+    - w11cis_rule_5_39_force or _w11cis_level2
+  ansible.windows.win_service:
+    name: WinRM
+    start_mode: disabled
+    state: stopped
+
+- name: "5.40 | L1 | Ensure 'World Wide Web Publishing Service (W3SVC)' is set to 'Disabled' or 'Not Installed'"
+  when:
+    - w11cis_rule_5_40_enabled
+  ansible.windows.win_service:
+    name: W3SVC
+    start_mode: disabled
+    state: stopped
+  register: _w11cis_world_wide_web_publishing_service
+  failed_when:
+    - _w11cis_world_wide_web_publishing_service is failed
+    - ("is not installed" not in _w11cis_world_wide_web_publishing_service.msg)
+
+- name: "5.41 | L1 | Ensure 'Xbox Accessory Management Service (XboxGipSvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_41_enabled
+  ansible.windows.win_service:
+    name: XboxGipSvc
+    start_mode: disabled
+    state: stopped
+
+- name: "5.42 | L1 | Ensure 'Xbox Live Auth Manager (XblAuthManager)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_42_enabled
+  ansible.windows.win_service:
+    name: XblAuthManager
+    start_mode: disabled
+    state: stopped
+
+- name: "5.43 | L1 | Ensure 'Xbox Live Game Save (XblGameSave)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_43_enabled
+  ansible.windows.win_service:
+    name: XblGameSave
+    start_mode: disabled
+    state: stopped
+
+- name: "5.44 | L1 | Ensure 'Xbox Live Networking Service (XboxNetApiSvc)' is set to 'Disabled'"
+  when:
+    - w11cis_rule_5_44_enabled
+  ansible.windows.win_service:
+    name: XboxNetApiSvc
+    start_mode: disabled
+    state: stopped

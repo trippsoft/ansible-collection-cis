@@ -1,0 +1,14 @@
+---
+- name: "18.10.43 | Microsoft Defender Application Guard (formerly Windows Defender Application Guard)"
+  when:
+    - w11cis_rule_18_10_43_1_enabled or
+      w11cis_rule_18_10_43_2_enabled or
+      w11cis_rule_18_10_43_3_enabled or
+      w11cis_rule_18_10_43_4_enabled or
+      w11cis_rule_18_10_43_5_enabled or
+      w11cis_rule_18_10_43_6_enabled
+  ansible.builtin.debug:
+    msg: >-
+      Rules 18.10.43.1-6 involve Microsoft Defender Application Guard which is deprecated.
+      It has been removed from Windows 11 24H2 and later.
+      These rules will not be remediated or audited by this collection.

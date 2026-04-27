@@ -1,0 +1,10 @@
+---
+- name: "18.10.79.1 | L1 | Ensure 'Enables or disables Windows Game Recording and Broadcasting' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_79_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR
+    name: AllowGameDVR
+    data: 0
+    type: dword
+    state: present

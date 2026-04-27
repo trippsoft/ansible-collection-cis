@@ -1,0 +1,83 @@
+---
+- name: "18.9.5.1 | L1 | Ensure 'Turn On Virtualization Based Security' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_9_5_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: EnableVirtualizationBasedSecurity
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.2 | L1 |
+    Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher
+  when:
+    - w11cis_rule_18_9_5_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: RequirePlatformSecurityFeatures
+    data: "{{ _w11cis_vbs_platform_security_level_value }}"
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.3 | L1 |
+    Ensure 'Turn On Virtualization Based Security: Virtualization Based Protection of Code Integrity'
+    is set to 'Enabled with UEFI lock'
+  when:
+    - w11cis_rule_18_9_5_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: HypervisorEnforcedCodeIntegrity
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.4 | L1 |
+    Ensure 'Turn On Virtualization Based Security: Require UEFI Memory Attributes Table' is set to 'True (checked)'
+  when:
+    - w11cis_rule_18_9_5_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: HVCIMATRequired
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.5 | L1 |
+    Ensure 'Turn On Virtualization Based Security: Credential Guard Configuration' is set to 'Enabled with UEFI lock'
+  when:
+    - w11cis_rule_18_9_5_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: LsaCfgFlags
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.6 | L1 | Ensure 'Turn On Virtualization Based Security: Secure Launch Configuration' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_9_5_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: ConfigureSystemGuardLaunch
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.5.7 | L1 |
+    Ensure 'Turn On Virtualization Based Security: Kernel-mode Hardware-enforced Stack Protection'
+    is set to 'Enabled: Enabled in enforcement mode'
+  when:
+    - w11cis_rule_18_9_5_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: ConfigureKernelShadowStacksLaunch
+    data: 1
+    type: dword
+    state: present

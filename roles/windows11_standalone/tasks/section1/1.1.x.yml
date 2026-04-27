@@ -1,0 +1,58 @@
+---
+- name: "1.1.1 | L1 | Ensure 'Enforce password history' is set to '24 or more password(s)'"
+  when:
+    - w11cis_rule_1_1_1_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: PasswordHistorySize
+    value: "{{ w11cis_password_history_size }}"
+
+- name: "1.1.2 | L1 | Ensure 'Maximum password age' is set to '365 or fewer days, but not 0'"
+  when:
+    - w11cis_rule_1_1_2_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: MaximumPasswordAge
+    value: "{{ w11cis_maximum_password_age }}"
+
+- name: "1.1.3 | L1 | Ensure 'Minimum password age' is set to '1 or more day(s)'"
+  when:
+    - w11cis_rule_1_1_3_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: MinimumPasswordAge
+    value: "{{ w11cis_minimum_password_age }}"
+
+- name: "1.1.4 | L1 | Ensure 'Minimum password length' is set to '14 or more character(s)'"
+  when:
+    - w11cis_rule_1_1_4_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: MinimumPasswordLength
+    value: "{{ w11cis_minimum_password_length }}"
+
+- name: "1.1.5 | L1 | Ensure 'Password must meet complexity requirements' is set to 'Enabled'"
+  when:
+    - w11cis_rule_1_1_5_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: PasswordComplexity
+    value: 1
+
+- name: "1.1.6 | L1 | Ensure 'Relax minimum password length limits' is set to 'Enabled'"
+  when:
+    - w11cis_rule_1_1_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SAM
+    name: RelaxMinimumPasswordLengthLimits
+    data: 1
+    type: dword
+    state: present
+
+- name: "1.1.7 | L1 | Ensure 'Store passwords using reversible encryption' is set to 'Disabled'"
+  when:
+    - w11cis_rule_1_1_7_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: ClearTextPassword
+    value: '0'

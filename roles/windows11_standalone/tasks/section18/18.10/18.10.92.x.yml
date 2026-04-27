@@ -1,0 +1,31 @@
+---
+- name: "18.10.92.1 | L1 | Ensure 'Allow clipboard sharing with Windows Sandbox' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_92_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sandbox
+    name: AllowClipboardRedirection
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.92.2 | L2 | Ensure 'Allow mapping folders into Windows Sandbox' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_92_2_enabled
+    - w11cis_rule_18_10_92_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sandbox
+    name: AllowWriteToMappedFolders
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.92.3 | L1 | Ensure 'Allow networking in Windows Sandbox' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_92_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sandbox
+    name: AllowNetworking
+    data: 0
+    type: dword
+    state: present

@@ -1,0 +1,10 @@
+---
+- name: "18.9.19.2 | L1 | Ensure 'Continue experiences on this device' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_9_19_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: EnableCdp
+    data: 0
+    type: dword
+    state: present

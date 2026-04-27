@@ -1,0 +1,137 @@
+---
+- name: "2.3.10.1 | L1 | Ensure 'Network access: Allow anonymous SID/Name translation' is set to 'Disabled'"
+  when:
+    - w11cis_rule_2_3_10_1_enabled
+  community.windows.win_security_policy:
+    section: System Access
+    key: LSAAnonymousNameLookup
+    value: 0
+
+- name: >-
+    2.3.10.2 | L1 | Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts' is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_10_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictAnonymousSAM
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.10.3 | L1 |
+    Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts and shares' is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_10_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictAnonymous
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.10.4 | L1 |
+    Ensure 'Network access: Do not allow storage of passwords and credentials for network authentication'
+    is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_10_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: DisableDomainCreds
+    data: 1
+    type: dword
+    state: present
+  notify:
+    - _w11cis_reboot_windows
+
+- name: >-
+    2.3.10.5 | L1 | Ensure 'Network access: Let Everyone permissions apply to anonymous users' is set to 'Disabled'
+  when:
+    - w11cis_rule_2_3_10_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: EveryoneIncludesAnonymous
+    data: 0
+    type: dword
+    state: present
+
+- name: "2.3.10.6 | L1 | Ensure 'Network access: Named Pipes that can be accessed anonymously' is set to 'None'"
+  when:
+    - w11cis_rule_2_3_10_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: NullSessionPipes
+    data: "{{ w11cis_null_session_pipes }}"
+    type: multistring
+    state: present
+
+- name: "2.3.10.7 | L1 | Ensure 'Network access: Remotely accessible registry paths' is configured"
+  when:
+    - w11cis_rule_2_3_10_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths
+    name: Machine
+    data:
+      - 'System\CurrentControlSet\Control\ProductOptions'
+      - 'System\CurrentControlSet\Control\Server Applications'
+      - 'Software\Microsoft\Windows NT\CurrentVersion'
+    type: multistring
+    state: present
+
+- name: "2.3.10.8 | L1 | Ensure 'Network access: Remotely accessible registry paths and sub-paths' is configured"
+  when:
+    - w11cis_rule_2_3_10_8_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedPaths
+    name: Machine
+    data: "{{ w11cis_remote_registry_paths }}"
+    type: multistring
+    state: present
+
+- name: >-
+    2.3.10.9 | L1 | Ensure 'Network access: Restrict anonymous access to Named Pipes and Shares' is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_10_9_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: RestrictNullSessAccess
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.10.10 | L1 |
+    Ensure 'Network access: Restrict clients allowed to make remote calls to SAM'
+    is set to 'Administrators: Remote Access: Allow'
+  when:
+    - w11cis_rule_2_3_10_10_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictRemoteSAM
+    data: "O:BAG:BAD:(A;;RC;;;BA)"
+    type: string
+    state: present
+
+- name: "2.3.10.11 | L1 | Ensure 'Network access: Shares that can be accessed anonymously' is set to 'None'"
+  when:
+    - w11cis_rule_2_3_10_11_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: NullSessionShares
+    data: ''
+    type: multistring
+    state: present
+
+- name: >-
+    2.3.10.12 | L1 |
+    Ensure 'Network access: Sharing and security model for local accounts'
+    is set to 'Classic - local users authenticate as themselves'
+  when:
+    - w11cis_rule_2_3_10_12_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: ForceGuest
+    data: 0
+    type: dword
+    state: present

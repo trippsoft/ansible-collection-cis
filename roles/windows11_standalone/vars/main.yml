@@ -1,0 +1,161 @@
+---
+_w11cis_level2: "{{ w11cis_level | int > 1 }}"
+
+_w11cis_access_this_computer_from_the_network_default_users:
+  - Administrators
+  - Remote Desktop Users
+
+_w11cis_adjust_memory_quotas_for_a_process_default_users:
+  - Administrators
+  - LOCAL SERVICE
+  - NETWORK SERVICE
+
+_w11cis_create_global_objects_default_users:
+  - Administrators
+  - LOCAL SERVICE
+  - NETWORK SERVICE
+  - SERVICE
+
+_w11cis_debug_programs_default_users:
+  - Administrators
+
+_w11cis_generate_security_audits_default_users:
+  - LOCAL SERVICE
+  - NETWORK SERVICE
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
+
+_w11cis_impersonate_a_client_after_authentication_default_users:
+  - Administrators
+  - LOCAL SERVICE
+  - NETWORK SERVICE
+  - SERVICE
+  - S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229 # RESTRICTED SERVICE\PrintSpoolerService
+
+_w11cis_perform_volume_maintenance_tasks_default_users:
+  - Administrators
+
+_w11cis_replace_a_process_level_token_default_users:
+  - LOCAL SERVICE
+  - NETWORK SERVICE
+
+_w11cis_access_this_computer_from_the_network_users: >-
+  {{ w11cis_access_this_computer_from_the_network_additional_users +
+      _w11cis_access_this_computer_from_the_network_default_users }}
+_w11cis_adjust_memory_quotas_for_a_process_users: >-
+  {{ w11cis_adjust_memory_quotas_for_a_process_additional_users +
+      _w11cis_adjust_memory_quotas_for_a_process_default_users }}
+_w11cis_create_global_objects_users: >-
+  {{ w11cis_create_global_objects_additional_users + _w11cis_create_global_objects_default_users }}
+_w11cis_debug_programs_users: >-
+  {{ w11cis_debug_programs_additional_users + _w11cis_debug_programs_default_users }}
+_w11cis_generate_security_audits_users: >-
+  {{ w11cis_generate_security_audits_additional_users + _w11cis_generate_security_audits_default_users }}
+_w11cis_impersonate_a_client_after_authentication_users: >-
+  {{ w11cis_impersonate_a_client_after_authentication_additional_users +
+      _w11cis_impersonate_a_client_after_authentication_default_users }}
+_w11cis_perform_volume_maintenance_tasks_users: >-
+  {{ w11cis_perform_volume_maintenance_tasks_additional_users +
+      _w11cis_perform_volume_maintenance_tasks_default_users }}
+_w11cis_replace_a_process_level_token_users: >-
+  {{ w11cis_replace_a_process_level_token_additional_users + _w11cis_replace_a_process_level_token_default_users }}
+
+_w11cis_smart_card_removal_behavior_map:
+  lock: 1
+  logoff: 2
+  disconnect: 3
+
+_w11cis_smb_spn_target_name_validation_level_map:
+  accept: 1
+  required: 2
+
+_w11cis_ldap_client_encryption_requirements_map:
+  negotiate: 1
+  require: 2
+
+_w11cis_ldap_client_signing_requirements_map:
+  negotiate: 1
+  require: 2
+
+_w11cis_outgoing_ntlm_traffic_requirement_map:
+  audit_all: 1
+  deny_all: 2
+
+_w11cis_private_key_prompt_map:
+  prompt_first_use: 1
+  prompt_always: 2
+
+_w11cis_admin_uac_elevation_behavior_map:
+  prompt_for_credentials: 1
+  prompt_for_consent: 2
+
+_w11cis_rpc_listener_authentication_protocol_map:
+  negotiate: 0
+  kerberos: 1
+
+_w11cis_vbs_platform_security_level_map:
+  secure_boot_and_dma_protection: 3
+  secure_boot: 1
+
+_w11cis_fixed_drive_recovery_password_map:
+  allow: 2
+  require: 1
+
+_w11cis_fixed_drive_recovery_key_map:
+  allow: 2
+  require: 1
+
+_w11cis_windows_connect_pin_requirement_map:
+  always: 2
+  first_time: 1
+
+_w11cis_telemetry_level_map:
+  required: 1
+  'off': 0
+
+_w11cis_delivery_optimization_download_mode_map:
+  http_only: 0
+  lan: 1
+  group: 2
+  simple: 99
+  bypass: 100
+
+_w11cis_windows_ink_workspace_access_map:
+  disallow_above_lock: 1
+  disabled: 0
+
+_w11cis_disable_http_proxy_features_map:
+  disable_for_loopback_interfaces: 256
+  disable_all: 287
+
+_w11cis_smart_card_removal_behavior_value: >-
+  {{ _w11cis_smart_card_removal_behavior_map[w11cis_smart_card_removal_behavior] }}
+_w11cis_smb_spn_target_name_validation_level_value: >-
+  {{ _w11cis_smb_spn_target_name_validation_level_map[w11cis_smb_spn_target_name_validation_level] }}
+_w11cis_ldap_client_encryption_requirements_value: >-
+  {{ _w11cis_ldap_client_encryption_requirements_map[w11cis_ldap_client_encryption_requirements] }}
+_w11cis_ldap_client_signing_requirements_value: >-
+  {{ _w11cis_ldap_client_signing_requirements_map[w11cis_ldap_client_signing_requirements] }}
+_w11cis_outgoing_ntlm_traffic_requirement_value: >-
+  {{ _w11cis_outgoing_ntlm_traffic_requirement_map[w11cis_outgoing_ntlm_traffic_requirement] }}
+_w11cis_private_key_prompt_value: >-
+  {{ _w11cis_private_key_prompt_map[w11cis_private_key_prompt] }}
+_w11cis_admin_uac_elevation_behavior_value: >-
+  {{ _w11cis_admin_uac_elevation_behavior_map[w11cis_admin_uac_elevation_behavior] }}
+_w11cis_rpc_listener_authentication_protocol_value: >-
+  {{ _w11cis_rpc_listener_authentication_protocol_map[w11cis_rpc_listener_authentication_protocol] }}
+_w11cis_vbs_platform_security_level_value: >-
+  {{ _w11cis_vbs_platform_security_level_map[w11cis_vbs_platform_security_level] }}
+_w11cis_fixed_drive_recovery_password_value: >-
+  {{ _w11cis_fixed_drive_recovery_password_map[w11cis_fixed_drive_recovery_password] }}
+_w11cis_fixed_drive_recovery_key_value: >-
+  {{ _w11cis_fixed_drive_recovery_key_map[w11cis_fixed_drive_recovery_key] }}
+_w11cis_windows_connect_pin_requirement_value: >-
+  {{ _w11cis_windows_connect_pin_requirement_map[w11cis_windows_connect_pin_requirement] }}
+_w11cis_telemetry_level_value: >-
+  {{ _w11cis_telemetry_level_map[w11cis_telemetry_level] }}
+_w11cis_delivery_optimization_download_mode_value: >-
+  {{ _w11cis_delivery_optimization_download_mode_map[w11cis_delivery_optimization_download_mode] }}
+_w11cis_windows_ink_workspace_access_value: >-
+  {{ _w11cis_windows_ink_workspace_access_map[w11cis_windows_ink_workspace_access] }}
+_w11cis_disable_http_proxy_features_value: >-
+  {{ _w11cis_disable_http_proxy_features_map[w11cis_disable_http_proxy_features] }}

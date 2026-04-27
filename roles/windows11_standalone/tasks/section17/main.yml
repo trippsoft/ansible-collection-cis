@@ -1,0 +1,24 @@
+---
+- name: Execute the 17.1.x tasks
+  ansible.builtin.import_tasks: section17/17.1.x.yml
+
+- name: Execute the 17.2.x tasks
+  ansible.builtin.import_tasks: section17/17.2.x.yml
+
+- name: Execute the 17.3.x tasks
+  ansible.builtin.import_tasks: section17/17.3.x.yml
+
+- name: Execute the 17.5.x tasks
+  ansible.builtin.import_tasks: section17/17.5.x.yml
+
+- name: Execute the 17.6.x tasks
+  ansible.builtin.import_tasks: section17/17.6.x.yml
+
+- name: Execute the 17.7.x tasks
+  ansible.builtin.import_tasks: section17/17.7.x.yml
+
+- name: Execute the 17.8.x tasks
+  ansible.builtin.import_tasks: section17/17.8.x.yml
+
+- name: Execute the 17.9.x tasks
+  ansible.builtin.import_tasks: section17/17.9.x.yml

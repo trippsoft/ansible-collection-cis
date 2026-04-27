@@ -1,0 +1,47 @@
+---
+- name: >-
+    2.3.9.1 | L1 |
+    Ensure 'Microsoft network server: Amount of idle time required before suspending session'
+    is set to '15 or fewer minute(s)'
+  when:
+    - w11cis_rule_2_3_9_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: AutoDisconnect
+    data: "{{ w11cis_idle_smb_timeout_in_minutes }}"
+    type: dword
+    state: present
+
+- name: "2.3.9.2 | L1 | Ensure 'Microsoft network server: Digitally sign communications (always)' is set to 'Enabled'"
+  when:
+    - w11cis_rule_2_3_9_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: RequireSecuritySignature
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.9.3 | L1 | Ensure 'Microsoft network server: Disconnect clients when logon hours expire' is set to 'Enabled'
+  when:
+    - w11cis_rule_2_3_9_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: EnableForcedLogoff
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    2.3.9.4 | L1 |
+    Ensure 'Microsoft network server: Server SPN target name validation level'
+    is set to 'Accept if provided by client' or higher
+  when:
+    - w11cis_rule_2_3_9_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: SMBServerNameHardeningLevel
+    data: "{{ _w11cis_smb_spn_target_name_validation_level_value }}"
+    type: dword
+    state: present

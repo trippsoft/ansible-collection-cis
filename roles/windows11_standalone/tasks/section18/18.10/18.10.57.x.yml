@@ -1,0 +1,204 @@
+---
+- name: >-
+    18.10.57.2.2 | L2 |
+    Ensure 'Disable Cloud Clipboard integration for server-to-client data transfer' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_10_57_2_2_enabled
+    - w11cis_rule_18_10_57_2_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client
+    name: DisableCloudClipboardIntegration
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.2.3 | L1 | Ensure 'Do not allow passwords to be saved' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_2_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: DisablePasswordSaving
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.10.57.3.2.1 | L2 | Ensure 'Allow users to connect remotely by using Remote Desktop Services' is set to 'Disabled'
+  when:
+    - w11cis_rule_18_10_57_3_2_1_enabled
+    - w11cis_rule_18_10_57_3_2_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDenyTSConnections
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.1 | L2 | Ensure 'Allow UI Automation redirection' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_1_enabled
+    - w11cis_rule_18_10_57_3_3_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: EnableUiaRedirection
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.2 | L2 | Ensure 'Do not allow COM port redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_2_enabled
+    - w11cis_rule_18_10_57_3_3_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableCcm
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.3 | L1 | Ensure 'Do not allow drive redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableCdm
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.4 | L2 | Ensure 'Do not allow location redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_4_enabled
+    - w11cis_rule_18_10_57_3_3_4_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableLocationRedir
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.5 | L2 | Ensure 'Do not allow LPT port redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_5_enabled
+    - w11cis_rule_18_10_57_3_3_5_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableLPT
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.6 | L2 | Ensure 'Do not allow supported Plug and Play device redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_6_enabled
+    - w11cis_rule_18_10_57_3_3_6_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisablePNPRedir
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.3.7 | L2 | Ensure 'Do not allow WebAuthn redirection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_3_7_enabled
+    - w11cis_rule_18_10_57_3_3_7_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableWebAuthn
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.10.57.3.3.8 | L2 |
+    Ensure 'Restrict clipboard transfer from server to client'
+    is set to 'Enabled: Disable clipboard transfers from server to client'
+  when:
+    - w11cis_rule_18_10_57_3_3_8_enabled
+    - w11cis_rule_18_10_57_3_3_8_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: SCClipLevel
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.57.3.9.1 | L1 | Ensure 'Always prompt for password upon connection' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_9_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fPromptForPassword
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.9.2 | L1 | Ensure 'Require secure RPC communication' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_57_3_9_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fEncryptRPCTraffic
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.10.57.3.9.3 | L1 |
+    Ensure 'Require use of specific security layer for remote (RDP) connections' is set to 'Enabled: SSL'
+  when:
+    - w11cis_rule_18_10_57_3_9_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: SecurityLayer
+    data: 2
+    type: dword
+    state: present
+
+- name: >-
+    18.10.57.3.9.4 | L1 |
+    Ensure 'Require user authentication for remote connections by using Network Level Authentication'
+    is set to 'Enabled'
+  when:
+    - w11cis_rule_18_10_57_3_9_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: UserAuthentication
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.57.3.9.5 | L1 | Ensure 'Set client connection encryption level' is set to 'Enabled: High Level'"
+  when:
+    - w11cis_rule_18_10_57_3_9_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: MinEncryptionLevel
+    data: 3
+    type: dword
+    state: present
+
+- name: >-
+    18.10.57.3.10.1 | L2 |
+    Ensure 'Set time limit for active but idle Remote Desktop Services sessions'
+    is set to 'Enabled: 15 minutes or less, but not Never (0)'
+  when:
+    - w11cis_rule_18_10_57_3_10_1_enabled
+    - w11cis_rule_18_10_57_3_10_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: MaxIdleTime
+    data: "{{ w11cis_remote_desktop_services_max_idle_time_in_ms }}"
+    type: dword
+    state: present
+
+- name: "18.10.57.3.11.1 | L1 | Ensure 'Do not delete temp folders upon exit' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_57_3_11_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: DeleteTempDirsOnExit
+    data: 1
+    type: dword
+    state: present

@@ -1,0 +1,11 @@
+---
+- name: "2.3.4.1 | L2 | Ensure 'Devices: Prevent users from installing printer drivers' is set to 'Enabled'"
+  when:
+    - w11cis_rule_2_3_4_1_enabled
+    - w11cis_rule_2_3_4_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers
+    name: AddPrinterDrivers
+    data: 1
+    type: dword
+    state: present
