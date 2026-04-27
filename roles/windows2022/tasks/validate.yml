@@ -311,6 +311,23 @@
       The variable 'w2022cis_public_firewall_log_size_in_kb' is set to 16384 or more.
       Value: {{ w2022cis_public_firewall_log_size_in_kb }}
 
+- name: >-
+    Validate | 18.5.11 | L1 |
+    Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a
+    warning' is set to 'Enabled: 90% or less'
+  when:
+    - w2022cis_rule_18_5_11_enabled
+  ansible.builtin.assert:
+    that:
+      - w2022cis_security_log_warning_level | int <= 90
+      - w2022cis_security_log_warning_level | int >= 0
+    fail_msg: >-
+      The variable 'w2022cis_security_log_warning_level' must be set to between 0 and 90.
+      Value: {{ w2022cis_security_log_warning_level }}
+    success_msg: >-
+      The variable 'w2022cis_security_log_warning_level' is set to between 0 and 90.
+      Value: {{ w2022cis_security_log_warning_level }}
+
 - name: "Validate | 18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
   when:
     - w2022cis_rule_18_9_26_5_enabled
