@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-04-28
+
+### Collection
+
+- Added *windows11* role to collection.
+- Added *windows11_standalone* role to collection.
+
+### Role - rhel8
+
+- Various bug fixes and improvements.
+
+### Role - rhel9
+
+- Various bug fixes and improvements.
+
+### Role - windows2019
+
+- Various bug fixes and improvements.
+
+### Role - windows2022
+
+- Various bug fixes and improvements.
+
+### Role - windows2025
+
+- Various bug fixes and improvements.
+
 ## [1.3.3] - 2025-06-10
 
 ### Collection
