@@ -1,0 +1,10 @@
+---
+- name: "18.9.17.1 | L1 | Ensure 'Enable / disable CLFS logfile authentication' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_9_17_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Policies
+    name: ClfsAuthenticationChecking
+    data: 1
+    type: dword
+    state: present

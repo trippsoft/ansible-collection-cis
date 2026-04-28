@@ -1,0 +1,10 @@
+---
+- name: "18.9.54 | L1 | Ensure 'Configure the behavior of the sudo command' is set to 'Enabled: Disabled'"
+  when:
+    - w11cis_rule_18_9_54_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sudo
+    name: Enabled
+    data: 0
+    type: dword
+    state: present

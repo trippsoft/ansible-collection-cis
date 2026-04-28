@@ -1,0 +1,90 @@
+---
+- name: "9.3.1 | L1 | Ensure 'Windows Firewall: Public: Firewall state' is set to 'On (recommended)'"
+  when:
+    - w11cis_rule_9_3_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+    name: EnableFirewall
+    data: 1
+    type: dword
+    state: present
+
+- name: "9.3.2 | L1 | Ensure 'Windows Firewall: Public: Inbound connections' is set to 'Block (default)'"
+  when:
+    - w11cis_rule_9_3_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+    name: DefaultInboundAction
+    data: 1
+    type: dword
+    state: present
+
+- name: "9.3.3 | L1 | Ensure 'Windows Firewall: Public: Settings: Display a notification' is set to 'No'"
+  when:
+    - w11cis_rule_9_3_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+    name: DisableNotifications
+    data: 1
+    type: dword
+    state: present
+
+- name: "9.3.4 | L1 | Ensure 'Windows Firewall: Public: Settings: Apply local firewall rules' is set to 'No'"
+  when:
+    - w11cis_rule_9_3_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+    name: AllowLocalPolicyMerge
+    data: 0
+    type: dword
+    state: present
+
+- name: "9.3.5 | L1 | Ensure 'Windows Firewall: Public: Settings: Apply local connection security rules' is set to 'No'"
+  when:
+    - w11cis_rule_9_3_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+    name: AllowLocalIPsecPolicyMerge
+    data: 0
+    type: dword
+    state: present
+
+- name: "9.3.6 | L1 | Ensure 'Windows Firewall: Public: Logging: Name' is configured"
+  when:
+    - w11cis_rule_9_3_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+    name: LogFilePath
+    data: "{{ w11cis_public_firewall_log_path }}"
+    type: string
+    state: present
+
+- name: "9.3.7 | L1 | Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'"
+  when:
+    - w11cis_rule_9_3_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+    name: LogFileSize
+    data: "{{ w11cis_public_firewall_log_size_in_kb }}"
+    type: dword
+    state: present
+
+- name: "9.3.8 | L1 | Ensure 'Windows Firewall: Public: Logging: Log dropped packets' is set to 'Yes'"
+  when:
+    - w11cis_rule_9_3_8_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+    name: LogDroppedPackets
+    data: 1
+    type: dword
+    state: present
+
+- name: "9.3.9 | L1 | Ensure 'Windows Firewall: Public: Logging: Log successful connections' is set to 'Yes'"
+  when:
+    - w11cis_rule_9_3_9_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+    name: LogSuccessfulConnections
+    data: 1
+    type: dword
+    state: present

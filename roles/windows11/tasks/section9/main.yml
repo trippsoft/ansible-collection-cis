@@ -1,0 +1,9 @@
+---
+- name: Execute the 9.1.x tasks
+  ansible.builtin.import_tasks: section9/9.1.x.yml
+
+- name: Execute the 9.2.x tasks
+  ansible.builtin.import_tasks: section9/9.2.x.yml
+
+- name: Execute the 9.3.x tasks
+  ansible.builtin.import_tasks: section9/9.3.x.yml

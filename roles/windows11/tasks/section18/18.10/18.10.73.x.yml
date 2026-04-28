@@ -1,0 +1,10 @@
+---
+- name: "18.10.73.1 | L1 | Ensure 'Allow Recall to be enabled' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_73_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+    name: AllowRecallEnablement
+    data: 0
+    type: dword
+    state: present

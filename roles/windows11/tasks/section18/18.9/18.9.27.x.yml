@@ -1,0 +1,21 @@
+---
+- name: "18.9.27.1 | L1 | Ensure 'Allow Custom SSPs and APs to be loaded into LSASS' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_9_27_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: AllowCustomSSPsAPs
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.9.27.2 | L1 | Ensure 'Configures LSASS to run as a protected process' is set to 'Enabled: Enabled with UEFI Lock'
+  when:
+    - w11cis_rule_18_9_27_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RunAsPPL
+    data: 1
+    type: dword
+    state: present

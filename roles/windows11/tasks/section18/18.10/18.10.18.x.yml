@@ -1,0 +1,74 @@
+---
+- name: "18.10.18.1 | L2 | Ensure 'Enable App Installer' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_1_enabled
+    - w11cis_rule_18_10_18_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableAppInstaller
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.18.2 | L1 | Ensure 'Enable App Installer Experimental Features' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableExperimentalFeatures
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.18.3 | L1 | Ensure 'Enable App Installer Hash Override' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableHashOverride
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.18.4 | L1 | Ensure 'Enable App Installer Local Archive Malware Scan Override' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableLocalArchiveMalwareScanOverride
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.10.18.5 | L1 |
+    Ensure 'Enable App Installer Microsoft Store Source Certificate Validation Bypass' is set to 'Disabled'
+  when:
+    - w11cis_rule_18_10_18_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableBypassCertificatePinningForMicrosoftStore
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.18.6 | L1 | Ensure 'Enable App Installer ms-appinstaller protocol' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableMSAppInstallerProtocol
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.10.18.7 | L2 | Ensure 'Enable Windows Package Manager command line interfaces' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_18_7_enabled
+    - w11cis_rule_18_10_18_7_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppInstaller
+    name: EnableWindowsPackageManagerCommandLineInterfaces
+    data: 0
+    type: dword
+    state: present

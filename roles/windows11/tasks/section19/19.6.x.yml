@@ -1,0 +1,13 @@
+---
+- name: "19.6.6.1.1 | L2 | Ensure 'Turn off Help Experience Improvement Program' is set to 'Enabled'"
+  loop: "{{ _w11cis_user_hives.sub_keys }}"
+  when:
+    - w11cis_rule_19_6_6_1_1_enabled
+    - w11cis_rule_19_6_6_1_1_force or _w11cis_level2
+    - ("Classes" not in item)
+  ansible.windows.win_regedit:
+    path: "HKU:\\{{ item }}\\SOFTWARE\\Policies\\Microsoft\\Assistance\\Client\\1.0"
+    name: NoImplicitFeedback
+    data: 1
+    type: dword
+    state: present

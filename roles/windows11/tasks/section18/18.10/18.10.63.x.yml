@@ -1,0 +1,11 @@
+---
+- name: "18.10.63.1 | L2 | Ensure 'Turn off KMS Client Online AVS Validation' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_63_1_enabled
+    - w11cis_rule_18_10_63_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform
+    name: NoGenTicket
+    data: 1
+    type: dword
+    state: present

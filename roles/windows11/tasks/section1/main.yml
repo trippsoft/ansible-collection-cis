@@ -1,0 +1,6 @@
+---
+- name: Execute the 1.1.x tasks
+  ansible.builtin.import_tasks: section1/1.1.x.yml
+
+- name: Execute the 1.2.x tasks
+  ansible.builtin.import_tasks: section1/1.2.x.yml

@@ -1,0 +1,24 @@
+---
+- name: "18.9.38.1 | L1 | Ensure 'Enable RPC Endpoint Mapper Client Authentication' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_9_38_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Rpc
+    name: EnableAuthEpResolution
+    data: 1
+    type: dword
+    state: present
+  notify:
+    - _w11cis_reboot_windows
+
+- name: "18.9.38.2 | L1 | Ensure 'Restrict Unauthenticated RPC clients' is set to 'Enabled: Authenticated'"
+  when:
+    - w11cis_rule_18_9_38_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Rpc
+    name: RestrictRemoteClients
+    data: 1
+    type: dword
+    state: present
+  notify:
+    - _w11cis_reboot_windows

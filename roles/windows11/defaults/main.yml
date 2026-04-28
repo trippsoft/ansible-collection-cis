@@ -108,6 +108,17 @@ w11cis_rule_2_3_4_1_enabled: true
 
 w11cis_rule_2_3_4_1_force: false
 
+# 2.3.6 - Domain member
+
+w11cis_rule_2_3_6_1_enabled: true
+w11cis_rule_2_3_6_2_enabled: true
+w11cis_rule_2_3_6_3_enabled: true
+w11cis_rule_2_3_6_4_enabled: true
+w11cis_rule_2_3_6_5_enabled: true
+w11cis_rule_2_3_6_6_enabled: true
+
+w11cis_maximum_machine_account_password_age_in_days: 30
+
 # 2.3.7 - Interactive logon
 
 w11cis_rule_2_3_7_1_enabled: true
@@ -117,11 +128,14 @@ w11cis_rule_2_3_7_4_enabled: true
 w11cis_rule_2_3_7_5_enabled: true
 w11cis_rule_2_3_7_6_enabled: true
 w11cis_rule_2_3_7_7_enabled: true
+w11cis_rule_2_3_7_8_enabled: true
 
 w11cis_rule_2_3_7_1_force: false
+w11cis_rule_2_3_7_6_force: false
 
 w11cis_inactivity_timeout_in_seconds: 900
 
+w11cis_cached_logons_count: 4
 w11cis_password_expiry_warning_in_days: 14
 w11cis_smart_card_removal_behavior: lock
 
@@ -290,6 +304,19 @@ w11cis_rule_5_39_force: false
 
 # 9 - Windows Defender Firewall with Advanced Security (formerly Windows Firewall with Advanced Security)
 
+# 9.1 - Domain Profile
+
+w11cis_rule_9_1_1_enabled: true
+w11cis_rule_9_1_2_enabled: true
+w11cis_rule_9_1_3_enabled: true
+w11cis_rule_9_1_4_enabled: true
+w11cis_rule_9_1_5_enabled: true
+w11cis_rule_9_1_6_enabled: true
+w11cis_rule_9_1_7_enabled: true
+
+w11cis_domain_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
+w11cis_domain_firewall_log_size_in_kb: 16384
+
 # 9.2 - Private Profile
 
 w11cis_rule_9_2_1_enabled: true
@@ -312,6 +339,8 @@ w11cis_rule_9_3_4_enabled: true
 w11cis_rule_9_3_5_enabled: true
 w11cis_rule_9_3_6_enabled: true
 w11cis_rule_9_3_7_enabled: true
+w11cis_rule_9_3_8_enabled: true
+w11cis_rule_9_3_9_enabled: true
 
 w11cis_public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
 w11cis_public_firewall_log_size_in_kb: 16384
@@ -393,6 +422,7 @@ w11cis_rule_18_4_3_enabled: true
 w11cis_rule_18_4_4_enabled: true
 w11cis_rule_18_4_5_enabled: true
 w11cis_rule_18_4_6_enabled: true
+w11cis_rule_18_4_7_enabled: true
 
 # 18.5 - MSS (Legacy)
 
@@ -423,8 +453,10 @@ w11cis_security_log_warning_level: 90
 
 w11cis_rule_18_6_4_1_enabled: true
 w11cis_rule_18_6_4_2_enabled: true
+w11cis_rule_18_6_4_3_enabled: true
+w11cis_rule_18_6_4_4_enabled: true
 
-w11cis_rule_18_6_4_2_force: false
+w11cis_rule_18_6_4_3_force: false
 
 w11cis_netbios_dns_resolution_behavior: disabled_on_public_networks
 
@@ -496,6 +528,7 @@ w11cis_rule_18_6_20_2_force: false
 # 18.6.21 - Windows Connection Manager
 
 w11cis_rule_18_6_21_1_enabled: true
+w11cis_rule_18_6_21_2_enabled: true
 
 # 18.6.23 - WLAN Service
 
@@ -592,6 +625,9 @@ w11cis_rule_18_9_17_1_enabled: true
 # 18.9.19 - Group Policy
 
 w11cis_rule_18_9_19_2_enabled: true
+w11cis_rule_18_9_19_3_enabled: true
+w11cis_rule_18_9_19_4_enabled: true
+w11cis_rule_18_9_19_5_enabled: true
 
 # 18.9.20 - Internet Communication Management
 
@@ -635,6 +671,24 @@ w11cis_rule_18_9_24_1_enabled: true
 
 w11cis_rule_18_9_24_1_force: false
 
+# 18.9.26 - LAPS
+
+w11cis_rule_18_9_26_1_enabled: true
+w11cis_rule_18_9_26_2_enabled: true
+w11cis_rule_18_9_26_3_enabled: true
+w11cis_rule_18_9_26_4_enabled: true
+w11cis_rule_18_9_26_5_enabled: true
+w11cis_rule_18_9_26_6_enabled: true
+w11cis_rule_18_9_26_7_enabled: true
+w11cis_rule_18_9_26_8_enabled: true
+
+w11cis_laps_directory: ad
+w11cis_laps_password_complexity: all_characters
+w11cis_laps_password_length: 15
+w11cis_laps_password_age_in_days: 30
+w11cis_laps_post_authentication_grace_period_in_hours: 8
+w11cis_laps_post_authentication_actions: reset_password_and_logoff
+
 # 18.9.27 - Local Security Authority
 
 w11cis_rule_18_9_27_1_enabled: true
@@ -652,6 +706,15 @@ w11cis_rule_18_9_29_1_enabled: true
 w11cis_rule_18_9_29_2_enabled: true
 w11cis_rule_18_9_29_3_enabled: true
 w11cis_rule_18_9_29_4_enabled: true
+w11cis_rule_18_9_29_5_enabled: true
+w11cis_rule_18_9_29_6_enabled: true
+w11cis_rule_18_9_29_7_enabled: true
+
+# 18.9.31 - Net Logon
+
+# 18.9.31.1 - DC Locator DNS Records
+
+w11cis_rule_18_9_31_1_1_enabled: true
 
 # 18.9.33 - OS Policies
 
@@ -685,6 +748,10 @@ w11cis_rule_18_9_37_2_enabled: true
 w11cis_rule_18_9_38_1_enabled: true
 w11cis_rule_18_9_38_2_enabled: true
 
+# 18.9.41 - Security Account Manager
+
+w11cis_rule_18_9_41_1_enabled: true
+
 # 18.9.49 - Troubleshooting and Diagnostics
 
 # 18.9.49.5 - Microsoft Support Diagnostic Tool
@@ -708,6 +775,7 @@ w11cis_rule_18_9_51_1_force: false
 # 18.9.53 - Windows Time Service
 
 w11cis_rule_18_9_53_1_1_enabled: true
+w11cis_rule_18_9_53_1_2_enabled: true
 
 w11cis_rule_18_9_54_enabled: true
 
@@ -766,6 +834,9 @@ w11cis_rule_18_10_10_1_7_enabled: true
 w11cis_rule_18_10_10_1_8_enabled: true
 w11cis_rule_18_10_10_1_9_enabled: true
 w11cis_rule_18_10_10_1_10_enabled: true
+w11cis_rule_18_10_10_1_11_enabled: true
+w11cis_rule_18_10_10_1_12_enabled: true
+w11cis_rule_18_10_10_1_13_enabled: true
 
 w11cis_rule_18_10_10_1_1_force: false
 w11cis_rule_18_10_10_1_2_force: false
@@ -777,6 +848,9 @@ w11cis_rule_18_10_10_1_7_force: false
 w11cis_rule_18_10_10_1_8_force: false
 w11cis_rule_18_10_10_1_9_force: false
 w11cis_rule_18_10_10_1_10_force: false
+w11cis_rule_18_10_10_1_11_force: false
+w11cis_rule_18_10_10_1_12_force: false
+w11cis_rule_18_10_10_1_13_force: false
 
 w11cis_fixed_drive_recovery_password: allow
 w11cis_fixed_drive_recovery_key: allow
@@ -791,6 +865,9 @@ w11cis_rule_18_10_10_2_5_enabled: true
 w11cis_rule_18_10_10_2_6_enabled: true
 w11cis_rule_18_10_10_2_7_enabled: true
 w11cis_rule_18_10_10_2_8_enabled: true
+w11cis_rule_18_10_10_2_9_enabled: true
+w11cis_rule_18_10_10_2_10_enabled: true
+w11cis_rule_18_10_10_2_11_enabled: true
 
 w11cis_rule_18_10_10_2_1_force: false
 w11cis_rule_18_10_10_2_2_force: false
@@ -800,6 +877,9 @@ w11cis_rule_18_10_10_2_5_force: false
 w11cis_rule_18_10_10_2_6_force: false
 w11cis_rule_18_10_10_2_7_force: false
 w11cis_rule_18_10_10_2_8_force: false
+w11cis_rule_18_10_10_2_9_force: false
+w11cis_rule_18_10_10_2_10_force: false
+w11cis_rule_18_10_10_2_11_force: false
 
 # 18.10.10.3 - Removable Data Drives
 
@@ -815,6 +895,9 @@ w11cis_rule_18_10_10_3_9_enabled: true
 w11cis_rule_18_10_10_3_10_enabled: true
 w11cis_rule_18_10_10_3_11_enabled: true
 w11cis_rule_18_10_10_3_12_enabled: true
+w11cis_rule_18_10_10_3_13_enabled: true
+w11cis_rule_18_10_10_3_14_enabled: true
+w11cis_rule_18_10_10_3_15_enabled: true
 
 w11cis_rule_18_10_10_3_1_force: false
 w11cis_rule_18_10_10_3_2_force: false
@@ -828,6 +911,9 @@ w11cis_rule_18_10_10_3_9_force: false
 w11cis_rule_18_10_10_3_10_force: false
 w11cis_rule_18_10_10_3_11_force: false
 w11cis_rule_18_10_10_3_12_force: false
+w11cis_rule_18_10_10_3_13_force: false
+w11cis_rule_18_10_10_3_14_force: false
+w11cis_rule_18_10_10_3_15_force: false
 
 # 18.10.11 - Camera
 
@@ -946,6 +1032,88 @@ w11cis_rule_18_10_40_1_force: false
 
 w11cis_rule_18_10_41_1_enabled: true
 
+# 18.10.42 - Microsoft Defender Antivirus (formerly Windows Defender Antivirus)
+
+# 18.10.42.4 - Features
+
+w11cis_rule_18_10_42_4_1_enabled: true
+
+# 18.10.42.5 - MAPS
+
+w11cis_rule_18_10_42_5_1_enabled: true
+w11cis_rule_18_10_42_5_2_enabled: true
+
+# 18.10.42.6 - Microsoft Defender Exploit Guard (formerly Windows Defender Exploit Guard)
+
+# 18.10.42.6.1 - Attack Surface Reduction
+
+w11cis_rule_18_10_42_6_1_1_enabled: true
+w11cis_rule_18_10_42_6_1_2_enabled: true
+
+# 18.10.42.6.3 - Network Protection
+
+w11cis_rule_18_10_42_6_3_1_enabled: true
+
+# 18.10.42.7 - MpEngine
+
+w11cis_rule_18_10_42_7_1_enabled: true
+
+w11cis_rule_18_10_42_7_1_force: false
+
+# 18.10.42.8 - Network Inspection System
+
+w11cis_rule_18_10_42_8_1_enabled: true
+
+w11cis_rule_18_10_42_8_1_force: false
+
+# 18.10.42.10 - Real-time Protection
+
+w11cis_rule_18_10_42_10_1_enabled: true
+w11cis_rule_18_10_42_10_2_enabled: true
+w11cis_rule_18_10_42_10_3_enabled: true
+w11cis_rule_18_10_42_10_4_enabled: true
+w11cis_rule_18_10_42_10_5_enabled: true
+
+# 18.10.42.11 - Remediation
+
+# 18.10.42.11.1 - Behavioral Network Blocks
+
+# 18.10.42.11.1.1 - Brute-Force Protection
+
+w11cis_rule_18_10_42_11_1_1_1_enabled: true
+w11cis_rule_18_10_42_11_1_1_2_enabled: true
+
+w11cis_rule_18_10_42_11_1_1_1_force: false
+
+w11cis_brute_force_protection_aggressiveness: medium
+w11cis_brute_force_protection_configured_state: audit
+
+# 18.10.42.11.1.2 - Remote Encryption Protection
+
+w11cis_rule_18_10_42_11_1_2_1_enabled: true
+
+w11cis_rule_18_10_42_11_1_2_1_force: false
+
+# 18.10.42.12 - Reporting
+
+w11cis_rule_18_10_42_12_1_enabled: true
+
+w11cis_rule_18_10_42_12_1_force: false
+
+w11cis_remote_encryption_protection_aggressiveness: medium
+
+# 18.10.42.13 - Scan
+
+w11cis_rule_18_10_42_13_1_enabled: true
+w11cis_rule_18_10_42_13_2_enabled: true
+w11cis_rule_18_10_42_13_3_enabled: true
+w11cis_rule_18_10_42_13_4_enabled: true
+w11cis_rule_18_10_42_13_5_enabled: true
+
+w11cis_rule_18_10_42_16_enabled: true
+
+w11cis_rule_18_10_42_17_enabled: true
+
 # 18.10.43 - Microsoft Defender Application Guard (formerly Windows Defender Application Guard)
 
 w11cis_rule_18_10_43_1_enabled: true
@@ -1022,8 +1190,10 @@ w11cis_rule_18_10_57_3_9_5_enabled: true
 # 18.10.57.3.10 - Session Time Limits
 
 w11cis_rule_18_10_57_3_10_1_enabled: true
+w11cis_rule_18_10_57_3_10_2_enabled: true
 
 w11cis_rule_18_10_57_3_10_1_force: false
+w11cis_rule_18_10_57_3_10_2_force: false
 
 w11cis_remote_desktop_services_max_idle_time_in_ms: 900000
 

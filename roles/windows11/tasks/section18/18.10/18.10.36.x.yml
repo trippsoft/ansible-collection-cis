@@ -1,0 +1,11 @@
+---
+- name: "18.10.36.1 | L2 | Ensure 'Turn off location' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_36_1_enabled
+    - w11cis_rule_18_10_36_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors
+    name: DisableLocation
+    data: 1
+    type: dword
+    state: present

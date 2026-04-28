@@ -1,0 +1,39 @@
+---
+- name: Execute the 2.2.x tasks
+  ansible.builtin.import_tasks: section2/2.2.x.yml
+
+- name: Execute the 2.3.1.x tasks
+  ansible.builtin.import_tasks: section2/2.3.1.x.yml
+
+- name: Execute the 2.3.2.x tasks
+  ansible.builtin.import_tasks: section2/2.3.2.x.yml
+
+- name: Execute the 2.3.4.x tasks
+  ansible.builtin.import_tasks: section2/2.3.4.x.yml
+
+- name: Execute the 2.3.6.x tasks
+  ansible.builtin.import_tasks: section2/2.3.6.x.yml
+
+- name: Execute the 2.3.7.x tasks
+  ansible.builtin.import_tasks: section2/2.3.7.x.yml
+
+- name: Execute the 2.3.8.x tasks
+  ansible.builtin.import_tasks: section2/2.3.8.x.yml
+
+- name: Execute the 2.3.9.x tasks
+  ansible.builtin.import_tasks: section2/2.3.9.x.yml
+
+- name: Execute the 2.3.10.x tasks
+  ansible.builtin.import_tasks: section2/2.3.10.x.yml
+
+- name: Execute the 2.3.11.x tasks
+  ansible.builtin.import_tasks: section2/2.3.11.x.yml
+
+- name: Execute the 2.3.14.x tasks
+  ansible.builtin.import_tasks: section2/2.3.14.x.yml
+
+- name: Execute the 2.3.15.x tasks
+  ansible.builtin.import_tasks: section2/2.3.15.x.yml
+
+- name: Execute the 2.3.17.x tasks
+  ansible.builtin.import_tasks: section2/2.3.17.x.yml

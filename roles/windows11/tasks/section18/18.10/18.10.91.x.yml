@@ -1,0 +1,11 @@
+---
+- name: "18.10.91.1 | L2 | Ensure 'Allow Remote Shell Access' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_10_91_1_enabled
+    - w11cis_rule_18_10_91_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS
+    name: AllowRemoteShellAccess
+    data: 0
+    type: dword
+    state: present

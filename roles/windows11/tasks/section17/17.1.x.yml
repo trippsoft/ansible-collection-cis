@@ -1,0 +1,26 @@
+---
+- name: "17.1.1 | L1 | Ensure 'Audit Credential Validation' is set to 'Success and Failure'"
+  when:
+    - w11cis_rule_17_1_1_enabled
+  block:
+    - name: "17.1.1 | L1 | Ensure 'Audit Credential Validation' is set to 'Success and Failure' | Get status"
+      check_mode: false
+      ansible.windows.win_shell: >-
+        AuditPol /get /subcategory:"{0cce923f-69ae-11d9-bed3-505054503030}" -r |
+          ConvertFrom-Csv |
+          Select-Object -expand "Inclusion Setting"
+      changed_when: false
+      failed_when: false
+      register: _w11cis_rule_17_1_1_audit
+
+    - name: "17.1.1 | L1 | Ensure 'Audit Credential Validation' is set to 'Success and Failure' | Success"
+      when:
+        - ("Success" not in _w11cis_rule_17_1_1_audit.stdout)
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce923f-69ae-11d9-bed3-505054503030}" /success:enable
+      changed_when: true
+
+    - name: "17.1.1 | L1 | Ensure 'Audit Credential Validation' is set to 'Success and Failure' | Failure"
+      when:
+        - ("Failure" not in _w11cis_rule_17_1_1_audit.stdout)
+      ansible.windows.win_shell: AuditPol /set /subcategory:"{0cce923f-69ae-11d9-bed3-505054503030}" /failure:enable
+      changed_when: true

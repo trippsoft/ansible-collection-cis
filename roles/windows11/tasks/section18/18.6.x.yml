@@ -1,0 +1,466 @@
+---
+- name: "18.6.4.1 | L1 | Ensure 'Configure multicast DNS (mDNS) protocol' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_4_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
+    name: EnableMDNS
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.6.4.2 | L1 |
+    Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'
+  when:
+    - w11cis_rule_18_6_4_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
+    name: EnableNetbios
+    data: "{{ _w11cis_netbios_dns_resolution_behavior_value }}"
+    type: dword
+    state: present
+
+- name: "18.6.4.3 | L2 | Ensure 'Turn off default IPv6 DNS Servers' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_4_3_enabled
+    - w11cis_rule_18_6_4_3_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
+    name: DisableIPv6DefaultDnsServers
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.4.4 | L1 | Ensure 'Turn off multicast name resolution' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_4_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
+    name: EnableMulticast
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.6.5.1 | L2 | Ensure 'Enable Font Providers' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_5_1_enabled
+    - w11cis_rule_18_6_5_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: EnableFontProviders
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.6.7.1 | L1 | Ensure 'Audit client does not support encryption' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_7_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: AuditClientDoesNotSupportEncryption
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.7.2 | L1 | Ensure 'Audit client does not support signing' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_7_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: AuditClientDoesNotSupportSigning
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.7.3 | L1 | Ensure 'Audit insecure guest logon' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_7_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: AuditInsecureGuestLogon
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.7.4 | L1 | Ensure 'Enable authentication rate limiter' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_7_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: EnableAuthRateLimiter
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.7.5 | L1 | Ensure 'Enable remote mailslots' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_7_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Bowser
+    name: EnableMailslots
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.6.7.6 | L1 | Ensure 'Mandate the minimum version of SMB' is set to 'Enabled: 3.1.1'"
+  when:
+    - w11cis_rule_18_6_7_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: MinSmb2Dialect
+    data: 785
+    type: dword
+    state: present
+
+- name: >-
+    18.6.7.7 | L1 | Ensure 'Set authentication rate limiter delay (milliseconds)' is set to 'Enabled: 2000' or more
+  when:
+    - w11cis_rule_18_6_7_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanServer
+    name: InvalidAuthenticationDelayTimeInMs
+    data: "{{ w11cis_smb_authentication_rate_limiter_delay_in_ms }}"
+    type: dword
+    state: present
+
+- name: "18.6.8.1 | L1 | Ensure 'Audit insecure guest logon' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_8_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: AuditInsecureGuestLogon
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.8.2 | L1 | Ensure 'Audit server does not support encryption' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_8_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: AuditServerDoesNotSupportEncryption
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.8.3 | L1 | Ensure 'Audit server does not support signing' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_8_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: AuditServerDoesNotSupportSigning
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.8.4 | L1 | Ensure 'Enable insecure guest logons' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_8_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: AllowInsecureGuestAuth
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.6.8.5 | L1 | Ensure 'Enable remote mailslots' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_8_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider
+    name: EnableMailslots
+    data: 0
+    type: dword
+    state: present
+
+- name: "18.6.8.6 | L1 | Ensure 'Mandate the minimum version of SMB' is set to 'Enabled: 3.1.1'"
+  when:
+    - w11cis_rule_18_6_8_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: MinSmb2Dialect
+    data: 785
+    type: dword
+    state: present
+
+- name: "18.6.8.7 | L1 | Ensure 'Require Encryption' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_8_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: RequireEncryption
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.6.9.1 | L2 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_9_1_enabled
+    - w11cis_rule_18_6_9_1_force or _w11cis_level2
+  block:
+    - name: "18.6.9.1 | L2 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | AllowLLTDIOOnDomain"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: AllowLLTDIOOnDomain
+        data: 0
+        type: dword
+        state: present
+
+    - name: "18.6.9.1 | L2 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | AllowLLTDIOOnPublicNet"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: AllowLLTDIOOnPublicNet
+        data: 0
+        type: dword
+        state: present
+
+    - name: "18.6.9.1 | L2 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | EnableLLTDIO"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: EnableLLTDIO
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.9.1 | L2 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | ProhibitLLTDIOOnPrivateNet
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: ProhibitLLTDIOOnPrivateNet
+        data: 0
+        type: dword
+        state: present
+
+- name: "18.6.9.2 | L2 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_9_2_enabled
+    - w11cis_rule_18_6_9_2_force or _w11cis_level2
+  block:
+    - name: "18.6.9.2 | L2 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | AllowRspndrOnDomain"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: AllowRspndrOnDomain
+        data: 0
+        type: dword
+        state: present
+
+    - name: "18.6.9.2 | L2 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | AllowRspndrOnPublicNet"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: AllowRspndrOnPublicNet
+        data: 0
+        type: dword
+        state: present
+
+    - name: "18.6.9.2 | L2 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | EnableRspndr"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: EnableRspndr
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.9.2 | L2 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | ProhibitRspndrOnPrivateNet
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD
+        name: ProhibitRspndrOnPrivateNet
+        data: 0
+        type: dword
+        state: present
+
+- name: "18.6.10.2 | L2 | Ensure 'Turn off Microsoft Peer-to-Peer Networking Services' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_10_2_enabled
+    - w11cis_rule_18_6_10_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Peernet
+    name: Disabled
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.6.11.2 | L1 |
+    Ensure 'Prohibit installation and configuration of Network Bridge on your DNS domain network' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_6_11_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections
+    name: NC_AllowNetBridge_NLA
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.6.11.3 | L1 | Ensure 'Prohibit use of Internet Connection Sharing on your DNS domain network' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_6_11_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections
+    name: NC_ShowSharedAccessUI
+    data: 0
+    type: dword
+    state: present
+
+- name: >-
+    18.6.14.1 | L1 |
+    Ensure 'Hardened UNC Paths'
+    is set to 'Enabled, with "Require Mutual Authentication", "Require Integrity", and "Require Privacy"
+    set for all NETLOGON and SYSVOL shares'
+  when:
+    - w11cis_rule_18_6_14_1_enabled
+  block:
+    - name: >-
+        18.6.14.1 | L1 |
+        Ensure 'Hardened UNC Paths'
+        is set to 'Enabled, with "Require Mutual Authentication", "Require Integrity", and "Require Privacy"
+        set for all NETLOGON and SYSVOL shares' |
+        NETLOGON
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths
+        name: "\\\\*\\NETLOGON"
+        data: "RequireMutualAuthentication=1, RequireIntegrity=1, RequirePrivacy=1"
+        type: string
+        state: present
+      notify:
+        - _w11cis_reboot_windows
+
+    - name: >-
+        18.6.14.1 | L1 |
+        Ensure 'Hardened UNC Paths'
+        is set to 'Enabled, with "Require Mutual Authentication", "Require Integrity", and "Require Privacy"
+        set for all NETLOGON and SYSVOL shares' |
+        SYSVOL
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths
+        name: "\\\\*\\SYSVOL"
+        data: "RequireMutualAuthentication=1, RequireIntegrity=1, RequirePrivacy=1"
+        type: string
+        state: present
+      notify:
+        - _w11cis_reboot_windows
+
+- name: "18.6.19.2.1 | L2 | Disable IPv6 (Ensure TCPIP6 Parameter 'DisabledComponents' is set to '0xff (255)')"
+  when:
+    - w11cis_rule_18_6_19_2_1_enabled
+    - w11cis_rule_18_6_19_2_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
+    name: DisabledComponents
+    data: 255
+    type: dword
+    state: present
+  notify:
+    - _w11cis_reboot_windows
+
+- name: "18.6.20.1 | L2 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'"
+  when:
+    - w11cis_rule_18_6_20_1_enabled
+    - w11cis_rule_18_6_20_1_force or _w11cis_level2
+  block:
+    - name: >-
+        18.6.20.1 | L2 |
+        Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' |
+        EnableRegistrars
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars
+        name: EnableRegistrars
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.20.1 | L2 |
+        Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' |
+        DisableUPnPRegistrar
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars
+        name: DisableUPnPRegistrar
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.20.1 | L2 |
+        Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' |
+        DisableInBand802DOT11Registrar
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars
+        name: DisableInBand802DOT11Registrar
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.20.1 | L2 |
+        Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' |
+        DisableFlashConfigRegistrar
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars
+        name: DisableFlashConfigRegistrar
+        data: 0
+        type: dword
+        state: present
+
+    - name: >-
+        18.6.20.1 | L2 |
+        Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' |
+        DisableWPDRegistrar
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars
+        name: DisableWPDRegistrar
+        data: 0
+        type: dword
+        state: present
+
+- name: "18.6.20.2 | L2 | Ensure 'Prohibit access of the Windows Connect Now wizards' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_6_20_2_enabled
+    - w11cis_rule_18_6_20_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\UI
+    name: DisableWcnUi
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.6.21.1 | L1 |
+    Ensure 'Minimize the number of simultaneous connections to the Internet or a Windows Domain'
+    is set to 'Enabled: 3 = Prevent Wi-Fi when on Ethernet'
+  when:
+    - w11cis_rule_18_6_21_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
+    name: fMinimizeConnections
+    data: 3
+    type: dword
+    state: present
+
+- name: >-
+    18.6.21.2 | L1 |
+    Ensure 'Prohibit connection to non-domain networks when connected to domain authenticated network'
+    is set to 'Enabled'
+  when:
+    - w11cis_rule_18_6_21_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
+    name: fBlockNonDomain
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.6.23.2.1 | L1 |
+    Ensure 'Allow Windows to automatically connect to suggested open hotspots, to networks shared by contacts, and to
+    hotspots offering paid services' is set to 'Disabled'
+  when:
+    - w11cis_rule_18_6_23_2_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\WcmSvc\WiFiNetworkManager\Config
+    name: AutoConnectAllowedOEM
+    data: 0
+    type: dword
+    state: present

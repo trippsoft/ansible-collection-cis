@@ -1,0 +1,372 @@
+---
+- name: "2.2.1 | L1 | Ensure 'Access Credential Manager as a trusted caller' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_1_enabled
+  ansible.windows.win_user_right:
+    name: SeTrustedCredManAccessPrivilege
+    users: []
+    action: set
+
+- name: "2.2.2 | L1 | Ensure 'Access this computer from the network' is set to 'Administrators, Remote Desktop Users'"
+  when:
+    - w11cis_rule_2_2_2_enabled
+  ansible.windows.win_user_right:
+    name: SeNetworkLogonRight
+    users: "{{ _w11cis_access_this_computer_from_the_network_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.3 | L1 | Ensure 'Act as part of the operating system' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_3_enabled
+  ansible.windows.win_user_right:
+    name: SeTcbPrivilege
+    users: []
+    action: set
+
+- name: >-
+    2.2.4 | L1 | Ensure 'Adjust memory quotas for a process' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'
+  when:
+    - w11cis_rule_2_2_4_enabled
+  ansible.windows.win_user_right:
+    name: SeIncreaseQuotaPrivilege
+    users: "{{ _w11cis_adjust_memory_quotas_for_a_process_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.5 | L1 | Ensure 'Allow log on locally' is set to 'Administrators, Users'"
+  when:
+    - w11cis_rule_2_2_5_enabled
+  ansible.windows.win_user_right:
+    name: SeInteractiveLogonRight
+    users:
+      - Administrators
+      - Users
+    action: set
+
+- name: >-
+    2.2.6 | L1 | Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users'
+  when:
+    - w11cis_rule_2_2_6_enabled
+  ansible.windows.win_user_right:
+    name: SeRemoteInteractiveLogonRight
+    users:
+      - Administrators
+      - Remote Desktop Users
+    action: set
+
+- name: "2.2.7 | L1 | Ensure 'Back up files and directories' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_7_enabled
+  ansible.windows.win_user_right:
+    name: SeBackupPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.8 | L1 | Ensure 'Change the system time' is set to 'Administrators, LOCAL SERVICE'"
+  when:
+    - w11cis_rule_2_2_8_enabled
+  ansible.windows.win_user_right:
+    name: SeSystemTimePrivilege
+    users:
+      - Administrators
+      - LOCAL SERVICE
+    action: set
+
+- name: "2.2.9 | L1 | Ensure 'Create a pagefile' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_9_enabled
+  ansible.windows.win_user_right:
+    name: SeCreatePagefilePrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.10 | L1 | Ensure 'Create a token object' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_10_enabled
+  ansible.windows.win_user_right:
+    name: SeCreateTokenPrivilege
+    users: []
+    action: set
+
+- name: >-
+    2.2.11 | L1 | Ensure 'Create global objects' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
+  when:
+    - w11cis_rule_2_2_11_enabled
+  ansible.windows.win_user_right:
+    name: SeCreateGlobalPrivilege
+    users: "{{ _w11cis_create_global_objects_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.12 | L1 | Ensure 'Create permanent shared objects' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_12_enabled
+  ansible.windows.win_user_right:
+    name: SeCreatePermanentPrivilege
+    users: []
+    action: set
+
+- name: "2.2.13 | L1 | Ensure 'Create symbolic links' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_13_enabled
+  block:
+    - name: "2.2.13 | L1 | Ensure 'Create symbolic links' is set to 'Administrators' | No Hyper-V"
+      when:
+        - not _w11cis_hyperv
+      ansible.windows.win_user_right:
+        name: SeCreateSymbolicLinkPrivilege
+        users:
+          - Administrators
+        action: set
+
+    - name: "2.2.13 | L1 | Ensure 'Create symbolic links' is set to 'Administrators' | With Hyper-V"
+      when:
+        - _w11cis_hyperv
+      ansible.windows.win_user_right:
+        name: SeCreateSymbolicLinkPrivilege
+        users:
+          - Administrators
+          - NT VIRTUAL MACHINE\Virtual Machines
+        action: set
+
+- name: "2.2.14 | L1 | Ensure 'Debug programs' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_14_enabled
+  ansible.windows.win_user_right:
+    name: SeDebugPrivilege
+    users: "{{ _w11cis_debug_programs_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.15 | L1 | Ensure 'Deny access to this computer from the network' to include 'Guests, Local account'"
+  when:
+    - w11cis_rule_2_2_15_enabled
+  ansible.windows.win_user_right:
+    name: SeDenyNetworkLogonRight
+    users:
+      - Guests
+      - Local account
+    action: add
+
+- name: "2.2.16 | L1 | Ensure 'Deny log on as a batch job' to include 'Guests'"
+  when:
+    - w11cis_rule_2_2_16_enabled
+  ansible.windows.win_user_right:
+    name: SeDenyBatchLogonRight
+    users:
+      - Guests
+    action: add
+
+- name: "2.2.17 | L1 | Ensure 'Deny log on as a service' to include 'Guests'"
+  when:
+    - w11cis_rule_2_2_17_enabled
+  ansible.windows.win_user_right:
+    name: SeDenyServiceLogonRight
+    users:
+      - Guests
+    action: add
+
+- name: "2.2.18 | L1 | Ensure 'Deny log on locally' to include 'Guests'"
+  when:
+    - w11cis_rule_2_2_18_enabled
+  ansible.windows.win_user_right:
+    name: SeDenyInteractiveLogonRight
+    users:
+      - Guests
+    action: add
+
+- name: "2.2.19 | L1 | Ensure 'Deny log on through Remote Desktop Services' to include 'Guests, Local account'"
+  when:
+    - w11cis_rule_2_2_19_enabled
+  ansible.windows.win_user_right:
+    name: SeDenyRemoteInteractiveLogonRight
+    users:
+      - Guests
+      - Local account
+    action: add
+
+- name: "2.2.20 | L1 | Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_20_enabled
+  ansible.windows.win_user_right:
+    name: SeEnableDelegationPrivilege
+    users: []
+    action: set
+
+- name: "2.2.21 | L1 | Ensure 'Force shutdown from a remote system' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_21_enabled
+  ansible.windows.win_user_right:
+    name: SeRemoteShutdownPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: >-
+    2.2.22 | L1 | Ensure 'Generate security audits'
+    is set to 'LOCAL SERVICE, NETWORK SERVICE, RESTRICTED SERVICES\PrintSpoolerService'
+  when:
+    - w11cis_rule_2_2_22_enabled
+  ansible.windows.win_user_right:
+    name: SeAuditPrivilege
+    users: "{{ _w11cis_generate_security_audits_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: >-
+    2.2.23 | L1 |
+    Ensure 'Impersonate a client after authentication'
+    is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, RESTRICTED SERVICES\PrintSpoolerService'
+  when:
+    - w11cis_rule_2_2_23_enabled
+  ansible.windows.win_user_right:
+    name: SeImpersonatePrivilege
+    users: "{{ _w11cis_impersonate_a_client_after_authentication_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: >-
+    2.2.24 | L1 | Ensure 'Increase scheduling priority' is set to 'Administrators, Window Manager\\Window Manager Group'
+  when:
+    - w11cis_rule_2_2_24_enabled
+  ansible.windows.win_user_right:
+    name: SeIncreaseBasePriorityPrivilege
+    users:
+      - Administrators
+      - Window Manager\Window Manager Group
+    action: set
+
+- name: "2.2.25 | L1 | Ensure 'Load and unload device drivers' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_25_enabled
+  ansible.windows.win_user_right:
+    name: SeLoadDriverPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.26 | L1 | Ensure 'Lock pages in memory' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_26_enabled
+  ansible.windows.win_user_right:
+    name: SeLockMemoryPrivilege
+    users: []
+    action: set
+
+- name: "2.2.27 | L2 | Ensure 'Log on as a batch job' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_27_enabled
+    - w11cis_rule_2_2_27_force or _w11cis_level2
+  ansible.windows.win_user_right:
+    name: SeBatchLogonRight
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.28 | L2 | Ensure 'Log on as a service' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_28_enabled
+    - w11cis_rule_2_2_28_force or _w11cis_level2
+  block:
+    - name: "2.2.28 | L2 | Ensure 'Log on as a service' is set to 'No One' | No Hyper-V"
+      when:
+        - not _w11cis_hyperv
+      ansible.windows.win_user_right:
+        name: SeServiceLogonRight
+        users: []
+        action: set
+
+    - name: "2.2.28 | L2 | Ensure 'Log on as a service' is set to 'No One' | With Hyper-V"
+      when:
+        - _w11cis_hyperv
+      ansible.windows.win_user_right:
+        name: SeServiceLogonRight
+        users:
+          - NT VIRTUAL MACHINE\Virtual Machines
+        action: set
+
+- name: "2.2.29 | L1 | Ensure 'Manage auditing and security log' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_29_enabled
+  ansible.windows.win_user_right:
+    name: SeSecurityPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.30 | L1 | Ensure 'Modify an object label' is set to 'No One'"
+  when:
+    - w11cis_rule_2_2_30_enabled
+  ansible.windows.win_user_right:
+    name: SeReLabelPrivilege
+    users: []
+    action: set
+
+- name: "2.2.31 | L1 | Ensure 'Modify firmware environment values' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_31_enabled
+  ansible.windows.win_user_right:
+    name: SeSystemEnvironmentPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.32 | L1 | Ensure 'Perform volume maintenance tasks' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_32_enabled
+  ansible.windows.win_user_right:
+    name: SeManageVolumePrivilege
+    users: "{{ _w11cis_perform_volume_maintenance_tasks_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.33 | L1 | Ensure 'Profile single process' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_33_enabled
+  ansible.windows.win_user_right:
+    name: SeProfileSingleProcessPrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.34 | L1 | Ensure 'Profile system performance' is set to 'Administrators, NT SERVICE\\WdiServiceHost'"
+  when:
+    - w11cis_rule_2_2_34_enabled
+  ansible.windows.win_user_right:
+    name: SeSystemProfilePrivilege
+    users:
+      - Administrators
+      - NT SERVICE\WdiServiceHost
+    action: set
+
+- name: "2.2.35 | L1 | Ensure 'Replace a process level token' is set to 'LOCAL SERVICE, NETWORK SERVICE'"
+  when:
+    - w11cis_rule_2_2_35_enabled
+  ansible.windows.win_user_right:
+    name: SeAssignPrimaryTokenPrivilege
+    users: "{{ _w11cis_replace_a_process_level_token_users | reject('equalto', omit) | list }}"
+    action: set
+
+- name: "2.2.36 | L1 | Ensure 'Restore files and directories' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_36_enabled
+  ansible.windows.win_user_right:
+    name: SeRestorePrivilege
+    users:
+      - Administrators
+    action: set
+
+- name: "2.2.37 | L1 | Ensure 'Shut down the system' is set to 'Administrators, Users'"
+  when:
+    - w11cis_rule_2_2_37_enabled
+  ansible.windows.win_user_right:
+    name: SeShutdownPrivilege
+    users:
+      - Administrators
+      - Users
+    action: set
+
+- name: "2.2.38 | L1 | Ensure 'Take ownership of files or other objects' is set to 'Administrators'"
+  when:
+    - w11cis_rule_2_2_38_enabled
+  ansible.windows.win_user_right:
+    name: SeTakeOwnershipPrivilege
+    users:
+      - Administrators
+    action: set

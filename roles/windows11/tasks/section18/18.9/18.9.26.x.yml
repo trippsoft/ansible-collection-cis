@@ -1,0 +1,92 @@
+---
+- name: >-
+    18.9.26.1 | L1 |
+    Ensure 'Configure password backup directory'
+    is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'
+  when:
+    - w11cis_rule_18_9_26_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: BackupDirectory
+    data: "{{ _w11cis_laps_directory_value }}"
+    type: dword
+    state: present
+
+- name: >-
+    18.9.26.2 | L1 | Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'
+  when:
+    - w11cis_rule_18_9_26_2_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PasswordExpirationProtectionEnabled
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.9.26.3 | L1 | Ensure 'Enable password encryption' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_9_26_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: ADPasswordEncryptionEnabled
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.9.26.4 | L1 |
+    Ensure 'Password Settings: Password Complexity'
+    is set to 'Enabled: Large letters + small letters + numbers + special characters' or 'Passphrase'
+  when:
+    - w11cis_rule_18_9_26_4_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PasswordComplexity
+    data: "{{ _w11cis_laps_password_complexity_value }}"
+    type: dword
+    state: present
+
+- name: "18.9.26.5 | L1 | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
+  when:
+    - w11cis_rule_18_9_26_5_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PasswordLength
+    data: "{{ w11cis_laps_password_length }}"
+    type: dword
+    state: present
+
+- name: "18.9.26.6 | L1 | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'"
+  when:
+    - w11cis_rule_18_9_26_6_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PasswordAgeDays
+    data: "{{ w11cis_laps_password_age_in_days }}"
+    type: dword
+    state: present
+
+- name: >-
+    18.9.26.7 | L1 |
+    Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'
+  when:
+    - w11cis_rule_18_9_26_7_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PostAuthenticationResetDelay
+    data: "{{ w11cis_laps_post_authentication_grace_period_in_hours }}"
+    type: dword
+    state: present
+
+- name: >-
+    18.9.26.8 | L1 |
+    Ensure 'Post-authentication actions: Actions'
+    is set to 'Enabled: Reset the password and logoff the managed account' or higher
+  when:
+    - w11cis_rule_18_9_26_8_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+    name: PostAuthenticationActions
+    data: "{{ _w11cis_laps_post_authentication_actions_value }}"
+    type: dword
+    state: present

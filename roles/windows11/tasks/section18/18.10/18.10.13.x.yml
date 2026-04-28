@@ -1,0 +1,31 @@
+---
+- name: "18.10.13.1 | L1 | Ensure 'Turn off cloud consumer account state content' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_13_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+    name: DisableConsumerAccountStateContent
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.13.2 | L2 | Ensure 'Turn off cloud optimized content' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_13_2_enabled
+    - w11cis_rule_18_10_13_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+    name: DisableCloudOptimizedContent
+    data: 1
+    type: dword
+    state: present
+
+- name: "18.10.13.3 | L1 | Ensure 'Turn off Microsoft consumer experiences' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_10_13_3_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+    name: DisableWindowsConsumerFeatures
+    data: 1
+    type: dword
+    state: present

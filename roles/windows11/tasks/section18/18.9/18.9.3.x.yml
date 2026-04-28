@@ -1,0 +1,10 @@
+---
+- name: "18.9.3.1 | L1 | Ensure 'Include command line in process creation events' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_9_3_1_enabled
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit
+    name: ProcessCreationIncludeCmdLine_Enabled
+    data: 1
+    type: dword
+    state: present

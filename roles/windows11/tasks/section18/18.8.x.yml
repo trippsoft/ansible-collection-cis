@@ -1,0 +1,25 @@
+---
+- name: "18.8.1.1 | L2 | Ensure 'Turn off notifications network usage' is set to 'Enabled'"
+  when:
+    - w11cis_rule_18_8_1_1_enabled
+    - w11cis_rule_18_8_1_1_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications
+    name: NoCloudApplicationNotification
+    data: 1
+    type: dword
+    state: present
+
+- name: >-
+    18.8.1.2 | L2 |
+    Ensure 'Remove Personalized Website Recommendations from the Recommended section in the Start Menu'
+    is set to 'Enabled'
+  when:
+    - w11cis_rule_18_8_1_2_enabled
+    - w11cis_rule_18_8_1_2_force or _w11cis_level2
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+    name: HideRecommendedPersonalizedSites
+    data: 1
+    type: dword
+    state: present

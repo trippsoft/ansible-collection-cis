@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Jim Tarpley (@trippsc2)
+  namespace: trippsc2
+  role_name: windows11
+  description: |
+    This role applies the CIS Benchmark hardening steps on Windows 11 machines. It is based on the CIS Benchmark for Windows 11 Enterprise, v5.0.1.
+
+  license: MIT
+
+  min_ansible_version: '2.16'
+
+  platforms:
+    - name: Windows
+      versions:
+        - 'all' # Windows 11 is not part of the schema.
+
+collections:
+  - ansible.windows
+  - community.windows
+
+dependencies: []
