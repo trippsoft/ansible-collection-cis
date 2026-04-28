@@ -138,6 +138,18 @@ _w11cis_delivery_optimization_download_mode_map:
   simple: 99
   bypass: 100
 
+_w11cis_brute_force_protection_aggressiveness_map:
+  medium: 1
+  high: 2
+
+_w11cis_brute_force_protection_configured_state_map:
+  block: 1
+  audit: 2
+
+_w11cis_remote_encryption_protection_aggressiveness_map:
+  medium: 1
+  high: 2
+
 _w11cis_windows_ink_workspace_access_map:
   disallow_above_lock: 1
   disabled: 0
@@ -182,6 +194,12 @@ _w11cis_telemetry_level_value: >-
   {{ _w11cis_telemetry_level_map[w11cis_telemetry_level] }}
 _w11cis_delivery_optimization_download_mode_value: >-
   {{ _w11cis_delivery_optimization_download_mode_map[w11cis_delivery_optimization_download_mode] }}
+_w11cis_brute_force_protection_aggressiveness_value: >-
+  {{ _w11cis_brute_force_protection_aggressiveness_map[w11cis_brute_force_protection_aggressiveness] }}
+_w11cis_brute_force_protection_configured_state_value: >-
+  {{ _w11cis_brute_force_protection_configured_state_map[w11cis_brute_force_protection_configured_state] }}
+_w11cis_remote_encryption_protection_aggressiveness_value: >-
+  {{ _w11cis_remote_encryption_protection_aggressiveness_map[w11cis_remote_encryption_protection_aggressiveness] }}
 _w11cis_windows_ink_workspace_access_value: >-
   {{ _w11cis_windows_ink_workspace_access_map[w11cis_windows_ink_workspace_access] }}
 _w11cis_disable_http_proxy_features_value: >-
