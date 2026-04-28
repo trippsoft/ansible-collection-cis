@@ -122,7 +122,6 @@ w11cis_rule_2_3_7_1_force: false
 
 w11cis_inactivity_timeout_in_seconds: 900
 
-w11cis_cached_logons_count: 4
 w11cis_password_expiry_warning_in_days: 14
 w11cis_smart_card_removal_behavior: lock
 

@@ -621,12 +621,6 @@ argument_specs:
         required: false
         description:
           - The legal notice caption.
-      w11cis_cached_logons_count:
-        type: int
-        required: false
-        default: 4
-        description:
-          - The number of cached logons to remember.
       w11cis_password_expiry_warning_in_days:
         type: int
         required: false
