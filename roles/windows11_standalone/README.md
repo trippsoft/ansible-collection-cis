@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.cis.windows11_standalone
-Version: 1.4.0
+Version: 1.4.1
 
 This role applies the CIS Benchmark hardening steps on standalone Windows 11 machines. It is based on the CIS Benchmark for Windows 11 Standalone, v5.0.0.
 
