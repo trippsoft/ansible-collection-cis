@@ -13,7 +13,7 @@ platforms:
     memory: 2048
     cpus: 2
     provider_options:
-      default_prefix: cis_w11_
+      default_prefix: cis_w11_standalone_
     groups:
       - subjects
       - level2
@@ -24,7 +24,7 @@ platforms:
     memory: 2048
     cpus: 2
     provider_options:
-      default_prefix: cis_w11_
+      default_prefix: cis_w11_standalone_
     groups:
       - subjects
       - level2
@@ -35,7 +35,7 @@ platforms:
     memory: 2048
     cpus: 2
     provider_options:
-      default_prefix: cis_w11_
+      default_prefix: cis_w11_standalone_
     groups:
       - subjects
       - level1
@@ -46,7 +46,7 @@ platforms:
     memory: 2048
     cpus: 2
     provider_options:
-      default_prefix: cis_w11_
+      default_prefix: cis_w11_standalone_
     groups:
       - subjects
       - level1
