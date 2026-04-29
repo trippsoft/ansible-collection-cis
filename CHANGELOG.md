@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2026-04-29
+
+### Role - windows11
+
+- Fixed validation task for Hyper-V role to use `Get-WindowsOptionalFeature` instead of `Get-WindowsFeature` as the latter does not work on Windows 11 machines.
+
+### Role - windows11_standalone
+
+- Fixed validation task for Hyper-V role to use `Get-WindowsOptionalFeature` instead of `Get-WindowsFeature` as the latter does not work on Windows 11 machines.
+
 ## [1.4.0] - 2026-04-28
 
 ### Collection

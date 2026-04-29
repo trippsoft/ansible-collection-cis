@@ -18,7 +18,8 @@
       $Ansible.Changed = $false
 
       try {
-        $Ansible.Result = Get-WindowsFeature Hyper-V | Select-Object -ExpandProperty Installed
+        $feature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+        $Ansible.Result = $feature.State -eq 'Enabled'
       } catch {
         $Ansible.Result = $false
       }
