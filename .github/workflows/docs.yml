@@ -43,61 +43,194 @@ jobs:
     name: Generate rhel9 role documentation
     permissions:
       contents: write
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'rhel9'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate rhel9 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/rhel9
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update rhel9 role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_rhel8:
     name: Generate rhel8 role documentation
+    needs: docs_rhel9
     permissions:
       contents: write
-    needs: docs_rhel9
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'rhel8'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate rhel8 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/rhel8
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update rhel8 role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_windows11:
     name: Generate windows11 role documentation
+    needs: docs_rhel8
     permissions:
       contents: write
-    needs: docs_rhel8
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'windows11'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate windows11 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/windows11
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update windows11 role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_windows11_standalone:
     name: Generate windows11_standalone role documentation
+    needs: docs_windows11
     permissions:
       contents: write
-    needs: docs_windows11
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'windows11_standalone'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate windows11_standalone role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/windows11_standalone
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update windows11_standalone role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_windows2025:
     name: Generate windows2025 role documentation
+    needs: docs_windows11_standalone
     permissions:
       contents: write
-    needs: docs_windows11_standalone
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'windows2025'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate windows2025 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/windows2025
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update windows2025 role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_windows2022:
     name: Generate windows2022 role documentation
+    needs: docs_windows2025
     permissions:
       contents: write
-    needs: docs_windows2025
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'windows2022'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate windows2022 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/windows2022
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update windows2022 role documentation." || /bin/true
+          git push origin main
+          deactivate
   docs_windows2019:
     name: Generate windows2019 role documentation
+    needs: docs_windows2022
     permissions:
       contents: write
-    needs: docs_windows2022
-    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
-    with:
-      working_directory: 'trippsc2.cis'
-      role_name: 'windows2019'
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.cis
+          ref: main
+      - name: Generate windows2019 role documentation
+        working-directory: 'trippsc2.cis'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          cd ./roles/windows2019
+          aar-doc . markdown
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git add README.md || /bin/true
+          git commit -m "Update windows2019 role documentation." || /bin/true
+          git push origin main
+          deactivate
