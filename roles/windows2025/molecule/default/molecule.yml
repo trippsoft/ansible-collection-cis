@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    requirements-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements-${MOLECULE_ANSIBLE_VERSION:-2.16}.yml
 driver:
   name: vagrant
   provider:
@@ -9,7 +11,7 @@ driver:
   parallel: true
 platforms:
   - name: l1dc
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -21,7 +23,7 @@ platforms:
       - windows_domain
       - windows_domain_controllers
   - name: l3dc
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -33,7 +35,7 @@ platforms:
       - windows_domain
       - windows_domain_controllers
   - name: l1ms
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -45,7 +47,7 @@ platforms:
       - windows_domain
       - windows_domain_members
   - name: l3ms
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -57,7 +59,7 @@ platforms:
       - windows_domain
       - windows_domain_members
   - name: l1standalone
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -68,7 +70,7 @@ platforms:
       - windows
       - windows_standalone
   - name: l3standalone
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -79,7 +81,7 @@ platforms:
       - windows
       - windows_standalone
   - name: l1template
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -91,7 +93,7 @@ platforms:
       - windows_standalone
       - windows_template
   - name: l3template
-    box: jtarpley/w2025_base
+    box: trippsc2/w2025_base
     memory: 2048
     cpus: 2
     provider_options:
