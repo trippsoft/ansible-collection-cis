@@ -1,9 +1,9 @@
 ---
 - name: Gather distribution info
   when:
-    - ansible_distribution is not defined or
-      ansible_os_family is not defined or
-      ansible_windows_domain_role is not defined
+    - ansible_facts.distribution is not defined or
+      ansible_facts.os_family is not defined or
+      ansible_facts.windows_domain_role is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
@@ -32,19 +32,21 @@
 - name: Check OS version and family
   ansible.builtin.assert:
     that:
-      - ansible_os_family == 'Windows'
-      - '"Microsoft Windows 11" in ansible_distribution'
+      - ansible_facts.os_family == 'Windows'
+      - '"Microsoft Windows 11" in ansible_facts.distribution'
     fail_msg: >-
       This role can only be run against Windows 11.
-      {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
-    success_msg: "This role is running against {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
+      {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported.
+    success_msg: >-
+      This role is running against {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }}.
 
 - name: Assert that machine is standalone
   ansible.builtin.assert:
     that:
-      - ansible_windows_domain_role == 'Stand-alone workstation'
+      - ansible_facts.windows_domain_role == 'Stand-alone workstation'
     fail_msg: >-
-      This role is intended to be run against standalone machines. This machine is a {{ ansible_windows_domain_role }}.
+      This role is intended to be run against standalone machines.
+      This machine is a {{ ansible_facts.windows_domain_role }}.
     success_msg: This machine is standalone, not part of a domain.
 
 - name: "Validate | 1.1.1 | L1 | Ensure 'Enforce password history' is set to '24 or more password(s)'"
