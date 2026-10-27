@@ -41,6 +41,9 @@ jobs:
           - w11_25h2_base
           - w11_24h2_base
           - w11_23h2_base
+        ansible:
+          - '2.16'
+          - '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -48,7 +51,7 @@ jobs:
           path: 'trippsc2.cis'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/windows11
           molecule test
@@ -58,3 +61,4 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}
