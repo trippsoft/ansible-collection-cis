@@ -1,8 +1,8 @@
 ---
-_w2019cis_standalone: "{{ ansible_windows_domain_role == 'Stand-alone server' and not w2019cis_is_template }}"
+_w2019cis_standalone: "{{ ansible_facts.windows_domain_role == 'Stand-alone server' and not w2019cis_is_template }}"
 _w2019cis_domain_controller: >-
-  {{ 'domain controller' in ansible_windows_domain_role and not w2019cis_is_template }}
-_w2019cis_member_server: "{{ ansible_windows_domain_role == 'Member server' and not w2019cis_is_template }}"
+  {{ 'domain controller' in ansible_facts.windows_domain_role and not w2019cis_is_template }}
+_w2019cis_member_server: "{{ ansible_facts.windows_domain_role == 'Member server' and not w2019cis_is_template }}"
 
 _w2019cis_level2_domain_controller: "{{ _w2019cis_domain_controller and w2019cis_level > 1 }}"
 _w2019cis_level2_member_server: "{{ _w2019cis_member_server and w2019cis_level > 1 }}"
