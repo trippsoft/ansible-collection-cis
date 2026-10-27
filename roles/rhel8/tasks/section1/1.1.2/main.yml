@@ -11,7 +11,7 @@
 
 - name: Set mount names
   ansible.builtin.set_fact:
-    _rhel8cis_mount_names: "{{ ansible_mounts | map(attribute='mount') | list }}"
+    _rhel8cis_mount_names: "{{ ansible_facts.mounts | map(attribute='mount') | list }}"
 
 - name: Execute the 1.1.2.3.x tasks
   ansible.builtin.import_tasks: section1/1.1.2/1.1.2.3.x.yml

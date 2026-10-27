@@ -38,7 +38,7 @@
   block:
     - name: '1.1.2.4.x | Set existing /var mount configuration fact'
       ansible.builtin.set_fact:
-        _rhel8cis_existing_var_mount: "{{ ansible_mounts | selectattr('mount', 'equalto', '/var') | list | first }}"
+        _rhel8cis_existing_var_mount: "{{ ansible_facts.mounts | selectattr('mount', 'equalto', '/var') | list | first }}"
 
     - name: 1.1.2.4.x | Get UUID of /var partition
       when:
