@@ -38,9 +38,9 @@ jobs:
       fail-fast: false
       matrix:
         box:
-          - w11_25h2_base
           - w11_24h2_base
-          - w11_23h2_base
+          - w11_25h2_base
+          - w11_26h2_base
         ansible:
           - '2.16'
           - '2.21'
