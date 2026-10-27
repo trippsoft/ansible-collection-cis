@@ -9,7 +9,7 @@ driver:
   parallel: true
 platforms:
   - name: l1server
-    box: jtarpley/rocky8_base
+    box: trippsc2/rocky8_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -19,7 +19,7 @@ platforms:
       - level1
       - servers
   - name: l2server
-    box: jtarpley/rocky8_base
+    box: trippsc2/rocky8_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -29,7 +29,7 @@ platforms:
       - level2
       - servers
   - name: l1workstation
-    box: jtarpley/rocky8_ws_base
+    box: trippsc2/rocky8_ws_base
     memory: 2048
     cpus: 2
     provider_options:
@@ -39,7 +39,7 @@ platforms:
       - level1
       - workstations
   - name: l2workstation
-    box: jtarpley/rocky8_ws_base
+    box: trippsc2/rocky8_ws_base
     memory: 2048
     cpus: 2
     provider_options:
