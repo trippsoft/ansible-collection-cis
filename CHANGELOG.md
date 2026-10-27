@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2026-10-27
+
+### Role - rhel8
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+- Refined crypto policy variable declarations to work with ansible-core 2.19 and later.
+
+### Role - rhel9
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+- Refined crypto policy variable declarations to work with ansible-core 2.19 and later.
+
+### Role - windows11
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - windows11_standalone
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - windows2019
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - windows2022
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - windows2025
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
 ## [1.4.1] - 2026-04-29
 
 ### Role - windows11
