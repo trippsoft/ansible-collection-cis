@@ -38,7 +38,7 @@
     - name: '1.1.2.4.x | Set existing /var mount configuration fact'
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_mount: >-
-          {{ ansible_mounts |
+          {{ ansible_facts.mounts |
               selectattr('mount', 'equalto', '/var') |
               list |
               first }}

@@ -7,48 +7,19 @@ _rhel9cis_workstation: "{{ rhel9cis_machine_type == 'workstation' }}"
 _rhel9cis_warning_count: 0
 _rhel9cis_warning_list: []
 
-_rhel9cis_no_sha1_crypto_subpolicies: >-
-  [
-  {% if rhel9cis_rule_1_6_3_enabled %}
-    "NO-SHA1"
-  {% endif %}
-  ]
-
-_rhel9cis_no_weakmac_crypto_subpolicies: >-
-  [
-  {% if rhel9cis_rule_1_6_4_enabled %}
-    "NO-WEAKMAC"
-  {% endif %}
-  ]
-
-_rhel9cis_no_sshcbc_crypto_subpolicies: >-
-  [
-  {% if rhel9cis_rule_1_6_5_enabled %}
-    "NO-SSHCBC"
-  {% endif %}
-  ]
-
-_rhel9cis_no_sshchacha20_crypto_subpolicies: >-
-  [
-  {% if rhel9cis_rule_1_6_6_enabled %}
-    "NO-SSHCHACHA20"
-  {% endif %}
-  ]
-
-_rhel9cis_no_sshetm_crypto_subpolicies: >-
-  [
-  {% if rhel9cis_rule_1_6_7_enabled %}
-    "NO-SSHETM"
-  {% endif %}
-  ]
+_rhel9cis_no_sha1_crypto_subpolicies: "{{ ['NO-SHA1'] if rhel9cis_rule_1_6_3_enabled else [] }}"
+_rhel9cis_no_weakmac_crypto_subpolicies: "{{ ['NO-WEAKMAC'] if rhel9cis_rule_1_6_4_enabled else [] }}"
+_rhel9cis_no_sshcbc_crypto_subpolicies: "{{ ['NO-SSHCBC'] if rhel9cis_rule_1_6_5_enabled else [] }}"
+_rhel9cis_no_sshchacha20_crypto_subpolicies: "{{ ['NO-SSHCHACHA20'] if rhel9cis_rule_1_6_6_enabled else [] }}"
+_rhel9cis_no_sshetm_crypto_subpolicies: "{{ ['NO-SSHETM'] if rhel9cis_rule_1_6_7_enabled else [] }}"
 
 _rhel9cis_crypto_subpolicies: >-
-  {{ _rhel9cis_no_sha1_crypto_subpolicies +
+  {{ (_rhel9cis_no_sha1_crypto_subpolicies +
       _rhel9cis_no_weakmac_crypto_subpolicies +
       _rhel9cis_no_sshcbc_crypto_subpolicies +
       _rhel9cis_no_sshchacha20_crypto_subpolicies +
       _rhel9cis_no_sshetm_crypto_subpolicies +
-      rhel9cis_additional_crypto_subpolicies | unique | list }}
+      (rhel9cis_additional_crypto_subpolicies | default([], true) | list)) | unique | list }}
 
 _rhel9cis_expected_crypto_policy: >-
   {{ rhel9cis_crypto_policy }}{% if _rhel9cis_crypto_subpolicies | length > 0 %}:{{ _rhel9cis_crypto_subpolicies | join(':') }}{% endif %}

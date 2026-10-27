@@ -47,7 +47,7 @@
     - name: 1.1.2.5.x | Set existing /var/tmp mount configuration fact
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_tmp_mount: >-
-          {{ ansible_mounts | selectattr('mount', 'equalto', '/var/tmp') | list | first }}
+          {{ ansible_facts.mounts | selectattr('mount', 'equalto', '/var/tmp') | list | first }}
 
     - name: 1.1.2.5.x | Get UUID of /var/tmp partition
       when:

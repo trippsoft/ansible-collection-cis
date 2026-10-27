@@ -47,7 +47,7 @@
     - name: 1.1.2.6.x | Set existing /var/log mount configuration fact
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_log_mount: >-
-          {{ ansible_mounts | selectattr('mount', 'equalto', '/var/log') | list | first }}
+          {{ ansible_facts.mounts | selectattr('mount', 'equalto', '/var/log') | list | first }}
 
     - name: 1.1.2.6.x | Get UUID of /var/log partition
       when:

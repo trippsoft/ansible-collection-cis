@@ -47,7 +47,7 @@
     - name: 1.1.2.7.x | Set existing /var/log/audit mount configuration fact
       ansible.builtin.set_fact:
         _rhel9cis_existing_var_log_audit_mount: >-
-          {{ ansible_mounts | selectattr('mount', 'equalto', '/var/log/audit') | list | first }}
+          {{ ansible_facts.mounts | selectattr('mount', 'equalto', '/var/log/audit') | list | first }}
 
     - name: 1.1.2.7.x | Get UUID of /var/log/audit partition
       when:

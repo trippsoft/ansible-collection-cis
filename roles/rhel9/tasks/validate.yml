@@ -1,9 +1,9 @@
 ---
 - name: Gather distribution info
   when:
-    - ansible_distribution is not defined or
-      ansible_distribution_major_version is not defined or
-      ansible_os_family is not defined
+    - ansible_facts.distribution is not defined or
+      ansible_facts.distribution_major_version is not defined or
+      ansible_facts.os_family is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
@@ -24,7 +24,7 @@
 
 - name: Set mount names
   ansible.builtin.set_fact:
-    _rhel9cis_mount_names: "{{ ansible_mounts | map(attribute='mount') | list }}"
+    _rhel9cis_mount_names: "{{ ansible_facts.mounts | map(attribute='mount') | list }}"
 
 - name: Get /etc/passwd contents
   check_mode: false
@@ -83,13 +83,13 @@
 - name: Validate OS version and family
   ansible.builtin.assert:
     that:
-      - ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
-      - ansible_distribution_major_version is version_compare('9', '==')
+      - ansible_facts.os_family == 'RedHat' or ansible_facts.os_family == 'Rocky'
+      - ansible_facts.distribution_major_version is version_compare('9', '==')
     fail_msg: >-
       This role can only be run against supported Linux distributions.
-      {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported.
+      {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported.
     success_msg: >-
-      This role is running against {{ ansible_distribution }} {{ ansible_distribution_major_version }}.
+      This role is running against {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }}.
 
 - name: Validate | 1.1.2.1.2 | Ensure nodev option set on /tmp partition
   when:

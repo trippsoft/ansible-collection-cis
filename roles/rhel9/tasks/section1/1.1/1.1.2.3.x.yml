@@ -38,7 +38,7 @@
     - name: '1.1.2.3.x | Set existing /home mount configuration fact'
       ansible.builtin.set_fact:
         _rhel9cis_existing_home_mount: >-
-          {{ ansible_mounts |
+          {{ ansible_facts.mounts |
               selectattr('mount', 'equalto', '/home') |
               list |
               first }}
