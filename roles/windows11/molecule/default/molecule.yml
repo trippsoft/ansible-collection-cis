@@ -21,7 +21,7 @@ platforms:
       - windows_domain
       - windows_domain_controllers
   - name: l2bitlocker
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -34,7 +34,7 @@ platforms:
       - windows_domain
       - windows_domain_members
   - name: l2
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -47,7 +47,7 @@ platforms:
       - windows_domain
       - windows_domain_members
   - name: l1bitlocker
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -60,7 +60,7 @@ platforms:
       - windows_domain
       - windows_domain_members
   - name: l1
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:

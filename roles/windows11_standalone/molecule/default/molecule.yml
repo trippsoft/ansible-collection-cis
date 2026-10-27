@@ -11,7 +11,7 @@ driver:
   parallel: true
 platforms:
   - name: l2bitlocker
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -22,7 +22,7 @@ platforms:
       - bitlocker
       - windows
   - name: l2
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -33,7 +33,7 @@ platforms:
       - no_bitlocker
       - windows
   - name: l1bitlocker
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
@@ -44,7 +44,7 @@ platforms:
       - bitlocker
       - windows
   - name: l1
-    box: trippsc2/${MOLECULE_BOX:-w11_25h2_base}
+    box: trippsc2/${MOLECULE_BOX:-w11_26h2_base}
     memory: 2048
     cpus: 2
     provider_options:
