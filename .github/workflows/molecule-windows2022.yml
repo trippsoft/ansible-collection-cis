@@ -34,6 +34,12 @@ jobs:
       - linux
       - ansible
       - x64
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible:
+          - '2.16'
+          - '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -41,7 +47,7 @@ jobs:
           path: 'trippsc2.cis'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/windows2022
           molecule test
@@ -50,3 +56,4 @@ jobs:
         env:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}
